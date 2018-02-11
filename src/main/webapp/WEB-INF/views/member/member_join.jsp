@@ -14,9 +14,9 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>ㅁㄴㅇㅁㅇ
+<body>
 	<div class="container">
-		바보아님 바보 맞음 바보야 바보맞음
+		회원가입
 	</div>
 </body>
 </html>
