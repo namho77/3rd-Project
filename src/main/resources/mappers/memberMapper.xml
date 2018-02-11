@@ -5,8 +5,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.kosmo.mapper.MemberMapper">
- 	<select id="login" resultType="com.cafe24.planners.domain.MemberDTO">
- 		select * from member where id=#{0} and pass=#{1}
+
+ 	
+ 	<select id="login" resultType="com.cafe24.ourplanners.member.dto.LoginDTO">
+ 		select * from op_member where id=#{0} and pass=#{1}
  	</select>
  	
  </mapper>

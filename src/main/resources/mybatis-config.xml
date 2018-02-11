@@ -5,7 +5,8 @@
 <configuration>
 
   <typeAliases>
-    <package name="com.cafe24.planners.domain"/>    
+    <package name="com.cafe24.ourplanners.member.domain"/>
+    <package name="com.cafe24.ourplanners.board.domain"/>    
   </typeAliases>
 
 
