@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.ourplanners.board.service.BoardService;
 
@@ -28,6 +29,12 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		return "board/engineer/board_engineer_list";
+	}
+	//글읽기
+	@ResponseBody
+	@RequestMapping(value = "engineer/{boardSrl}", method = RequestMethod.GET)
+		public String viewEngineerBoard(@PathVariable String boardSrl) {
+			return "board/engineer/board_engineer_modify";
 	}
 	//글쓰기
 	@RequestMapping(value = "engineer", method = RequestMethod.POST)
