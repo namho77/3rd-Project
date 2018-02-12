@@ -6,7 +6,7 @@
 
  <mapper namespace="com.kosmo.mapper.BoardMapper">
  
-  	<select id="list" resultType="com.cafe24.ourplanners.board.dto.BoardDTO">
+  <select id="list" resultType="com.cafe24.ourplanners.board.dto.BoardDTO">
 		SELECT * FROM op_board ORDER BY board_srl DESC
 	</select>
  	
