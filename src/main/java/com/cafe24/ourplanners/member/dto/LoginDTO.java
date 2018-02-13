@@ -2,11 +2,18 @@ package com.cafe24.ourplanners.member.dto;
 
 public class LoginDTO {
 	
-	private String	user_id;
+	private String user_id;
 	private String password;
 	private String user_name;
 	private String member_type;
+	private String is_admin;
 	  
+	public String getIs_admin() {
+		return is_admin;
+	}
+	public void setIs_admin(String is_admin) {
+		this.is_admin = is_admin;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
