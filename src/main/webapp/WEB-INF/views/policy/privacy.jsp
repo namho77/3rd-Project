@@ -15,6 +15,6 @@
 </script>
 </head>
 <body>
-개인정보처리방침
+개인정보처리방침 수정
 </body>
 </html>
