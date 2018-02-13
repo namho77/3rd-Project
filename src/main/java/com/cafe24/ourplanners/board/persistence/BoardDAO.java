@@ -1,5 +1,6 @@
 package com.cafe24.ourplanners.board.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
@@ -24,6 +25,8 @@ public interface BoardDAO {
 	  public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 
 	  public int countPaging(Criteria cri) throws Exception;
+	  
+	  public ArrayList<>
 	  
 	  //use for dynamic sql
 	  

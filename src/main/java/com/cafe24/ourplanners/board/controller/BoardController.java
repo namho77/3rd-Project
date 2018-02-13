@@ -1,7 +1,12 @@
 package com.cafe24.ourplanners.board.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,10 +72,15 @@ public class BoardController {
 		}
 		return "board/client/board_client_list";
 	}
-	//글쓰기
+	//글쓰기 폼 가져오기
 	@RequestMapping(value = "client", method = RequestMethod.POST)
-	public String writeClientBoard(Model model) {
+	public String writeClientBoard() {
 		return "board/client/board_client_write";
+	}
+	//글쓰기 처리
+	@RequestMapping(value= "clientAction", method = RequestMethod.POST)
+	public void writeClientBoardAction(HttpServletRequest req, HttpServletRequest resp, HttpSession session) throws IOException {
+		
 	}
 	//글수정
 	@RequestMapping(value = "client/{boardSrl}", method = RequestMethod.PUT)
@@ -83,4 +93,9 @@ public class BoardController {
 		return "board/client/board_client_list";
 	}
 	
+	//공지사항 게시판
+	@RequestMapping(value="announcementBoard", method = RequestMethod.POST)
+	public String announcementBoard(Model model, HttpServletRequest req) {
+		
+	}
 }
