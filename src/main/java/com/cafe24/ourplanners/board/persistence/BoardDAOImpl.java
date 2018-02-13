@@ -24,7 +24,7 @@ public class BoardDAOImpl implements BoardDAO{
 		//sqlSession.insert(namespace + ".create", vo);
 		
 		//return session.selectOne(namespace + ".read", bno);
-	}
+
 
 	@Override
 	public BoardVO view(Integer bno) throws Exception {

@@ -1,12 +1,14 @@
 package com.cafe24.ourplanners.board.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.ourplanners.board.service.BoardService;
 
@@ -29,6 +31,13 @@ public class BoardController {
 		}
 		return "board/engineer/board_engineer_list";
 	}
+	//글읽기
+	@ResponseBody
+	@RequestMapping(value = "engineer/{boardSrl}", method = RequestMethod.GET)
+		public String viewEngineerBoard(@PathVariable String boardSrl,Model model) {
+				
+			return "board/engineer/board_engineer_view";
+	}
 	//글쓰기
 	@RequestMapping(value = "engineer", method = RequestMethod.POST)
 	public String writeEngineerBoard(Model model) {
@@ -49,6 +58,13 @@ public class BoardController {
 	//목록보기
 	@RequestMapping(value = "client", method = RequestMethod.GET)
 	public String listClientBoard(Model model) {
+		try{
+			service.listAll();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		return "board/client/board_client_list";
 	}
 	//글쓰기
