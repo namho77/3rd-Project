@@ -64,7 +64,7 @@
 			<header>
 				<section class="banner" role="banner">
 		<!-- header navigation(탑1 부분) -->
-			<%@ include file="../common/top.jsp"%>
+			<%@ include file="../common/top_main.jsp"%>
 		<!-- header navigation(탑1 부분) -->
 		<!-- banner text -->
 		<div class="container">
