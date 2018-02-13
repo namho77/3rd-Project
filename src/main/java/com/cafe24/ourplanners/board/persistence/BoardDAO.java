@@ -26,7 +26,6 @@ public interface BoardDAO {
 
 	  public int countPaging(Criteria cri) throws Exception;
 	  
-	  public ArrayList<>
 	  
 	  //use for dynamic sql
 	  
