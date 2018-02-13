@@ -25,7 +25,7 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		//return session.selectOne(namespace + ".read", bno);
 
-
+	}
 	@Override
 	public BoardVO view(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
