@@ -55,7 +55,7 @@
 	
 	<section id="test">
 	<div class="container">
-		<h2>git도 사용할 줄 모르던 바보들 드디어 깨우치다!!!!!!</h2>
+		<h2>git도 사용할 줄 모르던 바보들 드디어 깨우치다~~</h2>
 		<div class="row">
 			<ul>
 				<li><a href="./member/join" target="_blank">회원가입</a></li>
