@@ -26,7 +26,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int hasId(String userId) throws Exception {
-		
+		System.out.println("다오 호출");
 		int hasId = dao.hasId(userId);
 		
 		return hasId;

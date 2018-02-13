@@ -21,12 +21,12 @@ values (#{member_srl},#{member_type},#{user_id},#{email_address},#{password},#{s
  	
  	
  	<select id="hasId" resultType="Integer">
- 		select count(*) from op_member where id=#{0} and pass=#{1}
+ 		select count(*) from op_member where user_id=#{0}
  	</select>
  	
  	
  	<select id="login" resultType="com.cafe24.ourplanners.member.dto.LoginDTO">
- 		select * from op_member where id=#{0} and pass=#{1}
+ 		select * from op_member where user_id=#{0} and password=#{1}
  	</select>
  	
  </mapper>

@@ -55,7 +55,7 @@
 	}
     $(document).ready(function () {
         var url = window.location;
-        alert(url);
+        //alert(url);
         $('nav.navmenu ul li a[href="'+ url +'"]').parent().addClass('active');
         $('nav.navmenu ul li a').filter(function() {
              return this.href == url;
@@ -453,10 +453,14 @@
 					return;
 				}
 				
+				//var url = '/json/id_check.json?user_id=' + uid.value;
 		    	
 		     $.ajax({
-		      url:'j_id_check.jsp?user_id=' + uid.value,  //url에 주소 넣기
+		      url:'/json/id_check.json',  //url에 주소 넣기
+			  contentType : "text/html; charset=utf-8;",	  
+		      data : {user_id : uid.value},			  
 		      dataType:'json',      //dataType에 데이터 타입 넣기
+		      
 		      success:function(data){     //success에 성공했을 때 동작 넣기.
 		       
 		       //중복되지 않은 경우
@@ -472,7 +476,12 @@
 		        document.registFrm.DuplicationCheckId.value="N";
 		       }
 		       
+		      },
+		      error: function (e) {
+		    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+		    	  
 		      }
+		      
 		     });
 		    
 		    }
@@ -491,25 +500,11 @@
 			<!-- HEADER -->
 			<header>
 				<section class="banner" role="banner">
-		<!-- header navigation(탑1 부분) -->
-			<%@ include file="../common/top.jsp"%>
-		<!-- header navigation(탑1 부분) -->
-		<!-- banner text -->
-		<div class="container">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="banner-text text-center">
-					<h1>Our Planners</h1>
-					<p>기획을 중점으로 요청자와 기술자들을 연결시켜 기획의 결실을 맺는 교류시스템</p>
-					<nav role="navigation">
-						<a href="#services" class="banner-btn"><img
-							src="${pageContext.request.contextPath}/resources/images/down-arrow.png" alt=""></a>
-					</nav>
-				</div>
-				<!-- banner text -->
-			</div>
-		</div>
-	</section>
-
+				<!-- header navigation(상단 메뉴 부분) -->
+			
+					<%@ include file="../common/top.jsp"%>
+				<!--// header navigation(상단 메뉴 부분) -->
+				</section>
 			</header>
 			<!-- //HEADER -->
 
