@@ -456,7 +456,7 @@
 				//var url = '/json/id_check.json?user_id=' + uid.value;
 		    	
 		     $.ajax({
-		      url:'/json/id_check.json',  //url에 주소 넣기
+		      url:'./json/id_check.json',  //url에 주소 넣기
 			  contentType : "text/html; charset=utf-8;",	  
 		      data : {user_id : uid.value},			  
 		      dataType:'json',      //dataType에 데이터 타입 넣기
