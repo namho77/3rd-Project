@@ -29,8 +29,9 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public int hasId(String userId) {
-		sqlSession.selectOne(namespace+".hasId", userId);
-		return 0;
+		System.out.println("맵퍼호출"+namespace+".hasId" + userId);
+		int hasId = sqlSession.selectOne(namespace+".hasId", userId);
+		return hasId;
 	}
 	
 	@Override
