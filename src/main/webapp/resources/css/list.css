@@ -101,7 +101,6 @@ ul li {
 	 Header
 -------------------------------------------------------------------------------*/
 #header {
-	position: fixed;
 	width: 100%;
 	z-index: 999;
 }
@@ -132,7 +131,6 @@ ul li {
 	 Header2
 -------------------------------------------------------------------------------*/
 #header2 {
-	position: fixed;
 	width: 100%;
 	z-index: 999;
 }
@@ -176,6 +174,14 @@ ul li {
 .navigation a {
 	color: rgba(255, 255, 255, 0.75);
 	font-size: 13px;
+	font-weight: 400;
+	margin-left: 40px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+.navigation a .field{
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 40px;
 	font-weight: 400;
 	margin-left: 40px;
 	letter-spacing: 3px;
@@ -322,11 +328,10 @@ ul li {
 }
 /* ------------------------------------------------------------------------------
 	 Banner
-	 
 -------------------------------------------------------------------------------*/
 
 .banner {
-	background-image: url(../images/main1.JPG);
+	background-image: url(../images/banner.jpg);
 	background-position: center top;
 	background-repeat: no-repeat;
 	-moz-background-size: cover;

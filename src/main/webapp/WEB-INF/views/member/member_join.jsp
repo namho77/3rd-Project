@@ -502,7 +502,7 @@
 				<section class="banner" role="banner">
 				<!-- header navigation(상단 메뉴 부분) -->
 			
-					<%@ include file="../common/top.jsp"%>
+					<%@ include file="../common/top_main.jsp"%>
 				<!--// header navigation(상단 메뉴 부분) -->
 				</section>
 			</header>

@@ -35,7 +35,7 @@
 	<!-- header section -->
 	<section class="banner" role="banner">
 		<!-- header navigation(탑1 부분) -->
-			<%@ include file="common/top.jsp"%>
+			<%@ include file="common/top_main.jsp"%>
 		<!-- header navigation(탑1 부분) -->
 		<!-- banner text -->
 		<div class="container">
@@ -45,30 +45,16 @@
 					<p>기획을 중점으로 요청자와 기술자들을 연결시켜 기획의 결실을 맺는 교류시스템</p>
 					<nav role="navigation">
 						<a href="#services" class="banner-btn"><img
-							src="${pageContext.request.contextPath}/resources/images/down-arrow.png" alt=""></a>
+							src="#" alt=""></a>
 					</nav>
 				</div>
 				<!-- banner text -->
 			</div>
 		</div>
 	</section>
-	
-	<section id="test">
-	<div class="container">
-		<h2>git도 사용할 줄 모르던 바보들 드디어 깨우치다!!!!!!</h2>
-		<div class="row">
-			<ul>
-				<li><a href="./member/join" target="_blank">회원가입</a></li>
-				<li><a href="./member/login" target="_blank">로그인</a></li>
-				<li><a href="./board/engineer" target="_blank">요청자 게시판 리스트</a></li>
-				<li><a href="./board/client" target="_blank">의뢰인 게시판 리스트2</a></li>
-			</ul>
-		</div>
-	</div>
-	</section>
-	
-	
 	<!-- header section -->
+	
+	
 	<!-- keyword section(키워드부분) -->
 	<section id="intro" class="section intro no-padding">
 		<div class="container-fluid">
@@ -127,8 +113,8 @@
 			<div class="row no-gutter">
 				<!-- 건축분야 -->
 				<div class="col-lg-3 col-md-3 col-sm-3 work">
-					<a href="${pageContext.request.contextPath}/resources/images/work-1.jpg" class="work-box"> <img
-						src="${pageContext.request.contextPath}/resources/images/work-1.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/resources/images/categorie1.jpg" class="work-box"> <img
+						src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
 						<div class="overlay">
 							<div class="overlay-caption">
 								<p>
@@ -140,8 +126,8 @@
 				</div>
 				<!-- IT분야 -->
 				<div class="col-lg-3 col-md-3 col-sm-3 work">
-					<a href="${pageContext.request.contextPath}/resources/images/work-2.jpg" class="work-box"> <img
-						src="${pageContext.request.contextPath}/resources/images/work-2.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/resources/images/categorie2.JPG" class="work-box"> <img
+						src="${pageContext.request.contextPath}/resources/images/categorie2.JPG" alt="">
 						<div class="overlay">
 							<div class="overlay-caption">
 								<p>
@@ -153,8 +139,8 @@
 				</div>
 				<!-- 자동차분야 -->
 				<div class="col-lg-3 col-md-3 col-sm-3 work">
-					<a href="${pageContext.request.contextPath}/resources/images/work-3.jpg" class="work-box"> <img
-						src="${pageContext.request.contextPath}/resources/images/work-3.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/resources/images/categorie3.jpg" class="work-box"> <img
+						src="${pageContext.request.contextPath}/resources/images/categorie3.jpg" alt="">
 						<div class="overlay">
 							<div class="overlay-caption">
 								<p>
@@ -166,8 +152,8 @@
 				</div>
 				<!-- 교육분야 -->
 				<div class="col-lg-3 col-md-3 col-sm-3 work">
-					<a href="${pageContext.request.contextPath}/resources/images/work-4.jpg" class="work-box"> <img
-						src="${pageContext.request.contextPath}/resources/images/work-4.jpg" alt="">
+					<a href="${pageContext.request.contextPath}/resources/images/categorie4.jpg" class="work-box"> <img
+						src="${pageContext.request.contextPath}/resources/images/categorie4.jpg" alt="">
 						<div class="overlay">
 							<div class="overlay-caption">
 								<p>
