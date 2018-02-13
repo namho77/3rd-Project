@@ -6,6 +6,24 @@
 
  <mapper namespace="com.kosmo.mapper.MemberMapper">
 
+	<select id="insert" resultType="Integer" parameterType="com.cafe24.ourplanners.member.domain.MemberVO">
+ 		
+ 		insert into op_member (member_srl,member_type,user_id,email_address,password,salt,email_id,email_host,user_name,
+find_account_question,find_account_answer,birthday,allow_mailing,allow_message,gender,address,mobile,
+career,career_history,license_date,license_provider,license_description,adopt_ratio,satisfaction,
+company_name,company_number,regdate,denied,limit_date,is_admin,change_password_date,profile_img_path,member_grade,last_login)
+values (#{member_srl},#{member_type},#{user_id},#{email_address},#{password},#{salt},#{email_id},#{email_host},#{user_name},
+#{find_account_question},#{find_account_answer},#{birthday},#{allow_mailing},#{allow_message},#{gender},#{address},#{mobile},
+#{career},#{career_history},#{license_date},#{license_provider},#{license_description},#{adopt_ratio},#{satisfaction},
+#{company_name},#{company_number},#{regdate},#{denied},#{limit_date},#{is_admin},#{change_password_date},#{profile_img_path},#{member_grade},#{last_login})
+ 		
+ 	</select>
+ 	
+ 	
+ 	<select id="hasId" resultType="Integer">
+ 		select count(*) from op_member where id=#{0} and pass=#{1}
+ 	</select>
+ 	
  	
  	<select id="login" resultType="com.cafe24.ourplanners.member.dto.LoginDTO">
  		select * from op_member where id=#{0} and pass=#{1}

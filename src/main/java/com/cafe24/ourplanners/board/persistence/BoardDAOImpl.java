@@ -16,10 +16,14 @@ public class BoardDAOImpl implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	private static String namespace = "com.kosmo.mapper.BoardMapper";
+	  
 	@Override
 	public void write(BoardVO vo) throws Exception {
 		// TODO Auto-generated method stub
+		//sqlSession.insert(namespace + ".create", vo);
 		
+		//return session.selectOne(namespace + ".read", bno);
 	}
 
 	@Override
@@ -43,6 +47,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public List<BoardVO> listAll() throws Exception {
 		// TODO Auto-generated method stub
+		//sqlSession.selectOne(namespace + ".list");
 		return null;
 	}
 
