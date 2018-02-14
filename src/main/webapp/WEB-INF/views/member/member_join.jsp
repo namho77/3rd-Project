@@ -1,6 +1,12 @@
-<%@page import="com.cafe24.ourplanners.member.dto.LoginDTO"%>
+<%@page import="com.cafe24.ourplanners.member.domain.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	//ajax json데이터 캐쉬 방지
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -881,7 +887,7 @@
 								<div class="row">
 
 									<div class="col-lg-2 ">
-										<!-- <input type="text" name="zipcode" size="5" /> -->
+									<input type="text" name="address" size="20" />
 									</div>
 									<div class="col-lg-2 ">
 										<input class="btnType1" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />
@@ -892,16 +898,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group">
-								<label class="col-lg-offset-2 col-lg-2 control-label"></label>
-								<div class="col-lg-6">
-									<input type="text" name="address" size="20" />
-									<!-- <input type="text" name="address1" size="20" /> <input type="text" name="address2" size="25" placeholder="상세주소" /> <input type="hidden" name="sido" size="10" /> <input type="hidden" name="gugun" size="10" /> -->
-								</div>
 
-							</div>
-						</div>
 						<div class="row">
 							<div class="form-group">
 
@@ -979,7 +976,7 @@
 					<%
 						} else if (action != null && action.equalsIgnoreCase("authmail")) {
 
-							LoginDTO memInfo = (LoginDTO) request.getAttribute("joinInfo");
+							MemberVO memInfo = (MemberVO) request.getAttribute("joinInfo");
 
 							session.setAttribute("joinInfo", memInfo);
 

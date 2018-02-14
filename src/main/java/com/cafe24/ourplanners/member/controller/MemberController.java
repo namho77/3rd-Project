@@ -57,103 +57,7 @@ public class MemberController {
 		}
 		else if(req.getParameter("action").equals("authmail"))
 		{
-			String member_type = req.getParameter("member_type");
-				
-			String user_id = req.getParameter("user_id");
-			
-			String email_address = req.getParameter("email_address");
-			
-			String password = req.getParameter("password");
-			
-			String email_id = req.getParameter("email_id");
-			
-			String email_host = req.getParameter("email_host");
-			
-			String user_name = req.getParameter("user_name");
-			
-			int find_account_question = Integer.parseInt(req.getParameter("find_account_question"));
-
-			String find_account_answer = req.getParameter("find_account_answer");
-		
-			
-			
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			String strBirthday = req.getParameter("birthday");
-
-			java.util.Date utilDate =null;
-			
-			try {
-				utilDate = format.parse(strBirthday);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			java.sql.Date sqlBirthday = new java.sql.Date(utilDate.getTime());
-
-			
-			String allow_mailing = req.getParameter("emailreceive");
-			String allow_message = req.getParameter("smsreceive");
-			
-			String gender = req.getParameter("gender");
-			
-			String address = req.getParameter("address");
-			
-			String mobile = req.getParameter("mobile");
-			
-			String career = req.getParameter("career");
-
-			String career_history =req.getParameter("career_history");
-			
-			String license_date = req.getParameter("license_date");
-			
-			String license_provider = req.getParameter("license_provider");
-			
-			String license_description = req.getParameter("license_description");
-			
-			String company_name = req.getParameter("company_name");
-			
-			String company_number = req.getParameter("company_number");
-
-			
-			utilDate = new java.util.Date();
-			java.sql.Date regdate = new java.sql.Date(utilDate.getTime());
-			
-			String denied = "N";
-			
-			java.sql.Date limit_date = null;
-			
-			String is_admin = req.getParameter("is_admin") == null ? "N" : req.getParameter("is_admin")  ;
-			
-			java.sql.Date change_password_date = regdate;
-			
-			String profile_img_path = "profile.jpg";
-
-			String member_grade = "E";
-			
-			java.sql.Date last_login = null;
-			
-
-			//비밀번호 암호화 			
-			String salt = SHA256.generateSalt();
-            
-            MemberVO memInfo = new MemberVO(member_type,user_id,email_address,password,salt,
-        			email_id,email_host,user_name,find_account_question,find_account_answer,
-        			sqlBirthday,allow_mailing,allow_message,gender,address,mobile,
-        			career,career_history,license_date,license_provider,
-        			license_description,company_name,company_number,regdate,denied,
-        			limit_date,is_admin,change_password_date,profile_img_path,member_grade,
-        			last_login);
-            
-            String newPassword = SHA256.encrypt(memInfo.getPassword(), salt);
-
-            memInfo.setPassword(newPassword);
-            memInfo.setSalt(salt);
-			
-            //System.out.println("저장된 솔트 : "+salt+"\n비밀번호 : "+memInfo.getPassword());
-			
-			model.addAttribute("action", "authmail");
-			model.addAttribute("joinInfo", memInfo);
+			service.registMember(req,model);
 			
 			return "member/member_join";
 
@@ -176,14 +80,9 @@ public class MemberController {
 							
 				session.removeAttribute("joinInfo");
 
-				 try {
+				
+			      service.registMember(req,model);
 						
-			        	service.registMemberNotNullCol(dto);
-						
-					} catch (Exception e) {
-						
-						e.printStackTrace();
-					}
 								
 				
 				model.addAttribute("action", "complete");

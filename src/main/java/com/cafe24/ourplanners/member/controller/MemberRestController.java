@@ -28,6 +28,20 @@ public class MemberRestController {
 	      return map;
 	  }
 	
+	@RequestMapping(value="/member/json/authkey_check.json")
+	public HashMap<String, Object> authkeyCheck(HttpServletRequest req){
+		
+
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+		service.checkAuthkey(req,map);
+		
+		
+	      return map;
+	      
+	}
+	
+	
+	
 	@RequestMapping(value="/member/json/id_check.json",method= RequestMethod.GET)
 	  public HashMap<String, Object> idCheck(HttpServletRequest req) {
 			
@@ -38,7 +52,7 @@ public class MemberRestController {
 	      
 	      int hasId = 0;
 		try {
-			System.out.println("서비스 호출");
+			//System.out.println("서비스 호출");
 			hasId = service.hasId(user_id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

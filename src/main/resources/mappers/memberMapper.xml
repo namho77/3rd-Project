@@ -26,7 +26,33 @@ values (#{member_srl},#{member_type},#{user_id},#{email_address},#{password},#{s
  	
  	
  	<select id="login" resultType="com.cafe24.ourplanners.member.dto.LoginDTO">
- 		select * from op_member where user_id=#{0} and password=#{1}
+ 		select * from op_member where user_id=#{user_id} and password=#{password}
  	</select>
+ 	
+ 	<select id="isValidAuthKey" resultType="Integer">
+ 		select count(*) from op_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
+ 	</select>
+ 	
+ 	<select id="isValidAuthKeyWithoutPassword" resultType="Integer">
+ 		select count(*) from op_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id}
+ 	</select>
+ 	
+ 	
+ 	<update id="updateIsRegister">
+ 	
+ 	update member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
+ 	
+	</update>
+	
+	<update id="mergeAuthKey">
+	
+	merge into op_member_auth_mail m using dual d on (user_id = #{user_id})  
+								when matched then  
+								    update set auth_key=#{auth_key},password=#{password},is_register=#{is_register},regdate=#{regdate}
+								when not matched then
+								    insert (auth_key,user_id,password,is_register,regdate) values (#{auth_key},#{user_id},#{password},#{is_register},#{regdate})
+		
+	</update>
+
  	
  </mapper>
