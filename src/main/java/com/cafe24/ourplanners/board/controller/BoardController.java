@@ -92,10 +92,4 @@ public class BoardController {
 	public String deleteClientBoard(@PathVariable String boardSrl) {
 		return "board/client/board_client_list";
 	}
-	
-/*	//공지사항 게시판
-	@RequestMapping(value="announcementBoard", method = RequestMethod.POST)
-	public String announcementBoard(Model model, HttpServletRequest req) {
-		
-	}*/
 }
