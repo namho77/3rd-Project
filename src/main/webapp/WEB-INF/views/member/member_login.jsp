@@ -32,7 +32,7 @@
 	function logoutGo() {
 		var ans = confirm("정말로 로그아웃 하시겠습니까?");
 		if (ans == true) {
-			location.href = "logout.jsp";
+			location.href = "/logout";
 		} else {
 			popLayerMsg("로그아웃을 취소하셨습니다.");
 		}
@@ -64,7 +64,7 @@
 			<header>
 				<section class="banner" role="banner">
 		<!-- header navigation(탑1 부분) -->
-			<%@ include file="../common/top.jsp"%>
+			<%@ include file="../common/top_main.jsp"%>
 		<!-- header navigation(탑1 부분) -->
 		<!-- banner text -->
 		<div class="container">
@@ -112,7 +112,7 @@
             }
             %>
             <div class="panel-body">
-					<form class="form-signin" action="login_proc.jsp" method="post" name="loginFrm" onsubmit="return loginFrmCheck();">
+					<form class="form-signin" action="login" method="post" name="loginFrm" onsubmit="return loginFrmCheck();">
 						<!-- <h2 class="form-signin-heading">로그인</h2> -->
 
 						<label>아이디</label>
@@ -127,8 +127,8 @@
 
 						<div class="info_account">
 							<div class="sign_up_account ">
-								<a href="../join/join" id="signUp">회원가입</a><span class="txt_bar">|</span>
-								<span class="account_more"> <a href="../find/find_id.do" class="link_more">아이디 찾기</a> <span class="txt_bar">|</span> <a href="../find/find_password.do" class="link_more" >비밀번호 찾기</a>
+								<a href="/join" id="signUp">회원가입</a><span class="txt_bar">|</span>
+								<span class="account_more"> <a href="../find/find_id" class="link_more">아이디 찾기</a> <span class="txt_bar">|</span> <a href="../find/find_password" class="link_more" >비밀번호 찾기</a>
 								</span> <span class="ico_login ico_top"></span>
 								
 							</div>

@@ -1,6 +1,12 @@
-<%@page import="com.cafe24.ourplanners.member.dto.LoginDTO"%>
+<%@page import="com.cafe24.ourplanners.member.domain.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	//ajax json데이터 캐쉬 방지
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +61,7 @@
 	}
     $(document).ready(function () {
         var url = window.location;
-        alert(url);
+        //alert(url);
         $('nav.navmenu ul li a[href="'+ url +'"]').parent().addClass('active');
         $('nav.navmenu ul li a').filter(function() {
              return this.href == url;
@@ -453,10 +459,14 @@
 					return;
 				}
 				
+				//var url = '/json/id_check.json?user_id=' + uid.value;
 		    	
 		     $.ajax({
-		      url:'j_id_check.jsp?user_id=' + uid.value,  //url에 주소 넣기
+		      url:'./json/id_check.json',  //url에 주소 넣기
+			  contentType : "text/html; charset=utf-8;",	  
+		      data : {user_id : uid.value},			  
 		      dataType:'json',      //dataType에 데이터 타입 넣기
+		      
 		      success:function(data){     //success에 성공했을 때 동작 넣기.
 		       
 		       //중복되지 않은 경우
@@ -472,7 +482,12 @@
 		        document.registFrm.DuplicationCheckId.value="N";
 		       }
 		       
+		      },
+		      error: function (e) {
+		    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+		    	  
 		      }
+		      
 		     });
 		    
 		    }
@@ -491,25 +506,11 @@
 			<!-- HEADER -->
 			<header>
 				<section class="banner" role="banner">
-		<!-- header navigation(탑1 부분) -->
-			<%@ include file="../common/top.jsp"%>
-		<!-- header navigation(탑1 부분) -->
-		<!-- banner text -->
-		<div class="container">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="banner-text text-center">
-					<h1>Our Planners</h1>
-					<p>기획을 중점으로 요청자와 기술자들을 연결시켜 기획의 결실을 맺는 교류시스템</p>
-					<nav role="navigation">
-						<a href="#services" class="banner-btn"><img
-							src="${pageContext.request.contextPath}/resources/images/down-arrow.png" alt=""></a>
-					</nav>
-				</div>
-				<!-- banner text -->
-			</div>
-		</div>
-	</section>
-
+				<!-- header navigation(상단 메뉴 부분) -->
+			
+					<%@ include file="../common/top_main.jsp"%>
+				<!--// header navigation(상단 메뉴 부분) -->
+				</section>
 			</header>
 			<!-- //HEADER -->
 
@@ -886,7 +887,7 @@
 								<div class="row">
 
 									<div class="col-lg-2 ">
-										<!-- <input type="text" name="zipcode" size="5" /> -->
+									<input type="text" name="address" size="20" />
 									</div>
 									<div class="col-lg-2 ">
 										<input class="btnType1" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />
@@ -897,16 +898,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group">
-								<label class="col-lg-offset-2 col-lg-2 control-label"></label>
-								<div class="col-lg-6">
-									<input type="text" name="address" size="20" />
-									<!-- <input type="text" name="address1" size="20" /> <input type="text" name="address2" size="25" placeholder="상세주소" /> <input type="hidden" name="sido" size="10" /> <input type="hidden" name="gugun" size="10" /> -->
-								</div>
 
-							</div>
-						</div>
 						<div class="row">
 							<div class="form-group">
 
@@ -984,7 +976,7 @@
 					<%
 						} else if (action != null && action.equalsIgnoreCase("authmail")) {
 
-							LoginDTO memInfo = (LoginDTO) request.getAttribute("joinInfo");
+							MemberVO memInfo = (MemberVO) request.getAttribute("joinInfo");
 
 							session.setAttribute("joinInfo", memInfo);
 
