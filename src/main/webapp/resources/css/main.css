@@ -345,7 +345,7 @@ ul li {
 -------------------------------------------------------------------------------*/
 
 .banner {
-	background-image: url(../images/main1.JPG);
+	background-image: url(../images/main3.png);
 	background-position: center top;
 	background-repeat: no-repeat;
 	-moz-background-size: cover;
@@ -465,6 +465,7 @@ ul li {
 }
 .work h5, .work p {
 	color: #fff;
+	font-size: 2.5em;
 	margin: 0;
 	opacity: 0;
 }
@@ -636,3 +637,97 @@ ul li {
 	font-size: 11px;
 	margin: 0 2px;
 }
+/* ------------------------------------------------------------------------------
+	 슬라이드형식 부분
+-------------------------------------------------------------------------------*/
+.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        /* use your favourite prefixer here */
+        transition: 500ms ease-in-out left;
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+}
+
+/* non-related styling: */
+body{
+  /* background: #333; */
+  color: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="footer-col col-md-12">
 					<h5>공지사항 : 2018년 3월 14일에 발표합니다. 준비하세요!</h5>
-					<hr />
+					<hr/>
 				</div>
 			</div>
 			<div class="row">

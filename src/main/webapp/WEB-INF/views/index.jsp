@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page trimDirectiveWhitespaces="true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
@@ -18,30 +19,47 @@
 
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 </head>
 
 <body>
 
 	<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
+	<img id="preloader"
+		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
+		alt="" />
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
@@ -68,50 +86,9 @@
 
 
 		<!-- keyword section(키워드부분) -->
-		<section id="intro" class="section intro no-padding">
-			<div class="container-fluid">
-				<div class="row no-gutter">
-					<div class="flexslider">
-						<ul class="slides">
-							<li>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 1</a>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 2</a>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 3</a>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 4</a>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 5</a>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="avatar">
-										<a href="#"><img src="${pageContext.request.contextPath}/resources/images/intro-img1.jpg" alt="" class="img-responsive">keyword 6</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
 		<!-- keyword section(키워드부분) -->
 		<div style="padding-top: 100px;"></div>
+
 
 		<!-- category section(분야별 부분) -->
 		<section id="works" class="works section no-padding">
@@ -119,48 +96,56 @@
 				<div class="row no-gutter">
 					<!-- 건축분야 -->
 					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="${pageContext.request.contextPath}/resources/images/categorie1.jpg" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
+						<a
+							href="${pageContext.request.contextPath}/resources/images/categorie1.jpg"
+							class="work-box"> <img
+							src="${pageContext.request.contextPath}/resources/images/categorie1.jpg"
+							alt="">
 							<div class="overlay">
 								<div class="overlay-caption">
-									<p>
-										<span class="icon icon-magnifying-glass"></span>
-									</p>
+									<p>건축</p>
 								</div>
 							</div>
 						</a>
 					</div>
 					<!-- IT분야 -->
 					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="${pageContext.request.contextPath}/resources/images/categorie2.JPG" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie2.JPG" alt="">
+						<a
+							href="${pageContext.request.contextPath}/resources/images/categorie2.jpg"
+							class="work-box"> <img
+							src="${pageContext.request.contextPath}/resources/images/categorie2.jpg"
+							alt="">
 							<div class="overlay">
 								<div class="overlay-caption">
-									<p>
-										<span class="icon icon-magnifying-glass"></span>
-									</p>
+									<p>컴퓨터</p>
 								</div>
 							</div>
 						</a>
 					</div>
 					<!-- 자동차분야 -->
 					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="${pageContext.request.contextPath}/resources/images/categorie3.jpg" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie3.jpg" alt="">
+						<a
+							href="${pageContext.request.contextPath}/resources/images/categorie3.jpg"
+							class="work-box"> <img
+							src="${pageContext.request.contextPath}/resources/images/categorie3.jpg"
+							alt="">
 							<div class="overlay">
 								<div class="overlay-caption">
-									<p>
-										<span class="icon icon-magnifying-glass"></span>
-									</p>
+									<p>자동차</p>
 								</div>
 							</div>
 						</a>
 					</div>
 					<!-- 교육분야 -->
 					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="${pageContext.request.contextPath}/resources/images/categorie4.jpg" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie4.jpg" alt="">
+						<a
+							href="${pageContext.request.contextPath}/resources/images/categorie4.jpg"
+							class="work-box"> <img
+							src="${pageContext.request.contextPath}/resources/images/categorie4.jpg"
+							alt="">
 							<div class="overlay">
 								<div class="overlay-caption">
-									<p>
-										<span class="icon icon-magnifying-glass"></span>
-									</p>
+									<p>교육</p>
 								</div>
 							</div>
 						</a>
@@ -173,16 +158,150 @@
 		<!-- engineer section(기술자 게시글부분) -->
 		<section id="teams" class="section teams">
 			<div class="container">
-				<h2>engineer board</h2>
-				<div class="row"></div>
+				<h2>[hot ★★★★★] engineer board</h2>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="carousel slide multi-item-carousel" id="theCarousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/f44336/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/e91e63/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/9c27b0/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/673ab7/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/4caf50/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/8bc34a/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<!-- add  more items here -->
+								<!-- Example item start:  -->
+
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/8bc34a/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+
+								<!--  Example item end -->
+							</div>
+							<a class="left carousel-control" href="#theCarousel"
+								data-slide="prev"><i
+								class="glyphicon glyphicon-chevron-left"></i></a> <a
+								class="right carousel-control" href="#theCarousel"
+								data-slide="next"><i
+								class="glyphicon glyphicon-chevron-right"></i></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 		<!-- engineer section(기술자 게시글부분) -->
 		<!-- buyer section(요청자 게시글부분) -->
 		<section id="teams" class="section teams">
 			<div class="container">
-				<h2>buyer board</h2>
-				<div class="row"></div>
+				<h2>[hot ★★★★★] buyer board</h2>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="carousel slide multi-item-carousel" id="theCarousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/f44336/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/e91e63/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/9c27b0/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/673ab7/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/4caf50/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/8bc34a/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+								<!-- add  more items here -->
+								<!-- Example item start:  -->
+
+								<div class="item">
+									<div class="col-xs-4">
+										<a href="#1"><img
+											src="http://placehold.it/300/8bc34a/000000"
+											class="img-responsive"></a>
+									</div>
+								</div>
+
+								<!--  Example item end -->
+							</div>
+							<a class="left carousel-control" href="#theCarousel"
+								data-slide="prev"><i
+								class="glyphicon glyphicon-chevron-left"></i></a> <a
+								class="right carousel-control" href="#theCarousel"
+								data-slide="next"><i
+								class="glyphicon glyphicon-chevron-right"></i></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 		<!-- buyer section(요청자 게시글부분) -->
