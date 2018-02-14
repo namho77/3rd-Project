@@ -1,5 +1,8 @@
 package com.cafe24.ourplanners.member.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,7 +32,8 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public int hasId(String userId) {
-		System.out.println("맵퍼호출"+namespace+".hasId" + userId);
+		
+		//System.out.println("맵퍼호출"+namespace+".hasId" + userId);
 		int hasId = sqlSession.selectOne(namespace+".hasId", userId);
 		return hasId;
 	}
@@ -38,6 +42,39 @@ public class MemberDAOImpl implements MemberDAO{
 	public LoginDTO login(String id, String pass) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public int isValidAuthKey(String user_id, String password, String auth_key) {
+		
+		 Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		    paramMap.put("user_id", user_id);
+		    paramMap.put("password", password);
+		    
+		    paramMap.put("auth_key", auth_key);
+		    
+		int isValidKey = sqlSession.selectOne(namespace+".isValidAuthKey", paramMap);
+
+		return isValidKey;
+	}
+
+
+	@Override
+	public int updateIsRegister(String is_register, String auth_key, String user_id, String password) {
+		 Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		 paramMap.put("is_regist", "Y");
+		 
+		    paramMap.put("user_id", user_id);
+		    paramMap.put("password", password);
+		    
+		    paramMap.put("auth_key", auth_key);
+		
+		int affected = sqlSession.selectOne(namespace+".updateIsRegister", paramMap);
+		
+		return affected;
 	}
 
 }
