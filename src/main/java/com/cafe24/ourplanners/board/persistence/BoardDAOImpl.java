@@ -1,11 +1,18 @@
 package com.cafe24.ourplanners.board.persistence;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
+import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
@@ -24,7 +31,6 @@ public class BoardDAOImpl implements BoardDAO{
 		//sqlSession.insert(namespace + ".create", vo);
 		
 		//return session.selectOne(namespace + ".read", bno);
-
 	}
 	@Override
 	public BoardVO view(Integer bno) throws Exception {
@@ -116,5 +122,4 @@ public class BoardDAOImpl implements BoardDAO{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

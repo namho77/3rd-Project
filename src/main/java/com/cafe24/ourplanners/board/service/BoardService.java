@@ -1,7 +1,13 @@
 package com.cafe24.ourplanners.board.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+
+import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
@@ -26,5 +32,5 @@ public interface BoardService {
 
 	  public int listSearchCount(SearchCriteria cri) throws Exception;
 	  
-	  public List<String> getAttach(Integer boardSrl)throws Exception;
+	  public List<String> getAttach(Integer boardSrl)throws Exception;	 	 
 }

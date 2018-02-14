@@ -3,6 +3,11 @@ package com.cafe24.ourplanners.board.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+
+import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
@@ -24,9 +29,7 @@ public interface BoardDAO {
 
 	  public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 
-	  public int countPaging(Criteria cri) throws Exception;
-	  
-	  public ArrayList<>
+	  public int countPaging(Criteria cri) throws Exception;  
 	  
 	  //use for dynamic sql
 	  
