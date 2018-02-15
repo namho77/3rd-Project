@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
 
@@ -19,14 +20,12 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public int registMemberNotNullCol(MemberVO vo) {
 		
-		
 		//session.selectList
 		//session.update
 		//session.delete
-		sqlSession.insert(namespace + ".insert", vo);
-		
-		
-		return 0;
+		int affected = sqlSession.insert(namespace + ".insert", vo);		
+
+		return affected;
 	}
 
 	
@@ -39,9 +38,8 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public LoginDTO login(String id, String pass) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO login(LoginDTO dto) throws Exception {
+		return sqlSession.selectOne(namespace + ".login", dto);
 	}
 
 
@@ -65,16 +63,49 @@ public class MemberDAOImpl implements MemberDAO{
 	public int updateIsRegister(String is_register, String auth_key, String user_id, String password) {
 		 Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		 paramMap.put("is_regist", "Y");
+		 paramMap.put("is_register", is_register);
 		 
 		    paramMap.put("user_id", user_id);
 		    paramMap.put("password", password);
 		    
 		    paramMap.put("auth_key", auth_key);
 		
-		int affected = sqlSession.selectOne(namespace+".updateIsRegister", paramMap);
+		int affected = sqlSession.update(namespace+".updateIsRegister", paramMap);
 		
 		return affected;
+	}
+
+
+	@Override
+	public int mergeAuthKey(MemberAuthMailVO vo) {
+		int affected = sqlSession.update(namespace+".mergeAuthKey", vo);
+		return affected;
+	}
+
+
+	@Override
+	public String getSaltById(String user_id) {
+		
+		//MemberDAO dao = sqlSession.getMapper(MemberDAO.class);
+		//return dao.getSaltById(user_id);
+		
+		return sqlSession.selectOne(namespace+".getSaltById", user_id);
+		
+		
+	}
+
+
+	@Override
+	public int confirmIdPassword(LoginDTO dto) {
+		
+
+		//MemberDAO dao = sqlSession.getMapper(MemberDAO.class);
+		//return dao.confirmIdPassword(dto);
+		
+		System.out.println("아이디 : " + dto.getUser_id());
+		System.out.println("비번 : " + dto.getPassword());
+		return sqlSession.selectOne(namespace+".confirmIdPassword", dto);
+		
 	}
 
 }

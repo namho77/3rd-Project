@@ -6,12 +6,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.cafe24.ourplanners.member.domain.MemberVO;
+import com.cafe24.ourplanners.member.dto.LoginDTO;
+
 public interface MemberService {
 
-	public int registMember(HttpServletRequest req, Model model);
+	public void saveMember(HttpServletRequest req, Model model);
+	
+	public int registMember(MemberVO joinInfo);
 	
 	public void checkAuthkey(HttpServletRequest req, HashMap<String, Object> map );
 	
-	public int hasId(String userId) throws Exception;
+	public void hasId(HttpServletRequest req, HashMap<String, Object> map);
+
+	public MemberVO login(LoginDTO dto, Model model) throws Exception;
 	
 }
