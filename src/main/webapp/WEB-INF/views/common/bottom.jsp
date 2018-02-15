@@ -28,7 +28,6 @@
 				</div>
 				<div class="footer-col col-md-3">
 					<h5>서비스</h5>
-					<p>
 					<ul>
 						<li><a href="#">기술자들 팀</a></li>
 						<li><a href="#">인재채용</a></li>
@@ -37,7 +36,6 @@
 						<li><a href="#">개인정보 취급방식</a></li>
 						<li><a href="#">FAQ</a></li>
 					</ul>
-					</p>
 				</div>
 				<div class="footer-col col-md-3">
 					<h5>관리자와 대화하기</h5>

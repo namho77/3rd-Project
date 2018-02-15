@@ -1,6 +1,8 @@
 <%@page import="com.cafe24.ourplanners.member.domain.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	//ajax json데이터 캐쉬 방지
 	response.setHeader("Cache-Control", "no-cache");
@@ -14,25 +16,26 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원가입|OUR PLANNERS</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	
-	<!-- JS FILES(자바스크립트 연결부분) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/retina.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/modernizr.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>	
+<jsp:useBean id="today" class="java.util.Date" scope="page" />
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<!-- JS FILES(자바스크립트 연결부분) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
 
 
 <script type="text/javascript">
@@ -220,8 +223,8 @@
 
 	function mergeMobNo() {
 		var f = document.registFrm;
-		var mobno = f.mno1.value.concat(f.mno2.value).concat(f.mno3.value);
-		f.mobno.value = mobno.split("-").join("");
+		var mobile = f.mno1.value.concat(f.mno2.value).concat(f.mno3.value);
+		f.mobile.value = mobile.split("-").join("");
 	}
 
 	function mergePhoneNo() {
@@ -500,8 +503,12 @@
 </head>
 
 <body>
-
+	<!-- PRELOADER -->
+	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
+	<!-- //PRELOADER -->
+	<div class="preloader_hide">
 <div id="page" class="single_page">
+
 
 			<!-- HEADER -->
 			<header>
@@ -761,7 +768,21 @@
 					<form class="form-horizontal" name="registFrm" method="post" action="join" onsubmit="return registFrmCheck();">
 						<input type="hidden" id="action" name="action" value="authmail">
 
+						
+						<div class="row">
+							<div class="form-group">
 
+								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 회원구분</label>
+
+								<div class="col-lg-6">
+
+									<input type="radio" name="member_type" id="personal" value="P" checked="checked" /> <label for="personal">개인</label> <input type="radio" name="member_type" id="company" value="C" /> <label for="company">회사</label>
+
+								</div>
+
+							</div>
+						</div>
+						
 						<div class="row">
 							<div class="form-group">
 
@@ -855,25 +876,11 @@
 						<div class="row">
 							<div class="form-group">
 
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 별명</label>
-
-								<div class="col-lg-6">
-
-									<input name="nickname" type="text" />
-
-								</div>
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="form-group">
-
 								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 생년월일</label>
 
 								<div class="col-lg-6">
 
-									<input name="birthday" type="date" step="1" /> <input type="radio" name="date_type" id="solar" value="S" checked="checked" /> <label for="solar">양력</label> <input type="radio" name="date_type" id="lunar" value="L" /> <label for="lunar">음력</label>
+									<input name="birthday" type="date" step="1" /> 
 
 								</div>
 
@@ -931,7 +938,7 @@
 								<div class="col-lg-offset-4  col-lg-6">
 									<div class="joinhelp">이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실 수 있습니다</div>
 									<div class="joinhelp">
-										수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다. <label><input type="radio" name="emailreceive" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="emailreceive" value="N" /> 아니오</label>
+										수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다. <label><input type="radio" name="allow_mailing" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="allow_mailing" value="N" /> 아니오</label>
 									</div>
 								</div>
 
@@ -952,13 +959,13 @@
 									<div class="col-lg-2">
 										<input name="mno3" type="text" size="4" maxlength="4" /> <br />
 									</div>
-									<input name="mobno" type="hidden" />
+									<input name="mobile" type="hidden" />
 								</div>
 
 								<div class="col-lg-offset-4  col-lg-6">
 									<div class="joinhelp">할인혜택과 이벤트 등의 소식 안내를 SMS로 받으실 수 있습니다.</div>
 									<div class="joinhelp">
-										수신동의 거부 시에도 기본서비스는 발송됩니다. <label><input type="radio" name="smsreceive" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="smsreceive" value="N" /> 아니오</label>
+										수신동의 거부 시에도 기본서비스는 발송됩니다. <label><input type="radio" name="allow_message" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="allow_message" value="N" /> 아니오</label>
 									</div>
 								</div>
 
@@ -1049,7 +1056,6 @@
 							});
 					});
 					
-					//JAVA ==> JSTL ==> HTML ==> JAVASCRIPT 실행순서
 
 					function checkAuthKey(f){
 						if (!f.authkey.value) {
@@ -1060,9 +1066,10 @@
 						}
 						
 						
+						
 						 
-						 var url="j_check_authkey.jsp";
-						 var params= "authkey="+f.authkey.value+"&user_id=${joinInfo.user_id}&password=${joinInfo.password}";
+						 var url="./json/authkey_check.json";
+						 var params= "auth_key="+f.authkey.value+"&user_id=${joinInfo.user_id}&password=${joinInfo.password}";
 						 var isMatched = false;
 						// alert(url+"?"+params);
 						//popLayerMsg(url+"?"+params); 
@@ -1083,7 +1090,6 @@
 						        	//popLayerMsg("인증 되었습니다.");
 						        	isMatched = true;
 						       }
-						       //중복된 경우
 						       else{
 						    	   
 						    	  popModal("#layer_unmatched_authkey");
@@ -1093,11 +1099,10 @@
 						       
 						      },
 						      error: function () {
-						    	  popLayerMsg("AJAX Error 발생");
+						    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
 						    	  $('.checkAuth_btn').prop("disabled", false);
 						    	  isMatched = false;
-						        //alert("ajax error");
-						      }
+						       }
 						     });
 						
 						return isMatched;
@@ -1124,7 +1129,7 @@
 						//countdown( "countdown", 10, 0 );
 						
 						 var authkey = document.getElementById("authkey");
-						 var url="sendMailAuth.jsp";
+						 var url="../mail/mail_authkey_send.json";
 						 var params="to=${joinInfo.email_address}&user_id=${joinInfo.user_id}&password=${joinInfo.password}";
 						 
 						 //popLayerMsg(url+"?"+params);
@@ -1146,14 +1151,9 @@
 					        	
 					    	   popLayerMsg("인증 메일이 발송 되었습니다.");
 					    	   
-					    	   //$('#layer_resend').modal().hide();
-					    	   
-					    	   //alert("발송성공");
-					        //document.getElementById("Span").innerText = "인증 메일이 발송 되었습니다.";
 					       }
 					       //중복된 경우
 					       else{
-					    	   //alert("메일발송실패");
 					    	   
 					    	   popLayerMsg("메일 발송 오류");
 					        //document.getElementById("Span").innerText = "이미 사용중이거나 탈퇴한 아이디입니다."+data.result;
@@ -1161,8 +1161,8 @@
 					       
 					      },
 					      error: function () {
-					    	  popLayerMsg("AJAX Error 발생");
-					        //alert("ajax error");
+					    	 
+					    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
 					      }
 					     });
 					
@@ -1238,11 +1238,11 @@
 
 						<div class="well text-center">
 
-							<span class="alert-success">${joinInfo.user_id}</span><br /> <span class="alert-success">${joinInfo.email_address}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.user_name}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.nick_name}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.birthday} </span><br /> <span class=" alert-success" style="display: none;">${joinInfo.mobno}</span><br />
+							<span class="alert-success">${joinInfo.user_id}</span><br /> <span class="alert-success">${joinInfo.email_address}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.user_name}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.birthday} </span><br /> <span class=" alert-success" style="display: none;">${joinInfo.mobile}</span><br />
 						</div>
 
 						<div class="text-center">
-							<button class="btn btn-info" type="button" onclick="location.href='../index.jsp';">확인</button>
+							<button class="btn btn-info" type="button" onclick="location.href='../';">확인</button>
 						</div>
 					</div>
 
@@ -1402,6 +1402,6 @@
 		<%@ include file="../common/bottom.jsp"%>
 	</footer>
 	<!-- Footer section(하단부분) -->
-
+</div>
 </body>
 </html>

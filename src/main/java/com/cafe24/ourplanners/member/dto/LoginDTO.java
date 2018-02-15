@@ -4,16 +4,7 @@ public class LoginDTO {
 	
 	private String user_id;
 	private String password;
-	private String user_name;
-	private String member_type;
-	private String is_admin;
-	  
-	public String getIs_admin() {
-		return is_admin;
-	}
-	public void setIs_admin(String is_admin) {
-		this.is_admin = is_admin;
-	}
+	
 	public String getUser_id() {
 		return user_id;
 	}
@@ -26,17 +17,7 @@ public class LoginDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getUser_name() {
-		return user_name;
-	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-	public String getMember_type() {
-		return member_type;
-	}
-	public void setMember_type(String member_type) {
-		this.member_type = member_type;
-	}
+
+
 	  
 }
