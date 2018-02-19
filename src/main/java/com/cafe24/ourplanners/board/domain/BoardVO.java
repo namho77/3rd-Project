@@ -25,6 +25,8 @@ public class BoardVO {
 	private int limit_person;
 	private String board_type;
 	private int service_score;
+	private java.util.Date last_update;
+	
 	
 	public BoardVO() {}
 	
@@ -32,7 +34,7 @@ public class BoardVO {
 			String title, String contents, Date postdate, int visitcount, Date contact_time_start,
 			Date contact_time_end, String like_user_id, String main_image, String contents_image, int category_srl,
 			int subcategory_srl, String service_expired, int service_cost, int limit_person, String board_type,
-			int service_score) {
+			int service_score, Date last_update) {
 		
 		this.board_srl = board_srl;
 		this.user_id = user_id;
@@ -55,6 +57,7 @@ public class BoardVO {
 		this.limit_person = limit_person;
 		this.board_type = board_type;
 		this.service_score = service_score;
+		this.last_update = last_update;
 	}
 
 	public int getBoard_srl() {
