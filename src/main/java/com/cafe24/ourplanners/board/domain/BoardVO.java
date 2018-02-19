@@ -7,14 +7,14 @@ public class BoardVO {
 	private int board_srl;
 	private String user_id;
 	private String location;
-	private java.util.Date service_time_start;
-	private java.util.Date service_time_end;
+	java.util.Date service_time_start;
+	java.util.Date service_time_end;
 	private String title;
 	private String contents;
-	private java.util.Date postdate;
+	java.util.Date postdate;
 	private int visitcount;
-	private java.util.Date contact_time_start;
-	private java.util.Date contact_time_end;
+	java.util.Date contact_time_start;
+	java.util.Date contact_time_end;
 	private String like_user_id;
 	private String main_image;
 	private String contents_image;
@@ -25,6 +25,9 @@ public class BoardVO {
 	private int limit_person;
 	private String board_type;
 	private int service_score;
+	java.util.Date last_update;
+	private int step;
+	private int indent;
 	
 	public BoardVO() {}
 	
@@ -32,7 +35,7 @@ public class BoardVO {
 			String title, String contents, Date postdate, int visitcount, Date contact_time_start,
 			Date contact_time_end, String like_user_id, String main_image, String contents_image, int category_srl,
 			int subcategory_srl, String service_expired, int service_cost, int limit_person, String board_type,
-			int service_score) {
+			int service_score, Date last_update, int step, int indent) {
 		
 		this.board_srl = board_srl;
 		this.user_id = user_id;
@@ -55,7 +58,11 @@ public class BoardVO {
 		this.limit_person = limit_person;
 		this.board_type = board_type;
 		this.service_score = service_score;
+		this.last_update = last_update;
+		this.step = step;
+		this.indent = indent;
 	}
+
 	public int getBoard_srl() {
 		return board_srl;
 	}
@@ -182,6 +189,24 @@ public class BoardVO {
 	public void setService_score(int service_score) {
 		this.service_score = service_score;
 	}
-	
+	public java.util.Date getLast_update() {
+		return last_update;
+	}
+	public void setLast_update(java.util.Date last_update) {
+		this.last_update = last_update;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public int getIndent() {
+		return indent;
+	}
+	public void setIndent(int indent) {
+		this.indent = indent;
+	}
+	  
 	
 }
