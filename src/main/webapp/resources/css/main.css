@@ -117,6 +117,28 @@ ul li {
 }
 
 /* ------------------------------------------------------------------------------
+	wordcloud
+	최근 1주일 핫 검색어
+-------------------------------------------------------------------------------*/
+#wordcloud {background:#24313d; padding:0;}
+#tagsList {position:relative; width:600px; height:400px; background:#24313d;}
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:#fff; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#FF0000; letter-spacing:2px;}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.padding-left-45 {
+    padding-left: 45px!important;
+}
+
+.padding-right-45 {
+    padding-right: 45px!important;
+}
+
+/* ------------------------------------------------------------------------------
 	 Header
 -------------------------------------------------------------------------------*/
 #header {
