@@ -318,7 +318,7 @@ $(document).ready(function() {
 					
 					$('#tagsList').html(items);
 		      },
-		      error: function () {
+		      error: function (e) {
 		    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
 
 		      }
