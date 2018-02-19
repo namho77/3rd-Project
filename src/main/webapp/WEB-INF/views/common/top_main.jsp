@@ -2,12 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header id="header">
 	<div class="header-content clearfix">
-		<a class="logo" href="#"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""> &nbsp; Our Planners</a>
+		<a class="logo" href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""> &nbsp; Our Planners</a>
 		<nav class="navigation" role="navigation">
 			<ul class="primary-nav">
 				<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판 리스트</a></li>
 				<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판 리스트</a></li>
-
 				<c:choose>
 					<c:when test="${empty loginUserInfo}">
 						<li><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>

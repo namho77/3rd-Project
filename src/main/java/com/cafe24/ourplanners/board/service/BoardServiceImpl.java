@@ -1,17 +1,11 @@
 package com.cafe24.ourplanners.board.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.persistence.BoardDAO;
 import com.cafe24.ourplanners.util.Criteria;
@@ -83,5 +77,7 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

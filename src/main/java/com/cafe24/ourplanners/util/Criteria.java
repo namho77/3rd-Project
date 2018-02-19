@@ -6,14 +6,55 @@ public class Criteria {
 	//int pageSize = 3; // 한 페이지에 출력할 게시물의 개수
 	//int blockPage = 2; // 한 블럭에 표시할 페이지 번호의 개수
 	
-	private int nowPage;	
+	private int nowPage;
 	private int pageSize;
+	
+	private int blockPage;
+	private int category_srl;
+	private int subcategory_srl;
+	private String board_type;
 	
 	public Criteria(){
 		this.nowPage = 1;
 		this.pageSize = 10;
+		this.blockPage= 10;
+	}
+	
+
+	public int getCategory_srl() {
+		return category_srl;
 	}
 
+
+	public void setCategory_srl(int category_srl) {
+		this.category_srl = category_srl;
+	}
+
+
+	public int getSubcategory_srl() {
+		return subcategory_srl;
+	}
+
+
+	public void setSubcategory_srl(int subcategory_srl) {
+		this.subcategory_srl = subcategory_srl;
+	}
+
+
+	public String getBoard_type() {
+		return board_type;
+	}
+
+
+	public void setBoard_type(String board_type) {
+		this.board_type = board_type;
+	}
+
+
+	public int getNowPage() {
+		return nowPage;
+	}
+	
 	public void setNowPage(int nowPage){
 		
 		if(nowPage <= 0){
@@ -24,6 +65,11 @@ public class Criteria {
 		this.nowPage = nowPage;
 	}
 	
+	public int getPageSize(){
+		
+		return this.pageSize;
+	}
+
 	public void setPageSize(int pageSize){
 		
 		if(pageSize <= 0 || pageSize > 100){
@@ -35,23 +81,33 @@ public class Criteria {
 	}
 	
 
-	
-	public int getNowPage() {
-		return nowPage;
-	}
 
-	//method for MyBatis SQL Mapper - 
+	public int getBlockPage() {
+		return blockPage;
+	}
+		
+	public void setBlockPage(int blockPage) {
+		
+		if(blockPage <= 0 || blockPage > 100){
+			this.blockPage = 10;
+			return;
+		}
+		
+		this.blockPage = blockPage;
+	}
+	
+
+	//method for MyBatis SQL Mapper
 	public int getPageStart() {
 		
-		return (this.nowPage -1)* pageSize;
+		return (this.nowPage - 1) * pageSize +1;
 	}
 	
 	//method for MyBatis SQL Mapper 
-	public int getPageSize(){
-		
-		return this.pageSize;
+	public int getPageEnd() {
+		return nowPage * pageSize;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Criteria [nowPage=" + nowPage + ", pageSize=" + pageSize + "]";

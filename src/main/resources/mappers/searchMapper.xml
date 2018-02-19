@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.mapper.SearchMapper">
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and contents like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'i'.toString()">
+				and user_id like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and ( title like CONCAT('%', #{keyword}, '%') OR contents like
+				CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+
+	<select id="getHotServiceList" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT BOARD_SRL ,
+USER_ID ,
+LOCATION ,
+SERVICE_TIME_START ,
+SERVICE_TIME_END ,
+TITLE ,
+CONTENTS ,
+POSTDATE ,
+VISITCOUNT ,
+CONTACT_TIME_START ,
+CONTACT_TIME_END ,
+LIKE_USER_ID ,
+NVL2(length(like_user_id) - length(replace(like_user_id,',','')), length(like_user_id) - length(replace(like_user_id,',',''))+1,0) like_user_count,
+MAIN_IMAGE ,
+CONTENTS_IMAGE ,
+CATEGORY_SRL ,
+SUBCATEGORY_SRL ,
+SERVICE_EXPIRED ,
+SERVICE_COST ,
+LIMIT_PERSON ,
+BOARD_TYPE ,
+SERVICE_SCORE  FROM op_board where board_srl > 0 
+
+ and postdate > (sysdate-7) 
+]]>
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+<![CDATA[  
+		ORDER BY like_user_count desc, board_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+]]>
+	</select>
+
+
+	<select id="getHotServiceListSearch" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT BOARD_SRL ,
+USER_ID ,
+LOCATION ,
+SERVICE_TIME_START ,
+SERVICE_TIME_END ,
+TITLE ,
+CONTENTS ,
+POSTDATE ,
+VISITCOUNT ,
+CONTACT_TIME_START ,
+CONTACT_TIME_END ,
+LIKE_USER_ID ,
+NVL2(length(like_user_id) - length(replace(like_user_id,',','')), length(like_user_id) - length(replace(like_user_id,',',''))+1,0) like_user_count,
+MAIN_IMAGE ,
+CONTENTS_IMAGE ,
+CATEGORY_SRL ,
+SUBCATEGORY_SRL ,
+SERVICE_EXPIRED ,
+SERVICE_COST ,
+LIMIT_PERSON ,
+BOARD_TYPE ,
+SERVICE_SCORE  FROM op_board where board_srl > 0 
+
+ and postdate > (sysdate-7) 
+]]>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+  
+	<![CDATA[    
+	  ORDER BY like_user_count desc, board_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+	]]>
+
+	</select>
+
+
+
+
+</mapper>

@@ -53,6 +53,10 @@
 	
 	<tx:annotation-driven />
 	
+	<context:component-scan base-package="com.cafe24.ourplanners.*.persistence"></context:component-scan>
+	<context:component-scan base-package="com.cafe24.ourplanners.*.service"></context:component-scan>
+	
+	<!--
 	<context:component-scan base-package="com.cafe24.ourplanners.board.persistence"></context:component-scan>
 	<context:component-scan base-package="com.cafe24.ourplanners.board.service"></context:component-scan>
 	
@@ -60,5 +64,6 @@
 	<context:component-scan base-package="com.cafe24.ourplanners.member.service"></context:component-scan>
 	
 	<context:component-scan base-package="con.cafe24.ourplanners.announcementboard.persistence"></context:component-scan>
+	-->
 		
 </beans>

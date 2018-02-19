@@ -5,7 +5,7 @@
 <!-- 관리자 페이지 전용 Sidebar -->
 
 <ul class="nav nav-pills nav-stacked">
-	<li><a href="../">HOME</a></li>
+	<li><a href="${pageContext.request.contextPath}">HOME</a></li>
 
 	<c:choose>
 		
