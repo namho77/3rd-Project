@@ -116,7 +116,7 @@ public class BoardVO {
 	}
 	public java.util.Date getContact_time_start() {
 		return contact_time_start;
-	} 
+	}
 	public void setContact_time_start(java.util.Date contact_time_start) {
 		this.contact_time_start = contact_time_start;
 	}
@@ -186,6 +186,7 @@ public class BoardVO {
 	public void setService_score(int service_score) {
 		this.service_score = service_score;
 	}
+
 	public java.util.Date getLast_update() {
 		return last_update;
 	}
