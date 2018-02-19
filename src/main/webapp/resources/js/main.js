@@ -1,5 +1,4 @@
 window.jQuery = window.$ = jQuery;
-
 /*
  * 프리로딩 (이미지 프리로더)
  */

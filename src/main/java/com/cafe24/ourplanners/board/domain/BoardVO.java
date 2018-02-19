@@ -56,6 +56,7 @@ public class BoardVO {
 		this.board_type = board_type;
 		this.service_score = service_score;
 	}
+
 	public int getBoard_srl() {
 		return board_srl;
 	}
@@ -182,6 +183,11 @@ public class BoardVO {
 	public void setService_score(int service_score) {
 		this.service_score = service_score;
 	}
-	
-	
+
+	public java.util.Date getLast_update() {
+		return last_update;
+	}
+	public void setLast_update(java.util.Date last_update) {
+		this.last_update = last_update;
+	}
 }
