@@ -13,7 +13,7 @@ $(document).ready(function(){
 			$('#smallABoard').html(d);
 		},
 		error:function(e){
-			alert("실패" + e);
+			alert("실패호ㅓㅏ오맇ㅁㅇ" + e);
 		}
 	});
 });
