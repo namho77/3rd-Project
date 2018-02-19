@@ -387,9 +387,8 @@ function limitCharacters(textid, limit, spanid)
 	<div class="col-xs-7 padding-right-45">
 		<div id="tagsList">
 		
-			<span><a href="http://www.hao123.com/haoserver/kuaidi.htm">快递查询</a></span>
-			 <span><a href="http://lvyou.hao123.com/huoche">火车票查询</a></span> 
-			 <span><a href="http://flight.qunar.com/?dh=hotk_P0T0M0">机票</a></span>
+			<span><a href="http://www.daum.net">다음</a></span>
+			 <span><a href="http://www.google.com">구글</a></span>
 			  
 		</div>
 
