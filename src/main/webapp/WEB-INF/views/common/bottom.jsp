@@ -32,7 +32,7 @@ function customercenterRow(){
 		<div class="row">
 			<div class="footer-col col-md-12">				
 					<a href="#" onclick="javascript:customercenterRow();"><h5>공지사항</h5></a>
-					<div id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</div>			
+					<span id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</span>			
 				<hr />
 			</div>
 		</div>

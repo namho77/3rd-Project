@@ -3,8 +3,8 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.kosmo.mapper.ABoardMapper">
+    
+<mapper namespace="com.cafe24.ourplanners.announcementboard.persistence.ABoardDAO">
 	<select id="listPage" resultType="com.cafe24.ourplanners.announcementboard.dto.ABoardDTO">
 		select * from (select Tb.*, rownum rNum from (select * from op_notice order by notice_srl desc) Tb) where rNum between #{param1} and #{param2}
 	</select>

@@ -19,5 +19,5 @@ function paging(pNum) {
 }
 </script>   
 <c:forEach items="${lists }" var="row">
-<p>${row.contents }</p> <ul class="pagination">${pagingDiv }</ul>
+<p>${row.contents }</p> ${pagingDiv }
 </c:forEach>

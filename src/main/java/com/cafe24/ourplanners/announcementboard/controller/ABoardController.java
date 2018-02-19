@@ -28,7 +28,7 @@ public class ABoardController {
 
 
 	//공지사항 small게시판
-	@RequestMapping(value="smallABoard", method = RequestMethod.POST)
+	@RequestMapping(value="smallABoard", method = RequestMethod.GET)
 	public String smallABoard(Model model, HttpServletRequest req) {
 		int pageSize = 1;
 		int blockPage = 1;
