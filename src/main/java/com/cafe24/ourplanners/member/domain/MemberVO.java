@@ -38,7 +38,7 @@ public class MemberVO {
     private String member_grade;
     private java.util.Date last_login;
     
-    public MemberVO() {};
+    public MemberVO() {}
     
     
 	public MemberVO(String member_type, String user_id, String email_address, String password, String salt,

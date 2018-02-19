@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kosmo.mapper.WordCloudMapper">
+ 	
+ 	<!-- 각 서비스 게시판에서 검색시 워드 클라우드 등록 -->
+ 	<insert id="insertWordCloud" parameterType="com.cafe24.ourplanners.board.domain.WordCloudVO">
+		INSERT INTO op_wordcloud (wordcloud_srl, searchword, searchdate, category_srl, subcategory_srl) 
+							VALUES (wordcloud_srl_seq.nextval, #{searchword}, #{searchdate}, #{category_srl}, #{subcategory_srl})
+	</insert>
+ 	
+ 	<!-- 탑20 워드 클라우드 (1주일내 핫 검색어 20개) 가져오기 -->	
+ 	<select id="getHotWordCloud" resultType="com.cafe24.ourplanners.board.domain.WordCloudVO">
+
+		<![CDATA[
+	select searchword, category_srl, subcategory_srl, searchcount, ranking 
+from
+    ( select Wc.*, rownum ranking from 
+(select count(*) as searchcount,searchword,category_srl,subcategory_srl from op_wordcloud where searchdate>sysdate-7 group by searchword,category_srl,subcategory_srl order by searchcount desc) Wc )    
+    where ranking between 1 and 20
+     		]]>
+     		
+ 	</select>
+ 	
+ 	<!-- 오래된 (1주일 전) 워드 클라우드 삭제 -->
+ 	<delete id="deleteOldWordCloud">
+ 		<![CDATA[
+ 	 	delete from op_wordcloud where searchdate<sysdate-7
+ 		]]>
+ 	</delete>
+
+ 	
+ </mapper>
