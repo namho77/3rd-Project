@@ -116,7 +116,7 @@ public class BoardVO {
 	}
 	public java.util.Date getContact_time_start() {
 		return contact_time_start;
-	}
+	} 
 	public void setContact_time_start(java.util.Date contact_time_start) {
 		this.contact_time_start = contact_time_start;
 	}
