@@ -13,7 +13,7 @@ function paging(pNum) {
 			$('#smallABoard').html(d);
 		},
 		error:function(e){
-			alert("실패" + e);
+			alert("실패다" + e);
 		}
 	});
 }
