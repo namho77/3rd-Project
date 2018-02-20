@@ -20,6 +20,7 @@
 
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/material/material-kit.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
@@ -29,14 +30,26 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+<!-- Owl Stylesheets -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.theme.default.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
 <!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
+<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 </head>
 
@@ -66,7 +79,6 @@
 			</div>
 		</section>
 
-
 		<section id="wordcloud">
 
 			<%@ include file="wordcloud/wordcloud.jsp"%>
@@ -78,11 +90,11 @@
 						<div class="modal-header">
 
 							<div>
-								
+
 								<h1>"${searchWord }"에 대한 검색 결과가 없습니다.</h1>
-								
+
 								<h1>다음 서비스를 찾고 있나요?</h1>
-								
+
 							</div>
 							<button type="button" class="close" data-dismiss="modal">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -92,48 +104,48 @@
 						</div>
 						<div class="modal-body" id="layer_msg_content">
 
-							<div >
+							<div>
 								<ul>
-									<li><a href="https://soomgo.com/hire/영어"> 영어 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/수학"> 수학 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/피아노키보드"> 피아노/키보드 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/비즈니스-영어"> 비즈니스 영어 </a></li>
-									<li><a href="https://soomgo.com/hire/보컬"> 보컬 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/국어"> 국어 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/과학"> 과학 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/시창청음화성학"> 시창청음/화성학 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/작곡-편곡"> 작곡/편곡 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/음악-편집-및-제작"> 음악 편집 및 제작 </a></li>
-									<li><a href="https://soomgo.com/hire/기타"> 기타 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/BGM-사운드-제작"> BGM/사운드 제작 </a></li>
-									<li><a href="https://soomgo.com/hire/toeic"> TOEIC/speaking/writing 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/중국어"> 중국어 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/일본어일어"> 일본어(일어) 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/퍼스널트레이닝"> 퍼스널트레이닝(PT) </a></li>
-									<li><a href="https://soomgo.com/hire/미디컴퓨터작곡"> 미디/컴퓨터작곡 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/비즈니스-중국어"> 비즈니스 중국어 </a></li>
-									<li><a href="https://soomgo.com/hire/소묘-드로잉"> 소묘/드로잉 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/사회"> 사회 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/미술-회화"> 미술 회화 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/연기"> 연기 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/일러스트-디자인"> 일러스트 디자인 </a></li>
-									<li><a href="https://soomgo.com/hire/영어-번역"> 영어 번역 </a></li>
-									<li><a href="https://soomgo.com/hire/축가"> 축가 요청 </a></li>
-									<li><a href="https://soomgo.com/hire/바이올린"> 바이올린 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/비즈니스-일본어"> 비즈니스 일본어 </a></li>
-									<li><a href="https://soomgo.com/hire/성악"> 성악 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/명함-디자인"> 명함 디자인 </a></li>
-									<li><a href="https://soomgo.com/hire/로고-디자인"> 로고 디자인 </a></li>
-									<li><a href="https://soomgo.com/hire/논술"> 논술 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/인쇄물-디자인"> 인쇄물 디자인 </a></li>
-									<li><a href="https://soomgo.com/hire/개인용-사진-촬영"> 개인용 사진 촬영 </a></li>
-									<li><a href="https://soomgo.com/hire/toefl"> TOEFL 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/기업-상업용-사진-촬영"> 기업/상업용 사진 촬영 </a></li>
-									<li><a href="https://soomgo.com/hire/방송댄스"> 방송댄스 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/검정고시"> 검정고시 과외 </a></li>
-									<li><a href="https://soomgo.com/hire/프로그래밍"> 프로그래밍/코딩 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/사진촬영"> 사진 촬영/편집 레슨 </a></li>
-									<li><a href="https://soomgo.com/hire/스트릿-댄스"> 스트릿댄스 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/영어"> 영어 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/수학"> 수학 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/피아노키보드"> 피아노/키보드 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-영어"> 비즈니스 영어 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/보컬"> 보컬 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/국어"> 국어 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/과학"> 과학 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/시창청음화성학"> 시창청음/화성학 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/작곡-편곡"> 작곡/편곡 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/음악-편집-및-제작"> 음악 편집 및 제작 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/기타"> 기타 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/BGM-사운드-제작"> BGM/사운드 제작 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/toeic"> TOEIC/speaking/writing 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/중국어"> 중국어 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/일본어일어"> 일본어(일어) 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/퍼스널트레이닝"> 퍼스널트레이닝(PT) </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/미디컴퓨터작곡"> 미디/컴퓨터작곡 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-중국어"> 비즈니스 중국어 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/소묘-드로잉"> 소묘/드로잉 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/사회"> 사회 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/미술-회화"> 미술 회화 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/연기"> 연기 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/일러스트-디자인"> 일러스트 디자인 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/영어-번역"> 영어 번역 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/축가"> 축가 요청 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/바이올린"> 바이올린 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-일본어"> 비즈니스 일본어 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/성악"> 성악 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/명함-디자인"> 명함 디자인 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/로고-디자인"> 로고 디자인 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/논술"> 논술 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/인쇄물-디자인"> 인쇄물 디자인 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/개인용-사진-촬영"> 개인용 사진 촬영 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/toefl"> TOEFL 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/기업-상업용-사진-촬영"> 기업/상업용 사진 촬영 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/방송댄스"> 방송댄스 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/검정고시"> 검정고시 과외 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/프로그래밍"> 프로그래밍/코딩 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/사진촬영"> 사진 촬영/편집 레슨 </a></li>
+									<li><a href="${pageContext.request.contextPath}/hire/스트릿-댄스"> 스트릿댄스 레슨 </a></li>
 								</ul>
 							</div>
 
@@ -217,53 +229,81 @@
 		<!-- category section(분야별 부분) -->
 
 		<!-- engineer section(기술자 게시글부분) -->
-		<section id="teams" class="section teams">
+		<section id="hot_engineer_board" class="section teams">
 			<div class="container">
 				<h2>[hot ★★★★★] engineer board</h2>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="carousel slide multi-item-carousel" id="theCarousel">
 							<div class="carousel-inner">
+
 								<div class="item active">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/f44336/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/e91e63/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/9c27b0/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<!-- add  more items here -->
-								<!-- Example item start:  -->
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg&quot;); opacity: 1;"></div>
+												<div class="ripple-container"></div>
+											</div>
 
+											<div class="card-content">
+												<h6 class="category text-info">Enterprise</h6>
+												<h4 class="card-title">
+													<a href="#pablo">Autodesk looks to future of 3D printing with Project Escher</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog8.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url('http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg'); opacity: 1;"></div>
+												<div class="ripple-container"></div>
+											</div>
+											<div class="card-content">
+												<h6 class="category text-success">Startups</h6>
+												<h4 class="card-title">
+													<a href="#pablo">Lyft launching cross-platform service this week</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg&quot;); opacity: 1;"></div>
+											</div>
+
+											<div class="card-content">
+												<h6 class="category text-danger">Enterprise</h6>
+												<h4 class="card-title">
+													<a href="#pablo">6 insights into the French Fashion landscape</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
 									</div>
 								</div>
 
-								<!--  Example item end -->
+
+
 							</div>
 							<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 						</div>
@@ -273,55 +313,83 @@
 		</section>
 		<!-- engineer section(기술자 게시글부분) -->
 		<!-- buyer section(요청자 게시글부분) -->
-		<section id="teams" class="section teams">
+		<section id="hot_client_board" class="section teams">
 			<div class="container">
 				<h2>[hot ★★★★★] buyer board</h2>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="carousel slide multi-item-carousel" id="theCarousel">
+						<div class="carousel slide multi-item-carousel" id="theCarousel2">
 							<div class="carousel-inner">
+
 								<div class="item active">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/f44336/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/e91e63/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/9c27b0/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
-									</div>
-								</div>
-								<!-- add  more items here -->
-								<!-- Example item start:  -->
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg&quot;); opacity: 1;"></div>
+												<div class="ripple-container"></div>
+											</div>
 
+											<div class="card-content">
+												<h6 class="category text-info">Enterprise</h6>
+												<h4 class="card-title">
+													<a href="#pablo">Autodesk looks to future of 3D printing with Project Escher</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="item">
-									<div class="col-xs-4">
-										<a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a>
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog8.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url('http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg'); opacity: 1;"></div>
+												<div class="ripple-container"></div>
+											</div>
+											<div class="card-content">
+												<h6 class="category text-success">Startups</h6>
+												<h4 class="card-title">
+													<a href="#pablo">Lyft launching cross-platform service this week</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-md-4">
+										<div class="card card-blog">
+											<div class="card-image">
+												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg">
+												</a>
+												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg&quot;); opacity: 1;"></div>
+											</div>
+
+											<div class="card-content">
+												<h6 class="category text-danger">Enterprise</h6>
+												<h4 class="card-title">
+													<a href="#pablo">6 insights into the French Fashion landscape</a>
+												</h4>
+												<p class="card-description">
+													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
+												</p>
+											</div>
+										</div>
 									</div>
 								</div>
 
-								<!--  Example item end -->
+
+
 							</div>
-							<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+							<a class="left carousel-control" href="#theCarousel2" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#theCarousel2" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 						</div>
 					</div>
 				</div>

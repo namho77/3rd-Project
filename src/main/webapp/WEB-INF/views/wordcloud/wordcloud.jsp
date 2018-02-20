@@ -9,9 +9,9 @@
 	response.setDateHeader("Expires", 0);
 %>
 <script type="text/javascript">
-
+window.jQuery = window.$ = jQuery;
 	
-(function(){
+$(document).ready(function(){
 
 	var radius = 120;
 	var dtr = Math.PI/180;
@@ -251,7 +251,7 @@
 	}
 
 		
-	})();
+});
 	
 $(document).ready(function() {
 
