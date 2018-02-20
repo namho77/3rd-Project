@@ -45,10 +45,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<BoardVO> listAll() throws Exception {
+	public List<BoardVO> list() throws Exception {
 		// TODO Auto-generated method stub
 		//sqlSession.selectOne(namespace + ".list");
-		return null;
+		return sqlSession.selectList(namespace + ".list");
 	}
 
 	@Override
