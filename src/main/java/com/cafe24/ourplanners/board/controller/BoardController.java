@@ -2,6 +2,7 @@ package com.cafe24.ourplanners.board.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.ourplanners.board.domain.BoardVO;
+import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.board.service.BoardService;
 
 
@@ -28,12 +31,14 @@ public class BoardController {
 	//목록보기
 	@RequestMapping(value = "engineer", method = RequestMethod.GET)
 	public String listEngineerBoard(Model model) {
+		List<BoardVO> lists = null;
 		try {
-			service.listAll();
+			lists = service.list();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		model.addAttribute("lists", lists);
 		return "board/engineer/board_engineer_list";
 	}
 	//글읽기
@@ -64,7 +69,7 @@ public class BoardController {
 	@RequestMapping(value = "client", method = RequestMethod.GET)
 	public String listClientBoard(Model model) {
 		try{
-			service.listAll();
+			service.list();
 		}
 		catch (Exception e) {
 			// TODO: handle exception

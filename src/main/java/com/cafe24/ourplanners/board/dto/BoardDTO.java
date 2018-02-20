@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BoardDTO {
 
-	 private int board_srl;
+	private int board_srl;
     private String user_id;
     private String location;
     private java.sql.Date service_time_start;
@@ -25,12 +25,15 @@ public class BoardDTO {
     private int limit_person;
     private char board_type;		
     private int service_score;
+    private java.sql.Date last_update;
+    
+    public BoardDTO() {}
     
     public BoardDTO(int board_srl, String user_id, String location, Date service_time_start,
  			Date service_time_end, String title, String contents, Date postdate, int visitcount,
  			Date contact_time_start, Date contact_time_end, String like_user_id, String main_image,
  			String contents_image, int category_srl, int subcategory_srl, char service_expired,
- 			int service_cost, int limit_person, char board_type, int service_score) {
+ 			int service_cost, int limit_person, char board_type, int service_score, Date last_update) {
 
  		this.board_srl = board_srl;
  		this.user_id = user_id;
@@ -53,6 +56,7 @@ public class BoardDTO {
  		this.limit_person = limit_person;
  		this.board_type = board_type;
  		this.service_score = service_score;
+ 		this.last_update = last_update;
  	}
     
 	public int getBoard_srl() {
@@ -181,7 +185,10 @@ public class BoardDTO {
 	public void setService_score(int service_score) {
 		this.service_score = service_score;
 	}
-	
-    
-	
+	public java.sql.Date getLast_update() {
+		return last_update;
+	}
+	public void setLast_update(java.sql.Date last_update) {
+		this.last_update = last_update;
+	}	
 }
