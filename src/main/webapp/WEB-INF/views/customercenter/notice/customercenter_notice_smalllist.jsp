@@ -4,7 +4,7 @@
 <script type="text/javascript">
 function paging(pNum) {
 	$.ajax({
-		url:"./board/smallABoard",
+		url:"./smallABoard",
 		dataType:"html",
 		type:"get",
 		contentType:"text/html; charset:utf-8",
@@ -19,5 +19,6 @@ function paging(pNum) {
 }
 </script>   
 <c:forEach items="${lists }" var="row">
-<p>${row.contents }</p> ${pagingDiv }
+	<input type="hidden" value="${row.notice_srl }" />
+	<a href="./board/aBoardView" style="font-size: 15px;">${row.contents }&nbsp;&nbsp;</a>${pagingDiv }
 </c:forEach>
