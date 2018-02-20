@@ -20,7 +20,6 @@ import com.cafe24.ourplanners.board.service.BoardService;
 import com.cafe24.ourplanners.util.PagingUtil;
 
 @Controller
-@RequestMapping("/board/*")
 public class ABoardController {
 
 	 @Autowired
@@ -54,7 +53,7 @@ public class ABoardController {
 		
 		String pagingDiv = PagingUtil.pagingAjax(totalRecordCount, pageSize, blockPage, nowPage, "");
 		
-		model.addAttribute("nowPage", nowPage);
+		/*model.addAttribute("nowPage", nowPage);*/
 		model.addAttribute("pagingDiv", pagingDiv);
 		model.addAttribute("lists", lists);
 		
@@ -62,7 +61,13 @@ public class ABoardController {
 	}
 	 
 	//공지사항 게시판
-	@RequestMapping(value="announcementBoard", method = RequestMethod.POST)
+	@RequestMapping("aBoard")
+	public String aBoard() {
+		return "customercenter/notice/customercenter_notice_list";
+	}
+	
+	//공지사항 게시판	
+	@RequestMapping("aBoard.do")
 	public String announcementBoard(Model model, HttpServletRequest req) {
 		
 		int pageSize = 3;
@@ -93,6 +98,6 @@ public class ABoardController {
 		model.addAttribute("pagingDiv", pagingDiv);
 		model.addAttribute("lists", lists);
 		
-		return "customercenter/notice/customercenter_notice_list";
+		return "customercenter/notice/customercenter_notice_largelist";
 	}	
 }

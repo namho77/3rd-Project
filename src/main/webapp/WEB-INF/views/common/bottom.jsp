@@ -4,7 +4,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.ajax({
-		url:"./board/smallABoard",
+		url:"./smallABoard",
 		dataType:"html",
 		type:"get",
 		contentType:"text/html; charset:utf-8",
@@ -18,21 +18,13 @@ $(document).ready(function(){
 	});
 });
 
-function customercenterRow(){
-	$.ajax({
-		url:"/board/announcementBoard",
-		type:"get",
-		dataType:"html",
-		contentType:"text/html; charset:utf-8",
-	});	
-}
 </script>
 <div class="footer-top section">
 	<div class="container">
 		<div class="row">
 			<div class="footer-col col-md-12">				
-					<a href="#" onclick="javascript:customercenterRow();"><h5>공지사항</h5></a>
-					<span id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</span>			
+					<a href="./aBoard" style="font-size: 15px;">공지사항</a>
+					<div id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</div>			
 				<hr />
 			</div>
 		</div>
