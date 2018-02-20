@@ -25,7 +25,6 @@ public class SearchRestController {
 	private SearchService service;
 
 	// HOT 게시글 목록 가져오기
-
 	@RequestMapping(value = "/board/json/hot_service_list.json")
 	public HashMap<String, Object> getHotServiceList(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
@@ -79,6 +78,8 @@ public class SearchRestController {
 		return map;
 	}
 
+	
+	//핫 검색어 20개 가져오기
 	@RequestMapping(value = "/board/json/top_search_list.json")
 	public HashMap<String, Object> getHotKeyWordList(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,

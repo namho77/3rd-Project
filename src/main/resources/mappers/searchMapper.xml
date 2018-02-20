@@ -47,7 +47,7 @@ SERVICE_EXPIRED ,
 SERVICE_COST ,
 LIMIT_PERSON ,
 BOARD_TYPE ,
-SERVICE_SCORE  FROM op_board where board_srl > 0 
+SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0 
 
  and postdate > (sysdate-7) 
 ]]>
@@ -106,7 +106,7 @@ SERVICE_EXPIRED ,
 SERVICE_COST ,
 LIMIT_PERSON ,
 BOARD_TYPE ,
-SERVICE_SCORE  FROM op_board where board_srl > 0 
+SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0 
 
  and postdate > (sysdate-7) 
 ]]>
