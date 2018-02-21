@@ -61,7 +61,7 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 		</choose>
 
 		<choose>
-			<when test="board_type == null or board_type == ''">
+			<when test="category_srl == null or category_srl == ''">
 
 			</when>
 			<otherwise>
@@ -70,7 +70,7 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 		</choose>
 
 		<choose>
-			<when test="board_type == null or board_type == ''">
+			<when test="subcategory_srl == null or subcategory_srl == ''">
 
 			</when>
 			<otherwise>
@@ -121,7 +121,7 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 		</choose>
 
 		<choose>
-			<when test="board_type == null or board_type == ''">
+			<when test="category_srl == null or category_srl == ''">
 
 			</when>
 			<otherwise>
@@ -130,7 +130,7 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 		</choose>
 
 		<choose>
-			<when test="board_type == null or board_type == ''">
+			<when test="subcategory_srl == null or subcategory_srl == ''">
 
 			</when>
 			<otherwise>
