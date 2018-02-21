@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 
@@ -50,6 +49,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
+
 
 </head>
 
@@ -228,174 +229,7 @@
 		</section>
 		<!-- category section(분야별 부분) -->
 
-		<!-- engineer section(기술자 게시글부분) -->
-		<section id="hot_engineer_board" class="section teams">
-			<div class="container">
-				<h2>[hot ★★★★★] engineer board</h2>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="carousel slide multi-item-carousel" id="theCarousel">
-							<div class="carousel-inner">
-
-								<div class="item active">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg&quot;); opacity: 1;"></div>
-												<div class="ripple-container"></div>
-											</div>
-
-											<div class="card-content">
-												<h6 class="category text-info">Enterprise</h6>
-												<h4 class="card-title">
-													<a href="#pablo">Autodesk looks to future of 3D printing with Project Escher</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog8.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url('http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg'); opacity: 1;"></div>
-												<div class="ripple-container"></div>
-											</div>
-											<div class="card-content">
-												<h6 class="category text-success">Startups</h6>
-												<h4 class="card-title">
-													<a href="#pablo">Lyft launching cross-platform service this week</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg&quot;); opacity: 1;"></div>
-											</div>
-
-											<div class="card-content">
-												<h6 class="category text-danger">Enterprise</h6>
-												<h4 class="card-title">
-													<a href="#pablo">6 insights into the French Fashion landscape</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-
-							</div>
-							<a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- engineer section(기술자 게시글부분) -->
-		<!-- buyer section(요청자 게시글부분) -->
-		<section id="hot_client_board" class="section teams">
-			<div class="container">
-				<h2>[hot ★★★★★] buyer board</h2>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="carousel slide multi-item-carousel" id="theCarousel2">
-							<div class="carousel-inner">
-
-								<div class="item active">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg&quot;); opacity: 1;"></div>
-												<div class="ripple-container"></div>
-											</div>
-
-											<div class="card-content">
-												<h6 class="category text-info">Enterprise</h6>
-												<h4 class="card-title">
-													<a href="#pablo">Autodesk looks to future of 3D printing with Project Escher</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog8.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url('http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog6.jpg'); opacity: 1;"></div>
-												<div class="ripple-container"></div>
-											</div>
-											<div class="card-content">
-												<h6 class="category text-success">Startups</h6>
-												<h4 class="card-title">
-													<a href="#pablo">Lyft launching cross-platform service this week</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="col-md-4">
-										<div class="card card-blog">
-											<div class="card-image">
-												<a href="#pablo"> <img class="img img-raised" src="http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg">
-												</a>
-												<div class="colored-shadow" style="background-image: url(&quot;http://demos.creative-tim.com/bs3/material-kit-pro/assets/img/examples/blog7.jpg&quot;); opacity: 1;"></div>
-											</div>
-
-											<div class="card-content">
-												<h6 class="category text-danger">Enterprise</h6>
-												<h4 class="card-title">
-													<a href="#pablo">6 insights into the French Fashion landscape</a>
-												</h4>
-												<p class="card-description">
-													Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses.<a href="#pablo"> Read More </a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-
-							</div>
-							<a class="left carousel-control" href="#theCarousel2" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#theCarousel2" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- buyer section(요청자 게시글부분) -->
+<%@ include file="board/hot/board_hot_list.jsp"%>
 
 		<!-- video section(홍보영상 분분) -->
 		<section id="testimonials" class="section testimonials no-padding">

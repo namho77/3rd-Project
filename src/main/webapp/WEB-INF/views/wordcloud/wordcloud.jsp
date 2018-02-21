@@ -316,7 +316,7 @@ $(document).ready(function() {
 						items.push("<span><a href='./board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
 					});//each끝
 					
-					$('#tagsList').html(items);
+					$('#tagsList').html(items.join(''));
 		      },
 		      error: function (e) {
 		    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
