@@ -1,11 +1,13 @@
 package com.cafe24.ourplanners.announcementboard.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
 import com.cafe24.ourplanners.announcementboard.persistence.ABoardDAO;
 import com.cafe24.ourplanners.board.service.BoardService;
+import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.member.persistence.MemberDAO;
 import com.cafe24.ourplanners.util.PagingUtil;
 
 @Controller
@@ -68,7 +72,9 @@ public class ABoardController {
 	
 	//공지사항 게시판	리스트폼 가져오기
 	@RequestMapping("aBoard.do")
-	public String announcementBoard(Model model, HttpServletRequest req) {
+	public String announcementBoard(Model model, HttpServletRequest req, HttpSession session) throws IOException{
+		
+		/*String master_id = ((LoginDTO)session.getAttribute("loginUserInfo")).getUser_id();*/
 		
 		int pageSize = 3;
 		int blockPage = 2;
@@ -94,6 +100,7 @@ public class ABoardController {
 		
 		String pagingDiv = PagingUtil.pagingAjax(totalRecordCount, pageSize, blockPage, nowPage, "");
 		
+		/*model.addAttribute("master_id", master_id);*/
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pagingDiv", pagingDiv);
 		model.addAttribute("lists", lists);
