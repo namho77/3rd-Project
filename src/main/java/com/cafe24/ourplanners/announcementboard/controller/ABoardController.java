@@ -103,12 +103,18 @@ public class ABoardController {
 	
 	//공지사항뷰
 	@RequestMapping("ViewRow")
-	public String ViewRow(Model model, HttpServletRequest req) {
+	public String viewRow(Model model, HttpServletRequest req) {
 		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
 		ABoardDTO dto = dao.view(req.getParameter("srl"));
 		
 		model.addAttribute("view", dto);
 		
 		return "customercenter/notice/customercenter_notice_view";
+	}
+	
+	//공지사항 글쓰기
+	@RequestMapping("writeRow")
+	public String writeRow() {
+		return "customercenter/notice/customercenter_notice_write";
 	}
 }

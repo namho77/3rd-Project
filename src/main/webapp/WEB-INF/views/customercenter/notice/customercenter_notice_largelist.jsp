@@ -28,5 +28,6 @@ function paging(pNum) {
 </c:forEach>
 <div class="pagination">${pagingDiv }</div>
 <div>
-	
+	<button type="button" onclick="location.href='./writeRow'">글쓰기</button>&nbsp;
+	<button type="button" onclick="javascript:deleteRow(${row.notice_srl})">삭제하기</button>&nbsp;
 </div>
