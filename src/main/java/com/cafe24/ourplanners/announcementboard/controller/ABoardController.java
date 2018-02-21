@@ -27,7 +27,7 @@ public class ABoardController {
 
 
 	//공지사항 small게시판
-	@RequestMapping(value="smallABoard", method = RequestMethod.GET)
+	@RequestMapping("smallABoard")
 	public String smallABoard(Model model, HttpServletRequest req) {
 		int pageSize = 1;
 		int blockPage = 1;
@@ -66,7 +66,7 @@ public class ABoardController {
 		return "customercenter/notice/customercenter_notice_list";
 	}
 	
-	//공지사항 게시판	
+	//공지사항 게시판	리스트폼 가져오기
 	@RequestMapping("aBoard.do")
 	public String announcementBoard(Model model, HttpServletRequest req) {
 		
@@ -100,4 +100,15 @@ public class ABoardController {
 		
 		return "customercenter/notice/customercenter_notice_largelist";
 	}	
+	
+	//공지사항뷰
+	@RequestMapping("ViewRow")
+	public String ViewRow(Model model, HttpServletRequest req) {
+		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		ABoardDTO dto = dao.view(req.getParameter("srl"));
+		
+		model.addAttribute("view", dto);
+		
+		return "customercenter/notice/customercenter_notice_view";
+	}
 }
