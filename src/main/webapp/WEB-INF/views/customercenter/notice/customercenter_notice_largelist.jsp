@@ -27,3 +27,6 @@ function paging(pNum) {
 	</div>	
 </c:forEach>
 <div class="pagination">${pagingDiv }</div>
+<div>
+	
+</div>

@@ -20,5 +20,5 @@ function paging(pNum) {
 </script>   
 <c:forEach items="${lists }" var="row">
 	<input type="hidden" value="${row.notice_srl }" />
-	<a href="./board/aBoardView" style="font-size: 15px;">${row.contents }&nbsp;&nbsp;</a>${pagingDiv }
+	<a href="./ViewRow?srl=${row.notice_srl }" style="font-size: 15px;">${row.contents }&nbsp;&nbsp;</a>${pagingDiv }
 </c:forEach>
