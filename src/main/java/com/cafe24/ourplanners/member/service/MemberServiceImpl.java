@@ -2,6 +2,7 @@ package com.cafe24.ourplanners.member.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -177,6 +178,25 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	
+	@Override
+	public void keepLogin(Integer member_srl, String sessionKey, Date next) throws Exception{
+		
+		dao.keepLogin(member_srl, sessionKey, next);
+	}
+	
+	public MemberVO checkLoginBefore(String value) {
+		
+		return dao.checkSessionKey(value);
+	}
+	
+	@Transactional
+	@Override
+	public void uploadPicture(MemberVO vo) throws Exception {
+		dao.uploadPicture(vo);
+		 
+	}
+	
 	@Override
 	public MemberVO login(LoginDTO dto, Model model) throws Exception {
 

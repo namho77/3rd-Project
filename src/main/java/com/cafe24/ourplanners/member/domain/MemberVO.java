@@ -2,6 +2,8 @@ package com.cafe24.ourplanners.member.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MemberVO {
 	
 	private int member_srl;	
@@ -15,6 +17,7 @@ public class MemberVO {
     private String user_name;
     private int find_account_question;
     private String find_account_answer;
+    //@DateTimeFormat(pattern = "yyyy/MM/dd")
     private java.util.Date birthday;
     private String allow_mailing;
     private String allow_message;
@@ -37,9 +40,9 @@ public class MemberVO {
     private String profile_img_path;			
     private String member_grade;
     private java.util.Date last_login;
+	private String sessionKey;
     
     public MemberVO() {}
-    
     
 	public MemberVO(String member_type, String user_id, String email_address, String password, String salt,
 			String email_id, String email_host, String user_name, int find_account_question, String find_account_answer,
@@ -123,6 +126,18 @@ public class MemberVO {
 		this.member_grade = member_grade;
 		this.last_login = last_login;
 	}
+	
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+
+
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+
+
 	public int getMember_srl() {
 		return member_srl;
 	}
