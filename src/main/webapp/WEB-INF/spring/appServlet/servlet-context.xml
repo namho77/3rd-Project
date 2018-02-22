@@ -57,7 +57,7 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/mypage*"/>
-			<mapping path="/board/client*"/>
+			<!-- <mapping path="/board/client*"/> -->
 			<mapping path="/member/withdraw"/>
 			<mapping path="/member/detail"/>
 			<beans:ref bean="authInterceptor" />

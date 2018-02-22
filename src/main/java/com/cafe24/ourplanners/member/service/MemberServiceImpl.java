@@ -193,6 +193,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void uploadPicture(MemberVO vo) throws Exception {
+		
 		dao.uploadPicture(vo);
 		 
 	}

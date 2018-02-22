@@ -99,8 +99,12 @@ public class MemberController {
 	@RequestMapping(value = "/uploadProfile", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public void uploadProfile(MultipartFile file, String str, HttpSession session, HttpServletRequest request,
 			Model model) throws Exception {
-
-		String uploadPath = "tripster/profile";
+		
+		Object obj = session.getAttribute("loginUserInfo");
+		
+		MemberVO memVO = (MemberVO) obj;
+				
+		String uploadPath = "upload/member/"+memVO.getMember_srl()+"/profile";
 
 		ResponseEntity<String> imgPath = new ResponseEntity<String>(
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
@@ -109,9 +113,7 @@ public class MemberController {
 		String memberPicture = (String) imgPath.getBody();
 
 		logger.info(memberPicture);
-
-		Object obj = session.getAttribute("login");
-		MemberVO memVO = (MemberVO) obj;
+		
 		memVO.setProfile_img_path(memberPicture);
 		try {
 			service.uploadPicture(memVO);

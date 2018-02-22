@@ -28,7 +28,7 @@ public class MyPageController {
 		@RequestMapping(value = "mypage", method = RequestMethod.GET)
 		public String mypage(Model model, HttpServletRequest req) {
 			logger.info("마이 페이지");
-			return "mypage/mypage";
+			return "mypage/myplan";
 	}
 		
 		
@@ -47,10 +47,10 @@ public class MyPageController {
 		return "mypage/profile";
 	}
 	
-	@RequestMapping(value = "mypage/profile/{user_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)
 	public String veiwProfile(@PathVariable String user_id,Model model, HttpServletRequest req,
 			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("마이 페이지 - 상대방 프로필 보기");
+		logger.info("프로필 보기");
 		return "mypage/profile";
 	}
 	
