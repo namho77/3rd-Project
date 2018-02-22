@@ -78,5 +78,71 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 		select count(*) from op_member where user_id=#{user_id} and password=#{password}
 		
 	</select>
+	
+	
+	<select id="selectProfile" resultType = "MemberVO">
+	select profile_img_path		 
+	from op_member
+	where user_id = #{user_id}
+	</select>	
+	
+	<!-- 프로필 사진 업데이트 -->
+	<update id="uploadPicture">
+	update op_member
+	set profile_img_path = #{profile_img_path}
+	where user_id = #{user_id}
+	</update>
+	
+	<!-- 회원 기본 정보 수정 -->
+	<update id="updateDefaultProfile">
+	update op_member
+	set 
+	find_account_answer = #{find_account_answer},
+	find_account_question = #{find_account_question},
+	user_name = #{user_name},
+	gender = #{gender},
+	birthday = #{birthday},
+	address = #{address},
+	allow_mailing = #{allow_mailing},
+	allow_message = #{allow_message},
+	mobile = #{mobile},
+	birthday = #{birthday},
+	
+	career = #{career},
+	career_history = #{career_history},
+
+	license_date = #{license_date},
+	license_provider = #{license_provider},
+	license_description = #{license_description},
+	
+	company_name = #{company_name},
+	company_number =#{company_number}
+	
+	where user_id = #{user_id}
+	</update>
+	
+	<!-- 이메일 변경 -->
+	<update id="updateEmail">
+	update op_member set 
+	email_address = #{email_address} , email_id = #{email_id} , 
+	email_host = #{email_host} where user_id = #{user_id}
+	</update>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePassword">
+	update op_member set password = #{newPassword} , salt= #{salt} 
+	 where user_id = #{user_id} and password = #{password}
+	</update>
+	
+	<!-- 비밀번호 찾기후 비밀번호 변경 -->
+	<update id="updatePasswordWithoutPrevPassword">
+	update op_member set password = #{newPassword} , salt= #{salt} where user_id = #{user_id}
+	</update>
+ 	
+ 	
+ 	<!-- 회원탈퇴 -->
+ 	<delete id="deleteMember">
+ 	DELETE op_member WHERE user_id=#{user_id}
+ 	</delete>
  	
  </mapper>
