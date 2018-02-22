@@ -1,5 +1,6 @@
 package com.cafe24.ourplanners.member.persistence;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,6 +107,26 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("비번 : " + dto.getPassword());
 		return sqlSession.selectOne(namespace+".confirmIdPassword", dto);
 		
+	}
+
+	@Override
+	public void keepLogin(Integer member_srl, String sessionKey, Date next) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("member_srl", member_srl);
+		paramMap.put("sessionKey", sessionKey);
+		paramMap.put("next", next);
+
+		sqlSession.update(namespace + ".keepLogin", paramMap);
+	}
+	
+	@Override
+	public MemberVO checkSessionKey(String value) {
+		return sqlSession.selectOne(namespace + ".checkSessionKey", value);
+	}
+	
+	@Override
+	public void uploadPicture(MemberVO vo) throws Exception {
+		sqlSession.insert(namespace + ".uploadPicture", vo);
 	}
 
 }

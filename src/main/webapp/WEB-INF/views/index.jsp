@@ -81,8 +81,10 @@
 		</section>
 
 		<section id="wordcloud">
-
+			
+			<!-- 검색, 핫 키워드 -->
 			<%@ include file="wordcloud/wordcloud.jsp"%>
+			<!-- 모달창 메시지 -->
 			<%@ include file="common/modal_msg.jsp"%>
 
 			<div class="modal fade " id="service-search-modal" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">

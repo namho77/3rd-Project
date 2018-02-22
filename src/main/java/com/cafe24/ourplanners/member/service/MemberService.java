@@ -1,5 +1,6 @@
 package com.cafe24.ourplanners.member.service;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,4 +22,9 @@ public interface MemberService {
 
 	public MemberVO login(LoginDTO dto, Model model) throws Exception;
 	
+	public void uploadPicture(MemberVO vo) throws Exception ;
+	
+	public void keepLogin(Integer member_srl, String sessionKey, Date next) throws Exception;
+
+	public MemberVO checkLoginBefore(String value);
 }

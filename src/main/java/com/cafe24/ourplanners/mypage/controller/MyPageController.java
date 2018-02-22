@@ -25,6 +25,14 @@ public class MyPageController {
 	//private MyPageService service;
 
 	// 마이 플래너스
+		@RequestMapping(value = "mypage", method = RequestMethod.GET)
+		public String mypage(Model model, HttpServletRequest req) {
+			logger.info("마이 페이지");
+			return "mypage/mypage";
+	}
+		
+		
+	// 마이 플래너스
 	@RequestMapping(value = "mypage/myplan", method = RequestMethod.GET)
 	public String myplan(Model model, HttpServletRequest req) {
 		logger.info("마이 페이지 - 마이 플랜");
@@ -32,7 +40,7 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping(value = "mypage/profile/", method = RequestMethod.GET)
+	@RequestMapping(value = "mypage/profile", method = RequestMethod.GET)
 	public String veiwProfile(Model model, HttpServletRequest req,
 			@RequestParam(required = false, defaultValue = "") String type) {
 		logger.info("마이 페이지 - 마이 프로필 보기");
@@ -47,12 +55,6 @@ public class MyPageController {
 	}
 	
 	
-	//회원탈퇴
-	@RequestMapping(value = "mypage/withdraw", method = RequestMethod.GET)
-		public String withdraw(@PathVariable String boardSrl,Model model) {
-				
-		
-		return "member/member_withdraw";
-	}
+
 	
 }

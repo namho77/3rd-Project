@@ -1,5 +1,7 @@
 package com.cafe24.ourplanners.member.persistence;
 
+import java.util.Date;
+
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
@@ -22,5 +24,11 @@ public interface MemberDAO {
 	public String getSaltById(String user_id);
 
 	public int confirmIdPassword(LoginDTO dto);
+
+	public void keepLogin(Integer member_srl, String sessionKey, Date next);
+
+	public MemberVO checkSessionKey(String value);
+	
+	public void uploadPicture(MemberVO vo) throws Exception;
 	
 }

@@ -41,7 +41,7 @@
 	function logout() {
 		var ans = confirm("정말로 로그아웃 하시겠습니까?");
 		if (ans == true) {
-			location.href = "/logout";
+			location.href = "/member/logout";
 		} else {
 			popLayerMsg("로그아웃을 취소하셨습니다.");
 		}
@@ -107,7 +107,7 @@
 												}
 									%>
 									<div class="panel-body">
-										<form class="form-signin" action="login" method="post" name="loginFrm" onsubmit="return loginFrmCheck();">
+										<form class="form-signin" action="loginPost" method="post" name="loginFrm" onsubmit="return loginFrmCheck();">
 											<!-- <h2 class="form-signin-heading">로그인</h2> -->
 
 											<label>아이디</label>
@@ -117,6 +117,11 @@
 											<label>비밀번호</label>
 											<div class="input-group">
 												<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> <input type="password" class="form-control" name="password" placeholder="비밀번호">
+											</div>
+
+											<div class="input-group">
+												<label> <input type="checkbox" name="useCookie">로그인 상태 유지
+												</label>
 											</div>
 
 
@@ -192,9 +197,7 @@
 					</div>
 				</div>
 			</div>
-			<br />
-			<br /> <br />
-			<br />
+			<br /> <br /> <br /> <br />
 		</section>
 
 
