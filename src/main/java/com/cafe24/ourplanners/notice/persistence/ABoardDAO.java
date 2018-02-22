@@ -1,8 +1,8 @@
-package com.cafe24.ourplanners.announcementboard.persistence;
+package com.cafe24.ourplanners.notice.persistence;
 
 import java.util.ArrayList;
 
-import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
+import com.cafe24.ourplanners.notice.dto.ABoardDTO;
 
 public interface ABoardDAO {
 
@@ -11,4 +11,6 @@ public interface ABoardDAO {
 	public int getTotalCount();
 	
 	public ABoardDTO view(String srl);
+	
+	public int delete(String srl);
 }

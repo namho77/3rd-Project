@@ -52,9 +52,28 @@
 	src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-
+function deleteRow(idx) {
+	var url = "${pageContext.request.contextPath}/notice/deleteRow"
+	$.ajax({
+		url:url,
+		type:"get",
+		data:{srl:idx},
+		dataType:"json",
+		contentType:"text/html; charset:utf-8",
+		success:function(d){
+			if(d.Code == 0){
+				alert("게시물 삭제에 실패하였습니다.");				
+			}
+			else if(d.Code == 1){
+				alert("게시물 삭제에 성공하였습니다.");
+				location.href="${pageContext.request.contextPath}/";
+			}				
+		},
+		error:function(e){
+			alert("실패:"+e.status+":"+e.statusText);
+		}
 	});
+}	
 </script>
 </head>
 <body>
@@ -80,12 +99,21 @@
 	<!-- test용 시작-->
 	<div class="col-xs-4 col-md-4"></div>
 	<div class="col-xs-6 col-md-6">
-		<div style="font-size: 1.5em; color: black;">
+		<div style="font-size: 1.5em; color: black;" id="noticeText_${view.notice_srl }">
 			<div class="col-xs-3 col-md-3">${view.notice_srl }</div>
 			<div class="col-xs-3 col-md-3">${view.title }</div>
 			<div class="col-xs-4 col-md-4">${view.contents }</div>
 			<div class="col-xs-2 col-md-2">${view.postdate }</div>
 		</div>
+	<c:choose>
+		<c:when
+			test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+			<div>
+				<button type="button" class="btn btn-primary" onclick="javascript:modifyRow(${view.notice_srl});" style="color: black;">수정하기</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:deleteRow(${view.notice_srl});" style="color: black;">삭제하기</button>				
+			</div>
+		</c:when>
+	</c:choose>
 	</div>
 	<div class="col-xs-2 col-md-2"></div>
 	<!-- test용 끝 -->

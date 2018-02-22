@@ -1,4 +1,4 @@
-package com.cafe24.ourplanners.announcementboard.controller;
+package com.cafe24.ourplanners.notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,12 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cafe24.ourplanners.announcementboard.dto.ABoardDTO;
-import com.cafe24.ourplanners.announcementboard.persistence.ABoardDAO;
 import com.cafe24.ourplanners.board.service.BoardService;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
 import com.cafe24.ourplanners.member.persistence.MemberDAO;
+import com.cafe24.ourplanners.notice.dto.ABoardDTO;
+import com.cafe24.ourplanners.notice.persistence.ABoardDAO;
 import com.cafe24.ourplanners.util.PagingUtil;
 
 @Controller
@@ -31,7 +32,7 @@ public class ABoardController {
 
 
 	//공지사항 small게시판
-	@RequestMapping("smallABoard")
+	@RequestMapping("/notice/smallABoard")
 	public String smallABoard(Model model, HttpServletRequest req) {
 		int pageSize = 1;
 		int blockPage = 1;
@@ -65,13 +66,13 @@ public class ABoardController {
 	}
 	 
 	//공지사항 게시판
-	@RequestMapping("aBoard")
+	@RequestMapping("/notice/aBoard")
 	public String aBoard() {
 		return "customercenter/notice/customercenter_notice_list";
 	}
 	
 	//공지사항 게시판	리스트폼 가져오기
-	@RequestMapping("aBoard.do")
+	@RequestMapping("/notice/aBoard.do")
 	public String announcementBoard(Model model, HttpServletRequest req, HttpSession session) throws IOException{
 		
 		/*String master_id = ((LoginDTO)session.getAttribute("loginUserInfo")).getUser_id();*/
@@ -109,7 +110,7 @@ public class ABoardController {
 	}	
 	
 	//공지사항뷰
-	@RequestMapping("ViewRow")
+	@RequestMapping("/notice/ViewRow")
 	public String viewRow(Model model, HttpServletRequest req) {
 		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
 		ABoardDTO dto = dao.view(req.getParameter("srl"));
@@ -119,8 +120,28 @@ public class ABoardController {
 		return "customercenter/notice/customercenter_notice_view";
 	}
 	
+	//공지사항 삭제하기
+	@RequestMapping("/notice/deleteRow")
+	@ResponseBody
+	public Map<String, Object> deleteRow(HttpSession session, HttpServletRequest req){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		int result = dao.delete(req.getParameter("srl"));
+		
+		if(result<=0) {
+			map.put("Code", 0);
+		}
+		else {
+			map.put("Code", 1);			
+		}
+		
+		return map;
+	}
+	
+	
 	//공지사항 글쓰기
-	@RequestMapping("writeRow")
+	@RequestMapping("/notice/writeRow")
 	public String writeRow() {
 		return "customercenter/notice/customercenter_notice_write";
 	}

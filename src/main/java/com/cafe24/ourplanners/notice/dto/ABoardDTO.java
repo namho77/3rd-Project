@@ -1,4 +1,4 @@
-package com.cafe24.ourplanners.announcementboard.dto;
+package com.cafe24.ourplanners.notice.dto;
 
 import java.sql.Date;
 

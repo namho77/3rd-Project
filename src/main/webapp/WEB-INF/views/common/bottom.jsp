@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 $(document).ready(function(){
+	 var url = "${pageContext.request.contextPath}/notice/smallABoard"
 	$.ajax({
-		url:"./smallABoard",
+		url:url,
 		dataType:"html",
 		type:"get",
 		contentType:"text/html; charset:utf-8",
@@ -13,7 +14,7 @@ $(document).ready(function(){
 			$('#smallABoard').html(d);
 		},
 		error:function(e){
-			alert("실패호ㅓㅏ오맇ㅁㅇ" + e);
+			alert("실패" + e);
 		}
 	});
 });
@@ -23,7 +24,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row">
 			<div class="footer-col col-md-12">				
-					<a href="./aBoard" style="font-size: 15px;">공지사항</a>
+					<a href="./notice/aBoard" style="font-size: 15px;">공지사항</a>
 					<div id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</div>			
 				<hr />
 			</div>

@@ -80,9 +80,27 @@
 	<!-- test용 시작-->
 	<div class="col-xs-4 col-md-4"></div>
 	<div class="col-xs-6 col-md-6">
-		입력한다.
+		<form id="writeFrm">
+			<table>
+				<colgroup>
+					<col width="20%" />
+					<col width="*" />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" style="width: 100px" name="title" /></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea name="contents" rows="10"></textarea></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<button type="button" onclick="">글작성</button>
 	</div>
-	<button type="button" onclick="">글작성</button>
+	
 	<div class="col-xs-2 col-md-2"></div>
 	<!-- test용 끝 -->
 </body>
