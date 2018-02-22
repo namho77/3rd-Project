@@ -53,8 +53,10 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	var url = "${pageContext.request.contextPath}/notice/aBoard.do"
 	$.ajax({
-		url:"./aBoard.do",
+		url:url,
 		dataType:"html",
 		type:"get",
 		contentType:"text/html; charset:utf-8",
