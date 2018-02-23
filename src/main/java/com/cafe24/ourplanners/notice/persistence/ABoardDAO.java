@@ -13,4 +13,6 @@ public interface ABoardDAO {
 	public ABoardDTO view(String srl);
 	
 	public int delete(String srl);
+	
+	public int write(String title, String contents);
 }

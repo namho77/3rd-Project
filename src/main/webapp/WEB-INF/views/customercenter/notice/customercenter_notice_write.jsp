@@ -52,9 +52,42 @@
 	src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	function writeRow() {
+		if ($("textarea[name='contents']").val() == "") {
+			alert("내용을 입력해주세요.");
+			$("textarea[name='contents']").focus();
+			return;
+		} else if ($("input[name='title']").val() == "") {
+			alert("제목을 입력해주세요.");
+			$("input[name='title']").focus();
+			return;
+		}
 
-	});
+		var params = $('#writeFrm').serialize();
+		var url = "${pageContext.request.contextPath}/notice/writeRowAction";
+
+		$.ajax({
+					url : url,
+					dataType : "json",
+					type : "get",
+					contentType : "text/html; charset=utf-8",
+					data : params,
+					success : function(d) {
+						if (d.writeCode == 1) {
+							alert("글입력완료");
+							location.href = "${pageContext.request.contextPath}/notice/aBoard";
+						} else if (d.writeCode == 0) {
+							alert("글입력실패");
+						} else if (d.writeCode == 2) {
+							alert("관리자로그인을 하세요.");
+							location.href = "${pageContext.request.contextPath}/member/login";
+						}
+					},
+					error : function(e) {
+						alert("작성실패:" + e.status + ":" + e.statusText);
+					}
+				});
+	}
 </script>
 </head>
 <body>
@@ -93,14 +126,16 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td><textarea name="contents" rows="10"></textarea></td>
+						<td><textarea name="contents" rows="10" style="color: black;"></textarea></td>
 					</tr>
 				</tbody>
 			</table>
+			<button type="button" onclick="javascript:writeRow()"
+				style="color: black;">글입력하기</button>
+			<button type="reset" style="color: red;">Reset</button>
 		</form>
-		<button type="button" onclick="">글작성</button>
 	</div>
-	
+
 	<div class="col-xs-2 col-md-2"></div>
 	<!-- test용 끝 -->
 </body>
