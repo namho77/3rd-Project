@@ -1,6 +1,7 @@
 package com.cafe24.ourplanners.member.persistence;
 
 import java.util.Date;
+import java.util.Map;
 
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
@@ -30,5 +31,7 @@ public interface MemberDAO {
 	public MemberVO checkSessionKey(String value);
 	
 	public void uploadPicture(MemberVO vo) throws Exception;
+
+	public int updatePassword(Map<String, Object> paramMap);
 	
 }

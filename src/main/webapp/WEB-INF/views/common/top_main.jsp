@@ -18,7 +18,7 @@
 								<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
 									<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
 								</c:if>
-								<li><a href="${pageContext.request.contextPath}/myplan">마이플랜</a></li>
+								<li><a href="${pageContext.request.contextPath}/mypage/myplan">마이플랜</a></li>
 								<li><a href="${pageContext.request.contextPath}/mypage/profile">나의정보</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
 								<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
