@@ -181,7 +181,24 @@ public class ABoardController {
 	//공지사항 수정처리하기
 	@RequestMapping("/notice/modifyAction")
 	@ResponseBody
-	public Map<String, Object> modifyAction(HttpServletRequest req, ){
+	public Map<String, Object> modifyAction(HttpServletRequest req, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		if(session.getAttribute("loginUserInfo")==null && !((MemberVO)session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+			map.put("modifyCode", 2);
+			return map;
+		}
+		
+		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		
+		/*int result = dao.modify(req.getParameter("title"), req.getParameter("contents"));
+		
+		if(result<=0) {
+			map.put("writeCode", 0);
+		}
+		else {
+			map.put("writeCode", 1);
+		}*/		
+		return map;
 	}
 }
