@@ -15,4 +15,6 @@ public interface ABoardDAO {
 	public int delete(String srl);
 	
 	public int write(String title, String contents);
+	
+	public int modify(String title, String contents, String srl);
 }

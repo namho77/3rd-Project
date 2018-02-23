@@ -179,7 +179,7 @@ public class ABoardController {
 	}
 	
 	//공지사항 수정처리하기
-	@RequestMapping("/notice/modifyAction")
+	@RequestMapping("/notice/modifyRowAction")
 	@ResponseBody
 	public Map<String, Object> modifyAction(HttpServletRequest req, HttpSession session){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -191,14 +191,14 @@ public class ABoardController {
 		
 		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
 		
-		/*int result = dao.modify(req.getParameter("title"), req.getParameter("contents"));
-		
+		int result = dao.modify(req.getParameter("title"), req.getParameter("contents"), req.getParameter("srl"));
+		System.out.println("result:"+result);
 		if(result<=0) {
-			map.put("writeCode", 0);
+			map.put("modifyCode", 0);
 		}
 		else {
-			map.put("writeCode", 1);
-		}*/		
+			map.put("modifyCode", 1);
+		}		
 		return map;
 	}
 }
