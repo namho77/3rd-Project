@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,12 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cafe24.ourplanners.board.service.BoardService;
-import com.cafe24.ourplanners.member.dto.LoginDTO;
-import com.cafe24.ourplanners.member.persistence.MemberDAO;
+import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.notice.dto.ABoardDTO;
 import com.cafe24.ourplanners.notice.persistence.ABoardDAO;
 import com.cafe24.ourplanners.util.PagingUtil;
@@ -137,12 +134,54 @@ public class ABoardController {
 		}
 		
 		return map;
-	}
-	
+	}	
 	
 	//공지사항 글쓰기
-	@RequestMapping("/notice/writeRow")
-	public String writeRow() {
+	@RequestMapping("/notice/writeRow")	
+	public String writeRow(){						
 		return "customercenter/notice/customercenter_notice_write";
+	}
+	
+	//공지사항 글쓰기 처리하기
+	@RequestMapping("/notice/writeRowAction")
+	@ResponseBody
+	public Map<String, Object> writeRowAction(HttpServletRequest req, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+				
+		if(session.getAttribute("loginUserInfo")==null && !((MemberVO)session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+			map.put("writeCode", 2);
+			return map;
+		}
+		
+		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		
+		int result = dao.write(req.getParameter("title"), req.getParameter("contents"));
+		
+		if(result<=0) {
+			map.put("writeCode", 0);
+		}
+		else {
+			map.put("writeCode", 1);
+		}		
+		return map;
+	}
+	
+	//공지사항 수정하기
+	@RequestMapping("/notice/modifyRow")
+	public String modifyRow(Model model, HttpServletRequest req, HttpServletResponse resp){					
+		
+		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		ABoardDTO dto = dao.view(req.getParameter("srl"));
+		
+		model.addAttribute("modify", dto);
+		
+		return "customercenter/notice/customercenter_notice_modify";
+	}
+	
+	//공지사항 수정처리하기
+	@RequestMapping("/notice/modifyAction")
+	@ResponseBody
+	public Map<String, Object> modifyAction(HttpServletRequest req, ){
+		
 	}
 }

@@ -17,4 +17,7 @@
 	<delete id="delete">
 		delete from op_notice where notice_srl=#{param1}
 	</delete>
+	<insert id="write">
+		insert into op_notice values (op_notice_srl_seq.nextval, #{param1}, #{param2}, sysdate)
+	</insert>
 </mapper>

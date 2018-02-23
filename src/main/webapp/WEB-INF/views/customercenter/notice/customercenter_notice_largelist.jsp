@@ -41,7 +41,33 @@
 				alert("실패:"+e.status+":"+e.statusText);
 			}
 		});
-	}	
+	}
+	
+	function modifyRow(idx) {
+		var url = "${pageContext.request.contextPath}/notice/modifyRow"
+			$.ajax({
+				url:url,
+				type:"get",
+				data:{srl:idx},
+				dataType:"html",
+				contentType:"text/html; charset:utf-8",
+				success:function(d){
+					if(d=="notMaster"){
+						alert("게시물을 수정할 수 없습니다. 관리자로 로그인해주세요.");
+						location.href = "${pageContext.request.contextPath}/member/login";
+					}
+					else if(d=="modifyFail"){
+						alert("게시물 수정을 실패하였습니다.");						
+					}
+					else{
+						$('#list').html(d);
+					}
+				},
+				error:function(e){
+					alert("실패:"+e.status+":"+e.statusText);
+				}
+			});
+	}
 </script>
 <c:forEach items="${lists }" var="row">
 	<div style="font-size: 1.5em; color: black;" id="noticeText_${row.notice_srl }">
@@ -66,7 +92,7 @@
 	<c:when
 		test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
 		<div>
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/notice/writeRow'" style="color: black;">글쓰기</button>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/notice/writeRow'" style="color: black;">글쓰기</button>			
 			&nbsp;
 		</div>
 	</c:when>
