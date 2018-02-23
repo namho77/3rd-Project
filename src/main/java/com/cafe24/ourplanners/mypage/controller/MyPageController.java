@@ -19,18 +19,10 @@ import com.cafe24.ourplanners.mypage.service.MyPageService;
 public class MyPageController {
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
 	//@Inject
 	//private MyPageService service;
-
-	// 마이 플래너스
-		@RequestMapping(value = "mypage", method = RequestMethod.GET)
-		public String mypage(Model model, HttpServletRequest req) {
-			logger.info("마이 페이지");
-			return "mypage/myplan";
-	}
-		
 		
 	// 마이 플래너스
 	@RequestMapping(value = "mypage/myplan", method = RequestMethod.GET)
@@ -43,18 +35,15 @@ public class MyPageController {
 	@RequestMapping(value = "mypage/profile", method = RequestMethod.GET)
 	public String veiwProfile(Model model, HttpServletRequest req,
 			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("마이 페이지 - 마이 프로필 보기");
+		logger.info("마이 페이지 - 마이 프로필 보기(의뢰인시점/기술자시점)");
 		return "mypage/profile";
 	}
 	
 	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)
 	public String veiwProfile(@PathVariable String user_id,Model model, HttpServletRequest req,
 			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("프로필 보기");
+		logger.info("상대방 프로필 보기(문의하기 기능 message)");
 		return "mypage/profile";
 	}
-	
-	
-
 	
 }

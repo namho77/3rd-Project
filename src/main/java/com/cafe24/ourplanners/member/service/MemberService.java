@@ -4,8 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
@@ -27,4 +29,10 @@ public interface MemberService {
 	public void keepLogin(Integer member_srl, String sessionKey, Date next) throws Exception;
 
 	public MemberVO checkLoginBefore(String value);
+	
+	public int updatePassword(Model model, HttpServletRequest req, HttpSession session);
+
+	public void findPassword(Model model, HttpServletRequest req, ModelAndView mv);
+	
+	
 }

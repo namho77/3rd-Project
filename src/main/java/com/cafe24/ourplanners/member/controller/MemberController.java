@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import com.cafe24.ourplanners.MainController;
@@ -124,10 +125,56 @@ public class MemberController {
 
 	// 회원탈퇴
 	@RequestMapping(value = "member/withdraw", method = RequestMethod.GET)
-	public String withdraw(@PathVariable String boardSrl, Model model) {
+	public String withdraw(Model model) {
 
 		return "member/member_withdraw";
 	}
+	
+	// 회원탈퇴 처리
+	@RequestMapping(value = "member/withdraw", method = RequestMethod.POST)
+	public String withdraw(Model model,HttpServletRequest req, HttpSession session) {
+
+		int affected = service.updatePassword(model,req,session);
+		if(affected<=0) {
+			model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
+			return "member/member_password_change";	
+		}
+		else
+		{
+			model.addAttribute("layer_msg", "비밀번호가 변경 되었습니다.");
+			return "index";
+		}
+		
+	}
+	
+	/*
+	 RedirectAttributes rediAttr
+	 
+	  rediAttr.addFlashAttribute("msg", "비밀번호가 변경 되었습니다.");
+		return "redirect:/member/change_password";
+	 */
+	//비밀번호 변경 페이지
+	@RequestMapping(value="member/change_password",method =RequestMethod.GET)
+	public String changePassword(Model model) {
+		return "member/member_password_change";
+	}
+	
+	//비밀번호 변경 처리
+		@RequestMapping(value="member/change_password",method =RequestMethod.POST)
+		public String changePassword(Model model,HttpServletRequest req, HttpSession session) {
+			
+		
+			int affected = service.updatePassword(model,req,session);
+			if(affected<=0) {
+				model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
+				return "member/member_password_change";	
+			}
+			else
+			{
+				model.addAttribute("layer_msg", "비밀번호가 변경 되었습니다.");
+				return "index";
+			}
+		}
 
 	// 로그인 화면
 	@RequestMapping(value = "member/login", method = RequestMethod.GET)
@@ -178,6 +225,8 @@ public class MemberController {
 		return "member/member_login";
 	}
 
+	
+	
 	// 로그인 처리
 	@RequestMapping(value = "member/loginPost", method = RequestMethod.POST)
 	public void login(LoginDTO dto, HttpServletRequest req, HttpSession session, Model model) throws Exception {
@@ -262,11 +311,38 @@ public class MemberController {
 		return "member/member_info_modify";
 	}
 
-	@RequestMapping(value = "find/password", method = RequestMethod.PUT)
-	public String findPassword(Model model) {
+	@RequestMapping(value = "member/confirmPassword", method = RequestMethod.GET)
+	public String confirmPassword(Model model,HttpServletRequest request) {
+		logger.info("비밀번호 확인");
+
+		return "member/member_info_view";
+	}
+	
+	
+	@RequestMapping(value = "find/id", method = RequestMethod.GET)
+	public ModelAndView findId(Model model,HttpServletRequest req) {
 		logger.info("비밀번호 찾기");
 
-		return "find/find_password";
+		ModelAndView mv = new ModelAndView();
+		service.findPassword(model,req,mv);
+		
+		mv.setViewName("find/find_password");
+		//vm.setViewName("redirect:/board/boardList");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "find/password", method = RequestMethod.GET)
+	public ModelAndView findPassword(Model model,HttpServletRequest req) {
+		logger.info("비밀번호 찾기");
+
+		ModelAndView mv = new ModelAndView();
+		service.findPassword(model,req,mv);
+		
+		mv.setViewName("find/find_password");
+		//vm.setViewName("redirect:/board/boardList");
+
+		return mv;
 	}
 
 }

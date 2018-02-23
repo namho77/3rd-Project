@@ -129,4 +129,17 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.insert(namespace + ".uploadPicture", vo);
 	}
 
+
+	@Override
+	public int updatePassword(Map<String, Object> paramMap) {
+		return sqlSession.update(namespace+".updatePassword", paramMap);
+	}
+	
+	public int updatePasswordWithoutPrevPassword(Map<String, Object> paramMap) {
+		
+		
+		return sqlSession.update(namespace+".updatePasswordWithoutPrevPassword", paramMap);
+	}
+
+
 }

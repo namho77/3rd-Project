@@ -65,6 +65,9 @@ $(document).ready(function(){
 
 			});//each끝
 			$('#hot_engineer_div').html(inHTML);
+			
+			
+			
 			//alert(inHTML);
 			//$('#hot_engineer_div').html(items);
 	    	
@@ -132,6 +135,8 @@ $(document).ready(function(){
 
 			});//each끝
 			$('#hot_client_div').html(inHTML);
+			
+			
 			//alert(inHTML);
 			//$('#hot_engineer_div').html(items);
 	    	
@@ -142,23 +147,45 @@ $(document).ready(function(){
 	      }
 		
 	});
+	
+	
+	
+	
 });
 
+$(window).load(function(){
+	//slide(슬라이드부분)
+	// Instantiate the Bootstrap carousel
+	$('.multi-item-carousel').carousel({
+	  interval: false
+	});
+	// for every slide in carousel, copy the next slide's item in the slide.
+	// Do the same for the next, next item.
+	$('.multi-item-carousel .item').each(function(){
+	  var next = $(this).next();
+	  if (!next.length) {
+	    next = $(this).siblings(':first');
+	  }
+	  next.children(':first-child').clone().appendTo($(this));
+	  
+	  if (next.next().length>0) {
+	    next.next().children(':first-child').clone().appendTo($(this));
+	  } else {
+	  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+	  }
+	});
+});
 </script>
 
 
 		<!-- engineer section(기술자 게시글부분) -->
-		<section id="hot_engineer_board" class="section teams">
+		<section id="hot_engineer_board">
 			<div class="container">
-				<h2>[hot ★★★★★] 기술자 게시판</h2>
+				<h2>기술자 HOT 게시글</h2>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="carousel slide multi-item-carousel" id="hot_engineer_board_list">
 							<div class="carousel-inner" id="hot_engineer_div">
-
-								
-
-
 
 							</div>
 							<a class="left carousel-control" href="#hot_engineer_board_list" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#hot_engineer_board_list" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -169,9 +196,9 @@ $(document).ready(function(){
 		</section>
 		<!-- engineer section(기술자 게시글부분) -->
 		<!-- buyer section(요청자 게시글부분) -->
-		<section id="hot_client_board" class="section teams">
+		<section id="hot_client_board">
 			<div class="container">
-				<h2>[hot ★★★★★] 요청자 게시판</h2>
+				<h2>요청자 HOT 게시글</h2>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="carousel slide multi-item-carousel" id="hot_client_board_list">

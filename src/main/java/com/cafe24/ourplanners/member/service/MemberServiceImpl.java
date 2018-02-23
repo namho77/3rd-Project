@@ -4,13 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
@@ -228,5 +231,43 @@ public class MemberServiceImpl implements MemberService {
 
 		return dao.login(dto);
 	}
+
+	@Override
+	public int updatePassword(Model model, HttpServletRequest req, HttpSession session) {
+		
+		String user_id = ((MemberVO)session.getAttribute("loginUserInfo")).getUser_id(); 
+		String password = req.getParameter("password");
+		String newPassword = req.getParameter("newPassword");
+				
+		// 현재 아이디의 솔트 가져오기
+		String prevSalt = dao.getSaltById(user_id);
+		// 입력받은 암호화 되지 않은 비밀번호를 솔트와 함께 비밀번호 암호화하여 DB에서 일치하는지 비교
+		password = SHA256.encrypt(password, prevSalt);
+
+		// 새로운 패스워드 암호화
+		String newSalt = SHA256.generateSalt();
+		newPassword = SHA256.encrypt(newPassword, newSalt);
+		
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", user_id);
+		paramMap.put("password", password);
+		paramMap.put("newPassword", newPassword);
+		paramMap.put("salt", newSalt);
+		
+		int affected = dao.updatePassword(paramMap);
+		
+		
+		
+		return affected;
+	}
+
+	@Override
+	public void findPassword(Model model, HttpServletRequest req, ModelAndView mv) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }

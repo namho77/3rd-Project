@@ -78,8 +78,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			String prev_url = (String)session.getAttribute("prev_url");
 			System.out.println("로그인 후 postHandle prev_url : " +prev_url);
 			
-			if(prev_url==null || prev_url.length() == 0)
-			modelAndView.setViewName("member/login");
+			if(prev_url==null || prev_url.length() == 0) {
+				modelAndView.setViewName("member/login");
+			}
 			else {
 				modelAndView.setViewName("redirect:"+prev_url);
 			
@@ -91,8 +92,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			logger.info("로그인 실패");
 			
 			//response.sendRedirect(request.getContextPath()+"/member/login");
-			modelAndView.setViewName("member/login");
+			//modelAndView.setViewName("redirect:member/login");
 			
+			modelAndView.setViewName("member/member_login");
 			
 			//out.print("<script>" + "alert('로그인 정보를 확인하세요');" + "history.go(-1);" + "</script>");
 			//out.flush();
