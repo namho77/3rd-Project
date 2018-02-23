@@ -20,4 +20,7 @@
 	<insert id="write">
 		insert into op_notice values (op_notice_srl_seq.nextval, #{param1}, #{param2}, sysdate)
 	</insert>
+	<update id="modify">
+		update op_notice set title=#{param1}, contents=#{param2} where notice_srl=${param3}
+	</update>
 </mapper>
