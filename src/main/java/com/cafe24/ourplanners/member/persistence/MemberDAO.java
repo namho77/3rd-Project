@@ -33,5 +33,7 @@ public interface MemberDAO {
 	public void uploadPicture(MemberVO vo) throws Exception;
 
 	public int updatePassword(Map<String, Object> paramMap);
+
+	public int deleteMember(String user_id);
 	
 }

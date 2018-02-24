@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+/* 공통된 탑1 부분 */
+
+#navbar-fixed-top {
+	background-color: #41AF39;
+	height: 60px;
+	padding-top: 7px;
+	padding-right: 10px;
+}
+
+#navbar-brand {
+	color: #353535;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+#navbar-brand>b {
+	color: #353535;
+	font-weight: bold;
+	font-size: 1.8em;
+}
+
+#form-control {
+	border: 0px;
+	border-radius: 0px;
+	height: 32px;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+#btn-default {
+	border: 0px;
+	border-radius: 0px;
+	height: 32px;
+}
+
+#navbar-nav>li>a {
+	color: #353535;
+	font-weight: 900;
+	font-size: 1em;
+}

@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/* 공통된 탑1 부분 */
+
+.footer-menu {
+	background-color: #FAFAFA;
+	border-top: 1px solid #E1E1E1;
+	border-bottom: 1px solid #E1E1E1;
+	text-align: center;
+	border-top: 1px solid #E1E1E1;
+	margin-bottom: 20px;
+}
+
+.footer-menu>a {
+	color: #8C8C8C;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
+.footer-waming {
+	margin-top: 20px;
+	background-color: #FAFAFA;
+	border: 1px solid #E1E1E1;
+	text-align: center;
+	padding-top: 5px;
+}
+
+h5 {
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+}
+
+p {
+	font-size: 0.9em;
+}
+
+.footer-info {
+	margin-top: 30px;
+}
+
+h6 {
+	color: #8C8C8C;
+	font-size: 0.9em;
+	margin-top: 8px;
+}
+
+span {
+	font-size: 0.9em;
+}
+
+b {
+	font-weight: bold;
+}
+
+.footer-images-logo {
+	width: 100% !important;
+	height: 40px;
+}
+
+.footer-gara {
+	width: 100% !important;
+	height: 160px;
+}
+
+.footer-images {
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+
+.col-xs-10>h4 {
+	color: #636363;
+	font-weight: bold;
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+
+.col-xs-10>p {
+	color: #8C8C8C;
+	font-weight: bold;
+}

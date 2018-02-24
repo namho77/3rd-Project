@@ -33,6 +33,8 @@ public interface MemberService {
 	public int updatePassword(Model model, HttpServletRequest req, HttpSession session);
 
 	public void findPassword(Model model, HttpServletRequest req, ModelAndView mv);
+
+	public int withdrawMember(Model model, HttpServletRequest req, HttpSession session);
 	
 	
 }

@@ -14,12 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.cafe24.ourplanners.MainController;
@@ -123,7 +123,7 @@ public class MemberController {
 		}
 	}
 
-	// 회원탈퇴
+	// 회원탈퇴 동의 페이지
 	@RequestMapping(value = "member/withdraw", method = RequestMethod.GET)
 	public String withdraw(Model model) {
 
@@ -132,17 +132,35 @@ public class MemberController {
 	
 	// 회원탈퇴 처리
 	@RequestMapping(value = "member/withdraw", method = RequestMethod.POST)
-	public String withdraw(Model model,HttpServletRequest req, HttpSession session) {
+	public String withdraw(Model model,HttpServletRequest req, HttpSession session,RedirectAttributes rediAttr) {
 
-		int affected = service.updatePassword(model,req,session);
+		int affected = 0;
+		if(req.getParameter("step").equalsIgnoreCase("2"))
+		{
+			return "member/member_withdraw_confirm_password";
+		}
+		
+		else if(req.getParameter("step").equalsIgnoreCase("3"))
+		{
+			affected = service.withdrawMember(model,req,session);
+		}
+		
+		
+		
 		if(affected<=0) {
-			model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
-			return "member/member_password_change";	
+			model.addAttribute("layer_msg", "회원탈퇴를 실패 하였습니다.");
+			return "member/member_withdraw";
 		}
 		else
 		{
-			model.addAttribute("layer_msg", "비밀번호가 변경 되었습니다.");
-			return "index";
+			rediAttr.addFlashAttribute("layer_msg", "회원탈퇴 처리 되었습니다.");
+			//model.addAttribute("layer_msg", "회원탈퇴 처리 되었습니다.");
+			/*UriComponents uri = ServletUriComponentsBuilder
+                    .fromServletMapping(req)
+                    .fromPath("/member/logout")
+                    .build();*/
+			return "redirect:/member/logout";
+			//return "redirect:"+req.getContextPath()+"member/logout";
 		}
 		
 	}
@@ -166,6 +184,7 @@ public class MemberController {
 		
 			int affected = service.updatePassword(model,req,session);
 			if(affected<=0) {
+				System.out.println("현재 비밀번호가 일치하지 않습니다.");
 				model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
 				return "member/member_password_change";	
 			}
@@ -183,13 +202,14 @@ public class MemberController {
 		String referer_url = req.getHeader("referer");
 		 System.out.println("리퍼러 = "+referer_url);
 		String contextPath = req.getContextPath();
-		 System.out.println("contextPath = "+contextPath);
+		//System.out.println("contextPath = "+contextPath);
 		String command = null;
 		String auth_prev_url = (String) session.getAttribute("auth_prev_url");
 		
 		
 		//auth인터셉터로 타고온 로그인 처리인 경우
 		if (auth_prev_url != null && auth_prev_url.length()!=0) {
+			System.out.println("auth인터셉터 타고온 로그인");
 			session.removeAttribute("auth_prev_url");
 			session.setAttribute("prev_url", auth_prev_url);
 			return "member/member_login";
@@ -271,7 +291,7 @@ public class MemberController {
 
 		session.setAttribute("prev_url", prev_url);
 
-		System.out.println("이전주소 : " + prev_url);
+		System.out.println("로그아웃시 이전주소 : " + prev_url);
 
 		Object loginObj = session.getAttribute("loginUserInfo");
 
