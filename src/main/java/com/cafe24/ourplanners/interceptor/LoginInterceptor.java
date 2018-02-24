@@ -36,12 +36,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		*/
 		
 		if(session.getAttribute(LOGIN)!=null) {
-		    System.out.println("Interceptor : Session Check Fail");
+		    System.out.println("Interceptor : 세션 존재");
 		    //response.sendRedirect(request.getContextPath()+"/");
 		    //return false;
 		   } 
 		   else { 
-		    System.out.println("Interceptor : Session Check true");
+		    System.out.println("Interceptor : 세션 없음");
 		    //return true;
 		   }
 		return super.preHandle(request, response, handler);
@@ -79,7 +79,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			System.out.println("로그인 후 postHandle prev_url : " +prev_url);
 			
 			if(prev_url==null || prev_url.length() == 0) {
-				modelAndView.setViewName("member/login");
+				modelAndView.setViewName("member/member_login");
 			}
 			else {
 				modelAndView.setViewName("redirect:"+prev_url);

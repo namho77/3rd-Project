@@ -267,6 +267,45 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int withdrawMember(Model model, HttpServletRequest req, HttpSession session) {
+		// TODO Auto-generated method stub
+		
+		LoginDTO dto = new LoginDTO();
+		
+		String user_id = ((MemberVO)session.getAttribute("loginUserInfo")).getUser_id();
+		String password = req.getParameter("password");
+		
+		dto.setUser_id(user_id);
+		
+		String salt = dao.getSaltById(user_id);
+		
+		password =  SHA256.encrypt(password, salt);
+		
+		dto.setPassword(password);
+		
+		int affected  = dao.confirmIdPassword(dto);
+		
+		if(affected<=0)
+		{
+			model.addAttribute("error_msg", "비밀번호가 일치하지 않습니다. 비밀번호를 확인후 다시 시도해 주세요.");
+			return affected;
+		}
+		else {
+			int deletedRow = dao.deleteMember(user_id);
+			//dao.dbClose();
+			if(deletedRow <=0)
+			{		
+				model.addAttribute("isNotDeleteAccount",Boolean.TRUE);
+				model.addAttribute("error_msg", "회원탈퇴에 실패하였습니다. 이미 탈퇴된 회원이거나 해당 하는 회원을 찾을 수 없습니다.");
+			}
+			return deletedRow;
+		}
+		
+	}
+	
+	
 	
 	
 

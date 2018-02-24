@@ -14,24 +14,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="description" content="메인">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>메인|OUR PLANNERS</title>
 
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/material/material-kit.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<!-- Owl Stylesheets -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.theme.default.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
+<link rel="shortcut icon" href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-144x144.png">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -39,19 +38,11 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-
-
+	
 </head>
 
 <body>
@@ -59,133 +50,29 @@
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	<div class="preloader_hide">
+	<div id="wrapper" class="preloader_hide">
 
 		<!-- header section -->
-		<!-- header navigation(탑1 부분) -->
-		<%@ include file="common/top_main.jsp"%>
-		<!-- header navigation(탑1 부분) -->
-		<!-- header section -->
-		<section class="banner" role="banner">
-			<div class="container">
-				<div class="col-md-10 col-md-offset-1">
-					<div class="banner-text text-center">
-						<h1>Our Planners</h1>
-						<p>기획을 중점으로 요청자와 기술자들을 연결시켜 기획의 결실을 맺는 교류시스템</p>
-						<nav role="navigation">
-							<a href="#services" class="banner-btn"><img src="#" alt=""></a>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</section>
+			<%@ include file="./common/top_main2.jsp"%> 
+		<!--// header section -->
+
+		<!-- 모달창 메시지 -->
+			<%@ include file="common/modal_msg.jsp"%>
+		<!--// 모달창 메시지 -->
 
 		<section id="wordcloud">
-			
 			<!-- 검색, 핫 키워드 -->
 			<%@ include file="wordcloud/wordcloud.jsp"%>
-			<!-- 모달창 메시지 -->
-			<%@ include file="common/modal_msg.jsp"%>
-
-			<div class="modal fade " id="service-search-modal" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-
-							<div>
-
-								<h1>"${searchWord }"에 대한 검색 결과가 없습니다.</h1>
-
-								<h1>다음 서비스를 찾고 있나요?</h1>
-
-							</div>
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-
-							<h4 class="modal-title" id="layer_msg_title">알림</h4>
-						</div>
-						<div class="modal-body" id="layer_msg_content">
-
-							<div>
-								<ul>
-									<li><a href="${pageContext.request.contextPath}/hire/영어"> 영어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/수학"> 수학 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/피아노키보드"> 피아노/키보드 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-영어"> 비즈니스 영어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/보컬"> 보컬 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/국어"> 국어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/과학"> 과학 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/시창청음화성학"> 시창청음/화성학 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/작곡-편곡"> 작곡/편곡 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/음악-편집-및-제작"> 음악 편집 및 제작 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/기타"> 기타 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/BGM-사운드-제작"> BGM/사운드 제작 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/toeic"> TOEIC/speaking/writing 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/중국어"> 중국어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/일본어일어"> 일본어(일어) 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/퍼스널트레이닝"> 퍼스널트레이닝(PT) </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/미디컴퓨터작곡"> 미디/컴퓨터작곡 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-중국어"> 비즈니스 중국어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/소묘-드로잉"> 소묘/드로잉 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/사회"> 사회 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/미술-회화"> 미술 회화 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/연기"> 연기 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/일러스트-디자인"> 일러스트 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/영어-번역"> 영어 번역 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/축가"> 축가 요청 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/바이올린"> 바이올린 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-일본어"> 비즈니스 일본어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/성악"> 성악 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/명함-디자인"> 명함 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/로고-디자인"> 로고 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/논술"> 논술 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/인쇄물-디자인"> 인쇄물 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/개인용-사진-촬영"> 개인용 사진 촬영 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/toefl"> TOEFL 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/기업-상업용-사진-촬영"> 기업/상업용 사진 촬영 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/방송댄스"> 방송댄스 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/검정고시"> 검정고시 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/프로그래밍"> 프로그래밍/코딩 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/사진촬영"> 사진 촬영/편집 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/스트릿-댄스"> 스트릿댄스 레슨 </a></li>
-								</ul>
-							</div>
-
-						</div>
-						<div class="modal-footer">
-
-							<div>
-								<div class="other-cat-desc">
-									<p>다른 이름으로 서비스가 존재할 수 있어요.</p>
-									<p>다음 카테고리에서 찾아보시는 건 어떠세요?</p>
-								</div>
-								<ul>
-									<li><a href="/레슨"> 레슨 </a></li>
-									<li><a href="/홈-리빙"> 홈/리빙 </a></li>
-									<li><a href="/이벤트"> 이벤트 </a></li>
-									<li><a href="/비즈니스"> 비즈니스 </a></li>
-									<li><a href="/디자인-개발"> 디자인/개발 </a></li>
-									<li><a href="/건강-미용"> 건강/미용 </a></li>
-									<li><a href="/기타"> 기타 </a></li>
-								</ul>
-							</div>
-
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<!--// 검색, 핫 키워드 -->
 		</section>
-
+	
 		<!-- category section(분야별 부분) -->
 		<section id="works" class="works section no-padding">
 			<div class="container-fluid">
 				<div class="row no-gutter">
 					<!-- 건축분야 -->
 					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=1" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
+						<a href="" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
 							<div class="overlay">
 								<div class="overlay-caption">
 									<p>건축</p>
@@ -231,47 +118,31 @@
 		</section>
 		<!-- category section(분야별 부분) -->
 
-<%@ include file="board/hot/board_hot_list.jsp"%>
+		<%@ include file="board/hot/board_hot_list.jsp"%>
 
 		<!-- video section(홍보영상 분분) -->
-		<section id="testimonials" class="section testimonials no-padding">
-			<div class="container-fluid">
-				<div class="row no-gutter">
-					<div class="flexslider">
-						<ul class="slides">
-							<li>
-								<div class="col-md-12">
-									<blockquote>
-										<h1>홍보영상 1</h1>
-										<p>건축 타일 기술자 이주찬</p>
-									</blockquote>
-								</div>
-							</li>
-							<li>
-								<div class="col-md-12">
-									<blockquote>
-										<h1>홍보영상 2</h1>
-										<p>프론트 개발자 박세창</p>
-									</blockquote>
-								</div>
-							</li>
-							<li>
-								<div class="col-md-12">
-									<blockquote>
-										<h1>홍보영상 3</h1>
-										<p>자동차 복구기술자 박상화</p>
-									</blockquote>
-								</div>
-							</li>
-							<li>
-								<div class="col-md-12">
-									<blockquote>
-										<h1>홍보영상 4</h1>
-										<p>발표 교육자 김남호</p>
-									</blockquote>
-								</div>
-							</li>
-						</ul>
+
+		<section class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 xs-box2">
+						<h2 class="section-title mb25 text-left st2">홍보영상</h2>
+						<p class="mb25">이달의 기술자 소개 영상 입니다...</p>
+						<p>
+							<i class="fa fa-cloud-download"></i> &nbsp; 건축 타일 기술자
+						</p>
+						<p>
+							<i class="fa fa-comments"></i> &nbsp; 이주찬
+						</p>
+						<p>
+							<i class="fa fa-github-alt"></i> &nbsp; 저는 ~~~~~~~~~
+						</p>
+						<p class="mt30 mb0">
+							<a href="#" class="btn voyo-btn-2 br2">자세히 보기</a>
+						</p>
+					</div>
+					<div class="col-sm-6">
+						<iframe class="rs-video" src="https://player.vimeo.com/video/7449107?portrait=0&amp;color=22aba6" allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>
@@ -279,7 +150,7 @@
 		<!-- video section(홍보영상 분분) -->
 
 		<!-- up section(위로가기 부분) -->
-		<section id="contact" class="section quote">
+		<section class="section section-gray">
 			<div class="container">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<h3>어떤 분야를 찾고 계십니까? 분야별 이미지를 클릭해주세요!</h3>
@@ -289,12 +160,15 @@
 		</section>
 		<!-- up section(위로가기 부분) -->
 
-		<!-- Footer section(하단부분) -->
-		<footer class="footer">
-			<%@ include file="common/bottom.jsp"%>
-		</footer>
-		<!-- Footer section(하단부분) -->
+		<!-- Footer (하단부분) -->
+		<%@ include file="./common/bottom.jsp"%>
+		<!--// Footer (하단부분) -->
 
 	</div>
+	
+	<!-- JS FILES(자바스크립트 연결부분) -->
+
+
+
 </body>
 </html>

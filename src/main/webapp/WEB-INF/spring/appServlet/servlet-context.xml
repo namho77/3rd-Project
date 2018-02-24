@@ -51,10 +51,14 @@
 
 	<!-- 인터셉터 설정 -->
 	<interceptors>
+		
+		<!-- 로그인후 URL 처리 인터셉터 -->
 		 <interceptor>
 			<mapping path="/member/loginPost" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
+		
+		<!-- 로그인 필요 페이지 인터셉터 -->
 		<interceptor>
 			<mapping path="/mypage/*"/>
 			<mapping path="/profile/*"/>

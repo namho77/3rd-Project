@@ -141,5 +141,11 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.update(namespace+".updatePasswordWithoutPrevPassword", paramMap);
 	}
 
+	@Override
+	public int deleteMember(String user_id) {
+		return sqlSession.delete(namespace+".deleteMember", user_id);		
+		
+	}
+
 
 }

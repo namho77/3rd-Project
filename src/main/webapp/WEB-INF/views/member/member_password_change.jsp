@@ -14,27 +14,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>로그인|OUR PLANNERS</title>
+<title>비밀번호 변경|OUR PLANNERS</title>
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-<!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 
 <script type="text/javascript">
@@ -79,35 +77,32 @@
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	<div class="preloader_hide">
-
-		<div id="page" class="single_page">
+	<div id="wrapper" class="preloader_hide">
 
 			<!-- HEADER -->
-			<header>
-				<section class="banner" role="banner">
-					<!-- header navigation(탑1 부분) -->
-					<%@ include file="../common/top_main.jsp"%>
-					<!-- header navigation(탑1 부분) -->
-				</section>
-			</header>
+					<%@ include file="../common/top_main2.jsp"%>
 			<!-- //HEADER -->
 
-
-
-
-
-
+		<!-- 모달창 메시지 -->
+			<%@ include file="../common/modal_msg.jsp"%>
+		<!--// 모달창 메시지 -->
+		
 			<!-- HOME -->
-			<section id="change_password" class="padbot0">
+			<section id="change_password" class="section padbot0">
 				<!-- CONTAINER -->
 				<div class="container">
 					<!-- 좌우측의 공간 확보 -->
 
 					<div class="col-xs-9 col-md-9">
-
+						
 						<h3>비밀번호 변경</h3>
 						<small>비밀번호 변경 페이지 입니다. 현재 비밀번호와 바꾸실 비밀번호를 입력하세요.</small>
+						
+						<c:if test="${not empty error_msg}">
+						<div class="alert alert-danger">
+							<strong>알림!</strong> ${error_msg}
+						</div>
+						</c:if>
 						<form name="changePasswordFrm" method="post" action="<c:url value="../member/change_password"/>" onsubmit="return checkPassword(this);">
 
 							<table class="table table-bordered">
@@ -159,83 +154,8 @@
 			</section>
 			<!-- //HOME -->
 
-
-
-		</div>
-		<!-- //PAGE -->
-
-
-		<!-- 모달창 -->
-
-		<section id="blank">
-
-
-			<div class="modal fade " id="layer_msg" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-							<h4 class="modal-title" id="layer_msg_title">알림</h4>
-						</div>
-						<div class="modal-body" id="layer_msg_content">...</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<br /> <br /> <br /> <br />
-		</section>
-
-
-		<script>
-			//레이어 팝업창 (alert 왠만하면 쓰지말자.. 사용자가 짜증나니깐)
-			var modalVerticalCenterClass = ".modal";
-
-			function centerModals($element) {
-				var $modals;
-				if ($element.length) {
-					$modals = $element;
-				} else {
-					$modals = $(modalVerticalCenterClass + ':visible');
-				}
-				$modals.each(function(i) {
-					var $clone = $(this).clone().css('display', 'block')
-							.appendTo('body');
-					var top = Math.round(($clone.height() - $clone.find(
-							'.modal-content').height()) / 2);
-					top = top > 0 ? top : 0;
-					$clone.remove();
-					$(this).find('.modal-content').css("margin-top", top);
-				});
-			}
-
-			function popLayerMsg(msg) {
-				$("#layer_msg_content").empty();
-				$("#layer_msg_content").append("<p>" + msg + "</p>");
-				$("#layer_msg").modal();
-
-			}
-
-			$(modalVerticalCenterClass).on('show.bs.modal', function(e) {
-				centerModals($(this));
-			});
-			$(window).on('resize', centerModals);
-		</script>
-
-		<!-- //모달창 끝 -->
-
-		<!-- CONTACTS -->
-		<section id="contacts"></section>
-		<!-- //CONTACTS -->
-
-
 		<!-- Footer section(하단부분) -->
-		<footer class="footer">
 			<%@ include file="../common/bottom.jsp"%>
-		</footer>
 		<!-- Footer section(하단부분) -->
 
 	</div>

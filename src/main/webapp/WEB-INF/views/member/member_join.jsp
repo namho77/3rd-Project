@@ -18,24 +18,26 @@
 <title>회원가입|OUR PLANNERS</title>
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-<!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<link rel="shortcut icon" href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-144x144.png">
 
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 
 <script type="text/javascript">
@@ -510,16 +512,16 @@
 <div id="page" class="single_page">
 
 
-			<!-- HEADER -->
-			<header>
-				<section class="banner" role="banner">
-				<!-- header navigation(상단 메뉴 부분) -->
+
 			
-					<%@ include file="../common/top_main.jsp"%>
-				<!--// header navigation(상단 메뉴 부분) -->
-				</section>
-			</header>
-			<!-- //HEADER -->
+			<!-- header navigation(탑1 부분) -->
+			<%@ include file="../common/top_main2.jsp"%>
+			<!-- header navigation(탑1 부분) -->
+			
+			<!-- 모달창 메시지 -->
+			<%@ include file="../common/modal_msg.jsp"%>
+			<!--// 모달창 메시지 -->
+			
 
 
 			<!-- HOME -->
@@ -1338,69 +1340,9 @@
 			</div>
 		</div>
 
-
-
-		<div class="modal fade " id="layer_msg" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
-						<h4 class="modal-title" id="layer_msg_title">알림</h4>
-					</div>
-					<div class="modal-body" id="layer_msg_content">...</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<script>
-		//레이어 팝업창 (alert 왠만하면 쓰지말자.. 사용자가 짜증나니깐)
-			var modalVerticalCenterClass = ".modal";
-			
-		function centerModals($element) {
-			    var $modals;
-			    if ($element.length) {
-			        $modals = $element;
-			    } else {
-			        $modals = $(modalVerticalCenterClass + ':visible');
-			    }
-			    $modals.each( function(i) {
-			        var $clone = $(this).clone().css('display', 'block').appendTo('body');
-			        var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
-			        top = top > 0 ? top : 0;
-			        $clone.remove();
-			        $(this).find('.modal-content').css("margin-top", top);
-			    });
-			}
-			
-		function popLayerMsg(msg){
-			$("#layer_msg_content").empty();
-			$("#layer_msg_content").append("<p>"+msg+"</p>");
-			$("#layer_msg").modal();
-			
-		}
-		
-			$(modalVerticalCenterClass).on('show.bs.modal', function(e) {
-			    centerModals($(this));
-			});
-			$(window).on('resize', centerModals);
-			</script>
-
-		<!-- //모달창 끝 -->
-
-		<!-- CONTACTS -->
-		<section id="contacts"></section>
-		<!-- //CONTACTS -->
-
 	
 	<!-- Footer section(하단부분) -->
-		<footer class="footer">
 		<%@ include file="../common/bottom.jsp"%>
-	</footer>
 	<!-- Footer section(하단부분) -->
 </div>
 </body>
