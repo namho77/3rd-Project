@@ -1,5 +1,6 @@
 <%@page import="com.cafe24.ourplanners.member.dto.LoginDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -17,16 +18,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>개인정보취급방침|OUR PLANNERS</title>
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel='stylesheet'
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-<link rel="shortcut icon" href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
-<link rel="apple-touch-icon" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="144x144" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-144x144.png">
+<link rel="shortcut icon"
+	href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
+<link rel="apple-touch-icon"
+	href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="144x144"
+	href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon-144x144.png">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -34,9 +44,11 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script>
 	$(document).ready(function() {
@@ -48,7 +60,9 @@
 
 <body>
 	<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
+	<img id="preloader"
+		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
+		alt="" />
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
@@ -124,16 +138,33 @@ body {
 	border: none !important;
 }
 </style>
-								<ul class="my-profile-menu-list list-style-none font-size-h4" role="tablist">
-									<li role="presentation" class="margin-right-30 position-relative  active "><a class="plain font-color-lighter" href="https://kmong.com/my_profile">나의정보</a></li>
+								<ul class="my-profile-menu-list list-style-none font-size-h4"
+									role="tablist">
+									<li role="presentation"
+										class="margin-right-30 position-relative  active "><a
+										class="plain font-color-lighter"
+										href="https://kmong.com/my_profile">나의정보</a></li>
 
-									<li role="presentation" class="margin-right-30 position-relative "><a class="plain font-color-lighter" href="https://kmong.com/my_profile/certification">인증정보</a></li>
+									<li role="presentation"
+										class="margin-right-30 position-relative "><a
+										class="plain font-color-lighter"
+										href="https://kmong.com/my_profile/certification">인증정보</a></li>
 
-									<li role="presentation" class="margin-right-30 position-relative "><a class="plain font-color-lighter" href="https://kmong.com/my_profile/mail_settings">알림설정</a></li>
+									<li role="presentation"
+										class="margin-right-30 position-relative "><a
+										class="plain font-color-lighter"
+										href="https://kmong.com/my_profile/mail_settings">알림설정</a></li>
 
-									<li role="presentation" class="margin-right-30 position-relative "><a class="plain font-color-lighter" href="https://kmong.com/my_profile/change_password">비밀번호 변경</a></li>
+									<li role="presentation"
+										class="margin-right-30 position-relative "><a
+										class="plain font-color-lighter"
+										href="https://kmong.com/my_profile/change_password">비밀번호
+											변경</a></li>
 
-									<li role="presentation" class="margin-right-30 position-relative "><a class="plain font-color-lighter" href="https://kmong.com/my_profile/leave">회원탈퇴</a></li>
+									<li role="presentation"
+										class="margin-right-30 position-relative "><a
+										class="plain font-color-lighter"
+										href="https://kmong.com/my_profile/leave">회원탈퇴</a></li>
 								</ul>
 
 							</div>
@@ -150,36 +181,63 @@ body {
 												</div>
 												<div class="row margin-top-20">
 													<div class="col-xs-3 text-center">
-														<img id="thumbnail" class="profile-image" src="https://kmong.com/img/tools/main_user_gray.png" title="dmacoder" onerror="this.onerror=null;this.src='/img/tools/main_user_gray.png';"> <input id="thumbnail_upload" name="file" type="file" style="display: none;">
+														<img id="thumbnail" class="profile-image"
+															src="https://kmong.com/img/tools/main_user_gray.png"
+															title="dmacoder"
+															onerror="this.onerror=null;this.src='/img/tools/main_user_gray.png';">
+														<input id="thumbnail_upload" name="file" type="file"
+															style="display: none;">
 
 														<div class="margin-top-20">
-															<label id="profilePictureBtn" class="label-margin-none btn btn-default btn-sm width-100px border-888" for="thumbnail_upload"> 이미지 등록 </label>
+															<label id="profilePictureBtn"
+																class="label-margin-none btn btn-default btn-sm width-100px border-888"
+																for="thumbnail_upload"> 이미지 등록 </label>
 														</div>
 													</div>
 													<div class="col-xs-9 padding-left-0">
 														<div class="row">
 															<div class="col-xs-12">
 																<div class="form-group position-relative">
-																	<label class="label-margin-none margin-bottom-10" for="username"> 이메일 </label> <input class="form-control input-sm" type="text" name="email" value="dmacoder@gmail.com" disabled="disabled">
+																	<label class="label-margin-none margin-bottom-10"
+																		for="username"> 이메일 </label> <input
+																		class="form-control input-sm" type="text" name="email"
+																		value="dmacoder@gmail.com" disabled="disabled">
 																</div>
 															</div>
 														</div>
 														<div id="username_body" class="row margin-top-20">
 															<div class="col-xs-12 position-relative">
 																<div class="form-group position-relative">
-																	<label class="label-margin-none margin-bottom-10" for="username"> 닉네임&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" data-title="닉네임 변경은 1회만 가능합니다" data-original-title="" title=""></i>
+																	<label class="label-margin-none margin-bottom-10"
+																		for="username"> 닉네임&nbsp;<i
+																		class="fa fa-info-circle" data-toggle="tooltip"
+																		data-placement="right" data-title="닉네임 변경은 1회만 가능합니다"
+																		data-original-title="" title=""></i>
 																	</label>
 																	<div class="pull-right" style="">
-																		<a href="javascript:void(0);" class="btn btn-link btn-xs link-color-blue text-underline"> <i class="fa fa-pencil" aria-hidden="true"></i> 수정
+																		<a href="javascript:void(0);"
+																			class="btn btn-link btn-xs link-color-blue text-underline">
+																			<i class="fa fa-pencil" aria-hidden="true"></i> 수정
 																		</a>
 																	</div>
-																	<div id="username_change_btn_group" class="pull-right" style="display: none;">
-																		<a href="javascript:void(0);" class="btn btn-link padding-right-0 btn-xs link-color-blue text-underline">취소</a> <a href="javascript:void(0);" class="btn btn-link btn-xs link-color-blue text-underline">저장</a>
+																	<div id="username_change_btn_group" class="pull-right"
+																		style="display: none;">
+																		<a href="javascript:void(0);"
+																			class="btn btn-link padding-right-0 btn-xs link-color-blue text-underline">취소</a>
+																		<a href="javascript:void(0);"
+																			class="btn btn-link btn-xs link-color-blue text-underline">저장</a>
 																	</div>
-																	<input id="username" name="username" type="text" class="form-control input-sm" value="dmacoder" disabled="disabled">
+																	<input id="username" name="username" type="text"
+																		class="form-control input-sm" value="dmacoder"
+																		disabled="disabled">
 
 																	<div>
-																		<span id="username_error" class="help-block padding-left-0" style="display: none"></span> <span id="username_success" class="help-block padding-left-0 color-success" style="display: none"></span>
+																		<span id="username_error"
+																			class="help-block padding-left-0"
+																			style="display: none"></span> <span
+																			id="username_success"
+																			class="help-block padding-left-0 color-success"
+																			style="display: none"></span>
 																	</div>
 																</div>
 															</div>
@@ -189,10 +247,13 @@ body {
 																<div class="row">
 																	<div class="col-xs-5 padding-right-0">
 																		<div class="form-group position-relative">
-																			<label class="label-margin-none margin-bottom-10" for="username"> 연락 가능 시간 설정 </label>
+																			<label class="label-margin-none margin-bottom-10"
+																				for="username"> 연락 가능 시간 설정 </label>
 
 																			<div class="select-control">
-																				<select id="av_time_from" class="form-control input-sm padding-side-15" disabled="disabled">
+																				<select id="av_time_from"
+																					class="form-control input-sm padding-side-15"
+																					disabled="disabled">
 																					<option value="0">0시</option>
 																					<option value="1">1시</option>
 																					<option value="2">2시</option>
@@ -230,17 +291,26 @@ body {
 																	</div>
 																	<div class="col-xs-5 padding-left-0">
 																		<div class="form-group position-relative">
-																			<label class="label-margin-none margin-bottom-10" for="av_time">&nbsp;</label>
+																			<label class="label-margin-none margin-bottom-10"
+																				for="av_time">&nbsp;</label>
 																			<div class="pull-right" style="">
-																				<a href="javascript:void(0);" class="btn btn-link link-color-blue text-underline btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> 수정
+																				<a href="javascript:void(0);"
+																					class="btn btn-link link-color-blue text-underline btn-xs">
+																					<i class="fa fa-pencil" aria-hidden="true"></i> 수정
 																				</a>
 																			</div>
-																			<div id="av_time_change_btn_group" class="pull-right" style="display: none;">
-																				<a href="javascript:void(0);" class="btn btn-link padding-right-0 link-color-blue text-underline btn-xs">취소</a> <a href="javascript:void(0);" class="btn btn-link link-color-blue text-underline btn-xs">저장</a>
+																			<div id="av_time_change_btn_group" class="pull-right"
+																				style="display: none;">
+																				<a href="javascript:void(0);"
+																					class="btn btn-link padding-right-0 link-color-blue text-underline btn-xs">취소</a>
+																				<a href="javascript:void(0);"
+																					class="btn btn-link link-color-blue text-underline btn-xs">저장</a>
 																			</div>
 
 																			<div class="select-control">
-																				<select id="av_time_to" class="form-control input-sm padding-side-15" disabled="disabled">
+																				<select id="av_time_to"
+																					class="form-control input-sm padding-side-15"
+																					disabled="disabled">
 																					<option value="0">0시</option>
 																					<option value="1">1시</option>
 																					<option value="2">2시</option>
@@ -272,46 +342,81 @@ body {
 																	</div>
 																</div>
 																<div>
-																	<span id="av_time_error" class="help-block padding-left-0" style="display: none"></span> <span id="av_time_success" class="help-block padding-left-0 color-success" style="display: none"></span>
+																	<span id="av_time_error"
+																		class="help-block padding-left-0"
+																		style="display: none"></span> <span
+																		id="av_time_success"
+																		class="help-block padding-left-0 color-success"
+																		style="display: none"></span>
 																</div>
 															</div>
-															<div id="contact_number_body" class="col-xs-6 padding-left-0">
+															<div id="contact_number_body"
+																class="col-xs-6 padding-left-0">
 																<div class="form-group position-relative">
-																	<label class="label-margin-none margin-bottom-10 pull-left" for="username"> 연락처 </label>
+																	<label
+																		class="label-margin-none margin-bottom-10 pull-left"
+																		for="username"> 연락처 </label>
 																	<div class="awesome-checkbox pull-left margin-left-10">
-																		<label> <input id="open_mobile" type="checkbox" value="1" checked=""> <span class="awesome-checkbox-body"></span> <span class="awesome-checkbox-text safeNumberTooltip font-size-h6 margin-left-5 font-color-lighter" style="width: 160px;">미결제 회원에게 안심번호 공개 <i class="fa fa-question-circle" data-toggle="tooltip" aria-hidden="true" data-placement="right" title="" data-original-title="• 결제를 진행하지 않은 크몽의 모든 회원에게 전문가의 실제 전화번호 대신 임시의 가상 번호를 노출합니다.<br />• 안심번호를 통해 통화한 내용은 녹취됩니다. "></i>
+																		<label> <input id="open_mobile"
+																			type="checkbox" value="1" checked=""> <span
+																			class="awesome-checkbox-body"></span> <span
+																			class="awesome-checkbox-text safeNumberTooltip font-size-h6 margin-left-5 font-color-lighter"
+																			style="width: 160px;">미결제 회원에게 안심번호 공개 <i
+																				class="fa fa-question-circle" data-toggle="tooltip"
+																				aria-hidden="true" data-placement="right" title=""
+																				data-original-title="• 결제를 진행하지 않은 크몽의 모든 회원에게 전문가의 실제 전화번호 대신 임시의 가상 번호를 노출합니다.<br />• 안심번호를 통해 통화한 내용은 녹취됩니다. "></i>
 																		</span>
 																		</label>
 																	</div>
 
 																	<div class="pull-right" style="">
-																		<a href="javascript:void(0);" class="btn btn-link link-color-blue text-underline btn-xs"> <i class="fa fa-pencil" aria-hidden="true"></i> 수정
+																		<a href="javascript:void(0);"
+																			class="btn btn-link link-color-blue text-underline btn-xs">
+																			<i class="fa fa-pencil" aria-hidden="true"></i> 수정
 																		</a>
 																	</div>
-																	<div id="contact_number_change_btn_group" class="pull-right" style="display: none;">
-																		<a href="javascript:void(0);" class="btn btn-link padding-right-0 link-color-blue text-underline btn-xs">취소</a> <a href="javascript:void(0);" class="btn btn-link link-color-blue text-underline btn-xs">저장</a>
+																	<div id="contact_number_change_btn_group"
+																		class="pull-right" style="display: none;">
+																		<a href="javascript:void(0);"
+																			class="btn btn-link padding-right-0 link-color-blue text-underline btn-xs">취소</a>
+																		<a href="javascript:void(0);"
+																			class="btn btn-link link-color-blue text-underline btn-xs">저장</a>
 																	</div>
-																	<input id="contact_number" class="form-control input-sm" type="text" name="contact_number" value="01098023638" disabled="disabled">
+																	<input id="contact_number"
+																		class="form-control input-sm" type="text"
+																		name="contact_number" value="01098023638"
+																		disabled="disabled">
 																</div>
 																<div>
-																	<span id="contact_number_error" class="help-block padding-left-0" style="display: none"></span> <span id="contact_number_success" class="help-block padding-left-0 color-success" style="display: none"></span>
+																	<span id="contact_number_error"
+																		class="help-block padding-left-0"
+																		style="display: none"></span> <span
+																		id="contact_number_success"
+																		class="help-block padding-left-0 color-success"
+																		style="display: none"></span>
 																</div>
 															</div>
 														</div>
 														<div class="row margin-top-20">
 															<div class="col-xs-6 position-relative" style="top: 8px;">
-																<span class="font-color-lighter">프로필 완성도:</span>&nbsp; <span class="NGB"><b>10%</b> </span>
+																<span class="font-color-lighter">프로필 완성도:</span>&nbsp; <span
+																	class="NGB"><b>10%</b> </span>
 															</div>
 															<div class="col-xs-6 text-right">
-																<a class="btn btn-link link-color-blue btn-xss" href="/@dmacoder">프로필 완성하러가기 &gt;</a>
+																<a class="btn btn-link link-color-blue btn-xss"
+																	href="/@dmacoder">프로필 완성하러가기 &gt;</a>
 															</div>
 														</div>
 														<div class="row margin-top-5">
 															<div class="col-xs-12">
 																<div id="profileProgressBar" style="position: relative;">
-																	<svg viewBox="0 0 100 3" preserveAspectRatio="none" style="display: block; width: 100%;">
-																	<path d="M 0,1.5 L 100,1.5" stroke="#ffd400" stroke-width="3" fill-opacity="0" style="stroke-dasharray: 100, 100; stroke-dashoffset: 90;"></path></svg>
-																	<div class="progressbar__label" style="color: rgb(255, 212, 0); opacity: 0; position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%);">undefined</div>
+																	<svg viewBox="0 0 100 3" preserveAspectRatio="none"
+																		style="display: block; width: 100%;">
+																	<path d="M 0,1.5 L 100,1.5" stroke="#ffd400"
+																			stroke-width="3" fill-opacity="0"
+																			style="stroke-dasharray: 100, 100; stroke-dashoffset: 90;"></path></svg>
+																	<div class="progressbar__label"
+																		style="color: rgb(255, 212, 0); opacity: 0; position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%);">undefined</div>
 																</div>
 															</div>
 														</div>

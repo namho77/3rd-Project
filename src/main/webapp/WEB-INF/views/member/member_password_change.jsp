@@ -23,6 +23,13 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member_password_change.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
+
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -77,88 +84,80 @@
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	<div id="wrapper" class="preloader_hide">
-
-			<!-- HEADER -->
-					<%@ include file="../common/top_main2.jsp"%>
-			<!-- //HEADER -->
-
-		<!-- 모달창 메시지 -->
-			<%@ include file="../common/modal_msg.jsp"%>
-		<!--// 모달창 메시지 -->
-		
-			<!-- HOME -->
-			<section id="change_password" class="section padbot0">
-				<!-- CONTAINER -->
-				<div class="container">
-					<!-- 좌우측의 공간 확보 -->
-
-					<div class="col-xs-9 col-md-9">
-						
-						<h3>비밀번호 변경</h3>
-						<small>비밀번호 변경 페이지 입니다. 현재 비밀번호와 바꾸실 비밀번호를 입력하세요.</small>
-						
-						<c:if test="${not empty error_msg}">
-						<div class="alert alert-danger">
-							<strong>알림!</strong> ${error_msg}
-						</div>
-						</c:if>
-						<form name="changePasswordFrm" method="post" action="<c:url value="../member/change_password"/>" onsubmit="return checkPassword(this);">
-
-							<table class="table table-bordered">
-								<colgroup>
-									<col width="20%" />
-									<col width="*" />
-								</colgroup>
-								<tbody>
-
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">현재 비밀번호</th>
-										<td>
-											<input type="password" name="password" class="form-control" style="width: 200px;" />
-										</td>
-
-									</tr>
-
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">새 비밀번호</th>
-										<td>
-											<input type="password" name="newPassword" class="form-control" style="width: 200px;" />
-										</td>
-
-									</tr>
-
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">새 비밀번호 확인</th>
-										<td>
-											<input type="password" name="newPassword_confirm" class="form-control" style="width: 200px;" />
-										</td>
-
-									</tr>
-								</tbody>
-							</table>
-
-
-							<div class="row text-center" style="">
-								<button type="submit" class="btn btn-danger">비밀번호 변경</button>
-								<button type="button" class="btn btn-warning" onclick="history.back();">취소하기</button>
-							</div>
-
-
-						</form>
-
-
-					</div>
-				</div>
-				<!-- //CONTAINER -->
-			</section>
-			<!-- //HOME -->
-
-		<!-- Footer section(하단부분) -->
-			<%@ include file="../common/bottom.jsp"%>
-		<!-- Footer section(하단부분) -->
-
+	
+	<!-- Top영역 1첫번째 -->
+	<div class="row">
+		<%@ include file="../common/commonTop_1.jsp"%>
 	</div>
+	<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+	<div class="row">
+		<%@ include file="../common/commonTop_2_mypage.jsp"%>
+	</div>
+	
+	<!-- 모달창 메시지 -->
+		<%@ include file="../common/modal_msg.jsp"%>
+	<!--// 모달창 메시지 -->
+	
+	
+	<!-- Body영역 -->
+	<c:if test="${not empty error_msg}">
+		<div class="alert alert-danger">
+			<strong>알림!</strong> ${error_msg}
+		</div>
+	</c:if>
+	<div class="row" id="row-body-change-password">
+		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+		<div class="col-lg-8 col-sm-10 col-xs-12">
+			<!-- 서브메뉴부분 -->
+			<div class="col-xs-2" id="profile-menu">
+				<h3>계정설정</h3>
+				<a href="#"><p>나의정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a>
+				<a href="#"><p>비밀번호 변경</p></a> <a href="#"><p>회원탈퇴</p></a>
+			</div>
+			<!-- 비밀번호변경부분 -->
+			<form name="changePasswordFrm" method="post" action="<c:url value="../member/change_password"/>" onsubmit="return checkPassword(this);">
+			<div class="col-xs-10" id="profile-info">
+				<table>
+					<tr>
+						<td colspan="2">
+							<h4>현재 비밀번호</h4>
+							<hr />
+							<p class="password-title">현재 비밀번호</p> <input type="password" name="password"
+							class="form-control" placeholder="기존 비밀번호를 입력해 주세요." />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<h4>변경 비밀번호</h4>
+							<hr />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="1" id="change-password">
+							<p class="password-title">변경할 비밀번호</p> <input type="password"
+							class="form-control" style="width: 95%" name="newPassword"
+							placeholder="변경할 비밀번호를 입력해주세요." />
+						</td>
+						<td colspan="1">
+							<p class="password-title">한번 더 입력</p> <input type="password" name="newPassword_confirm"
+							class="form-control" placeholder="변경할 비밀번호를 한번 더 입력해주세요." />
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 버튼부분 -->
+			<div class="password-btn">
+				<button type="submit" class="btn btn-success">변경하기</button>
+			</div>
+			</form>
+		</div>
+		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+	</div>
+	
+	
+	<!-- Footer section(하단부분) -->
+		<%@ include file="../common/commonBottom.jsp"%>
+	<!-- Footer section(하단부분) -->
 </body>
 </html>
 

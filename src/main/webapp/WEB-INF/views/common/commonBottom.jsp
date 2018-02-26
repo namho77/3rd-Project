@@ -20,7 +20,7 @@
 		});
 	});
 </script>
-
+<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <div class="container-fluid">
 	<div class="footer-menu">
 		<a href="#">31.5팀</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">서비스소개</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">인재채용</a> &nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">이용약관</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">개인정보취급방침</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">FAQ</a>
