@@ -25,6 +25,9 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
 <link rel="apple-touch-icon" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
@@ -53,8 +56,12 @@
 	<div id="wrapper" class="preloader_hide">
 
 		<!-- header section -->
-			<%@ include file="./common/top_main2.jsp"%> 
+			<%@ include file="./common/commonTop_1.jsp"%>
 		<!--// header section -->
+		<!-- header section -->
+			<%@ include file="./common/commonTop_2.jsp"%>
+		<!--// header section -->
+		
 
 		<!-- 모달창 메시지 -->
 			<%@ include file="common/modal_msg.jsp"%>
@@ -161,7 +168,7 @@
 		<!-- up section(위로가기 부분) -->
 
 		<!-- Footer (하단부분) -->
-		<%@ include file="./common/bottom.jsp"%>
+		<%@ include file="./common/commonBottom.jsp"%>
 		<!--// Footer (하단부분) -->
 
 	</div>
