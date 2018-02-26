@@ -83,7 +83,7 @@
 			<!--// 모달창 메시지 -->
 			
 			<!-- HOME -->
-			<section id="login" class="padbot0">
+			<section id="login" class="section">
 
 				<!-- CONTAINER -->
 				<div class="container">
