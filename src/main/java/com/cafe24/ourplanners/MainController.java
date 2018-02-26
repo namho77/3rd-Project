@@ -30,4 +30,19 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "privacy", method = RequestMethod.GET)
+	public String privacy(Model model) {
+		logger.info("개인정보 취급방침 페이지");
+			
+		return "policy_privacy";
+	}
+	
+	@RequestMapping(value = "provision", method = RequestMethod.GET)
+	public String provision(Model model) {
+		logger.info("사이트 이용약관 페이지");
+			
+		return "policy_provision";
+	}
+	
+	
 }

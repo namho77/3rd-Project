@@ -7,21 +7,26 @@
 <mapper namespace="com.kosmo.mapper.SearchMapper">
 
 	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">
-				and title like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				and contents like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'i'.toString()">
-				and user_id like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				and ( title like CONCAT('%', #{keyword}, '%') OR contents like
-				CONCAT('%', #{keyword}, '%'))
-			</if>
-		</if>
+		<choose>
+			<when test="searchType == null or searchType == ''">
+
+			</when>
+			<otherwise>
+				<if test="searchType == 't'.toString()">
+					and title like CONCAT(CONCAT('%', #{keyword}), '%')
+				</if>
+				<if test="searchType == 'c'.toString()">
+					and contents like CONCAT(CONCAT('%', #{keyword}), '%')
+				</if>
+				<if test="searchType == 'i'.toString()">
+					and user_id like CONCAT(CONCAT('%', #{keyword}), '%')
+				</if>
+				<if test="searchType == 'tc'.toString()">
+					and ( title like CONCAT(CONCAT('%', #{keyword}), '%') OR contents like
+					CONCAT(CONCAT('%', #{keyword}), '%'))
+				</if>
+			</otherwise>
+		</choose>
 	</sql>
 
 	<select id="getHotServiceList" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
@@ -147,6 +152,118 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 	</select>
 
 
+<select id="getSubCategoryListSearch" resultType="com.cafe24.ourplanners.board.domain.SubCategoryVO">
+<![CDATA[  
+ select sc.category_srl, category_name, sc.subcategory_srl, sc.subcategory_name 
+ from 
+ subcategory sc inner join category c 
+ on sc.category_srl = c.category_srl 
+ where subcategory_srl>0 
+]]>
 
+		<choose>
+			<when test="category_name == null or category_name == ''">
+
+			</when>
+			<otherwise>
+				
+				and (
+				 	category_name like CONCAT(CONCAT('%', #{category_name}), '%') 
+					
+					
+					<if test="category_name != null and category_name != ''">
+					OR subcategory_name like CONCAT(CONCAT('%', #{subcategory_name}), '%')
+					</if>
+			
+					)
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="subcategory_srl == null or subcategory_srl == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+
+	</select>
+	
+	<!-- 게시판 검색후 리스트 가져오기 -->
+	
+	<select id="getServiceListSearch" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT BOARD_SRL ,
+USER_ID ,
+LOCATION ,
+SERVICE_TIME_START ,
+SERVICE_TIME_END ,
+TITLE ,
+CONTENTS ,
+POSTDATE ,
+VISITCOUNT ,
+CONTACT_TIME_START ,
+CONTACT_TIME_END ,
+LIKE_USER_ID ,
+NVL2(length(like_user_id) - length(replace(like_user_id,',','')), length(like_user_id) - length(replace(like_user_id,',',''))+1,0) like_user_count,
+MAIN_IMAGE ,
+CONTENTS_IMAGE ,
+CATEGORY_SRL ,
+SUBCATEGORY_SRL ,
+SERVICE_EXPIRED ,
+SERVICE_COST ,
+LIMIT_PERSON ,
+BOARD_TYPE ,
+SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0 
+]]>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="subcategory_srl == null or subcategory_srl == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+  
+	<![CDATA[    
+	  ORDER BY board_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+	]]>
+
+	</select>
+	
+	<!-- 게시판 검색후 검색 키워드 wordcloud에 insert -->
+	
+	
 
 </mapper>

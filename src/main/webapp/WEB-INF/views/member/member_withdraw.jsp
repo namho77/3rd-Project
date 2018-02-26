@@ -75,29 +75,6 @@
 
 				<div class="well well-lg">
 
-
-					<%-- <c:if test="${not empty layer_msg}">
-						
-						<c:choose>
-							<c:when test="${not empty error_msg}">
-							    <script>						
-									$(document).ready(function() {
-										popLayerMsg("${layer_msg} <br/> ${error_msg}");
-									});
-								</script>
-							</c:when>
-							
-							<c:otherwise>
-							    <script>						
-									$(document).ready(function() {
-										popLayerMsg("${layer_msg}");
-									});
-								</script>
-							</c:otherwise>
-						</c:choose>
-
-					</c:if> --%>
-
 					<c:if test="${isNotDeleteAccount}">
 
 					</c:if>

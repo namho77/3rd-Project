@@ -332,12 +332,25 @@ $(document).ready(function() {
 	});		
 		
 $(document).ready(function(){
-
-
+	$('.mainSearchBtn').on('click', function() {
 		
+		if (checkValidKeyword(this.form)) {
+			
+			this.form.submit();
+		}		
+	});
 });
-	
 
+	
+function checkInvalidKeyword(f)
+{
+	if (!f.mainKeyword.value) {
+		popLayerMsg("검색어를 입력하세요.");
+		return false;
+	}
+	return true;
+	//todo 19금, 경쟁사 상호명 등 검색 단어제외 체크 기능 추가..
+}
 	
 	
 	
@@ -374,19 +387,26 @@ function limitCharacters(textid, limit, spanid)
 	<div class="col-xs-5 padding-left-45" style="z-index: 30;">
 		<div class="row ">
 			<div class="col-xs-12 banner-text">
-				<div class="col-xs-12">모든 일에는 전문가가 필요합니다.<br/>
-				각 분야 전문가들의 실력을 빌려보세요.</div>
+				<div class="col-xs-12">
+					모든 일에는 전문가가 필요합니다.<br /> 각 분야 전문가들의 실력을 빌려보세요.
+				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<form method="GET" action="./board/search" accept-charset="UTF-8" id="searchKeyword" class="margin-bottom-0" data-name="메인 상단" data-type="기본">
+			<form method="GET" action="${pageContext.request.contextPath}/board/search" accept-charset="UTF-8" id="searchKeyword" class="margin-bottom-0" data-name="메인 상단" data-type="기본">
 				<div class="col-xs-12">
-					<div class="col-xs-6 search-group">
-						<span id="searchLimit"></span>
-						<input class="form-control input-sm" placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
+					<div class="col-xs-3">
+						<select class="form-control" id="board_type" name="board_type">
+							<option value="E">기술자</option>
+							<option value="C">요청자</option>
+						</select>
 					</div>
-					<button type="submit" class="btn btn-black btn-sm">검색</button>
+					<div class="col-xs-6 search-group">
+
+						<span id="searchLimit"></span> <input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
+					</div>
+					<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
 
 				</div>
 			</form>
@@ -397,10 +417,9 @@ function limitCharacters(textid, limit, spanid)
 
 	<div class="col-xs-7 padding-right-45">
 		<div id="tagsList">
-		
-			<span><a href="http://www.daum.net">다음</a></span>
-			 <span><a href="http://www.google.com">구글</a></span>
-			  
+
+			<span><a href="http://www.daum.net">다음</a></span> <span><a href="http://www.google.com">구글</a></span>
+
 		</div>
 
 	</div>
@@ -408,91 +427,91 @@ function limitCharacters(textid, limit, spanid)
 
 
 <div class="modal fade " id="service-search-modal" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
 
-							<div>
+				<div>
 
-								<h1>"${searchWord }"에 대한 검색 결과가 없습니다.</h1>
+					<h1>"${searchWord }"에 대한 검색 결과가 없습니다.</h1>
 
-								<h1>다음 서비스를 찾고 있나요?</h1>
+					<h1>다음 서비스를 찾고 있나요?</h1>
 
-							</div>
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-
-							<h4 class="modal-title" id="layer_msg_title">알림</h4>
-						</div>
-						<div class="modal-body" id="layer_msg_content">
-
-							<div>
-								<ul>
-									<li><a href="${pageContext.request.contextPath}/hire/영어"> 영어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/수학"> 수학 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/피아노키보드"> 피아노/키보드 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-영어"> 비즈니스 영어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/보컬"> 보컬 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/국어"> 국어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/과학"> 과학 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/시창청음화성학"> 시창청음/화성학 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/작곡-편곡"> 작곡/편곡 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/음악-편집-및-제작"> 음악 편집 및 제작 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/기타"> 기타 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/BGM-사운드-제작"> BGM/사운드 제작 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/toeic"> TOEIC/speaking/writing 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/중국어"> 중국어 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/일본어일어"> 일본어(일어) 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/퍼스널트레이닝"> 퍼스널트레이닝(PT) </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/미디컴퓨터작곡"> 미디/컴퓨터작곡 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-중국어"> 비즈니스 중국어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/소묘-드로잉"> 소묘/드로잉 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/사회"> 사회 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/미술-회화"> 미술 회화 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/연기"> 연기 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/일러스트-디자인"> 일러스트 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/영어-번역"> 영어 번역 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/축가"> 축가 요청 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/바이올린"> 바이올린 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/비즈니스-일본어"> 비즈니스 일본어 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/성악"> 성악 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/명함-디자인"> 명함 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/로고-디자인"> 로고 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/논술"> 논술 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/인쇄물-디자인"> 인쇄물 디자인 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/개인용-사진-촬영"> 개인용 사진 촬영 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/toefl"> TOEFL 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/기업-상업용-사진-촬영"> 기업/상업용 사진 촬영 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/방송댄스"> 방송댄스 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/검정고시"> 검정고시 과외 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/프로그래밍"> 프로그래밍/코딩 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/사진촬영"> 사진 촬영/편집 레슨 </a></li>
-									<li><a href="${pageContext.request.contextPath}/hire/스트릿-댄스"> 스트릿댄스 레슨 </a></li>
-								</ul>
-							</div>
-
-						</div>
-						<div class="modal-footer">
-
-							<div>
-								<div class="other-cat-desc">
-									<p>다른 이름으로 서비스가 존재할 수 있어요.</p>
-									<p>다음 카테고리에서 찾아보시는 건 어떠세요?</p>
-								</div>
-								<ul>
-									<li><a href="/레슨"> 레슨 </a></li>
-									<li><a href="/홈-리빙"> 홈/리빙 </a></li>
-									<li><a href="/이벤트"> 이벤트 </a></li>
-									<li><a href="/비즈니스"> 비즈니스 </a></li>
-									<li><a href="/디자인-개발"> 디자인/개발 </a></li>
-									<li><a href="/건강-미용"> 건강/미용 </a></li>
-									<li><a href="/기타"> 기타 </a></li>
-								</ul>
-							</div>
-
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						</div>
-					</div>
 				</div>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+				</button>
+
+				<h4 class="modal-title" id="layer_msg_title">알림</h4>
 			</div>
+			<div class="modal-body" id="layer_msg_content">
+
+				<div>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/hire/영어"> 영어 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/수학"> 수학 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/피아노키보드"> 피아노/키보드 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/비즈니스-영어"> 비즈니스 영어 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/보컬"> 보컬 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/국어"> 국어 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/과학"> 과학 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/시창청음화성학"> 시창청음/화성학 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/작곡-편곡"> 작곡/편곡 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/음악-편집-및-제작"> 음악 편집 및 제작 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/기타"> 기타 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/BGM-사운드-제작"> BGM/사운드 제작 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/toeic"> TOEIC/speaking/writing 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/중국어"> 중국어 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/일본어일어"> 일본어(일어) 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/퍼스널트레이닝"> 퍼스널트레이닝(PT) </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/미디컴퓨터작곡"> 미디/컴퓨터작곡 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/비즈니스-중국어"> 비즈니스 중국어 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/소묘-드로잉"> 소묘/드로잉 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/사회"> 사회 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/미술-회화"> 미술 회화 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/연기"> 연기 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/일러스트-디자인"> 일러스트 디자인 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/영어-번역"> 영어 번역 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/축가"> 축가 요청 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/바이올린"> 바이올린 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/비즈니스-일본어"> 비즈니스 일본어 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/성악"> 성악 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/명함-디자인"> 명함 디자인 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/로고-디자인"> 로고 디자인 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/논술"> 논술 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/인쇄물-디자인"> 인쇄물 디자인 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/개인용-사진-촬영"> 개인용 사진 촬영 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/toefl"> TOEFL 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/기업-상업용-사진-촬영"> 기업/상업용 사진 촬영 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/방송댄스"> 방송댄스 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/검정고시"> 검정고시 과외 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/프로그래밍"> 프로그래밍/코딩 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/사진촬영"> 사진 촬영/편집 레슨 </a></li>
+						<li><a href="${pageContext.request.contextPath}/hire/스트릿-댄스"> 스트릿댄스 레슨 </a></li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+
+				<div>
+					<div class="other-cat-desc">
+						<p>다른 이름으로 서비스가 존재할 수 있어요.</p>
+						<p>다음 카테고리에서 찾아보시는 건 어떠세요?</p>
+					</div>
+					<ul>
+						<li><a href="/레슨"> 레슨 </a></li>
+						<li><a href="/홈-리빙"> 홈/리빙 </a></li>
+						<li><a href="/이벤트"> 이벤트 </a></li>
+						<li><a href="/비즈니스"> 비즈니스 </a></li>
+						<li><a href="/디자인-개발"> 디자인/개발 </a></li>
+						<li><a href="/건강-미용"> 건강/미용 </a></li>
+						<li><a href="/기타"> 기타 </a></li>
+					</ul>
+				</div>
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>

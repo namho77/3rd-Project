@@ -100,12 +100,12 @@
 					</div>
 					<div class="pull-right">
 						<ul class="footer-menu">
-							<li><a href="./">기술자들 팀</a></li>
+							<li><a href="${pageContext.request.contextPath}/aboutus">기술자들 팀</a></li>
 							<li><a href="#">인재채용</a></li>
 							<li><a href="#">서비스소개</a></li>
-							<li><a href="#">이용약관</a></li>
-							<li><a href="#">개인정보 취급방식</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/provision">이용약관</a></li>
+							<li><a href="${pageContext.request.contextPath}/privacy">개인정보 취급방식</a></li>
+							<li><a href="${pageContext.request.contextPath}/faq/">FAQ</a></li>
 						</ul>
 					</div>
 				</div>
