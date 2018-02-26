@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>|OUR PLANNERS</title>
+<title>인재 채용|OUR PLANNERS</title>
 <jsp:useBean id="today" class="java.util.Date" scope="page" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
@@ -54,14 +54,14 @@
 
 		<!-- HEADER -->
 
-		<%@ include file="./common/top_main2.jsp"%>
+		<%@ include file="../common/top_main2.jsp"%>
 
 		<!-- HOME -->
 		<section id="main" class="section">
 
 			<!-- CONTAINER -->
-			<div class="container ">
-				
+			<div class="container">
+
 			</div>
 			<!-- //CONTAINER -->
 
@@ -70,12 +70,12 @@
 		<!-- //HOME -->
 
 		<!-- 모달창 -->
-		<%@ include file="./common/modal_msg.jsp"%>
+		<%@ include file="../common/modal_msg.jsp"%>
 		<!-- //모달창 끝 -->
 
 
 		<!-- Footer section(하단부분) -->
-		<%@ include file="./common/bottom.jsp"%>
+		<%@ include file="../common/bottom.jsp"%>
 		<!-- Footer section(하단부분) -->
 
 	</div>

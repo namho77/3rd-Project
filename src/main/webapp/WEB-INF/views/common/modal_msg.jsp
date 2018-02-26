@@ -18,6 +18,41 @@
 	</div>
 </div>
 
+<div class="modal fade" id="layer_faq_qna" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<span class="glyphicon glyphicon-envelope"></span> <strong class="text-danger"> 자주 묻는 질문 안내 </strong>
+
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					</div>
+					<div class="modal-body">
+
+						<ul class="list-group">
+							<li>1. 자주 묻는 질문 테스트</li>
+							
+						</ul>
+						<p>자주 묻는 질문</p>
+
+
+					</div>
+
+					<div class="modal-footer">
+						<p>원하는 결과를 찾지 못했나요?</p>
+						<button class="btn btn-default" onclick="$('#CustomerCenter').trigger('click');" type="button">플래너스 고객센터</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span>닫기
+						</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 <script>
 	//레이어 팝업창 (alert 왠만하면 쓰지말자.. 사용자가 짜증나니깐)
 	var modalVerticalCenterClass = ".modal";

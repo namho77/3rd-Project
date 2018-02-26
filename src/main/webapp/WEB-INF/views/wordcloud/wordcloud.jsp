@@ -383,47 +383,57 @@ function limitCharacters(textid, limit, spanid)
 
 </script>
 
-<div class="row">
-	<div class="col-xs-5 padding-left-45" style="z-index: 30;">
-		<div class="row ">
-			<div class="col-xs-12 banner-text">
-				<div class="col-xs-12">
-					모든 일에는 전문가가 필요합니다.<br /> 각 분야 전문가들의 실력을 빌려보세요.
-				</div>
-			</div>
-		</div>
 
+<section class="section-full-height large-padding custom-bg parallax" data-bg="${pageContext.request.contextPath}/resources/images/main/s-203.jpg">
+	<div class="bg-layer op6"></div>
+	<div class="container align-middle">
 		<div class="row">
-			<form method="GET" action="${pageContext.request.contextPath}/board/search" accept-charset="UTF-8" id="searchKeyword" class="margin-bottom-0" data-name="메인 상단" data-type="기본">
-				<div class="col-xs-12">
-					<div class="col-xs-3">
-						<select class="form-control" id="board_type" name="board_type">
-							<option value="E">기술자</option>
-							<option value="C">요청자</option>
-						</select>
+			<div class="col-xs-5 padding-left-45" style="z-index: 30;">
+				<div class="row ">
+					<div class="col-xs-12 banner-text">
+						<div class="col-xs-12">
+							모든 일에는 전문가가 필요합니다.<br /> 각 분야 전문가들의 실력을 빌려보세요.
+						</div>
 					</div>
-					<div class="col-xs-6 search-group">
+				</div>
 
-						<span id="searchLimit"></span> <input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
-					</div>
-					<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
+				<div class="row">
+					<form method="GET" action="${pageContext.request.contextPath}/board/search" accept-charset="UTF-8" id="searchKeyword" class="margin-bottom-0" data-name="메인 상단" data-type="기본">
+						<div class="col-xs-12">
+							<div class="col-xs-3">
+								<select class="form-control" id="board_type" name="board_type">
+									<option value="E">기술자</option>
+									<option value="C">요청자</option>
+								</select>
+							</div>
+							<div class="col-xs-6 search-group">
+
+								<span id="searchLimit"></span> <input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
+							</div>
+							<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
+
+						</div>
+					</form>
 
 				</div>
-			</form>
+
+			</div>
+
+			<div class="col-xs-7 padding-right-45">
+				<div id="tagsList">
+
+					<span><a href="http://www.daum.net">다음</a></span> <span><a href="http://www.google.com">구글</a></span>
+
+				</div>
+
+			</div>
 
 		</div>
-
 	</div>
+</section>
 
-	<div class="col-xs-7 padding-right-45">
-		<div id="tagsList">
 
-			<span><a href="http://www.daum.net">다음</a></span> <span><a href="http://www.google.com">구글</a></span>
 
-		</div>
-
-	</div>
-</div>
 
 
 <div class="modal fade " id="service-search-modal" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
