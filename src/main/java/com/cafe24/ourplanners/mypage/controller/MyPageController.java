@@ -31,17 +31,19 @@ public class MyPageController {
 		return "mypage/myplan";
 	}
 	
-	
-	@RequestMapping(value = "mypage/profile", method = RequestMethod.GET)
+	@RequestMapping(value = "mypage/myinfo", method = RequestMethod.GET)
 	public String veiwProfile(Model model, HttpServletRequest req,
 			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("마이 페이지 - 마이 프로필 보기(의뢰인시점/기술자시점)");
-		return "mypage/profile";
+		logger.info("마이 페이지 - 나의 정보 보기(의뢰인시점/기술자시점)");
+		return "mypage/myinfo";
 	}
 	
 	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)
 	public String veiwProfile(@PathVariable String user_id,Model model, HttpServletRequest req,
-			@RequestParam(required = false, defaultValue = "") String type) {
+			@RequestParam(required = false, defaultValue = "E") String type) {
+		/*
+		 * type => E:기술자시점 C:의뢰인시점
+		 */
 		logger.info("상대방 프로필 보기(문의하기 기능 message)");
 		return "mypage/profile";
 	}

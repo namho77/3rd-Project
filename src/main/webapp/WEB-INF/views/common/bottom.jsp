@@ -100,12 +100,13 @@
 					</div>
 					<div class="pull-right">
 						<ul class="footer-menu">
-							<li><a href="${pageContext.request.contextPath}/aboutus">기술자들 팀</a></li>
-							<li><a href="#">인재채용</a></li>
-							<li><a href="#">서비스소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/provision">이용약관</a></li>
-							<li><a href="${pageContext.request.contextPath}/privacy">개인정보 취급방식</a></li>
-							<li><a href="${pageContext.request.contextPath}/faq/">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/service">서비스소개</a></li>
+							<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>
+							<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>
+							<li><a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');">FAQ</a></li>
 						</ul>
 					</div>
 				</div>

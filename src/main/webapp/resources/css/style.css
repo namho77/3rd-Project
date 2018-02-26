@@ -1987,7 +1987,7 @@
 	최근 1주일 핫 검색어
 -------------------------------------------------------------------------------*/
 #wordcloud {
-	background: #24313d;
+	/* background: #24313d; */
 	padding: 0;
 }
 
@@ -1995,7 +1995,7 @@
 	position: relative;
 	width: 600px;
 	height: 400px;
-	background: #24313d;
+	/* background: #24313d; */
 }
 
 #tagsList a {

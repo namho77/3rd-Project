@@ -30,19 +30,46 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "privacy", method = RequestMethod.GET)
+	@RequestMapping(value = "policy/privacy", method = RequestMethod.GET)
 	public String privacy(Model model) {
 		logger.info("개인정보 취급방침 페이지");
 			
-		return "policy_privacy";
+		return "policy/policy_privacy";
 	}
 	
-	@RequestMapping(value = "provision", method = RequestMethod.GET)
+	@RequestMapping(value = "policy/provision", method = RequestMethod.GET)
 	public String provision(Model model) {
 		logger.info("사이트 이용약관 페이지");
 			
-		return "policy_provision";
+		return "policy/policy_provision";
 	}
 	
+	@RequestMapping(value = "about/ourplanners", method = RequestMethod.GET)
+	public String aboutOurPlanners(Model model) {
+		logger.info("Our Planners 팀 소개");
+			
+		return "about/about_ourplanners";
+	}
+	
+	@RequestMapping(value = "about/service", method = RequestMethod.GET)
+	public String aboutService(Model model) {
+		logger.info("서비스 소개 페이지");
+			
+		return "about/about_service";
+	}
+	
+	@RequestMapping(value = "about/recruit", method = RequestMethod.GET)
+	public String aboutRecruit(Model model) {
+		logger.info("인재채용 페이지");
+			
+		return "about/about_recruit";
+	}
+	
+	@RequestMapping(value = "about/sitemap", method = RequestMethod.GET)
+	public String aboutSitemap(Model model) {
+		logger.info("사이트맵 페이지");
+			
+		return "about/about_sitemap";
+	}	
 	
 }
