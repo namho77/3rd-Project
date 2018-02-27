@@ -19,9 +19,14 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  		
  	</insert>
  	
- 	
+ 	<!-- 회원가입 아이디 확인 -->
  	<select id="hasId" resultType="Integer">
  		select count(*) from op_member where user_id=#{0}
+ 	</select>
+ 	
+ 	<!-- 아이디 찾기시 (이름과 이메일로)-->
+ 	<select id="hasIdByNameAndEmail" resultType="Integer">
+ 	select count(*) from op_member where user_name=#{user_name} and email_address=#{email_address}
  	</select>
  	
  	<select id="login" resultType="com.cafe24.ourplanners.member.domain.MemberVO">
@@ -139,6 +144,10 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	update op_member set password = #{newPassword} , salt= #{salt} where user_id = #{user_id}
 	</update>
  	
+ 	<!-- 아이디 찾기 * 힌트 -->
+ 	<select id="getAsteriskIdByNameAndEmail" resultType="String">
+ 	select getAsteriskName(user_id) from op_member where user_name=#{user_name} and email_address=#{email_address}
+ 	</select>
  	
  	<!-- 회원탈퇴 -->
  	<delete id="deleteMember">

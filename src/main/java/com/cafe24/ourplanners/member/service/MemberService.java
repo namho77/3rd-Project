@@ -35,6 +35,8 @@ public interface MemberService {
 	public void findPassword(Model model, HttpServletRequest req, ModelAndView mv);
 
 	public int withdrawMember(Model model, HttpServletRequest req, HttpSession session);
+
+	public void findId(Model model, HttpServletRequest req, ModelAndView mv);
 	
 	
 }
