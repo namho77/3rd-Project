@@ -7,6 +7,7 @@ import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,15 +16,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
+import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.persistence.MemberDAO;
 import com.cafe24.ourplanners.util.General;
 
 @Service
-public class MailServiceImpl implements MailService{
+public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
+
 	@Inject
 	private MemberDAO dao;
 
@@ -31,39 +33,54 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public void sendAuthMail(HttpServletRequest req, Map<String, Object> map) {
 
+		HttpSession session = req.getSession();
+
 		String auth_key = General.getAuth_key();
-		
+
 		String user_id = req.getParameter("user_id");
 		String password = req.getParameter("password");
-		
+
 		String from = "ourplanners@ourplanners.com";
 		String name = "기획자들";
-		String to = req.getParameter("to"); // 받는 사람 이메일
-		
-		
-		String subject = "기획자들 회원가입 인증 메일 입니다.";
-		String content = "아래의 인증 토큰을 회원가입 창에서 입력하세요.\r\n인증 토큰 : ".concat(auth_key);
+		String to = null;
+		String subject = null;
+		String content = null;
+		if (user_id == null || password == null) {
+			to = (String) session.getAttribute("email");
+			//System.out.println("이메일 : "+to);
+			MemberVO memVO = dao.getUserInfoByEmail(to);
+			user_id = memVO.getUser_id();
+			password = memVO.getPassword();
+			subject = "코스모 커뮤니티 아이디/비밀번호 찾기 인증 메일 입니다.";
+			content = "아래의 인증 토큰을 아이디/비밀번호 찾기 페이지 인증번호란에 입력하세요.\r\n인증 토큰 : ".concat(auth_key);
+
+		} else {
+			// user_id != null && password!=null
+			to = req.getParameter("to"); // 받는 사람 이메일
+			subject = "기획자들 회원가입 인증 메일 입니다.";
+			content = "아래의 인증 토큰을 회원가입 창에서 입력하세요.\r\n인증 토큰 : ".concat(auth_key);
+
+		}
 
 		java.util.Date utilDate = new java.util.Date();
-		
+
 		java.sql.Date regdate = new java.sql.Date(utilDate.getTime());
-			
+
 		MemberAuthMailVO vo = new MemberAuthMailVO(auth_key, user_id, password, "N", regdate);
-			
-		//dao.insertAuthKey(dto);
+
+		// dao.insertAuthKey(dto);
 		dao.mergeAuthKey(vo);
 
-		
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();
-			
-			Address fromAddr = new InternetAddress(from,name);
+
+			Address fromAddr = new InternetAddress(from, name);
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-			//messageHelper.setFrom(from);
+			// messageHelper.setFrom(from);
 			messageHelper.setFrom((InternetAddress) fromAddr); // 보내는 사람 생략시 작동안됨
-			 
+
 			messageHelper.setTo(to); // 받는사람
 			messageHelper.setSubject(subject); // 제목은 생략 가능
 			messageHelper.setText(content); // 내용
@@ -76,7 +93,7 @@ public class MailServiceImpl implements MailService{
 			map.put("result", "fail");
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -85,7 +102,7 @@ public class MailServiceImpl implements MailService{
 		String to = req.getParameter("to"); // 받는 사람 이메일
 		String subject = req.getParameter("subject"); // 제목
 		String content = req.getParameter("content"); // 내용
-		
+
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();
@@ -104,8 +121,7 @@ public class MailServiceImpl implements MailService{
 			map.put("result", "fail");
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
 }

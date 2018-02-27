@@ -339,7 +339,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "find/id", method = RequestMethod.GET)
+	@RequestMapping(value = "find/id")
 	public ModelAndView findId(Model model,HttpServletRequest req) {
 		logger.info("아이디 찾기");
 		
@@ -351,7 +351,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "find/password", method = RequestMethod.GET)
+	@RequestMapping(value = "find/password")
 	public ModelAndView findPassword(Model model,HttpServletRequest req) {
 		logger.info("비밀번호 찾기");
 

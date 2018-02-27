@@ -57,10 +57,13 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  		select count(*) from op_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id}
  	</select>
  	
+ 	<update id="updateIsRegisterWithoutPassword">
+ 		update op_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id}
+ 	</update>
  	
  	<update id="updateIsRegister">
  	
- 	update member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
+ 	update op_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
  	
 	</update>
 	
@@ -147,6 +150,11 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	<!-- 아이디 찾기 * 힌트 -->
  	<select id="getAsteriskIdByNameAndEmail" resultType="String">
  	select getAsteriskName(user_id) from op_member where user_name=#{user_name} and email_address=#{email_address}
+ 	</select>
+ 	
+ 	<!-- 이메일로 회원정보 가져오기 -->
+ 	<select id="getUserInfoByEmail" resultType="MemberVO">
+ 	select * from op_member WHERE email_address=#{email_address}
  	</select>
  	
  	<!-- 회원탈퇴 -->

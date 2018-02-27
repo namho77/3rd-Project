@@ -132,7 +132,7 @@ body{
 									}
 						%>
 						<div class="panel-body">
-							<form class="form-signin" action="loginPost" method="post"
+							<form class="form-signin" action="${pageContext.request.contextPath}/member/loginPost" method="post"
 								name="loginFrm" onsubmit="return loginFrmCheck();">
 								<!-- <h2 class="form-signin-heading">로그인</h2> -->
 								<label>아이디</label>
@@ -154,10 +154,10 @@ body{
 								</div>
 								<div class="info_account">
 									<div class="sign_up_account ">
-										<a href="./join" id="signUp">회원가입</a><span class="txt_bar">|</span>
-										<span class="account_more"> <a href="../find/find_id"
+										<a href="${pageContext.request.contextPath}/member/join" id="signUp">회원가입</a><span class="txt_bar">|</span>
+										<span class="account_more"> <a href="${pageContext.request.contextPath}/find/id"
 											class="link_more">아이디 찾기</a> <span class="txt_bar">|</span>
-											<a href="../find/find_password" class="link_more">비밀번호
+											<a href="${pageContext.request.contextPath}/find/password" class="link_more">비밀번호
 												찾기</a>
 										</span> <span class="ico_login ico_top"></span>
 									</div>

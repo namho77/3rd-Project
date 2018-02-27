@@ -54,18 +54,24 @@
 	function checkForm(f) {
 
 		if (!f.searchName.value) {
-			popLayerMsg("이름 또는 별명을 입력하세요.");
+			popLayerMsg("이름을 입력하세요.");
 			f.searchName.focus();
 			return false;
 		}
+		
+		if (!f.searchEmail.value) {
+			popLayerMsg("이메일을 입력하세요.");
+			f.searchEmail.focus();
+			return false;
+		}
 
-		if (!checkId(f.searchName.value)) {
+		if (!hasIdByNameAndEmail(f.searchName.value)) {
 			return false;
 		}
 		return true;
 	}
 
-	function checkId(userId) {
+	function hasIdByNameAndEmail(userId) {
 
 		var url = "${pageContext.request.contextPath}/member/json/id_check.json";
 		var params = "name=" + $('#searchName').val() + "&email="
@@ -361,7 +367,7 @@
 
 														isMatched = true;
 													}
-													//중복된 경우
+													//불일치
 													else {
 														$("[data-dismiss=modal]").trigger({ type: "click" });
 														popModal("#layer_unmatched_authkey");
@@ -396,7 +402,7 @@
 
 									var auth_key = document
 											.getElementById("auth_key");
-									var url = "sendMailAuth.jsp";
+									var url = "${pageContext.request.contextPath}/mail/mail_authkey_send.json";
 									var params = "to=${sessionScope.email}";
 
 									//popLayerMsg(url+"?"+params);

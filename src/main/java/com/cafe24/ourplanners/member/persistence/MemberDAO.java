@@ -46,6 +46,6 @@ public interface MemberDAO {
 
 	public void updateIsRegisterWithoutPassword(String string, String auth_key, String user_id);
 
-	public MemberVO getUserInfoByEmail(String email);
+	public MemberVO getUserInfoByEmail(String email_address);
 	
 }

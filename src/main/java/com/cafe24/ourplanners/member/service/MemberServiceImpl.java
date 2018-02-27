@@ -201,12 +201,14 @@ public class MemberServiceImpl implements MemberService {
 			
 		}else {
 			//아이디 찾기시 인증키 확인
+			MemberVO vo = dao.getUserInfoByEmail(email);
+			user_id = vo.getUser_id();
 			
 			result = dao.isValidAuthKeyWithoutPassword(user_id,auth_key);
 			
-			MemberVO vo = dao.getUserInfoByEmail(email);
 			
-			user_id = vo.getUser_id();
+			
+			
 			
 			if (result == 1) {
 

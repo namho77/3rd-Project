@@ -166,10 +166,11 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	//아이디 찾기 이름,이메일로 아이디 검색후 asterisk로 힌트 주기
 	@Override
 	public String getAsteriskIdByNameAndEmail(String searchName, String searchEmail) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("user_id", searchName);
+		paramMap.put("user_name", searchName);
 		paramMap.put("email_address", searchEmail);
 		
 		return sqlSession.selectOne(namespace+".getAsteriskIdByNameAndEmail", paramMap);
@@ -178,8 +179,11 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public int isValidAuthKeyWithoutPassword(String user_id, String auth_key) {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", user_id);
+		paramMap.put("auth_key", auth_key);
+		
+		return sqlSession.selectOne(namespace+".isValidAuthKeyWithoutPassword", paramMap);
 	}
 
 
@@ -191,9 +195,9 @@ public class MemberDAOImpl implements MemberDAO{
 
 
 	@Override
-	public MemberVO getUserInfoByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO getUserInfoByEmail(String email_address) {
+		
+		return sqlSession.selectOne(namespace+".getUserInfoByEmail", email_address);
 	}
 
 
