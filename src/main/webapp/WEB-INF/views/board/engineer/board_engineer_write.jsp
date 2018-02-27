@@ -1,66 +1,160 @@
-<%@page import="com.cafe24.ourplanners.member.domain.MemberVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	//ajax json데이터 캐쉬 방지
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>|OUR PLANNERS</title>
-<jsp:useBean id="today" class="java.util.Date" scope="page" />
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery.fancybox.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/responsive.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-icon.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-<!-- JS FILES(자바스크립트 연결부분) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.flexslider-min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.fancybox.pack.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/retina.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/modernizr.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<script src="${pageContext.request.contextPath}/resources/js/main.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script type="text/javascript">
-	$(document).ready(function() {
-
+$(document).ready(function(){
+	
+	
+	$('#listGO').click(function(){
+		location.href = "./engineer";
 	});
-</script>
-</head>
-<body>
-
-	<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
-	<!-- //PRELOADER -->
-	<div class="preloader_hide">
-
-		<!-- HEADER -->
-			<header>
-				<section class="banner" role="banner">
-				<!-- header navigation(상단 메뉴 부분) -->
 			
-					<%@ include file="../../common/top_main.jsp"%>
-				<!--// header navigation(상단 메뉴 부분) -->
-				</section>
-			</header>
-			<!-- //HEADER -->
-		 
+	$('#writeActionBtn').click(function(){
+	//폼값 검증
+		if($("input[type='text'][name='title']").val()==""){
+			alert("제목을 입력해주세요");
+			$("input[type='text'][name='title']").focus();
+			return;
+		}
+		if($("textarea[name='contents']").val()==""){
+			alert("내용을 입력해주세요");
+			$("textarea[name='contents']").focus();
+			return;
+		}
+		if($("input[type='text'][name='service_time_start']").val()==""){
+			alert("서비스 시작 기간을 입력해주세요");
+			$("input[type='text'][name='service_time_start']").focus();
+			return;
+		}
+		if($("input[type='text'][name='service_time_end']").val()==""){
+			alert("서비스 종료 기간을 입력해주세요");
+			$("input[type='text'][name='service_time_end']").focus();
+			return;
+		}
+		if($("input[type='text'][name='service_cost']").val()==""){
+			alert("서비스 종료 기간을 입력해주세요");
+			$("input[type='text'][name='service_cost']").focus();
+			return;
+		}
+		if($("input[type='text'][name='contact_time']").val()==""){
+			alert("연락 가능 시간을 입력해주세요");
+			$("input[type='text'][name='contact_time']").focus();
+			return;
+		}
+		
+		//폼값전송
+		var params = $('#writeFrm').serialize();
+		$.ajax({
+			url : "./engineer/writeAction",
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset=utf-8",
+			data : params,
+			success : function(d){
+				if(d=="loginFail"){
+					alert("로그인후 작성해주세요")
+					location.href = "login.do";
+				}
+				else if(d=="writeSuccess"){
+					alert("글쓰기를 성공하였습니다.")
+					location.href = "board.do";	
+				}
+			},
+			error : function(e){
+				alert("요청실패:"+e.status+" "+e.statusText);
+			}
+		});
+	});
+});
+</script>
 
-	</div>
-</body>
-</html>
+<%-- <c:choose>
+	<c:when test="${empty sessionScope.loginUserInfo }">
+		<!-- 로그인 정보가 없다면 경고메시지를 띄우고 로그인 페이지로 이동한다. -->
+		<script>
+			alert("로그인 후 작성해주세요.");
+			location.href="../member/login";
+		</script>
+	</c:when>
+	<c:otherwise> --%>
+		<form id="writeFrm">
+			<div class="row" id="row-body-write">
+			
+				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+				<div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+					<div class="write-body">
+						<div class="title">
+							<p class="p-title">제목</p>
+							<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title"/>
+						</div>
+						<div class="contents">
+							<p class="p-title">서비스내용</p>
+							
+							
+							<textarea class="form-control" name="editor1" id="editor1" rows="10" cols="80">
+               
+            				</textarea>
+			            <script>
+			                // Replace the <textarea id="editor1"> with a CKEditor
+			                // instance, using default configuration.
+			                CKEDITOR.replace( 'editor1' );
+			            </script>
+							
+						</div>
+						<div class="need-contents">
+							<p class="p-title">필수사항</p>
+							<div class="form-inline">
+								<p>
+									서비스지역 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+									<input name="location"
+										class="form-control" id="input-area" type="text"
+										style="display: inline;" placeholder="지역을 입력하세요" />
+								</p>
+								<p>
+									서비스기간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+									<input name="service_time_start"
+										class="form-control" id="input-time-s" type="text"
+										placeholder="이때부터" />&nbsp; ~ &nbsp;
+									<input name="service_time_end"
+										class="form-control" id="input-time-e" type="text" placeholder="여기까지" />
+								</p>
+								<p>
+									서비스비용 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+									<input name="service_cost"
+										class="form-control" id="input-cost" type="text"
+										placeholder="비용을 입력하세요" />
+								</p>
+								<p>
+									연락가능시간 &nbsp;&nbsp;: &nbsp;&nbsp;
+									<input name="contact_time"
+										class="form-control" id="input-call" type="text" 
+										placeholder="연락가능시간을 입력하세요" />
+								</p>
+							</div>
+						</div>
+						<div class="images">
+							<p class="p-title">
+								<img src="" alt="메인 이미지" id="main_image"/>
+							</p>
+							
+							<p class="p-title">
+								<img src="" alt="컨텐츠 이미지" id="contents_image1"/>
+							</p>
+							
+							<p class="p-title">
+								<img src="" alt="컨텐츠 이미지" id="contents_image2"/>
+							</p>
+						</div>
+					</div>
+					<div class="write-btn">
+						<button type="button" class="btn btn-success" id="listGO">목록보기</button>
+						<button type="button" class="btn btn-success" id="writeActionBtn">글쓰기</button>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+			</div>
+		</form>
+<%-- 	</c:otherwise>
+</c:choose>	 --%>

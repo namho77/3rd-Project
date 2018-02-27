@@ -1,30 +1,45 @@
 package com.cafe24.ourplanners.board.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
-import com.cafe24.ourplanners.board.domain.WordCloudVO;
+import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
 
+
 public interface BoardDAO {
 
-	public void write(BoardVO vo) throws Exception;
+	//public List<BoardVO> list() throws Exception;
+	
+	public List<BoardVO> listPage(int start, int end) throws Exception;
+	
+	public int getTotalCount() throws Exception;
+	
+	public BoardDTO view (Integer boardSrl) throws Exception;
+	
+	public BoardVO read(Integer boardSrl) throws Exception;
 
-	public BoardVO view(Integer bno) throws Exception;
+	
+	
+	public int countPaging(Criteria cri) throws Exception;
+	
+	
+	
+	
+	public void write(BoardVO vo) throws Exception;
 
 	public void update(BoardVO vo) throws Exception;
 
 	public void delete(Integer bno) throws Exception;
 
-	public List<BoardVO> list() throws Exception;
+	
 
 	public List<BoardVO> listPage(int page) throws Exception;
 
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 
-	public int countPaging(Criteria cri) throws Exception;
+	
 
 	// use for dynamic sql
 
