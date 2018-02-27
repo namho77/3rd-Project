@@ -399,7 +399,6 @@ public class MemberServiceImpl implements MemberService {
 	public void findPassword(Model model, HttpServletRequest req, ModelAndView mv) {
 
 		String action = req.getParameter("action");
-
 		HttpSession session = req.getSession();
 
 		if (action == null || action.length() == 0 || action.equalsIgnoreCase("checking_id")) {
@@ -434,9 +433,9 @@ public class MemberServiceImpl implements MemberService {
 		} else if (action.equalsIgnoreCase("complete")) {
 
 			String user_id = (String) session.getAttribute("find_id");
-			String new_pw = req.getParameter("password");
+			String newPassword = req.getParameter("password");
 
-			int affected = dao.updatePasswordWithoutPrevPassword(user_id, new_pw);
+			int affected = dao.updatePasswordWithoutPrevPassword(user_id, newPassword);
 
 			session.removeAttribute("find_id");
 			session.removeAttribute("email");

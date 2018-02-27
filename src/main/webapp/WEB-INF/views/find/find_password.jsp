@@ -251,7 +251,7 @@
 
 											<div class="col-lg-offset-2 col-lg-6">
 												<div class="form-group">
-													<span class="hide" id="spanCheckName"></span> <input class="form-control" type="text" id="searchName" name="searchName" value="" placeholder="이름 또는 닉네임(별명)을 입력해 주세요.">
+													<span class="hide" id="spanCheckName"></span> <input class="form-control" type="text" id="searchName" name="searchName" value="" placeholder="이름을 입력해 주세요.">
 												</div>
 											</div>
 
@@ -291,7 +291,7 @@
 
 											<div class="col-lg-offset-2 col-lg-6">
 												<div class="form-group">
-													<input type="text" class="form-control " name="authkey" id="authkey" data-rule-required="true" placeholder="인증번호 입력(10분 동안 유효)" maxlength="8">
+													<input type="text" class="form-control " name="auth_key" id="auth_key" data-rule-required="true" placeholder="인증번호 입력(10분 동안 유효)" maxlength="8">
 												</div>
 											</div>
 											<div class="col-lg-2">
@@ -348,15 +348,15 @@
 
 								function checkAuthKey(f) {
 
-									if (!f.authkey.value) {
+									if (!f.auth_key.value) {
 										popLayerMsg("인증 번호를 입력하세요.");
 
-										f.authkey.focus();
+										f.auth_key.focus();
 										return false;
 									}
 
-									var url = "j_check_authkey.jsp";
-									var params = "authkey=" + f.authkey.value;
+									var url = "${pageContext.request.contextPath}/member/json/authkey_check.json";
+									var params = "auth_key=" + f.auth_key.value;
 									var isMatched = false;
 									// alert(url+"?"+params);
 									//popLayerMsg(url+"?"+params); 
@@ -412,9 +412,9 @@
 
 									//countdown( "countdown", 10, 0 );
 
-									var authkey = document
-											.getElementById("authkey");
-									var url = "sendMailAuth.jsp";
+									var auth_key = document
+											.getElementById("auth_key");
+									var url = "${pageContext.request.contextPath}/mail/mail_authkey_send.json";
 									var params = "to=${sessionScope.email}";
 
 									//popLayerMsg(url+"?"+params);
@@ -533,7 +533,7 @@
 											<div class="col-lg-2">
 
 												<p class="desc_add emph_notice" style="display: none;"></p>
-												<button type="button" class="btn btn-info" onclick="location.href='../';">커뮤니티 홈</button>
+												<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}';">메인 홈</button>
 											</div>
 										</div>
 
