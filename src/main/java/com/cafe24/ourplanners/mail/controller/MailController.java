@@ -30,8 +30,6 @@ public class MailController {
 
 		service.sendAuthMail(req,map);
 		
-
-
 		return map;
 	}
 	
