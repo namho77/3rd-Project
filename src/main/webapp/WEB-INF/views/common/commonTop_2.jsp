@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<nav class="navber navbar-inverse navbar-fixed-top"
+<nav class="navber navbar-fixed-top"
 	id="navbar-fixed-top2">
 	<div class="container-fluid">
 		<div class="row">
@@ -9,7 +9,7 @@
 				<ul class="nav navbar-nav navbar-left" id="navbar-nav2">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">건축디자인</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">철골</a></li>
 							<li><a href="#">목조</a></li>
 							<li><a href="#">단열</a></li>
@@ -24,7 +24,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">IT&프로그래밍</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">워드프레스</a></li>
 							<li><a href="#">웹사이트개발</a></li>
 							<li><a href="#">웹사이트유지보수</a></li>
@@ -39,7 +39,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">자동차</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">워드프레스</a></li>
 							<li><a href="#">웹사이트개발</a></li>
 							<li><a href="#">웹사이트유지보수</a></li>
@@ -54,7 +54,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">교육</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">국어</a></li>
 							<li><a href="#">영어</a></li>
 							<li><a href="#">수학</a></li>
@@ -69,7 +69,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">번역&통역</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">영어</a></li>
 							<li><a href="#">일본어</a></li>
 							<li><a href="#">중국어</a></li>
@@ -84,7 +84,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">컨텐츠제작</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">영상제작</a></li>
 							<li><a href="#">사진&영상촬영</a></li>
 							<li><a href="#">더빙&녹음</a></li>
@@ -96,7 +96,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">마케팅</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">SNS광고</a></li>
 							<li><a href="#">영상&PPL</a></li>
 							<li><a href="#">상위노출&검색작업</a></li>
@@ -111,7 +111,7 @@
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">핸드메이드</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">리빙&인테리어</a></li>
 							<li><a href="#">음식</a></li>
 							<li><a href="#">패션&뷰티</a></li>
