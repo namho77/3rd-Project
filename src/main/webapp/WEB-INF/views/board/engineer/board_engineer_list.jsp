@@ -1,346 +1,132 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	//ajax json데이터 캐쉬 방지
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="description" content="메인">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>board_engineer_list</title>
-<jsp:useBean id="today" class="java.util.Date" scope="page" />
-
-
-<%@ include file="../../common/scriptinclude.jsp"%>
-
-
-</head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/list2.css" />
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#datatables').DataTable({
-            "pagingType": "full_numbers",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            responsive: true,
-            language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records",
-            }
+$(document).ready(function(){
+	
+	
+	//글쓰기 폼이동
+	$('#write').click(function(){		
+		$.ajax({
+			url : "./engineer/write",
+			type : "get",
+			contentType : "text/html; charset:UTF-8",
+			success : function(d){
+				$('#boardHTML').html(d);
+			},
+			error : function(e){
+				alert("요청실패 : "+e.status+" : "+e.statusText);
+			}
+		});
+	});	
+});
+//상세보기 폼으로 이동하기
+function viewPage(board_srl){
+	
+	$.ajax({
+		url : "./engineer/view",
+		dataType : "html",
+		type : "get",
+		contentType : "text/html; charset:utf-8",
+		data : {board_srl : board_srl},
+		success : function(d){
+			
+			$('#boardHTML').html(d);
+			
+		},
+		error : function(e){
+			alert("요청실패:"+e.status+"  "+e.statusText);
+		}
+	});
+}
 
-        });
-
-
-        var table = $('#datatables').DataTable();
-
-        // Edit record
-        table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        });
-
-        // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
-        });
-
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
-
-        $('.card .material-datatables label').addClass('form-group');
-    });
+function paging(pNum){
+	$.ajax({
+		url : "./engineer/list",
+		dataType : "html",
+		type : "get",
+		contentType : "text/html; charset:UTF-8",
+		data : {nowPage:pNum},
+		success : function(d){
+			$('#boardHTML').html(d); 
+		},
+		error : function(d){
+			alert("실패 : "+d);
+		}
+	});
+}
 </script>
-<body>
-<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
-	<!-- //PRELOADER -->
-	<div class="preloader_hide">
-	<!-- header section -->
-		<!-- header navigation(탑1 부분) -->
-			<%@ include file="../../common/top1.jsp"%>
-		<!-- header navigation(탑1 부분) -->
-		
-		<!-- 네비게이션 탑2 부분 -->
-			<header id="header" class="fixed">
-				<div class="header-content clearfix">
-					<nav class="navigation" role="navigation">
-						<ul class="primary-nav">
-							<li><a href="#works" class="field">건축</a></li>
-							<li><a href="#teams" class="field">IT</a></li>
-							<li><a href="#testimonials" class="field">자동차</a></li>
-							<li><a href="#contact" class="field">교육</a></li>
-						</ul>
-					</nav>
-				</div>
-			</header>
-	
-	<!-- 내용 -->
-	
 
-	
-	<div class="container">
-    
-    <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-icon" data-background-color="purple">
-                                    <i class="material-icons">assignment</i>
-                                </div>
-                                <div class="card-content">
-                                    <h4 class="card-title">DataTables.net</h4>
-                                    <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                    </div>
-                                    <div class="material-datatables">
-                                        <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                        	<div class="row"><div class="col-sm-6"><div class="dataTables_length" id="datatables_length">
-                                        	<!-- <label class="form-group form-group-sm">Show <select name="datatables_length" aria-controls="datatables" class="form-control"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="-1">All</option></select> 
-                                        	entries<span class="material-input"></span>
-                                        	</label> -->
-                                        	</div></div><div class="col-sm-6"><div id="datatables_filter" class="dataTables_filter"><label class="form-group form-group-sm is-empty">
-                                        	<!-- <input type="search" class="form-control" placeholder="Search records" aria-controls="datatables"> -->
-                                        	<span class="material-input"></span></label></div></div></div><div class="row"><div class="col-sm-12"><table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
-                                            <thead>
-                                                <tr role="row">
-                                                	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 185px;" aria-label="Name: activate to sort column ascending">
-                                                		기업/개인명
-                                                	</th>
-                                                	<th class="sorting_desc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 271px;" aria-label="Position: activate to sort column ascending" aria-sort="descending">
-                                                		제목(댓글수)
-                                                	</th>
-                                                	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 139px;" aria-label="Office: activate to sort column ascending">
-                                                		예상비용
-                                                	</th>
-                                                	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 119px;" aria-label="Age: activate to sort column ascending">
-                                                		서비스 지역
-                                                	</th>
-                                                	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 119px;" aria-label="Date: activate to sort column ascending">
-                                                		서비스 기간
-                                                	</th>
-                                                	<th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 76px;" aria-label="Actions: activate to sort column ascending">
-                                                		조회수
-                                                	</th>
-                                               	</tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th class="text-right" rowspan="1" colspan="1">Actions</th></tr>
-                                            </tfoot>
-                                            <tbody>
-                                            	<c:forEach var="lists" items="${lists }">
-                                            		<tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">${lists.user_id }</td>
-	                                                    <td class="sorting_1">${lists.title }</td>
-	                                                    <td>${lists.service_cost }</td>
-	                                                    <td>${lists.location }</td>
-	                                                    <td>${lists.service_time_start } ~ ${lists.service_time_end } </td>
-	                                                    <td>${lists.visitcount }</td>
-	                                                </tr>
-                                            	</c:forEach>
-	                                            <!-- <tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">adsfa</td>
-	                                                    <td class="sorting_1">Technical Author</td>
-	                                                    <td>London</td>
-	                                                    <td>27</td>
-	                                                    <td>2011/05/07</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td class="" tabindex="0">rqrdsafg</td>
-	                                                    <td class="sorting_1">Team Leader</td>
-	                                                    <td>San Francisco</td>
-	                                                    <td>22</td>
-	                                                    <td>2008/10/26</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr>
-	                                                
-	                                                <tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">erwtwrtt</td>
-	                                                    <td class="sorting_1">Technical Author</td>
-	                                                    <td>London</td>
-	                                                    <td>27</td>
-	                                                    <td>2011/05/07</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td class="" tabindex="0">vbnfgd</td>
-	                                                    <td class="sorting_1">Team Leader</td>
-	                                                    <td>San Francisco</td>
-	                                                    <td>22</td>
-	                                                    <td>2008/10/26</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr>
-	                    	
-	                                            <tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">Prescott Bartlett</td>
-	                                                    <td class="sorting_1">Technical Author</td>
-	                                                    <td>London</td>
-	                                                    <td>27</td>
-	                                                    <td>2011/05/07</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td class="" tabindex="0">Gavin Cortez</td>
-	                                                    <td class="sorting_1">Team Leader</td>
-	                                                    <td>San Francisco</td>
-	                                                    <td>22</td>
-	                                                    <td>2008/10/26</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">Gloria Little</td>
-	                                                    <td class="sorting_1">Systems Administrator</td>
-	                                                    <td>New York</td>
-	                                                    <td>59</td>
-	                                                    <td>2009/04/10</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td tabindex="0" class="">Tiger Nixon</td>
-	                                                    <td class="sorting_1">System Architect</td>
-	                                                    <td>Edinburgh</td>
-	                                                    <td>61</td>
-	                                                    <td>2011/04/25</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">Quinn Flynn</td>
-	                                                    <td class="sorting_1">Support Lead</td>
-	                                                    <td>Edinburgh</td>
-	                                                    <td>22</td>
-	                                                    <td>2013/03/03</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td class="" tabindex="0">Bradley Greer</td>
-	                                                    <td class="sorting_1">Software Engineer</td>
-	                                                    <td>20,000</td>
-	                                                    <td>여긴어디지</td>
-	                                                    <td>2012/10/13</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">Brenden Wagner</td>
-	                                                    <td class="sorting_1">Software Engineer</td>
-	                                                    <td>30,000</td>
-	                                                    <td>28</td>
-	                                                    <td>2011/06/07</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td tabindex="0" class="">Sonya Frost</td>
-	                                                    <td class="sorting_1">Software Engineer</td>
-	                                                    <td>Edinburgh</td>
-	                                                    <td>23</td>
-	                                                    <td>2008/12/13</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="odd">
-	                                                    <td class="" tabindex="0">Haley Kennedy</td>
-	                                                    <td class="sorting_1">Senior Marketing Designer</td>
-	                                                    <td>London</td>
-	                                                    <td>43</td>
-	                                                    <td>2012/12/18</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr><tr role="row" class="even">
-	                                                    <td tabindex="0" class="">Cedric Kelly</td>
-	                                                    <td class="sorting_1">Senior Javascript Developer</td>
-	                                                    <td>Edinburgh</td>
-	                                                    <td>22</td>
-	                                                    <td>2012/03/29</td>
-	                                                    <td class="text-right">
-	                                                        <a href="#" class="btn btn-simple btn-info btn-icon like"><i class="material-icons">favorite</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
-	                                                        <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
-	                                                    </td>
-	                                                </tr> -->
-                                             	</tbody>
-                                        </table></div></div><div class="row"><div class="col-sm-5">
-                                        <!-- <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">
-                                        Showing 1 to 10 of 40 entries</div> -->
-                                        </div><div class="col-sm-7"><div class="dataTables_paginate paging_full_numbers" id="datatables_paginate">
-                                        <!-- <ul class="pagination"><li class="paginate_button first disabled" id="datatables_first">
-                                        <a href="#" aria-controls="datatables" data-dt-idx="0" tabindex="0">First</a></li><li class="paginate_button previous disabled" id="datatables_previous"><a href="#" aria-controls="datatables" data-dt-idx="1" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="datatables" data-dt-idx="2" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="datatables" data-dt-idx="3" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="datatables" data-dt-idx="4" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="datatables" data-dt-idx="5" tabindex="0">4</a></li><li class="paginate_button next" id="datatables_next"><a href="#" aria-controls="datatables" data-dt-idx="6" tabindex="0">Next</a></li><li class="paginate_button last" id="datatables_last"><a href="#" aria-controls="datatables" data-dt-idx="7" tabindex="0">Last</a></li>
-                                        </ul> -->
-                                        </div></div></div></div>
-                                    </div>
-                                </div>
-                                <!-- end content-->
-                            </div>
-                            <!--  end card  -->
-                        </div>
-                        <!-- end col-md-12 -->
-                    </div>
-                    <!-- end row -->
-                </div>
-            </div>
-            
-                </div>
-	
-	<!-- Footer section(하단부분) -->
-	<footer class="footer">
-		<%@ include file="../../common/bottom.jsp"%>
-	</footer>
-	<!-- Footer section(하단부분) -->
+
+<div class="row" id="row-body">
+	<div class="col-lg-3 col-sm-2 col-xs-1"></div>
+	<div class="col-lg-6 col-sm-8 col-xs-10">
+		<!-- 상단 버튼부분 -->
+		<div class="row" id="table-btn">
+			<div class="col-xs-5">
+				<button type="button" class="btn btn-default" id="engineer-btn">기술자
+					게시판</button>
+				<button type="button" class="btn btn-default" id="customer-btn">의뢰인
+					게시판</button>
+			</div>
+			<form class="form-inline" action="#">
+				<div class="from-group col-xs-3" id="from-group">
+					<select class="form-control" id="select-form-control">
+						<option value="title">제목</option>
+						<option value="mbid">작성자</option>
+						<option value="content">내용</option>
+					</select>
+				</div>
+				<div class="input-group col-xs-4">
+					<input type="text" class="form-control" placeholder="검색어"
+						name="search" id="form-control" />
+					<div class="input-group-btn">
+						<button class="btn btn-default" id="btn-default" type="submit">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
+						<button type="button" class="btn btn-success" id="write">글쓰기</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<!-- 리스트부분 반복 -->
+		<div class="table-responsive">
+			<table class="table table-hover" id="table-hover">
+				<thead>
+					<tr class="success">
+						<th>아이디</th>
+						<th>제목</th>
+						<th>예상비용</th>
+						<th>서비스기간</th>
+						<th>지역</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="lists" items="${lists }">
+						<tr>
+							<td>${lists.user_id }</td>
+							<td><a href="javascript:viewPage(${lists.board_srl })">${lists.title }</a></td>
+							<td>${lists.service_cost }</td>
+							<td>${lists.service_time_start } <br /> ~ ${lists.service_time_end }</td>
+							<td>${lists.location }</td>
+							<td>${lists.visitcount }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+	</div>
+	<div class="col-lg-3 col-sm-2 col-xs-1"></div>
 </div>
-</body>
-</html>
+
+<!-- 페이징부분 -->
+<div class="row text-center">
+	<ul class="pagination" >
+		${pagingDiv }
+	</ul>
+</div>

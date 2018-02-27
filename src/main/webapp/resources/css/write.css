@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* 리스트 부분 */
+
+#row-body-write {
+	margin-top: 100px;
+	background-color: #FAFAFA;
+	padding-top: 90px;
+	padding-bottom: 90px;
+}
+
+.write-body {
+	border: 1px solid #E1E1E1;
+	background-color: white;
+	padding: 15px;
+}
+
+.title {
+	margin-bottom: 25px;
+	border-bottom: 1px solid #E1E1E1;
+	padding-bottom: 25px;
+}
+
+.title>.form-control {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+.contents {
+	margin-bottom: 25px;
+	border-bottom: 1px solid #E1E1E1;
+	padding-bottom: 25px;
+}
+
+.contents>.form-control {
+	height: 500px;
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+.need-contents {
+	margin-bottom: 25px;
+	border-bottom: 1px solid #E1E1E1;
+	padding-bottom: 25px;
+}
+
+.p-title {
+	color: #636363;
+	font-weight: bold;
+}
+
+#input-area {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+#input-time-s, #input-time-e {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+#input-cost {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+#input-call {
+	border-radius: 0px;
+	border: 1px solid #CFCFCF;
+}
+
+.write-btn {
+	margin-top: 25px;
+	text-align: right;
+}
+
+#btn-list, #btn-write {
+	margin-left: 10px;
+	border-radius: 0px;
+	height: 35px;
+	width: 100px;
+}
