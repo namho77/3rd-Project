@@ -22,6 +22,12 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
+
 
 <link rel="shortcut icon" href="http://abusinesstheme.com/demo/voyo/assets/images/favicon.ico">
 <link rel="apple-touch-icon" href="http://abusinesstheme.com/demo/voyo/assets/images/apple-touch-icon.png">
@@ -501,61 +507,187 @@
 	 
 	 }
 </script>
-	
-</head>
 
+<!-- 회원가입부분 CSS -->
+<style type="text/css">
+
+body{
+	background-color: #FAFAFA;
+}
+
+.padbot0{
+	margin-top: 60px;
+	margin-bottom: 100px;
+}
+.title-image{
+	padding-right: 30px;
+}
+.join-one-btn{
+	background-color: #27CEA7;
+	border: 0px solid;
+	height: 50px;
+	width: 150px;
+	font-size: 1.1em;
+	font-weight:bold;
+	margin-top: 30px;
+}
+
+.member_choose{
+	border: 1px solid #CFCFCF;
+	border-radius: 5px;
+	
+}
+
+.form-up{
+	height: 40px;
+	border: 1px solid #CFCFCF;
+	background-color: white;
+	margin-top: 2px;
+}
+
+.man-woman{
+	height: 40px;
+	border: 1px solid #CFCFCF;
+	padding: 5px;
+	width: 100%;
+	margin-left: 0px;
+	text-align: center;
+	background-color: white;
+}
+
+#woman{
+	margin-left: 130px;
+}
+
+#address-btn{
+	margin-right: 13px;
+	height: 40px;
+	border: 0px solid;
+	margin-top: 2px;
+	padding-top: 0px;
+	font-weight: bold;
+	width: 100%;
+	
+}
+
+#address-left{
+	display: inline;
+	float: left;
+	width: 470px;
+}
+
+#address-right{
+	display: inline;
+	float: right;
+}
+
+#address-left>.form-up{
+	width: 100%;
+}
+
+#email_id{
+	display: inline-block;
+	float: left;
+}
+
+#email_host{
+	display: inline-block;
+	
+}
+
+#email_type{
+	display: inline;
+	float: right;
+}
+
+#email-select{
+	height: 40px;
+	border: 1px solid #CFCFCF;
+	background-color: white;
+	width: 30%;
+	float: right;
+}
+
+.joinhelp{
+	float:right;
+	font-size: 0.9em;
+}
+
+#joinhelp{
+	margin-top: 20px;
+}
+
+#joinhelp2{
+	margin-top: 20px;
+}
+
+#call_one{
+	display: inline-block;
+	float: left;
+}
+
+#call_two{
+	display: inline-block;
+}
+
+
+
+</style>
+</head>
 <body>
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	<div class="preloader_hide">
-<div id="page" class="single_page">
 
-
-
-			
-			<!-- header navigation(탑1 부분) -->
-			<%@ include file="../common/top_main2.jsp"%>
-			<!-- header navigation(탑1 부분) -->
+			<!-- 탑부분(기본적인 틀) -->
+			<nav class="navber navbar-fixed-top" id="navbar-fixed-top">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+						<div class="col-lg-8 col-sm-10 col-xs-12">
+							<div class="navbar-header">
+								<a class="navbar-brand" id="navbar-brand"
+									href="${pageContext.request.contextPath}"><b>♣</b>
+									OurPlanners</a>
+							</div>
+						</div>
+						<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+					</div>
+				</div>
+			</nav>
 			
 			<!-- 모달창 메시지 -->
 			<%@ include file="../common/modal_msg.jsp"%>
 			<!--// 모달창 메시지 -->
 			
-
-
 			<!-- HOME -->
 			<section id="home" class="padbot0">
-
 				<!-- CONTAINER -->
 				<div class="container">
 					<br /> <br />
-					<!-- 좌우측의 공간 확보 -->
+					<!-- 첫번째페이지(좌우측의 공간 확보) -->
 					<%
 						String action = ((String) request.getAttribute("action"));
 						System.out.println("현재 join.jsp로 들어온 액션 : " + action);
 						if ((action == null) || (action.equalsIgnoreCase("term"))) {
 					%>
 
-					<div class="container text-center">
+					<div class="container text-center title-image">
 						<span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>
 					</div>
-
-					<br /> <br />
+					<br/><br/>
 
 					<div class="text-center">
 						<h3>회원가입 약관 동의</h3>
-						<div class="txt_desc">
-							사이트 이용 약관 및 개인정보 수집, 이용에 <strong>동의</strong>해 주세요.
-						</div>
 					</div>
 
 					<form class="form-horizontal" name="step1Frm" method="post" action="join" onsubmit="return agreeCheck(this);">
 						<input type="hidden" id="action" name="action" value="signup">
 						<div class="form-group">
-							<label for="provision" class="col-lg-2 control-label">회원가입약관</label>
-							<div class="col-lg-10" id="provision">
-								<textarea class="form-control" rows="8" style="resize: none; width: 100%; height: 100%; overflow: auto; scrollbar-face-color: #ffffff; scrollbar-shadow-color: #cccccc; scrollbar-highlight-color: #cccccc; scrollbar-3dlight-color: #ffffff; scrollbar-darkshadow-color: #ffffff; scrollbar-track-color: #ffffff; scrollbar-arrow-color: #ffffff; border: 0; background-color: clear; filter: chroma(color = ffffff);">
+							<div class="col-lg-12" id="provision">
+							<label for="provision" class="control-label">회원가입약관</label>
+							<textarea class="form-control" rows="8" style="resize: none;">
+								
 [코스모31기 사이트 이용 약관]
 [제 1장 총칙]
 제 1조 목적
@@ -674,20 +806,15 @@
 제 18조 관할법원
 서비스 이용에 관하여 발생한 분쟁에 대해 소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 관할법원으로 합니다.
                     </textarea>
-
-								<label> <input type="checkbox" name="provisionYn" value="Y" autofocus="autofocus"> 동의합니다.
-								</label>
-
-
-
-							</div>
-						</div>
+                    <label> <input type="checkbox" name="provisionYn" value="Y" autofocus="autofocus"> 동의합니다.</label>
+					</div>
+					</div>
 
 
-						<div class="form-group">
-							<label for="memberInfo" class="col-lg-2 control-label">개인정보취급방침</label>
-							<div class="col-lg-10" id="memberInfo">
-								<textarea class="form-control" rows="8" style="resize: none">
+					<div class="form-group">
+					<div class="col-lg-12" id="memberInfo">
+					<label for="memberInfo" class="control-label">개인정보취급방침</label>
+					<textarea class="form-control" rows="8" style="resize: none">
 [개인정보수집 및 이용 약관]
 
 [수집하는 개인정보의 항목]
@@ -734,108 +861,90 @@
 1. 본 약관은 2018년 1월 1일부터 시행됩니다. 2. 2017년 12월 01일부터 시행되었던 종전의 약관은 본 약관으로 대체합니다.
 ----------------------------------------------------------------------------------------------------------------------------------------------------
                     </textarea>
-								<label> <input type="checkbox" name="memberInfoYn" value="Y"> 동의합니다.
-								</label>
-
-							</div>
+					<label><input type="checkbox" name="memberInfoYn" value="Y"> 동의합니다.</label>
 						</div>
-
-
+						</div>
 						<div class="form-group">
 							<div class="text-center">
-								<button type="submit" class="btn btn-success">다음</button>
+								<button type="submit" class="btn btn-success join-one-btn">다음</button>
 							</div>
 						</div>
-
-
 					</form>
+
 
 					<%
 						} else if (action != null && action.equalsIgnoreCase("signup")) {
 					%>
-
-					<div class="container text-center">
+					
+					
+					<!-- 두번째 페이지 -->
+					<div class="container text-center title-image">
 						<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>
 					</div>
-
-					<br /> <br />
-
+					<br/><br/>
 					<div class="text-center">
 						<h3>
-							<b>계정 정보 입력</b>
+							계정 정보 입력
 						</h3>
-
 					</div>
-
 					<form class="form-horizontal" name="registFrm" method="post" action="join" onsubmit="return registFrmCheck();">
 						<input type="hidden" id="action" name="action" value="authmail">
-
+						<!-- <div class="row">
+							<p><label class="control-label"><em style="color: red;">*</em> 회원구분</label></p>
+						</div>
+						<div class="row">
+							<div class="form-group" >
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6 member_choose">
+									
+									<input type="radio" name="member_type" id="personal" value="P" checked="checked" /> <label for="personal">개인</label>
+									<input type="radio" name="member_type" id="company" value="C" /> <label for="company">회사</label>
+								</div>
+								<div class="col-lg-3"></div>
+							</div>
+						</div> -->
 						
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 회원구분</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input type="radio" name="member_type" id="personal" value="P" checked="checked" /> <label for="personal">개인</label> <input type="radio" name="member_type" id="company" value="C" /> <label for="company">회사</label>
-
+									<label class="control-label"><em style="color: red;">*</em> 아이디</label>
+									<input class="form-control form-up" id="user_id" name="user_id" type="text" placeholder="5~20자의 영문소문자,숫자,특수기호(_),(-)을 사용해주세요" onkeydown="resetDuplicationCheckId()" /> <span id="idCheckSpan" class="joinhelpred"></span> <input type="hidden" name="DuplicationCheckId" value="N">
 								</div>
+								<div class="col-lg-3"></div>
+							</div>
+						</div>
 
+						<div class="row">
+							<div class="form-group">
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6">
+									<label class="control-label"><em style="color: red;">*</em> 비밀번호</label>
+									<input class="form-control form-up" name="password" type="password" placeholder="8~20자리의 영문,숫자 조합권장합니다 (영문,숫자,특수기호 조합)" /> <span class="joinhelp"></span>
+								</div>
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 아이디</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input id="user_id" name="user_id" type="text" placeholder="5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능" onkeydown="resetDuplicationCheckId()" /> <span id="idCheckSpan" class="joinhelpred"></span> <input type="hidden" name="DuplicationCheckId" value="N">
-
+									<label class="control-label"><em style="color: red;">*</em> 비밀번호 확인</label>
+									<input class="form-control form-up" name="user_pw2" type="password" placeholder="비밀번호를 한번 더 작성해주세요"/>
 								</div>
-
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 비밀번호</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input name="password" type="text" /> <span class="joinhelp">8~20자리의 영문,숫자 조합(영문,숫자,특수 기호 조합을 권장합니다.)</span>
-
-								</div>
-
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 비밀번호 확인</label>
-
-								<div class="col-lg-6">
-
-									<input name="user_pw2" type="text" />
-
-								</div>
-
-							</div>
-
-						</div>
-
-						<div class="row">
-							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label" for="find_account_question"><em style="color: red;">*</em> 비밀번호 찾기 질문/답변</label>
-
-								<div class="col-lg-6">
-									<select name="find_account_question" id="find_account_question" style="margin: 0px 0px 8px; display: block;">
-										<option value="1">다른 이메일 주소는?</option>
-										<option value="2">나의 보물 1호는?</option>
+									<label class="control-label" for="find_account_question"><em style="color: red;">*</em> 비밀번호 찾기 질문/답변</label>
+									<select class="form-control form-up" name="find_account_question" id="find_account_question" style="margin: 0px 0px 8px; display: block;">
+										<option value="1">나의 보물 1호는?</option>
+										<option value="2">다른 이메일 주소는?</option>
 										<option value="3">나의 출신 초등학교는?</option>
 										<option value="4">나의 출신 고향은?</option>
 										<option value="5">나의 이상형은?</option>
@@ -844,144 +953,140 @@
 										<option value="8">가장 좋아하는 색깔은?</option>
 										<option value="9">가장 좋아하는 음식은?</option>
 									</select>
-									<input name="find_account_answer" title="비밀번호 찾기 답변" id="find_account_answer" type="text" value="">
+									<input class="form-control form-up" name="find_account_answer" title="비밀번호 찾기 답변" 
+									id="find_account_answer" type="text" value="" placeholder="비밀번호찾기 질문의 답변을 작성해주세요">
 								</div>
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 이름</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input name="user_name" type="text" />
-
+									<label class="control-label"><em style="color: red;">*</em> 이름</label>
+									<input class="form-control form-up" name="user_name" type="text" placeholder="이름을 작성해주세요"/>
 								</div>
-
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 성별</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input type="radio" name="gender" id="man" value="M" checked="checked" /> <label for="man">남성</label> <input type="radio" name="gender" id="woman" value="W" /> <label for="woman">여성</label>
-
+									<label class="control-label"><em style="color: red;">*</em> 성별</label>
+									<div class="row man-woman">
+										<label for="man">
+										<input type="radio" name="gender" id="man" value="M" checked="checked"/>남성</label>
+										<label for="woman">
+										<input type="radio" name="gender" id="woman" value="W"/>여성</label>
+									</div>
 								</div>
-
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 생년월일</label>
-
+								<div class="col-lg-3"></div>
 								<div class="col-lg-6">
-
-									<input name="birthday" type="date" step="1" /> 
-
+									<label class="control-label"><em style="color: red;">*</em> 생년월일</label>
+									<input class="form-control form-up" name="birthday" type="date" step="1" /> 
 								</div>
-
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 주소</label>
-
-								<div class="row">
-
-									<div class="col-lg-2 ">
-									<input type="text" name="address" size="20" />
-									</div>
-									<div class="col-lg-2 ">
-										<input class="btnType1" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />
-									</div>
-
-
-
-								</div>
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 이메일</label>
-
-								<div class="row">
-									<div class="col-lg-2 ">
-										<input name="email_id" type="text" /> @
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6">
+									<input name="email_address" type="hidden" />
+									<label class="control-label"><em style="color: red;">* </em>이메일</label>
+									<div class="form-inline">
+										<div id="email_id">
+											<input class="form-control form-up" name="email_id" type="text" /> @ 
+										</div>
+										<div class="form-inline" id="email_host ">
+											&nbsp;<input class="form-control form-up" name="email_host" type="text" />
+											<select name="email_type" size="1" id="email-select"
+												class="form-control form-up" onchange="selectEmail(this);">
+												<option value="" selected="selected">직접입력</option>
+												<option value="naver.com">naver.com</option>
+												<option value="hanmail.net">hanmail.net</option>
+												<option value="nate.com">nate.com</option>
+												<option value="yahoo.com">yahoo.com</option>
+											</select>
+										</div>
+									</div>	
+									<div class="joinhelp" id="joinhelp">이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실
+										수 있습니다
 									</div>
-									<div class="col-lg-2 ">
-
-										<input name="email_host" type="text" />
-									</div>
-									<div class="col-lg-2 ">
-										<input name="email_address" type="hidden" />
-									</div>
-									<div class="col-lg-2 ">
-										<select name="email_type" size="1" onchange="selectEmail(this);">
-											<option value="" selected="selected">직접입력</option>
-											<option value="naver.com">naver.com</option>
-											<option value="hanmail.net">hanmail.net</option>
-											<option value="nate.com">nate.com</option>
-											<option value="yahoo.com">yahoo.com</option>
-										</select>
-									</div>
-									<br />
-
-
-								</div>
-								<div class="col-lg-offset-4  col-lg-6">
-									<div class="joinhelp">이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실 수 있습니다</div>
 									<div class="joinhelp">
-										수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다. <label><input type="radio" name="allow_mailing" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="allow_mailing" value="N" /> 아니오</label>
+										수신동의 거부 시에도 기본서비스는 발송됩니다. &nbsp;&nbsp;&nbsp;<label><input
+											type="radio" name="allow_mailing" value="Y" checked="checked" />
+											예</label> <label><input type="radio" name="allow_mailing"
+											value="N" /> 아니오</label>
 									</div>
 								</div>
-
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
+
+
 						<div class="row">
 							<div class="form-group">
-
-								<label class="col-lg-offset-2 col-lg-2 control-label"><em style="color: red;">*</em> 휴대전화</label>
-
-								<div class="row">
-									<div class="col-lg-2 ">
-										<input name="mno1" type="text" size="3" maxlength="3" />
-									</div>
-									<div class="col-lg-2">
-										<input name="mno2" type="text" size="4" maxlength="4" />
-									</div>
-									<div class="col-lg-2">
-										<input name="mno3" type="text" size="4" maxlength="4" /> <br />
-									</div>
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6">
 									<input name="mobile" type="hidden" />
-								</div>
-
-								<div class="col-lg-offset-4  col-lg-6">
-									<div class="joinhelp">할인혜택과 이벤트 등의 소식 안내를 SMS로 받으실 수 있습니다.</div>
+									<label class="control-label"><em style="color: red;">* </em>휴대전화</label>
+									<div class="form-inline">
+										<div id="call_one">
+											<input class="form-control form-up" name="mno1" type="text" size="3" maxlength="3" style="width: 120px"/> -&nbsp;
+										</div>
+										<div class="form-inline" id="call_two ">
+											<input class="form-control form-up" name="mno2" type="text" size="4" maxlength="4" style="width: 140px;"/> - 
+											<input class="form-control form-up" name="mno3" type="text" size="4" maxlength="4" style="width: 140px;"/>
+										</div>
+									</div>
+									<div class="joinhelp" id="joinhelp2">할인혜택과 이벤트 등의 소식 안내를 SMS로 받으실 수 있습니다.</div>
 									<div class="joinhelp">
-										수신동의 거부 시에도 기본서비스는 발송됩니다. <label><input type="radio" name="allow_message" value="Y" checked="checked" /> 예</label> <label><input type="radio" name="allow_message" value="N" /> 아니오</label>
+										수신동의 거부 시에도 기본서비스는 발송됩니다. &nbsp;&nbsp;&nbsp;<label><input type="radio"
+											name="allow_message" value="Y" checked="checked" /> 예</label> <label><input
+											type="radio" name="allow_message" value="N" /> 아니오</label>
 									</div>
 								</div>
-
+								<div class="col-lg-3"></div>
 							</div>
 						</div>
-
+						
+						<div class="row">
+							<div class="form-group">
+								<div class="col-lg-3"></div>
+								<div class="col-lg-6">
+									<label class="control-label"><em style="color: red;">*</em> 주소</label>
+									<div class="form-inline">
+										<div id="address-left">
+											<input class="form-control form-up" type="text" name="address" size="20"/>
+										</div>
+										<div id="address-right">
+											<button type="button" class="btn" id="address-btn" onclick="postOpen();">주소 검색</button>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3"></div>
+							</div>
+						</div>
+				
 						<div class="row">
 							<div class="form-group">
 								<div class="text-center">
-									<button type="submit" class="btn btn-success">다음</button>
+									<button type="submit" class="btn btn-success join-one-btn">다음</button>
 								</div>
 							</div>
 						</div>
-					</form>
+			</form>
 					<%
 						} else if (action != null && action.equalsIgnoreCase("authmail")) {
 
@@ -1340,10 +1445,28 @@
 			</div>
 		</div>
 
-	
-	<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
-	<!-- Footer section(하단부분) -->
+	<!-- 페이지이동시 필요한 부분 -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var url = "${pageContext.request.contextPath}/notice/smallABoard"
+		$.ajax({
+			url : url,
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset:utf-8",
+			data : {
+				param1 : "값1"
+			},
+			success : function(d) {
+				$('#smallABoard').html(d);
+			},
+			error : function(e) {
+				alert("실패" + e);
+			}
+		});
+	});
+	</script>
+	<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 </div>
 </body>
 </html>
