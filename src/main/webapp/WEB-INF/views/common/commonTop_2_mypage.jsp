@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 마이페이지영역시 탑2 변환 -->
-<nav class="navber navbar-inverse navbar-fixed-top"
+<nav class="navber navbar-fixed-top"
 	id="navbar-fixed-top2">
 	<div class="container-fluid">
 		<div class="row">
@@ -14,7 +14,7 @@
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">채택관리
 						<span class="glyphicon glyphicon-chevron-down"></span></a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">채택관리</a></li>
 							<li><a href="#">채택내역</a></li>
 						</ul>
@@ -22,7 +22,7 @@
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">기술관리
 						<span class="glyphicon glyphicon-chevron-down"></span></a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu navbar-nav3">
 							<li><a href="#">기술관리</a></li>
 							<li><a href="#">나의서비스</a></li>
 							<li><a href="#">채택요청관리</a></li>

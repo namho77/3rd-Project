@@ -3,7 +3,8 @@
 /* 공통된 탑1 부분 */
 
 #navbar-fixed-top {
-	background-color: #41AF39;
+	background-color: #27cea7;
+	/* background-color: #41AF39; 네이버색생*/
 	height: 60px;
 	padding-top: 7px;
 	padding-right: 10px;
@@ -40,3 +41,15 @@
 	font-weight: 900;
 	font-size: 1em;
 }
+
+#dropdown-menu{
+	z-index: 2;
+}
+
+#dropdown-menu>li>a:hover, #dropdown-menu>li>a:active{
+	color: white; /* 드롭다운 글자색 통일하기 옆의 색으로 */
+	font-weight: bold;
+	font-size: 1.1em;
+	background-color: #27cea7;
+}
+
