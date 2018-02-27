@@ -106,7 +106,7 @@
 							<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>
 							<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>
 							<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>
-							<li><a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/faq/list">FAQ</a></li>
 						</ul>
 					</div>
 				</div>

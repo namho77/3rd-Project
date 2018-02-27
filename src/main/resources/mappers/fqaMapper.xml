@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe24.ourplanners.faq.persistence.faqDAO">
+	<select id="listPage" resultType="com.cafe24.ourplanners.faq.dto.faqDTO">
+		select * from (select Tb.*, rownum rNum from (select * from op_qna order by qna_srl desc) Tb) where rNum between #{param1} and #{param2}
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select count(*) from op_qna
+	</select>
+	<select id="view" resultType="com.cafe24.ourplanners.faq.dto.faqDTO">
+		select * from op_qna where qna_srl=#{param1}
+	</select>
+	<delete id="delete">
+		delete from op_qna where qna_srl=#{param1}
+	</delete>
+	<insert id="write">
+		insert into op_qna values (op_qna_srl_seq.nextval, #{param1}, #{param2}, sysdate)
+	</insert>
+	<update id="modify">
+		update op_qna set title=#{param1}, contents=#{param2} where qna_srl=${param3}
+	</update>
+</mapper>

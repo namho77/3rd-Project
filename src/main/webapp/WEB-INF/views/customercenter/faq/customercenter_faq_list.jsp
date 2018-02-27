@@ -38,9 +38,22 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-<script>
+<script type="text/javascript">
 	$(document).ready(function() {
-
+		var url = "${pageContext.request.contextPath}/notice/list.do"
+			$.ajax({
+				url:url,
+				dataType:"html",
+				type:"get",
+				contentType:"text/html; charset:utf-8",
+				data:{param1:"값1"},
+				success:function(d){
+					$('#list').html(d);
+				},
+				error:function(e){
+					alert("실패" + e);
+				}
+			});
 	});
 </script>
 
@@ -61,7 +74,11 @@
 
 			<!-- CONTAINER -->
 			<div class="container">
-			
+				<!-- test용 시작-->
+					<div class="col-xs-4 col-md-4"></div>
+					<div class="col-xs-6 col-md-6" id="list">여기에 뿌려진다.</div>
+					<div class="col-xs-2 col-md-2"></div>
+				<!-- test용 끝 -->
 			</div>
 			<!-- //CONTAINER -->
 
