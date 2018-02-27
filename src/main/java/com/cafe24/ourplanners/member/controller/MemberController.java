@@ -341,14 +341,13 @@ public class MemberController {
 	
 	@RequestMapping(value = "find/id", method = RequestMethod.GET)
 	public ModelAndView findId(Model model,HttpServletRequest req) {
-		logger.info("비밀번호 찾기");
-
-		ModelAndView mv = new ModelAndView();
-		service.findPassword(model,req,mv);
+		logger.info("아이디 찾기");
 		
-		mv.setViewName("find/find_password");
+		ModelAndView mv = new ModelAndView();
+		service.findId(model,req,mv);
+		
 		//vm.setViewName("redirect:/board/boardList");
-
+		mv.setViewName("find/find_id");
 		return mv;
 	}
 	

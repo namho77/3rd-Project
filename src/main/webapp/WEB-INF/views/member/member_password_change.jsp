@@ -46,7 +46,7 @@
 	function logout() {
 		var ans = confirm("정말로 로그아웃 하시겠습니까?");
 		if (ans == true) {
-			location.href = "/member/logout";
+			location.href = "${pageContext.request.contextPath}/member/logout";
 		} else {
 			popLayerMsg("로그아웃을 취소하셨습니다.");
 		}

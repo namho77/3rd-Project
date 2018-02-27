@@ -126,7 +126,7 @@
 
 											<div class="info_account">
 												<div class="sign_up_account ">
-													<a href="./join" id="signUp">회원가입</a><span class="txt_bar">|</span> <span class="account_more"> <a href="../find/find_id" class="link_more">아이디 찾기</a> <span class="txt_bar">|</span> <a href="../find/find_password" class="link_more">비밀번호 찾기</a>
+													<a href="${pageContext.request.contextPath}/member/join" id="signUp">회원가입</a><span class="txt_bar">|</span> <span class="account_more"> <a href="${pageContext.request.contextPath}/find/id" class="link_more">아이디 찾기</a> <span class="txt_bar">|</span> <a href="${pageContext.request.contextPath}/find/password" class="link_more">비밀번호 찾기</a>
 													</span> <span class="ico_login ico_top"></span>
 
 												</div>

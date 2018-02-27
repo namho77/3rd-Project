@@ -36,7 +36,7 @@ public class MemberRestController {
 		return map;
 	}
 
-	@RequestMapping(value = "/member/json/id_check.json", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/json/id_check.json")
 	public HashMap<String, Object> idCheck(HttpServletRequest req) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		service.hasId(req, map);

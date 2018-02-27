@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.util.SHA256;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -21,9 +22,9 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public int registMemberNotNullCol(MemberVO vo) {
 		
-		//session.selectList
-		//session.update
-		//session.delete
+		//sqlSession.selectList
+		//sqlSession.update
+		//sqlSession.delete
 		int affected = sqlSession.insert(namespace + ".insert", vo);		
 
 		return affected;
@@ -37,6 +38,16 @@ public class MemberDAOImpl implements MemberDAO{
 		int hasId = sqlSession.selectOne(namespace+".hasId", userId);
 		return hasId;
 	}
+	
+	@Override
+	public int hasIdByNameAndEmail(String search_name, String email_address) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_name", search_name);
+		paramMap.put("email_address", email_address);
+		int hasId = sqlSession.selectOne(namespace+".hasIdByNameAndEmail", paramMap);
+		return hasId;
+	}
+	
 	
 	@Override
 	public MemberVO login(LoginDTO dto) throws Exception {
@@ -134,18 +145,59 @@ public class MemberDAOImpl implements MemberDAO{
 	public int updatePassword(Map<String, Object> paramMap) {
 		return sqlSession.update(namespace+".updatePassword", paramMap);
 	}
-	
-	public int updatePasswordWithoutPrevPassword(Map<String, Object> paramMap) {
-		
-		
-		return sqlSession.update(namespace+".updatePasswordWithoutPrevPassword", paramMap);
-	}
+
 
 	@Override
 	public int deleteMember(String user_id) {
 		return sqlSession.delete(namespace+".deleteMember", user_id);		
 		
 	}
+
+
+	@Override
+	public int updatePasswordWithoutPrevPassword(String user_id, String newPassword) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		// 새로운 솔트 생성
+		String salt = SHA256.generateSalt();
+		paramMap.put("user_id", user_id);
+		paramMap.put("newPassword", newPassword);
+		paramMap.put("salt", salt);
+		return sqlSession.update(namespace+".updatePasswordWithoutPrevPassword", paramMap);
+	}
+
+
+	@Override
+	public String getAsteriskIdByNameAndEmail(String searchName, String searchEmail) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("user_id", searchName);
+		paramMap.put("email_address", searchEmail);
+		
+		return sqlSession.selectOne(namespace+".getAsteriskIdByNameAndEmail", paramMap);
+	}
+
+
+	@Override
+	public int isValidAuthKeyWithoutPassword(String user_id, String auth_key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void updateIsRegisterWithoutPassword(String string, String auth_key, String user_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public MemberVO getUserInfoByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 
 }

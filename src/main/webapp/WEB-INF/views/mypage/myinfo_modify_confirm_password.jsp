@@ -41,6 +41,15 @@
 	$(document).ready(function() {
 
 	});
+
+	function checkPassword(f) {
+		if (f.password.value == "") {
+			alert("패스워드를 입력하세요");
+			f.password.focus();
+			return false;
+
+		}
+	}
 </script>
 
 </head>
@@ -61,74 +70,68 @@
 			<!-- CONTAINER -->
 			<div class="container">
 				<!-- 좌우측의 공간 확보 -->
-				<br />
-				<br />
 
 				<div class="row">
-					<h3 class="text-center">
-						<b>내 정보를 <span class="text-primary">최신 정보로 관리</span>해 주세요.
-						</b>
-					</h3>
-					<p class="text-center">아이디/비밀번호 분실 및 보호조치 해제를 위해 최신 정보로 내정보를 관리하세요.</p>
-					<hr class="container col-lg-4 col-lg-offset-4" />
+					<div class="col-lg-offset-3 col-lg-6 text-center">
 
-				</div>
+						<h3>회원정보 수정전 비밀번호 확인</h3>
+						<small>회원정보 수정전 개인 정보 보호를 위해 비밀번호를 다시 확인 합니다.</small><br />
 
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">아이디</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.user_id}</div>
-				</div>
+						<c:if test="${errors.isNotMatchPassword}">
+							<span class="text-danger">비밀번호가 일치하지 않습니다.</span>
+							<br />
+							<br />
+						</c:if>
 
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">이름</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.user_name}</div>
-				</div>
+						<c:if test="${errors.isNotAdminModifyMember}">
+							<span class="text-danger">관리자 계정만 이용할 수 있습니다.</span>
+							<br />
+							<br />
+						</c:if>
+						<form name="passwordFrm" method="post" action="<c:url value="/mypage/myinfo"/>" onsubmit="return checkPassword(this);">
 
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">성별</div>
-					<div class="col-lg-2 text-center">
+							<input type="hidden" name="action" value="modify" />
+							<table class="table table-bordered">
+								<colgroup>
+									<col width="50%" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
 
-						<c:choose>
-							<c:when test="${loginUserInfo.gender == 'M' }">
-			남자
-		</c:when>
 
-							<c:otherwise>
-		여자
-		</c:otherwise>
-						</c:choose>
+									<tr>
+										<th class="text-center" style="vertical-align: middle;">패스워드</th>
+
+										<td>
+											<input type="text" name="password" class="form-control" style="width: 200px;" />
+										</td>
+
+
+									</tr>
+
+								</tbody>
+							</table>
+
+
+							<div class="row text-center" style="">
+								<!-- 각종 버튼 부분 -->
+								<button type="submit" class="btn btn-danger">확인</button>
+								<!-- <button type="reset" class="btn">리셋하기</button> -->
+								<button type="button" class="btn btn-warning" onclick="history.back();">취소</button>
+
+								<!-- <button type="button" class="btn btn-default" onclick="location.href='WriteSkin.jsp';">글쓰기</button> -->
+								<!-- <button type="button" class="btn btn-primary">수정하기</button>
+					<button type="button" class="btn btn-success">삭제하기</button>
+					<button type="button" class="btn btn-info">답글쓰기</button>-->
+
+							</div>
+
+
+						</form>
+
+
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">생년월일</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.birthday}</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">지역</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.address}</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">이메일</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.email_address}</div>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-offset-4 col-lg-2 text-center">휴대전화</div>
-					<div class="col-lg-2 text-center">${loginUserInfo.mobile}</div>
-				</div>
-				<br />
-				<form name="memberInfoFrm" method="post" action="<c:url value="../mypage/myinfo"/>">
-					<input type="hidden" name="action" value="password" />
-					<div class="row text-center">
-						<button type="submit" class="btn btn-info">정보수정</button>
-					</div>
-				</form>
-				<br />
-				<br />
-
 
 			</div>
 			<!-- //CONTAINER -->

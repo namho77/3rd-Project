@@ -35,5 +35,17 @@ public interface MemberDAO {
 	public int updatePassword(Map<String, Object> paramMap);
 
 	public int deleteMember(String user_id);
+
+	public int updatePasswordWithoutPrevPassword(String user_id, String newPassword);
+
+	public String getAsteriskIdByNameAndEmail(String searchName, String searchEmail);
+
+	public int hasIdByNameAndEmail(String search_name, String email_address);
+
+	public int isValidAuthKeyWithoutPassword(String user_id, String auth_key);
+
+	public void updateIsRegisterWithoutPassword(String string, String auth_key, String user_id);
+
+	public MemberVO getUserInfoByEmail(String email);
 	
 }

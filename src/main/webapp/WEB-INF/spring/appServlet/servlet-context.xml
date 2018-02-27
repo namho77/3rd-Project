@@ -62,10 +62,11 @@
 		<interceptor>
 			<mapping path="/mypage/*"/>
 			<mapping path="/profile/*"/>
-			
+			<mapping path="/message/*"/>
+			<mapping path="/admin/*"/>
 			<!-- <mapping path="/board/client*"/> -->
 			<mapping path="/member/withdraw"/>
-			<mapping path="/member/detail"/>
+			<mapping path="/member/change_password"/>
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>

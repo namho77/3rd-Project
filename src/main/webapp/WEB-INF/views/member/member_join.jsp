@@ -474,13 +474,13 @@
 		      
 		      success:function(data){     //success에 성공했을 때 동작 넣기.
 		       
-		       //중복되지 않은 경우
-		       if(data.result == "success"){
+		       //중복되지 않은 경우 hasId=> N
+		       if(data.result == "N"){
 		        idCheck = true; 
 		        document.getElementById("idCheckSpan").innerText = "좋은 아이디네요!";
 		        document.registFrm.DuplicationCheckId.value="Y";
 		       }
-		       //중복된 경우
+		       //중복된 경우 hasId =>Y
 		       else{
 		        idCheck = false;
 		        document.getElementById("idCheckSpan").innerText = "이미 사용중이거나 탈퇴한 아이디입니다."+data.result;
@@ -1244,7 +1244,7 @@
 						</div>
 
 						<div class="text-center">
-							<button class="btn btn-info" type="button" onclick="location.href='../';">확인</button>
+							<button class="btn btn-info" type="button" onclick="location.href='${pageContext.request.contextPath}';">확인</button>
 						</div>
 					</div>
 
