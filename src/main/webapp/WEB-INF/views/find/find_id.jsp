@@ -160,7 +160,7 @@
 
 											<div class="col-lg-offset-2 col-lg-6">
 												<div class="form-group">
-													<span class="hide" id="spanCheckName"></span> <input class="form-control" type="text" id="searchName" name="searchName" value="" placeholder="이름 또는 닉네임(별명)을 입력해 주세요.">
+													<span class="hide" id="spanCheckName"></span> <input class="form-control" type="text" id="searchName" name="searchName" value="" placeholder="이름을 입력해 주세요.">
 												</div>
 											</div>
 
@@ -185,7 +185,7 @@
 								<div id="findPassword" class="text-left col-lg-offset-3 col-lg-6 container list-group">
 
 									<div class="list-group-item d-flex justify-content-between align-items-center">
-										비밀번호를 모르시나요?<a href="find/password" class="link_tip">비밀번호 찾기</a><span class="ico_find ico_more"></span>
+										비밀번호를 모르시나요?<a href="${pageContext.request.contextPath}/find/password" class="link_tip">비밀번호 찾기</a><span class="ico_find ico_more"></span>
 									</div>
 
 

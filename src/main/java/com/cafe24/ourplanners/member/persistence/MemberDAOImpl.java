@@ -159,9 +159,11 @@ public class MemberDAOImpl implements MemberDAO{
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		// 새로운 솔트 생성
 		String salt = SHA256.generateSalt();
+		newPassword = SHA256.encrypt(newPassword, salt);
 		paramMap.put("user_id", user_id);
 		paramMap.put("newPassword", newPassword);
 		paramMap.put("salt", salt);
+		
 		return sqlSession.update(namespace+".updatePasswordWithoutPrevPassword", paramMap);
 	}
 
