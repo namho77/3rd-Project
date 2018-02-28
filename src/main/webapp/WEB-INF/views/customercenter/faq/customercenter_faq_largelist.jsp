@@ -70,17 +70,18 @@
 	}
 </script>
 <c:forEach items="${lists }" var="row">
-	<div style="font-size: 1.5em; color: black;" id="noticeText_${row.notice_srl }">
-		<div class="col-xs-3 col-md-3">${row.notice_srl }</div>
-		<div class="col-xs-3 col-md-3">${row.title }</div>
-		<div class="col-xs-4 col-md-4">${row.contents }</div>
-		<div class="col-xs-2 col-md-2">${row.postdate }</div>	
+	<div style="font-size: 1.5em; color: black;" id="noticeText_${row.faq_srl }">
+		<div class="col-xs-3 col-md-2">${row.faq_srl }</div>
+		<div class="col-xs-3 col-md-2">${row.category }</div>
+		<div class="col-xs-4 col-md-2">${row.service }</div>
+		<div class="col-xs-2 col-md-2">${row.title }</div>
+		<div class="col-xs-2 col-md-4">${row.contents }</div>	
 	<c:choose>
 		<c:when
 			test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
 			<div>
-				<button type="button" class="btn btn-primary" onclick="javascript:modifyRow(${row.notice_srl});" style="color: black;">수정하기</button>
-				<button type="button" class="btn btn-primary" onclick="javascript:deleteRow(${row.notice_srl});" style="color: black;">삭제하기</button>				
+				<button type="button" class="btn btn-primary" onclick="javascript:modifyRow(${row.faq_srl});" style="color: black;">수정하기</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:deleteRow(${row.faq_srl});" style="color: black;">삭제하기</button>				
 			</div>
 		</c:when>
 	</c:choose>
