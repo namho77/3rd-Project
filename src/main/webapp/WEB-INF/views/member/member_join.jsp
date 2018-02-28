@@ -630,7 +630,24 @@ body{
 	display: inline-block;
 }
 
+.presonal-company{
+	height: 55px;
+	border: 1px solid #CFCFCF;
+	padding: 5px;
+	padding-top: 15px;
+	width: 100%;
+	margin-left: 0px;
+	text-align: center;
+	background-color: white;
+}
 
+#companyRadioBtn{
+	margin-left: 130px;
+}
+
+.company-input{
+	margin-bottom: 8px;
+}
 
 </style>
 </head>
@@ -889,58 +906,72 @@ body{
 					</div>
 					<form class="form-horizontal" name="registFrm" method="post" action="join" onsubmit="return registFrmCheck();">
 						<input type="hidden" id="action" name="action" value="authmail">
-						<!-- <div class="row">
-							<p><label class="control-label"><em style="color: red;">*</em> 회원구분</label></p>
-						</div>
-						<div class="row">
-							<div class="form-group" >
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6 member_choose">
-									
-									<input type="radio" name="member_type" id="personal" value="P" checked="checked" /> <label for="personal">개인</label>
-									<input type="radio" name="member_type" id="company" value="C" /> <label for="company">회사</label>
-								</div>
-								<div class="col-lg-3"></div>
-							</div>
-						</div> -->
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
+									<label class="control-label"><em style="color: red;">*</em> 회원구분</label>
+									<div class="row presonal-company">
+										<label for="personal">
+										<input type="radio" name="member_type" id="personalRadioBtn" value="P" checked="checked" />개인</label>
+										<label for="company">
+										<input type="radio" name="member_type" id="companyRadioBtn" value="C" />기업</label>
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+							</div>
+						</div>
+						
+						<div class="row hidden" id="companyDiv">
+							<div class="form-group">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
+									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호를 입력해주세요"/>
+									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호의 회사명을 입력해주세요"/>
+									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호의 대표자명을 입력해주세요"/>
+								</div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+							</div>
+						</div>
+				
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 아이디</label>
 									<input class="form-control form-up" id="user_id" name="user_id" type="text" placeholder="5~20자의 영문소문자,숫자,특수기호(_),(-)을 사용해주세요" onkeydown="resetDuplicationCheckId()" /> <span id="idCheckSpan" class="joinhelpred"></span> <input type="hidden" name="DuplicationCheckId" value="N">
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 비밀번호</label>
 									<input class="form-control form-up" name="password" type="password" placeholder="8~20자리의 영문,숫자 조합권장합니다 (영문,숫자,특수기호 조합)" /> <span class="joinhelp"></span>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 비밀번호 확인</label>
 									<input class="form-control form-up" name="user_pw2" type="password" placeholder="비밀번호를 한번 더 작성해주세요"/>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label" for="find_account_question"><em style="color: red;">*</em> 비밀번호 찾기 질문/답변</label>
 									<select class="form-control form-up" name="find_account_question" id="find_account_question" style="margin: 0px 0px 8px; display: block;">
 										<option value="1">나의 보물 1호는?</option>
@@ -956,25 +987,25 @@ body{
 									<input class="form-control form-up" name="find_account_answer" title="비밀번호 찾기 답변" 
 									id="find_account_answer" type="text" value="" placeholder="비밀번호찾기 질문의 답변을 작성해주세요">
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 이름</label>
 									<input class="form-control form-up" name="user_name" type="text" placeholder="이름을 작성해주세요"/>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 성별</label>
 									<div class="row man-woman">
 										<label for="man">
@@ -983,25 +1014,25 @@ body{
 										<input type="radio" name="gender" id="woman" value="W"/>여성</label>
 									</div>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 생년월일</label>
 									<input class="form-control form-up" name="birthday" type="date" step="1" /> 
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<input name="email_address" type="hidden" />
 									<label class="control-label"><em style="color: red;">* </em>이메일</label>
 									<div class="form-inline">
@@ -1030,15 +1061,15 @@ body{
 											value="N" /> 아니오</label>
 									</div>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 
 
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<input name="mobile" type="hidden" />
 									<label class="control-label"><em style="color: red;">* </em>휴대전화</label>
 									<div class="form-inline">
@@ -1057,14 +1088,14 @@ body{
 											type="radio" name="allow_message" value="N" /> 아니오</label>
 									</div>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 						
 						<div class="row">
 							<div class="form-group">
-								<div class="col-lg-3"></div>
-								<div class="col-lg-6">
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
+								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 주소</label>
 									<div class="form-inline">
 										<div id="address-left">
@@ -1075,18 +1106,37 @@ body{
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-3"></div>
+								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
 						</div>
 				
 						<div class="row">
 							<div class="form-group">
 								<div class="text-center">
-									<button type="submit" class="btn btn-success join-one-btn">다음</button>
+									<button type="submit" class="btn btn-success join-one-btn" style="margin-top: 70px;">다음</button>
 								</div>
 							</div>
 						</div>
-			</form>
+					</form>
+					<script type="text/javascript">
+					$(document).ready(function() {
+					    setMemberTypeListener(); 
+					});
+					
+					function setMemberTypeListener() {
+
+						var companyDiv = $('#companyDiv');
+
+						$('#personalRadioBtn').click(function() {
+						    companyDiv.addClass('hidden');
+						});
+
+						$('#companyRadioBtn').click(function() {
+						    companyDiv.removeClass('hidden');
+						})
+					}
+					
+					</script>
 					<%
 						} else if (action != null && action.equalsIgnoreCase("authmail")) {
 
@@ -1097,50 +1147,45 @@ body{
 							request.setAttribute("joinInfo", memInfo);
 							//request.getAttribute("joinInfo");
 					%>
-
-
-					<div class="container text-center">
+				
+					<!-- 3번째 페이지 -->
+					<div class="container text-center title-image">
 						<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-check"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>
 					</div>
-
-
-
+					<br/><br/>
 					<div class="text-center">
-						<h3>이메일 인증</h3>
+						<h3>이메일 인증단계</h3>
 						<hr />
-
 					</div>
-					<br /> <br />
+					<br /><br /><br />
 
 					<form class="form-horizontal" name="step1Frm" method="post" action="join" onsubmit="return checkAuthKey(this);">
 						<input type="hidden" id="action" name="action" value="complete">
 
 						<div class="form-group text-center">
-							<b>${joinInfo.email_address }</b> <label for="inputauthkey" class="col-lg-12 text-center">위 메일로 발송된 8자리 인증 번호를 입력해주세요.</label>
+							<b>${joinInfo.email_address }</b> <label for="inputauthkey" class="col-xs-12 text-center">위 메일로 발송된 8자리 인증 번호를 입력해주세요.</label>
 						</div>
 
 						<div class="form-group">
-							<div class="col-lg-4 text-center">
+							<div class="col-sm-4 col-xs-2 text-center">
 								<div id="countdown"></div>
 							</div>
-							<div class="col-lg-4 text-center">
-								<input type="text" class="form-control " name="authkey" id="authkey" data-rule-required="true" placeholder="인증번호 입력(10분 동안 유효)" maxlength="8">
+							<div class="col-sm-4 col-xs-8 text-center">
+								<input type="text" class="form-control form-up" name="authkey" id="authkey" data-rule-required="true" placeholder="인증번호 입력(10분 동안 유효)" maxlength="8">
 							</div>
-							<div class="col-lg-4 text-center"></div>
+							<div class="col-sm-4 col-xs-2 text-center"></div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-lg-12 text-center">
-								<button type="submit" class="checkAuth_btn btn btn-success">다음</button>
+							<div class="col-xs-12 text-center">
+								<button type="submit" class="checkAuth_btn btn btn-success join-one-btn">다음</button>
 							</div>
 						</div>
 
 						<div class="form-group text-center">
-							<span class="text-center"> <a class="link_login link_resend" href="javascript:popModal('#layer_resend');" target="_blank"> 인증메일을 받지 못하셨나요? </a>
+							<span class="text-center"> <a class="link_login link_resend" href="javascript:popModal('#layer_resend');" target="_blank"><b>인증메일을 받지 못하셨나요?</b></a>
 							</span>
 						</div>
-
-
 					</form>
 
 
@@ -1318,45 +1363,32 @@ body{
 
 							//request.getAttribute("joinInfo");
 					%>
-
-					<div class="container text-center">
+					
+					
+					<!-- 4번째 페이지 -->
+					<div class="container text-center title-image">
 						<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-unchecked"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-check"></span>
 					</div>
-
-
-
+					<br/><br/>
 					<div class="text-center">
 						<h3>
-							<b>코스모 계정 가입 완료</b>
+							플레너스계정 가입완료
 						</h3>
 						<hr />
-
 					</div>
-					<br /> <br />
-
+					<br /><br /><br />
+					<br /><br />
+					
 					<div class="row text-center">
-						<b><strong class="tit_info">코스모계정 가입을 환영합니다!</strong></b>
-						<p class="text-center">코스모계정으로 로그인하시면 다양한 서비스를 이용하실 수 있습니다.</p>
-
+						<b><strong class="tit_info">${joinInfo.user_name}님의 회원가입을 환영합니다!</strong></b>
+						<p class="text-center">${joinInfo.user_id}으로 로그인하시면 다양한 서비스를 이용하실 수 있습니다.</p>
 					</div>
-
 
 					<div class=" container">
-
-						<div class="well text-center">
-
-							<span class="alert-success">${joinInfo.user_id}</span><br /> <span class="alert-success">${joinInfo.email_address}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.user_name}</span><br /> <span class=" alert-success" style="display: none;">${joinInfo.birthday} </span><br /> <span class=" alert-success" style="display: none;">${joinInfo.mobile}</span><br />
-						</div>
-
 						<div class="text-center">
-							<button class="btn btn-info" type="button" onclick="location.href='${pageContext.request.contextPath}';">확인</button>
+							<button class="btn btn-info join-one-btn" type="button" onclick="location.href='${pageContext.request.contextPath}';">확인</button>
 						</div>
 					</div>
-
-
-
-
-
 
 
 					<%
