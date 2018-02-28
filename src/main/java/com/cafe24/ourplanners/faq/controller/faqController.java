@@ -16,14 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.ourplanners.faq.dto.faqDTO;
+import com.cafe24.ourplanners.faq.persistence.faqDAO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
-import com.cafe24.ourplanners.notice.dto.ABoardDTO;
-import com.cafe24.ourplanners.notice.persistence.ABoardDAO;
+
 import com.cafe24.ourplanners.util.PagingUtil;
 
 @Controller
 public class faqController {
-
+/*
 	@Autowired SqlSession sqlSession;
 
 	//faq게시판 리스트
@@ -47,13 +48,13 @@ public class faqController {
 		paramMap.put("start", start);
 		paramMap.put("end", end);
 
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		faqDAO dao = sqlSession.getMapper(faqDAO.class);
 
 		int totalRecordCount = dao.getTotalCount();
 
-		ArrayList<ABoardDTO> lists = dao.listPage(start, end);
+		ArrayList<faqDTO> lists = dao.listPage(start, end);
 
-		for(ABoardDTO list:lists) {
+		for(faqDTO list:lists) {
 			list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
 		}
 
@@ -69,12 +70,12 @@ public class faqController {
 	//faq뷰
 	@RequestMapping("/notice/ViewRow")
 	public String viewRow(Model model, HttpServletRequest req) {
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
-		ABoardDTO dto = dao.view(req.getParameter("srl"));
+		faqDAO dao = sqlSession.getMapper(faqDAO.class);
+		faqDTO dto = dao.view(req.getParameter("srl"));
 
 		model.addAttribute("view", dto);
 
-		return "customercenter/notice/customercenter_notice_view";
+		return "customercenter/notice/customercenter_faq_view";
 	}
 
 	//faq 삭제하기
@@ -83,7 +84,7 @@ public class faqController {
 	public Map<String, Object> deleteRow(HttpSession session, HttpServletRequest req){
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		faqDAO dao = sqlSession.getMapper(faqDAO.class);
 		int result = dao.delete(req.getParameter("srl"));
 
 		if(result<=0) {
@@ -99,7 +100,7 @@ public class faqController {
 	//faq 글쓰기
 	@RequestMapping("/notice/writeRow")	
 	public String writeRow(){						
-		return "customercenter/notice/customercenter_notice_write";
+		return "customercenter/notice/customercenter_faq_write";
 	}
 
 	//faq 글쓰기 처리하기
@@ -113,7 +114,7 @@ public class faqController {
 			return map;
 		}
 
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		faqDAO dao = sqlSession.getMapper(faqDAO.class);
 
 		int result = dao.write(req.getParameter("title"), req.getParameter("contents"));
 
@@ -127,19 +128,19 @@ public class faqController {
 	}
 
 	//faq 수정하기
-	@RequestMapping("/notice/modifyRow")
+	@RequestMapping("/faq/modifyRow")
 	public String modifyRow(Model model, HttpServletRequest req, HttpServletResponse resp){					
 
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
-		ABoardDTO dto = dao.view(req.getParameter("srl"));
+		faqDAO dao = sqlSession.getMapper(faqDAO.class);
+		faqDTO dto = dao.view(req.getParameter("srl"));
 
 		model.addAttribute("modify", dto);
 
-		return "customercenter/notice/customercenter_notice_modify";
+		return "customercenter/notice/customercenter_faq_modify";
 	}
 
 	//faq 수정처리하기
-	@RequestMapping("/notice/modifyRowAction")
+	@RequestMapping("/faq/modifyRowAction")
 	@ResponseBody
 	public Map<String, Object> modifyAction(HttpServletRequest req, HttpSession session){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -149,7 +150,7 @@ public class faqController {
 			return map;
 		}
 
-		ABoardDAO dao = sqlSession.getMapper(ABoardDAO.class);
+		faqDao dao = sqlSession.getMapper(faqDAO.class);
 
 		int result = dao.modify(req.getParameter("title"), req.getParameter("contents"), req.getParameter("srl"));
 		System.out.println("result:"+result);
@@ -160,5 +161,5 @@ public class faqController {
 			map.put("modifyCode", 1);
 		}		
 		return map;
-	}
+	}*/
 }
