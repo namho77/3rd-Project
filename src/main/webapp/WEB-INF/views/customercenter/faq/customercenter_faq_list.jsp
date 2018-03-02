@@ -37,10 +37,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var url = "${pageContext.request.contextPath}/notice/list.do"
+		var url = "${pageContext.request.contextPath}/customercenter/faq/json/faq_list.json"
 			$.ajax({
 				url:url,
-				dataType:"html",
+				dataType:"json",
 				type:"get",
 				contentType:"text/html; charset:utf-8",
 				data:{param1:"값1"},

@@ -47,35 +47,7 @@
 
 	});
 </script>
-
-</head>
-
-<body>
-	<!-- PRELOADER -->
-	<img id="preloader"
-		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
-		alt="" />
-	<!-- //PRELOADER -->
-	<div class="preloader_hide">
-
-		<!-- HEADER -->
-
-		<%@ include file="../common/top_main2.jsp"%>
-
-		<!-- HOME -->
-		<section id="main" class="section">
-
-			<!-- CONTAINER -->
-			<div class="container">
-
-				<div class="row margin-top-40">
-					<div class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-2">
-								<h2 class="margin-top-0 margin-bottom-20">
-									<b>계정설정</b>
-								</h2>
-								<style>
+<style>
 body {
 	background: #fafafa !important;
 	font-size: 14px;
@@ -130,6 +102,35 @@ body {
 	border: none !important;
 }
 </style>
+</head>
+
+<body>
+
+	<!-- PRELOADER -->
+	<img id="preloader"
+		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
+		alt="" />
+	<!-- //PRELOADER -->
+	<div class="preloader_hide">
+
+		<!-- HEADER -->
+
+		<%@ include file="../common/top_main2.jsp"%>
+
+		<!-- HOME -->
+		<section id="main" class="section">
+
+			<!-- CONTAINER -->
+			<div class="container">
+
+				<div class="row margin-top-40">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-2">
+								<h2 class="margin-top-0 margin-bottom-20">
+									<b>계정설정</b>
+								</h2>
+								
 								<ul class="my-profile-menu-list list-style-none font-size-h4"
 									role="tablist">
 									<li role="presentation"
@@ -399,71 +400,9 @@ body {
 																	href="/@dmacoder">프로필 완성하러가기 &gt;</a>
 															</div>
 														</div>
-														<div class="row margin-top-5">
-															<div class="col-xs-12">
-																<div id="profileProgressBar" style="position: relative;">
-																	<svg viewBox="0 0 100 3" preserveAspectRatio="none"
-																		style="display: block; width: 100%;">
-																	<path d="M 0,1.5 L 100,1.5" stroke="#ffd400"
-																			stroke-width="3" fill-opacity="0"
-																			style="stroke-dasharray: 100, 100; stroke-dashoffset: 90;"></path></svg>
-																	<div class="progressbar__label"
-																		style="color: rgb(255, 212, 0); opacity: 0; position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%);">undefined</div>
-																</div>
-															</div>
-														</div>
-														<script src="/js/progressbar.js"></script>
-														<style>
-#profileProgressBar>svg {
-	background: #f1f1f1;
-}
-</style>
-														<script>
-															var progressBar = new ProgressBar.Line(
-																	'#profileProgressBar',
-																	{
-																		strokeWidth : 3, // progress 두께
-																		color : sassVariables['color-yellow-400'],
-																		trailColor : sassVariables['color-gray-d1'],
-																		text : {
-																			// Initial value for text.
-																			// Default: null
-																			value : 'Text',
-
-																			// Class name for text element.
-																			// Default: 'progressbar-text'
-																			className : 'progressbar__label',
-
-																			// Inline CSS styles for the text element.
-																			// If you want to modify all CSS your self, set null to disable
-																			// all default styles.
-																			// If the style option contains values, container is automatically
-																			// set to position: relative. You can disable behavior this with
-																			// autoStyleContainer: false
-																			// If you specify anything in this object, none of the default styles
-																			// apply
-																			// Default: object speficied below
-																			style : {
-																				color : sassVariables['color-yellow-400'],
-																				opacity : 0,
-																				position : 'absolute',
-																				left : '50%',
-																				top : '50%',
-																				padding : 0,
-																				margin : 0,
-																				// You can specify styles which will be browser prefixed
-																				transform : {
-																					prefix : true,
-																					value : 'translate(-50%, -50%)'
-																				}
-																			},
-																		},
-																	});
-															progressBar
-																	.set(0.1);
-															progressBar
-																	.setText();
-														</script>
+														
+														
+														
 													</div>
 												</div>
 											</div>

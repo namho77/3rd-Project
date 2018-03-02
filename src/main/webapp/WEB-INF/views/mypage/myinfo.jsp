@@ -236,18 +236,9 @@
 							placeholder="${loginUserInfo.mobile}" /></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2"><span class="info-title">프로필 완성도: 10%</span></td>
-						<td colspan="2" class="edit"><a href="#" >프로필 완성하러가기></a>
+						<td colspan="2" class="edit"><a href="#" >프로필 수정하러가기></a>
 					</tr>
-					<tr>
-						<td colspan="4">
-							<div class="progress">
-								<div class="progress-bar progress-bar-success"
-									role="progressbar" aria-valuenow="10" aria-valuemin="0"
-									aria-valuemax="100" style="width: 10%"></div>
-							</div>
-						</td>
-					</tr>
+					
 				</table>
 			</div>
 		</div>

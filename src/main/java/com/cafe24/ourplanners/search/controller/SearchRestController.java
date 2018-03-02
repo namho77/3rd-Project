@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.ourplanners.board.domain.SubCategoryVO;
 import com.cafe24.ourplanners.search.service.SearchService;
-import com.cafe24.ourplanners.util.Criteria;
-import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.ServiceBoardCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 @RestController
 public class SearchRestController {
@@ -64,7 +64,7 @@ public class SearchRestController {
 
 		ctx.close();
 
-		Criteria cri = new Criteria();
+		ServiceBoardCriteria cri = new ServiceBoardCriteria();
 
 		cri.setBoard_type(board_type);
 		if (category_srl != null)
@@ -121,7 +121,7 @@ public class SearchRestController {
 			ctx.close();
 		}
 
-		Criteria cri = new Criteria();
+		SearchServiceBoardCriteria cri = new SearchServiceBoardCriteria();
 
 		cri.setBoard_type(board_type);
 		if (category_srl != null)
@@ -196,7 +196,7 @@ public class SearchRestController {
 			ctx.close();
 		}
 
-		SearchCriteria scri = new SearchCriteria();
+		SearchServiceBoardCriteria scri = new SearchServiceBoardCriteria();
 
 		scri.setBoard_type(board_type);
 		if (category_srl != null)
@@ -216,5 +216,7 @@ public class SearchRestController {
 
 		return map;
 	}
+	
+	
 
 }

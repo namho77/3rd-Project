@@ -6,7 +6,7 @@ import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.domain.SubCategoryVO;
 import com.cafe24.ourplanners.board.domain.WordCloudVO;
 import com.cafe24.ourplanners.util.Criteria;
-import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 public interface SearchDAO {
 
@@ -16,7 +16,7 @@ public interface SearchDAO {
 
 	public List<SubCategoryVO> getSubCategoryListSearch(SubCategoryVO vo);
 
-	public List<BoardVO> getServiceListSearch(SearchCriteria scri);
+	public List<BoardVO> getServiceListSearch(SearchServiceBoardCriteria scri);
 
-	public int insertWordCloud(SearchCriteria scri);
+	public int insertWordCloud(SearchServiceBoardCriteria scri);
 }
