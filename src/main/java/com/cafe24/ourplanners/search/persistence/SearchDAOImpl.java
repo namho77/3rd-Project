@@ -49,10 +49,7 @@ public class SearchDAOImpl implements SearchDAO {
 	public int insertWordCloud(SearchServiceBoardCriteria scri) {
 		
 		Map<String,Object> paramMap = new HashMap<String, Object>();
-
-		System.out.println("키워드:"+scri.getKeyword());
-		System.out.println("서브카테:"+scri.getSubcategory_srl());
-		System.out.println("보드타입:"+scri.getBoard_type());					
+				
 		paramMap.put("searchword", scri.getKeyword());
 		paramMap.put("subcategory_srl", scri.getSubcategory_srl());
 		paramMap.put("category_srl", scri.getCategory_srl());
