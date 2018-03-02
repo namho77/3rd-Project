@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.cafe24.ourplanners.board.domain.SubCategoryVO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 public interface SearchService {
 
@@ -14,5 +15,5 @@ public interface SearchService {
 
 	public void getSubCategoryListSearch(SubCategoryVO vo, HashMap<String, Object> map);
 
-	public void getServiceListSearch(SearchCriteria scri, HashMap<String, Object> map);	
+	public void getServiceListSearch(SearchServiceBoardCriteria scri, HashMap<String, Object> map);	
 }

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	function paging(pNum) {
-		var url = "${pageContext.request.contextPath}/faq/list.do"
+		var url = "${pageContext.request.contextPath}/customercenter/faq/list.do"
 		$.ajax({
 			url : url,
 			dataType : "html",
@@ -21,18 +21,18 @@
 		});
 	}
 	function deleteRow(idx) {
-		var url = "${pageContext.request.contextPath}/faq/deleteRow"
+		var url = "${pageContext.request.contextPath}/customercenter/faq/"+idx
 		$.ajax({
 			url:url,
-			type:"get",
-			data:{srl:idx},
+			type:"delete",
+			//data:{srl:idx},
 			dataType:"json",
 			contentType:"text/html; charset:utf-8",
 			success:function(d){
-				if(d.Code == 0){
+				if(d.result == "fail"){
 					alert("게시물 삭제에 실패하였습니다.");
 				}
-				else if(d.Code == 1){
+				else if(d.result == "success"){
 					alert("게시물 삭제에 성공하였습니다.");
 					$("#noticeText_"+idx).hide(1000);
 				}						
@@ -44,11 +44,11 @@
 	}
 	
 	function modifyRow(idx) {
-		var url = "${pageContext.request.contextPath}/faq/modifyRow"
+		var url = "${pageContext.request.contextPath}/faq/"+idx+"/edit"
 			$.ajax({
 				url:url,
 				type:"get",
-				data:{srl:idx},
+				//data:{srl:idx},
 				dataType:"html",
 				contentType:"text/html; charset:utf-8",
 				success:function(d){

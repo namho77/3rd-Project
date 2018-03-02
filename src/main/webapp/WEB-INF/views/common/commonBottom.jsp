@@ -22,9 +22,16 @@
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <div class="container-fluid">
-	<div class="footer-menu">
-		<a href="#">31.5팀</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">서비스소개</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">인재채용</a> &nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">이용약관</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">개인정보취급방침</a>&nbsp;&nbsp;&nbsp;l&nbsp;&nbsp;&nbsp;<a href="#">FAQ</a>
-	</div>
+	<ul class="footer-menu">
+		<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/service">서비스소개</a></li>
+							<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>
+							<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>
+							<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>
+							<li><a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');">FAQ</a></li>
+					
+	</ul>
 	<div class="row">
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 		<div class="col-lg-8 col-sm-10 col-xs-12">
