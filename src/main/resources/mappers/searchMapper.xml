@@ -8,22 +8,22 @@
 
 	<sql id="search">
 		<choose>
-			<when test="searchType == null or searchType == ''">
+			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">
 
 			</when>
 			<otherwise>
 				<if test="searchType == 't'.toString()">
-					and title like CONCAT(CONCAT('%', #{keyword}), '%')
+					and title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
 				</if>
 				<if test="searchType == 'c'.toString()">
-					and contents like CONCAT(CONCAT('%', #{keyword}), '%')
+					and contents like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
 				</if>
 				<if test="searchType == 'i'.toString()">
-					and user_id like CONCAT(CONCAT('%', #{keyword}), '%')
+					and user_id like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
 				</if>
 				<if test="searchType == 'tc'.toString()">
-					and ( title like CONCAT(CONCAT('%', #{keyword}), '%') OR contents like
-					CONCAT(CONCAT('%', #{keyword}), '%'))
+					and ( title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%') OR contents like
+					CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%'))
 				</if>
 			</otherwise>
 		</choose>
