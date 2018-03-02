@@ -14,6 +14,8 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<!-- <resources mapping="/assets/**" location="/resources/pixit/admin/assets/" /> -->
+	
 
 
 	<!-- index controller -->
@@ -32,7 +34,7 @@
 		<beans:property name="maxUploadSize" value="104857600"></beans:property>
 	</beans:bean>
 	
-	<beans:bean id="uploadPath" class="java.lang.String">
+	<beans:bean id="upload" class="java.lang.String">
 		<beans:constructor-arg value="/resources/upload"></beans:constructor-arg>
 	</beans:bean>
 	
@@ -63,10 +65,13 @@
 			<mapping path="/mypage/*"/>
 			<mapping path="/profile/*"/>
 			<mapping path="/message/*"/>
-			<mapping path="/admin/*"/>
+			<mapping path="/admin**/**"/>
 			<!-- <mapping path="/board/client*"/> -->
 			<mapping path="/member/withdraw"/>
 			<mapping path="/member/change_password"/>
+			<exclude-mapping path="/admin/login**/**"/>
+			<exclude-mapping path="/member/login**/**"/>
+   			<exclude-mapping path="/resources/**/"/>
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>

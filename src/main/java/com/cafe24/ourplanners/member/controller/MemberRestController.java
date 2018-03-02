@@ -42,5 +42,12 @@ public class MemberRestController {
 		service.hasId(req, map);
 		return map;
 	}
+	
+	@RequestMapping(value = "/member/json/email_check.json")
+	public HashMap<String, Object> emailCheck(HttpServletRequest req) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		service.hasEmail(req, map);
+		return map;
+	}
 
 }

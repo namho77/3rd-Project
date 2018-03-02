@@ -84,7 +84,7 @@
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	
+
 	<!-- Top영역 1첫번째 -->
 	<div class="row">
 		<%@ include file="../common/commonTop_1.jsp"%>
@@ -93,70 +93,70 @@
 	<div class="row">
 		<%@ include file="../common/commonTop_2_mypage.jsp"%>
 	</div>
-	
+
 	<!-- 모달창 메시지 -->
-		<%@ include file="../common/modal_msg.jsp"%>
+	<%@ include file="../common/modal_msg.jsp"%>
 	<!--// 모달창 메시지 -->
-	
-	
+
+
 	<!-- Body영역 -->
-	<c:if test="${not empty error_msg}">
-		<div class="alert alert-danger">
-			<strong>알림!</strong> ${error_msg}
-		</div>
-	</c:if>
+
 	<div class="row" id="row-body-change-password">
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 		<div class="col-lg-8 col-sm-10 col-xs-12">
 			<!-- 서브메뉴부분 -->
 			<div class="col-xs-2" id="profile-menu">
 				<h3>계정설정</h3>
-				<a href="#"><p>나의정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a>
-				<a href="#"><p>비밀번호 변경</p></a> <a href="#"><p>회원탈퇴</p></a>
+				<a href="#"><p>나의정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="#"><p>비밀번호 변경</p></a> <a href="#"><p>회원탈퇴</p></a>
 			</div>
 			<!-- 비밀번호변경부분 -->
 			<form name="changePasswordFrm" method="post" action="<c:url value="../member/change_password"/>" onsubmit="return checkPassword(this);">
-			<div class="col-xs-10" id="profile-info">
-				<table>
-					<tr>
-						<td colspan="2">
-							<h4>현재 비밀번호</h4>
-							<hr />
-							<p class="password-title">현재 비밀번호</p> <input type="password" name="password"
-							class="form-control" placeholder="기존 비밀번호를 입력해 주세요." />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<h4>변경 비밀번호</h4>
-							<hr />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="1" id="change-password">
-							<p class="password-title">변경할 비밀번호</p> <input type="password"
-							class="form-control" style="width: 95%" name="newPassword"
-							placeholder="변경할 비밀번호를 입력해주세요." />
-						</td>
-						<td colspan="1">
-							<p class="password-title">한번 더 입력</p> <input type="password" name="newPassword_confirm"
-							class="form-control" placeholder="변경할 비밀번호를 한번 더 입력해주세요." />
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- 버튼부분 -->
-			<div class="password-btn">
-				<button type="submit" class="btn btn-success">변경하기</button>
-			</div>
+				<div class="col-xs-10" id="profile-info">
+					<table>
+						<tr>
+							<td colspan="2">
+								<h4>현재 비밀번호</h4>
+								<hr />
+								<p class="password-title">현재 비밀번호
+								<c:if test="${not empty error_msg}">
+																		
+										<strong class="alert-danger"> (알림!)  ${error_msg}</strong>
+
+								</c:if>
+								</p>
+								<input type="password" name="password" class="form-control" placeholder="기존 비밀번호를 입력해 주세요." />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<h4>변경 비밀번호</h4>
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="1" id="change-password">
+								<p class="password-title">변경할 비밀번호</p>
+								<input type="password" class="form-control" style="width: 95%" name="newPassword" placeholder="변경할 비밀번호를 입력해주세요." />
+							</td>
+							<td colspan="1">
+								<p class="password-title">한번 더 입력</p>
+								<input type="password" name="newPassword_confirm" class="form-control" placeholder="변경할 비밀번호를 한번 더 입력해주세요." />
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!-- 버튼부분 -->
+				<div class="password-btn">
+					<button type="submit" class="btn btn-success">변경하기</button>
+				</div>
 			</form>
 		</div>
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 	</div>
-	
-	
+
+
 	<!-- Footer section(하단부분) -->
-		<%@ include file="../common/commonBottom.jsp"%>
+	<%@ include file="../common/commonBottom.jsp"%>
 	<!-- Footer section(하단부분) -->
 </body>
 </html>

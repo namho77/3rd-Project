@@ -17,4 +17,6 @@ public interface SearchDAO {
 	public List<SubCategoryVO> getSubCategoryListSearch(SubCategoryVO vo);
 
 	public List<BoardVO> getServiceListSearch(SearchCriteria scri);
+
+	public int insertWordCloud(SearchCriteria scri);
 }

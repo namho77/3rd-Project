@@ -67,7 +67,7 @@
 			<%@ include file="common/modal_msg.jsp"%>
 		<!--// 모달창 메시지 -->
 
-		<section id="wordcloud">
+		<section id="wordcloud" class="section">
 			<!-- 검색, 핫 키워드 -->
 			<%@ include file="wordcloud/wordcloud.jsp"%>
 			<!--// 검색, 핫 키워드 -->
@@ -149,7 +149,8 @@
 						</p>
 					</div>
 					<div class="col-sm-6">
-						<iframe class="rs-video" src="https://player.vimeo.com/video/7449107?portrait=0&amp;color=22aba6" allowfullscreen></iframe>
+					
+						<iframe class="rs-video" src="https://www.youtube.com/embed/_T_VPnwGrbk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>

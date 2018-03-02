@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,11 +41,15 @@ public class MailController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		service.sendMail(req, map);
-		
-		
-		
-
 		return map;
 	}
+	
+	@RequestMapping(value = "/customercenter/email")
+	public String mailForm(HttpServletRequest req,Model model) {
+		
+		
+		return "/customercenter/email/email_compose";
+	}
+	
 
 }

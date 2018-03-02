@@ -7,9 +7,11 @@
  <mapper namespace="com.kosmo.mapper.WordCloudMapper">
  	
  	<!-- 각 서비스 게시판에서 검색시 워드 클라우드 등록 -->
- 	<insert id="insertWordCloud" parameterType="com.cafe24.ourplanners.board.domain.WordCloudVO">
-		INSERT INTO op_wordcloud (wordcloud_srl, searchword, searchdate, category_srl, subcategory_srl) 
-							VALUES (wordcloud_srl_seq.nextval, #{searchword}, #{searchdate}, #{category_srl}, #{subcategory_srl})
+ 	<insert id="insertWordCloud" >
+		INSERT INTO op_wordcloud (wordcloud_srl, searchword, searchdate, category_srl, subcategory_srl,board_type) 
+							VALUES (wordcloud_srl_seq.nextval, #{searchword}, sysdate, #{category_srl,jdbcType=INTEGER}, #{subcategory_srl,jdbcType=INTEGER},#{board_type,jdbcType=VARCHAR})
+	
+	
 	</insert>
  	
  	<!-- 탑20 워드 클라우드 (1주일내 핫 검색어 20개) 가져오기 -->	
