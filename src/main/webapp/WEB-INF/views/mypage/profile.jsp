@@ -27,26 +27,12 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
-<script>
-	$(document).ready(function() {
-
-	});
-</script>
 <style>
 body {
 	background: #fafafa !important;
@@ -102,33 +88,53 @@ body {
 	border: none !important;
 }
 </style>
+
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 </head>
-
 <body>
-
 	<!-- PRELOADER -->
-	<img id="preloader"
-		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
-		alt="" />
+	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
-		<!-- HEADER -->
+	<!-- Top영역 1첫번째 -->
+	<div class="row">
+		<%@ include file="../common/commonTop_1.jsp"%>
+	</div>
+	<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+	<div class="row">
+		<%@ include file="../common/commonTop_2_mypage.jsp"%>
+	</div>
 
-		<%@ include file="../common/top_main2.jsp"%>
 
 		<!-- HOME -->
 		<section id="main" class="section">
 
 			<!-- CONTAINER -->
-			<div class="container">
+
+			<div class="container" style="margin-top: 100px;">
+
 
 				<div class="row margin-top-40">
 					<div class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-2">
 								<h2 class="margin-top-0 margin-bottom-20">
-									<b>계정설정</b>
+
+									<b>계정설정( 바디부분 수정해야 하는 페이지 )</b>
+
 								</h2>
 								
 								<ul class="my-profile-menu-list list-style-none font-size-h4"
@@ -418,8 +424,6 @@ body {
 
 			</div>
 			<!-- //CONTAINER -->
-
-
 		</section>
 		<!-- //HOME -->
 
@@ -427,11 +431,9 @@ body {
 		<%@ include file="../common/modal_msg.jsp"%>
 		<!-- //모달창 끝 -->
 
-
 		<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
+		<%@ include file="../common/commonBottom.jsp"%>
 		<!-- Footer section(하단부분) -->
-
 	</div>
 </body>
 </html>

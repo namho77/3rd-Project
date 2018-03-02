@@ -72,8 +72,11 @@
 			<!-- 서브메뉴부분 -->
 			<div class="col-xs-2" id="profile-menu">
 				<h3>계정설정</h3>
-				<a href="#"><p>나의정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a>
-				<a href="#"><p>비밀번호 변경</p></a> <a href="#"><p>회원탈퇴</p></a>
+				<a href="${pageContext.request.contextPath}/mypage/myinfo"><p>계정정보</p></a>
+				<a href="#"><p>인증정보</p></a>
+				<a href="#"><p>알림설정</p></a>
+				<a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a>
+				<a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 			</div>
 			<!-- 기본정보부분 -->
 			<div class="col-xs-10" id="profile-info">

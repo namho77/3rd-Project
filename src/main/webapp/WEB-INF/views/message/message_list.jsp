@@ -9,7 +9,7 @@
 	response.setDateHeader("Expires", 0);
 	if (request.getProtocol().equals("HTTP/1.1"))
 		response.setHeader("Cache-Control", "no-cache");
-%>>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +22,10 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -34,13 +38,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
-<script>
-	$(document).ready(function() {
-
-	});
-</script>
-
 </head>
 
 <body>
@@ -49,12 +46,17 @@
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
-		<!-- HEADER -->
-
-		<%@ include file="../common/top_main2.jsp"%>
+		<!-- Top영역 1첫번째 -->
+		<div class="row">
+		<%@ include file="../common/commonTop_1.jsp"%>
+		</div>
+		<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+		<div class="row">
+		<%@ include file="../common/commonTop_2_mypage.jsp"%>
+		</div>
 
 		<!-- HOME -->
-		<section id="main" class="section">
+		<section id="main" class="section" style="margin-top: 100px;">
 
 			<!-- CONTAINER -->
 			<div id="messageGroup" class="container ">
@@ -185,8 +187,6 @@
 				</div>
 			</div>
 			<!-- //CONTAINER -->
-
-
 		</section>
 		<!-- //HOME -->
 
@@ -194,11 +194,9 @@
 		<%@ include file="../common/modal_msg.jsp"%>
 		<!-- //모달창 끝 -->
 
-
 		<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
+		<%@ include file="../common/commonBottom.jsp"%>
 		<!-- Footer section(하단부분) -->
-
 	</div>
 </body>
 </html>

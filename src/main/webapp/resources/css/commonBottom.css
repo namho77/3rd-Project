@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
-/* 공통된 탑1 부분 */
+/* 공통된 바텀 부분 */
+
+.container-fluid{
+	padding-left: 0px;
+	padding-right: 0px;
+}
 
 .footer-menu {
 	background-color: #FAFAFA;

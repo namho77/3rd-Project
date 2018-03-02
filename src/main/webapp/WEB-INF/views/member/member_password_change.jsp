@@ -101,14 +101,17 @@
 
 
 	<!-- Body영역 -->
-
 	<div class="row" id="row-body-change-password">
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 		<div class="col-lg-8 col-sm-10 col-xs-12">
 			<!-- 서브메뉴부분 -->
 			<div class="col-xs-2" id="profile-menu">
 				<h3>계정설정</h3>
-				<a href="#"><p>나의정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="#"><p>비밀번호 변경</p></a> <a href="#"><p>회원탈퇴</p></a>
+				<a href="${pageContext.request.contextPath}/mypage/myinfo"><p>계정정보</p></a>
+				<a href="#"><p>인증정보</p></a>
+				<a href="#"><p>알림설정</p></a>
+				<a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a>
+				<a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 			</div>
 			<!-- 비밀번호변경부분 -->
 			<form name="changePasswordFrm" method="post" action="<c:url value="../member/change_password"/>" onsubmit="return checkPassword(this);">
@@ -154,7 +157,6 @@
 		</div>
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 	</div>
-
 
 	<!-- Footer section(하단부분) -->
 	<%@ include file="../common/commonBottom.jsp"%>
