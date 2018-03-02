@@ -22,6 +22,11 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member_withdraw_confirm_password.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -59,83 +64,71 @@ function checkPassword(f){
 	
 }
 </script>
-
 </head>
-
 <body>
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
-		<!-- HEADER -->
-
-		<%@ include file="../common/top_main2.jsp"%>
-
-		<!-- HOME -->
-			<section id="join" class="padbot0">
-
-				<!-- CONTAINER -->
-				<div class="container"><!-- 좌우측의 공간 확보 -->
-           
-           <div class="col-xs-9 col-md-9">
-
-				<h3>회원탈퇴 전 비밀번호 확인</h3>
-				<small>회원탈퇴 전 개인 정보 보호를 위해 비밀번호를 다시 확인 합니다.<br/>비밀번호 확인후 바로 탈퇴 처리 됩니다.</small>
-				<form name="withdrawFrm" method="post" action="<c:url value="/member/withdraw"/>" onsubmit="return checkPassword(this);">
-					
-					<!-- 폼값으로 넘겨받으면 변조 우려 있음 그나마 세션이 안전하긴함 이것도 암호화해얄듯-->
-					<%-- <input type="hidden" name="user_id" value="${sessionScope.USER_ID }"/> --%>
-					<input type="hidden" name="step" value="3"/>
-					<table class="table table-bordered">
-						<colgroup>
-							<col width="20%" />
-							<col width="*" />
-						</colgroup>
-						<tbody>
-							
+		<!-- Top영역 1첫번째 -->
+		<div class="row">
+		<%@ include file="../common/commonTop_1.jsp"%>
+		</div>
+		<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+		<div class="row">
+		<%@ include file="../common/commonTop_2_mypage.jsp"%>
+		</div>
+		
+		<!-- Body영역 -->
+		<div class="row" id="row-body-withdraw">
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-8 col-sm-10 col-xs-12">
+				<!-- 서브메뉴부분 -->
+				<div class="col-xs-2" id="profile-menu">
+					<h3>계정설정</h3>
+					<a href="${pageContext.request.contextPath}/mypage/myinfo"><p>계정정보</p></a>
+					<a href="#"><p>인증정보</p></a>
+					<a href="#"><p>알림설정</p></a>
+					<a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a>
+					<a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
+				</div>
+				<!-- 회원탈퇴 비밀번호 작성후 탈퇴부분 -->
+				<div class="col-xs-10" id="profile-info">
+					<h4>회원탈퇴 전 비밀번호 확인</h4>
+					<hr/>
+					<br/>
+					<form name="withdrawFrm" method="post" action="<c:url value="/member/withdraw"/>" onsubmit="return checkPassword(this);">	
+						<!-- 폼값으로 넘겨받으면 변조 우려 있음 그나마 세션이 안전하긴함 이것도 암호화해얄듯-->
+						<%-- <input type="hidden" name="user_id" value="${sessionScope.USER_ID }"/> --%>
+						<input type="hidden" name="step" value="3"/>
+						<table>
 							<tr>
-								<th class="text-center" style="vertical-align: middle;">패스워드</th>
 								<td>
-									<input type="text" name="password" class="form-control" style="width: 200px;" />
+									<p class="confirm-title">확인 비밀번호</p>
+									<input type="password" name="password" class="form-control" placeholder="비밀번호 확인후 바로 탈퇴 처리 됩니다."/>
 								</td>
 							</tr>
-						
-						</tbody>
-					</table>
-
-
-					<div class="row text-center" style="">
-						<!-- 각종 버튼 부분 -->
-						<button type="submit" class="btn btn-danger">회원탈퇴</button>
-						<button type="button" class="btn btn-warning" onclick="history.back();">취소하기</button>
-
-
-					</div>
-
-
-				</form>
-
-
+							<tr id="confirm-btn">
+								<td>
+									<button type="button" class="btn btn-success btn-back" onclick="history.back();">취소하기</button>
+									<button type="submit" class="btn btn-danger">회원탈퇴</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
 			</div>
-           
-           
-           </div>
-				<!-- //CONTAINER -->
-
-
-			</section>
-		<!-- //HOME -->
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+		</div>
 
 		<!-- 모달창 -->
 		<%@ include file="../common/modal_msg.jsp"%>
 		<!-- //모달창 끝 -->
 
-
 		<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
+		<%@ include file="../common/commonBottom.jsp"%>
 		<!-- Footer section(하단부분) -->
-
 	</div>
 </body>
 </html>
