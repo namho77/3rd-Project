@@ -70,7 +70,28 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 				}
 			}
 			
-			response.sendRedirect(request.getContextPath()+"/member/login");
+			/*
+			 관리자 페이지의 경우 관리자 전용 로그인으로..
+			 */
+			String uri = request.getRequestURI();
+			
+			String query = request.getQueryString();
+			
+			if(query == null || query.equals("null")) {
+				query = "";
+			} else {
+				query = "?" + query;
+			}
+			String reqURL =  (uri + query);
+			if(reqURL.matches(".*admin.*"))
+			{
+				response.sendRedirect(request.getContextPath()+"/admin/login");
+			}
+			else {
+				response.sendRedirect(request.getContextPath()+"/member/login");
+			}
+			
+			
 			return false;
 		}
 		return true;

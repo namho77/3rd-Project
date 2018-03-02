@@ -89,13 +89,31 @@
 				<table>
 					<tr class="mini-title">
 						<!-- 프로필이미지 -->
-						<td rowspan="8" class="image-area">
-							<center>
-								<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" />
-								<p>
-									<button type="button" class="btn btn-default">이미지 등록</button>
-								</p>
-							</center>
+						<td rowspan="8" class="image-area" align="center">
+								
+								<c:choose>
+		
+									<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
+									
+									<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" class="profile-image" />
+									
+									</c:when>
+							
+									<c:otherwise>
+									
+									<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" />
+							
+									</c:otherwise>
+								</c:choose>
+								
+								<input id="thumbnail_upload" name="file" type="file"
+															style="display: none;">
+								<div class="margin-top-20">
+															<label id="profilePictureBtn"
+																class="label-margin-none btn btn-default btn-sm width-100px border-888"
+																for="thumbnail_upload"> 이미지 등록 </label>
+														</div>
+							
 						</td>
 						<td colspan="4"><span class="info-title">아이디</span></td>
 					</tr>

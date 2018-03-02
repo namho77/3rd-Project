@@ -15,7 +15,8 @@ public class SearchController {
 	@RequestMapping(value="/board/search", method = RequestMethod.GET)
 	public String searchBoard(Model model,HttpServletRequest req, HttpSession session,RedirectAttributes rediAttr) {
 	
-	return "board/search/board_search_list";
+		//http://localhost:8080/ourplanners/board/search?board_type=E&keyword=ㄱㄱ
+		return "board/search/board_search_list";
 	}
 	
 }

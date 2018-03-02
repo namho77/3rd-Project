@@ -95,7 +95,7 @@
 										<div class="row">
 											<div class="col-xs-6 dashboard-profile text-center">
 												<div class="dashboard-profile-body">
-													<img id="thumbnail" class="border-round" src="${pageContext.request.contextPath}/img/tools/main_user_gray.png" title="dmacoder" onError="this.onerror=null;this.src='/img/tools/main_user_gray.png';">
+													<img id="thumbnail" class="border-round" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" title="dmacoder" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/main_user_gray.png';">
 													<div class="dashboard-profile-grade userProfileRanking NEW">
 														<a href="${pageContext.request.contextPath}/grade"> <img src="/img/tools/grade/kmong_grade_NEW.png" data-toggle="tooltip" data-placement="right" title="" data-original-title=NEW>
 														</a>

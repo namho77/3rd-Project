@@ -23,6 +23,10 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	<select id="hasId" resultType="Integer">
  		select count(*) from op_member where user_id=#{0}
  	</select>
+ 	<!-- 이메일 중복 체크 -->
+ 	 <select id="hasEmail" resultType="Integer">
+ 		select count(*) from op_member where email_address=#{0}
+ 	</select>
  	
  	<!-- 아이디 찾기시 (이름과 이메일로)-->
  	<select id="hasIdByNameAndEmail" resultType="Integer">

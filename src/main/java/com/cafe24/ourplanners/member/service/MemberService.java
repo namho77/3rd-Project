@@ -37,6 +37,8 @@ public interface MemberService {
 	public int withdrawMember(Model model, HttpServletRequest req, HttpSession session);
 
 	public void findId(Model model, HttpServletRequest req, ModelAndView mv);
+
+	public void hasEmail(HttpServletRequest req, HashMap<String, Object> map);
 	
 	
 }

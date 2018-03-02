@@ -448,4 +448,22 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public void hasEmail(HttpServletRequest req, HashMap<String, Object> map) {
+		int hasEmail = 0;
+
+		String email_address = req.getParameter("email_address");
+
+		hasEmail = dao.hasEmail(email_address);
+		
+		//해당 하는 아이디가 없으면 success N
+		//해당 하는 아이디가 있으면 fail Y
+		if (hasEmail <= 0) {
+			 System.out.println(hasEmail);
+			map.put("result", "N");
+		} else {
+			map.put("result", "Y");
+		}
+	}
+
 }

@@ -97,7 +97,7 @@ public class MemberController {
 
 	// 회원 프로필 사진 업로드
 	@ResponseBody
-	@RequestMapping(value = "/uploadProfile", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "member/uploadProfile", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public void uploadProfile(MultipartFile file, String str, HttpSession session, HttpServletRequest request,
 			Model model) throws Exception {
 		

@@ -46,13 +46,11 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-
 	function emailFrmCheck() {
 		var f = document.emailFrm;
-		
 
 		if ((!f.email.value)) {
-			alert("이메일 주소를 입력하세요");
+			popLayerMsg("이메일 주소를 입력하세요");
 			f.email.focus();
 
 		}
@@ -60,7 +58,7 @@
 		if (!checkEmail()) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -71,73 +69,72 @@
 
 		//이메일 유효성 검사
 		var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		
+
 		//한글 들어가 있는지 확인
 		var isHan = /[ㄱ-ㅎ가-힣]/g;
 		if (!isEmail.test(email) || isHan.test(email)) {
-			alert("이메일 주소를 다시 확인해주세요.");
+			//popLayerMsg("이메일 주소를 다시 확인해주세요.");
 			return false;
 		}
 		f.email.value = email;
 		return true;
 	}
 
-
-	function resetDuplicationCheck() {
-		var fn = document.registFrm;
-		fn.DuplicationCheck.value = "N";
+	function resetDuplicationCheckEmail() {
+		var fn = document.emailFrm;
+		fn.DuplicationCheckEmail.value = "N";
 	}
 
-	
-	 window.onload = function(){
-		  
-		  
-		  var uid = document.getElementById("user_id");
-		  
-		  var isValidID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
-		  
-		  if(uid != null)
-		{
-			  
-		  uid.onblur = function(){
-		    //uid에 입력된 값이 있으면
-		    if(uid.value != null && uid.value.length > 0)
-		    {
-		    	
-		    	
-				if (!isValidID.test(uid.value)) {
-					document.getElementById("idCheckSpan").innerText = "아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
-					document.registFrm.DuplicationCheck.value="N";
-					return;
+	$(window).load(function() {
+
+		var email = document.getElementById("email");
+
+		if (email != null) {
+			$('#email').on('blur', function() {
+
+				//uid에 입력된 값이 있으면
+				if (uid.value != null && uid.value.length > 0) {
+
+					if (checkEmail()) {
+						document.getElementById("idCheckSpan").innerText = "올바른 이메일 주소를 입력하세요.";
+						document.emailFrm.DuplicationCheckEmail.value = "N";
+						return;
+					}
+
+					$.ajax({
+						url : '${pageContext.request.contextPath}/json/email_check.json', //url에 주소 넣기
+						contentType : "text/html; charset=utf-8;",
+						data : {
+							email_address : email.value
+						},
+						dataType : 'json', //dataType에 데이터 타입 넣기
+						success : function(data) { //success에 성공했을 때 동작 넣기.
+
+							//중복되지 않은 경우
+							if (data.result == "success") {
+								idCheck = true;
+								document.getElementById("emailCheckSpan").innerText = "사용할 수 있는 이메일 입니다.";
+								document.registFrm.DuplicationCheckEmail.value = "Y";
+							}
+							//중복된 경우
+							else {
+								idCheck = false;
+								document.getElementById("emailCheckSpan").innerText = "이미 사용중인 이메일 입니다." + data.result;
+								document.registFrm.DuplicationCheckEmail.value = "N";
+							}
+
+						},
+						error : function(e) {
+							popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+
+						}
+					});
+
 				}
-				
-		    	
-		     $.ajax({
-		      url:'j_id_check.jsp?user_id=' + uid.value,  //url에 주소 넣기
-		      dataType:'json',      //dataType에 데이터 타입 넣기
-		      success:function(data){     //success에 성공했을 때 동작 넣기.
-		       
-		       //중복되지 않은 경우
-		       if(data.result == "success"){
-		        idCheck = true; 
-		        document.getElementById("idCheckSpan").innerText = "좋은 아이디네요!";
-		        document.registFrm.DuplicationCheck.value="Y";
-		       }
-		       //중복된 경우
-		       else{
-		        idCheck = false;
-		        document.getElementById("idCheckSpan").innerText = "이미 사용중이거나 탈퇴한 아이디입니다."+data.result;
-		        document.registFrm.DuplicationCheck.value="N";
-		       }
-		       
-		      }
-		     });
-		    
-		    }
-		  }
-	 }
-	 
-	 }
+			});
+		}
+
+	});
 </script>
 </head>
 
@@ -177,7 +174,9 @@
 									<div>이메일</div>
 								</div>
 								<div class="col-lg-4 text-center">
-									<input type="text" class="form-control" name="email" id="email" data-rule-required="true" placeholder="이메일 주소 입력">
+									<input type="text" class="form-control" name="email" id="email" data-rule-required="true" placeholder="이메일 주소 입력" onkeydown="resetDuplicationCheckEmail()"> <span id="emailCheckSpan" class="text-danger"></span> <input type="hidden" name="DuplicationCheckEmail" value="N">
+
+
 									<button type="button" class="btn btn-info btn-xs" onclick="sendAuthMail();">발송</button>
 								</div>
 								<div class="col-lg-4 text-center"></div>
@@ -247,49 +246,44 @@
 							return false;
 						}
 
-						var url = "j_check_authkey.jsp";
-						var params = "authkey="
-								+ f.authkey.value
-								+ "&user_id=${emailInfo.user_id}&password=${emailInfo.password}";
+						var url = "${pageContext.request.contextPath}/json/authkey_check.json";
+						var params = "authkey=" + f.authkey.value + "&user_id=${emailInfo.user_id}&password=${emailInfo.password}";
 						var isMatched = false;
 						// alert(url+"?"+params);
 						//popLayerMsg(url+"?"+params); 
 						popLayerMsg("인증 번호 확인중");
 						//동기방식으로 호출 그래야 알맞게 return 됨
-						$
-								.ajax({
-									type : 'post',
-									async : false,
-									url : url,
-									dataType : 'json',
-									data : params,
+						$.ajax({
+							type : 'post',
+							async : false,
+							url : url,
+							dataType : 'json',
+							data : params,
 
-									success : function(data) { //success에 성공했을 때 동작 넣기.
+							success : function(data) { //success에 성공했을 때 동작 넣기.
 
-										//인증번호 일치
-										if (data.result == "success") {
-											//alert("인증 성공");
-											//popLayerMsg("인증 되었습니다.");
-											isMatched = true;
-										}
-										//중복된 경우
-										else {
+								//인증번호 일치
+								if (data.result == "success") {
+									//alert("인증 성공");
+									//popLayerMsg("인증 되었습니다.");
+									isMatched = true;
+								}
+								//중복된 경우
+								else {
 
-											popModal("#layer_unmatched_authkey");
-											$('.checkAuth_btn').prop(
-													"disabled", false);
-											isMatched = false;
-										}
+									popModal("#layer_unmatched_authkey");
+									$('.checkAuth_btn').prop("disabled", false);
+									isMatched = false;
+								}
 
-									},
-									error : function() {
-										popLayerMsg("AJAX Error 발생");
-										$('.checkAuth_btn').prop("disabled",
-												false);
-										isMatched = false;
-										//alert("ajax error");
-									}
-								});
+							},
+							error : function() {
+								popLayerMsg("AJAX Error 발생");
+								$('.checkAuth_btn').prop("disabled", false);
+								isMatched = false;
+								//alert("ajax error");
+							}
+						});
 
 						return isMatched;
 
@@ -313,10 +307,8 @@
 
 						//countdown( "countdown", 10, 0 );
 
-						var url = "../join/sendMailAuth.jsp";
-						var params = "to="
-								+ document.emailFrm.email.value
-								+ "&user_id=${emailInfo.user_id}&password=${emailInfo.password}";
+						var url = "${pageContext.request.contextPath}/mail/mail_authkey_send.json";
+						var params = "to=" + document.emailFrm.email.value + "&user_id=${emailInfo.user_id}&password=${emailInfo.password}";
 
 						//alert(url+"?"+params);
 						popLayerMsg("인증메일 발송중 입니다.");
@@ -374,17 +366,13 @@
 								time = new Date(msLeft);
 								hours = time.getUTCHours();
 								mins = time.getUTCMinutes();
-								element.innerHTML = (hours ? hours + ':'
-										+ twoDigits(mins) : mins)
-										+ ':' + twoDigits(time.getUTCSeconds());
-								setTimeout(updateTimer, time
-										.getUTCMilliseconds() + 500);
+								element.innerHTML = (hours ? hours + ':' + twoDigits(mins) : mins) + ':' + twoDigits(time.getUTCSeconds());
+								setTimeout(updateTimer, time.getUTCMilliseconds() + 500);
 							}
 						}
 
 						element = document.getElementById(elementName);
-						endTime = (+new Date) + 1000 * (60 * minutes + seconds)
-								+ 500;
+						endTime = (+new Date) + 1000 * (60 * minutes + seconds) + 500;
 						updateTimer();
 					}
 

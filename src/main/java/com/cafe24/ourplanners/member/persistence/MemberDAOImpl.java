@@ -203,6 +203,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	@Override
+	public int hasEmail(String email_address) {
+		int hasEmail = sqlSession.selectOne(namespace+".hasEmail", email_address);
+		return hasEmail;
+	}
+
+
 
 
 
