@@ -1,10 +1,13 @@
 package com.cafe24.ourplanners.board.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.dto.BoardDTO;
@@ -35,15 +38,45 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public BoardDTO view(Integer boardSrl) throws Exception {
+	public BoardVO view(Integer boardSrl) throws Exception {
 		return dao.view(boardSrl);
 	}
 	
-
-	
 	@Override
-	public void write(BoardVO board) throws Exception {
-		// TODO Auto-generated method stub
+	public int write(HttpServletRequest req, Model model) throws Exception {
+		
+		
+	    String user_id = req.getParameter("user_id");
+	    String title = req.getParameter("title");
+	    String contents = req.getParameter("contents");
+	    String location = req.getParameter("location");
+		
+		
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date utilDate = null;
+		
+		String strService_time_start = req.getParameter("service_time_start");
+		utilDate = fm.parse(strService_time_start);
+		java.sql.Date sqlService_time_start = new java.sql.Date(utilDate.getTime());
+		
+		
+		String strService_time_end = req.getParameter("service_time_end");
+		utilDate = fm.parse(strService_time_end);
+		java.sql.Date sqlService_time_end = new java.sql.Date(utilDate.getTime());
+		
+		int contact_time_start = Integer.parseInt(req.getParameter("contact_time_start"));
+		int contact_time_end = Integer.parseInt(req.getParameter("contact_time_end"));
+		int category_srl = Integer.parseInt(req.getParameter("category_srl"));
+		int subcategory_srl = Integer.parseInt(req.getParameter("subcategory_srl"));
+		int service_cost = Integer.parseInt(req.getParameter("service_cost"));
+		String board_type = req.getParameter("board_type");
+		
+		BoardDTO dto = new BoardDTO(user_id, title, contents, location, sqlService_time_start,
+				sqlService_time_end, contact_time_start, contact_time_end, category_srl, subcategory_srl, 
+				service_cost, board_type);
+	    
+		return dao.write(dto);
+		
 		
 	}
 	

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,14 +45,19 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public BoardDTO view(Integer boardSrl) throws Exception{
+	public BoardVO view(Integer boardSrl) throws Exception{
 		return sqlSession.selectOne(namespace + ".view", boardSrl);
 	}
 	
+	@Override
+	public int write(BoardDTO dto) throws Exception {
+		System.out.println(dto.getBoard_type());
+		System.out.println(dto.getCategory_srl());
+		System.out.println(dto.getLocation());
+		return sqlSession.insert(namespace + ".insert", dto); 
+	}
+	
 
-	
-	
-	
 	@Override
 	public BoardVO read(Integer bno) throws Exception {
 		return sqlSession.selectOne(namespace + ".read", bno);
@@ -59,13 +65,7 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	
 	
-	@Override
-	public void write(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		//sqlSession.insert(namespace + ".create", vo);
-		
-		//return session.selectOne(namespace + ".read", bno);
-	}
+	
 	
 
 	@Override

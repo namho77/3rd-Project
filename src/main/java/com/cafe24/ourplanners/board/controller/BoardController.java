@@ -1,6 +1,8 @@
 package com.cafe24.ourplanners.board.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.dto.BoardDTO;
@@ -85,48 +89,54 @@ public class BoardController {
 	public String viewEngineerBoard(Model model, HttpServletRequest req, HttpSession session, HttpServletResponse resp) throws IOException {
 		
 		
-		BoardDTO dto = null;
+		BoardVO vo = null;
 		try {
-			dto = service.view(Integer.parseInt(req.getParameter("board_srl")));
+			vo = service.view(Integer.parseInt(req.getParameter("board_srl")));
 			
-			dto.setContents(dto.getContents().replace("\r\n", "<br/>"));
+			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("view", dto);
+		model.addAttribute("view", vo);
 		
 		
 		return "board/engineer/board_engineer_view";
 	}
-	
-
-	
-	
-	
-	
+		
 	//글쓰기 폼 가져오기
 	@RequestMapping(value = "engineer/write", method = RequestMethod.GET)
 	public String writeEngineerBoard() {
 		return "board/engineer/board_engineer_write";
 	}
 	
-	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.POST)
-	public String writeActionEngineerBoard(HttpServletResponse resp, HttpServletRequest req, HttpSession session) {
-		
-		BoardVO board = null;
+	//글쓰기 처리
+	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.GET)
+	public void writeActionEngineerBoard(HttpServletResponse resp, 
+			HttpServletRequest req, HttpSession session, Model model) {
+			
 		
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		try {
-			service.write(board);
+		
+			/*if(session.getAttribute("siteUserInfo")==null) {
+				resp.getWriter().write("loginFail");
+				return;
+			}*/
+			
+			int result = service.write(req, model);
+			
+			if(result > 0) {
+				resp.getWriter().write("writeSuccess");
+			}
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "board/engineer/board_engineer_write";
 	}
 	
 	

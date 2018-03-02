@@ -2,8 +2,11 @@ package com.cafe24.ourplanners.board.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+
 import com.cafe24.ourplanners.board.domain.BoardVO;
-import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
 
@@ -17,11 +20,9 @@ public interface BoardService {
 	
 	public int getTotalCount() throws Exception;
 	
-	public BoardDTO view(Integer boardSrl) throws Exception;
+	public BoardVO view(Integer boardSrl) throws Exception;
 	
-
-	
-	public void write(BoardVO board) throws Exception;
+	public int write(HttpServletRequest req, Model model) throws Exception;
 	
 	
 	public int listCountCriteria(Criteria cri) throws Exception;

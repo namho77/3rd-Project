@@ -1,20 +1,20 @@
 package com.cafe24.ourplanners.board.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardVO {
 
 	private int board_srl;
 	private String user_id;
 	private String location;
-	private java.util.Date service_time_start;
-	private java.util.Date service_time_end;
+	private java.sql.Date service_time_start;
+	private java.sql.Date service_time_end;
 	private String title;
 	private String contents;
-	private java.util.Date postdate;
+	private java.sql.Date postdate;
 	private int visitcount;
-	private java.util.Date contact_time_start;
-	private java.util.Date contact_time_end;
+	private int contact_time_start;
+	private int contact_time_end;
 	private String like_user_id;
 	private String main_image;
 	private String contents_image;
@@ -25,14 +25,14 @@ public class BoardVO {
 	private int limit_person;
 	private String board_type;
 	private int service_score;
-	private java.util.Date last_update;
+	private java.sql.Date last_update;
 	
 	
 	public BoardVO() {}
 	
 	public BoardVO(int board_srl, String user_id, String location, Date service_time_start, Date service_time_end,
-			String title, String contents, Date postdate, int visitcount, Date contact_time_start,
-			Date contact_time_end, String like_user_id, String main_image, String contents_image, int category_srl,
+			String title, String contents, Date postdate, int visitcount, int contact_time_start,
+			int contact_time_end, String like_user_id, String main_image, String contents_image, int category_srl,
 			int subcategory_srl, String service_expired, int service_cost, int limit_person, String board_type,
 			int service_score, Date last_update) {
 		
@@ -78,16 +78,16 @@ public class BoardVO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public java.util.Date getService_time_start() {
+	public java.sql.Date getService_time_start() {
 		return service_time_start;
 	}
-	public void setService_time_start(java.util.Date service_time_start) {
+	public void setService_time_start(java.sql.Date service_time_start) {
 		this.service_time_start = service_time_start;
 	}
-	public java.util.Date getService_time_end() {
+	public java.sql.Date getService_time_end() {
 		return service_time_end;
 	}
-	public void setService_time_end(java.util.Date service_time_end) {
+	public void setService_time_end(java.sql.Date service_time_end) {
 		this.service_time_end = service_time_end;
 	}
 	public String getTitle() {
@@ -102,10 +102,10 @@ public class BoardVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public java.util.Date getPostdate() {
+	public java.sql.Date getPostdate() {
 		return postdate;
 	}
-	public void setPostdate(java.util.Date postdate) {
+	public void setPostdate(java.sql.Date postdate) {
 		this.postdate = postdate;
 	}
 	public int getVisitcount() {
@@ -114,16 +114,16 @@ public class BoardVO {
 	public void setVisitcount(int visitcount) {
 		this.visitcount = visitcount;
 	}
-	public java.util.Date getContact_time_start() {
+	public int getContact_time_start() {
 		return contact_time_start;
 	}
-	public void setContact_time_start(java.util.Date contact_time_start) {
+	public void setContact_time_start(int contact_time_start) {
 		this.contact_time_start = contact_time_start;
 	}
-	public java.util.Date getContact_time_end() {
+	public int getContact_time_end() {
 		return contact_time_end;
 	}
-	public void setContact_time_end(java.util.Date contact_time_end) {
+	public void setContact_time_end(int contact_time_end) {
 		this.contact_time_end = contact_time_end;
 	}
 	public String getLike_user_id() {
@@ -187,10 +187,10 @@ public class BoardVO {
 		this.service_score = service_score;
 	}
 
-	public java.util.Date getLast_update() {
+	public java.sql.Date getLast_update() {
 		return last_update;
 	}
-	public void setLast_update(java.util.Date last_update) {
+	public void setLast_update(java.sql.Date last_update) {
 		this.last_update = last_update;
 	}
 }

@@ -2,11 +2,37 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script type="text/javascript">
 $(document).ready(function(){
 	
+ 	//ckedit
+	$(function(){
+    	         
+        CKEDITOR.replace( 'contents', {//해당 이름으로 된 textarea에 에디터를 적용
+            width:'100%',
+            height:'600px',
+            filebrowserImageUploadUrl: './engineer/writeAction' //여기 경로로 파일을 전달하여 업로드 시킨다.
+        });
+         
+         
+        CKEDITOR.on('dialogDefinition', function( ev ){
+            var dialogName = ev.data.name;
+            var dialogDefinition = ev.data.definition;
+          
+            switch (dialogName) {
+                case 'image': //Image Properties dialog
+                    //dialogDefinition.removeContents('info');
+                    dialogDefinition.removeContents('Link');
+                    dialogDefinition.removeContents('advanced');
+                    break;
+            }
+        });
+   	         
+    });
 	
+	 
 	$('#listGO').click(function(){
 		location.href = "./engineer";
 	});
@@ -18,11 +44,11 @@ $(document).ready(function(){
 			$("input[type='text'][name='title']").focus();
 			return;
 		}
-		if($("textarea[name='contents']").val()==""){
+	/* 	if($("textarea[name='contents']").val()==""){
 			alert("내용을 입력해주세요");
 			$("textarea[name='contents']").focus();
 			return;
-		}
+		} */
 		if($("input[type='text'][name='service_time_start']").val()==""){
 			alert("서비스 시작 기간을 입력해주세요");
 			$("input[type='text'][name='service_time_start']").focus();
@@ -45,7 +71,7 @@ $(document).ready(function(){
 		}
 		
 		//폼값전송
-		var params = $('#writeFrm').serialize();
+		var params = $('#writeFrm').serialize();	
 		$.ajax({
 			url : "./engineer/writeAction",
 			dataType : "html",
@@ -53,13 +79,16 @@ $(document).ready(function(){
 			contentType : "text/html; charset=utf-8",
 			data : params,
 			success : function(d){
-				if(d=="loginFail"){
+				if(d == "loginFail"){
 					alert("로그인후 작성해주세요")
-					location.href = "login.do";
+					location.href = "../member/login";
 				}
 				else if(d=="writeSuccess"){
 					alert("글쓰기를 성공하였습니다.")
-					location.href = "board.do";	
+					location.href = "./engineer";	
+				}
+				else {
+					alert("글쓰기 실패!");
 				}
 			},
 			error : function(e){
@@ -79,7 +108,14 @@ $(document).ready(function(){
 		</script>
 	</c:when>
 	<c:otherwise> --%>
+	
 		<form id="writeFrm">
+			
+			<input type="hidden" name="user_id" value="${sessionScope.loginUserInfo.user_id }" />
+			<input type="hidden" name="board_type" value="E" />
+		 	<input type="hidden" name="category_srl" value="1" />
+			<input type="hidden" name="subcategory_srl" value="1" />
+			
 			<div class="row" id="row-body-write">
 			
 				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
@@ -93,15 +129,8 @@ $(document).ready(function(){
 							<p class="p-title">서비스내용</p>
 							
 							
-							<textarea class="form-control" name="editor1" id="editor1" rows="10" cols="80">
-               
-            				</textarea>
-			            <script>
-			                // Replace the <textarea id="editor1"> with a CKEditor
-			                // instance, using default configuration.
-			                CKEDITOR.replace( 'editor1' );
-			            </script>
-							
+							<textarea class="form-control" name="contents" id="contents" 
+								rows="10" cols="80" placeholder="서비스 내용을 입력하세요"></textarea>	
 						</div>
 						<div class="need-contents">
 							<p class="p-title">필수사항</p>
@@ -128,7 +157,13 @@ $(document).ready(function(){
 								</p>
 								<p>
 									연락가능시간 &nbsp;&nbsp;: &nbsp;&nbsp;
-									<input name="contact_time"
+									<input name="contact_time_start"
+										class="form-control" id="input-call" type="text" 
+										placeholder="연락가능시간을 입력하세요" />
+										
+										~
+										
+									<input name="contact_time_end"
 										class="form-control" id="input-call" type="text" 
 										placeholder="연락가능시간을 입력하세요" />
 								</p>
@@ -140,11 +175,7 @@ $(document).ready(function(){
 							</p>
 							
 							<p class="p-title">
-								<img src="" alt="컨텐츠 이미지" id="contents_image1"/>
-							</p>
-							
-							<p class="p-title">
-								<img src="" alt="컨텐츠 이미지" id="contents_image2"/>
+								<img src="" alt="컨텐츠 이미지" id="contents_image"/>
 							</p>
 						</div>
 					</div>
