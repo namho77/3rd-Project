@@ -8,7 +8,7 @@
 $(document).ready(function(){
 	
  	//ckedit
-	$(function(){
+	/* $(function(){
     	         
         CKEDITOR.replace( 'contents', {//해당 이름으로 된 textarea에 에디터를 적용
             width:'100%',
@@ -30,7 +30,7 @@ $(document).ready(function(){
             }
         });
    	         
-    });
+    }); */
 	
 	 
 	$('#listGO').click(function(){
@@ -170,13 +170,13 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<div class="images">
-							<p class="p-title">
+							<!-- <p class="p-title">
 								<img src="" alt="메인 이미지" id="main_image"/>
 							</p>
 							
 							<p class="p-title">
 								<img src="" alt="컨텐츠 이미지" id="contents_image"/>
-							</p>
+							</p> -->
 						</div>
 					</div>
 					<div class="write-btn">
