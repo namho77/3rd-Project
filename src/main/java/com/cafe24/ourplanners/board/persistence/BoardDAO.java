@@ -16,7 +16,9 @@ public interface BoardDAO {
 	
 	public int getTotalCount() throws Exception;
 	
-	public BoardDTO view (Integer boardSrl) throws Exception;
+	public BoardVO view (Integer boardSrl) throws Exception;
+	
+	public int write(BoardDTO dto) throws Exception;
 	
 	public BoardVO read(Integer boardSrl) throws Exception;
 
@@ -27,7 +29,7 @@ public interface BoardDAO {
 	
 	
 	
-	public void write(BoardVO vo) throws Exception;
+	
 
 	public void update(BoardVO vo) throws Exception;
 

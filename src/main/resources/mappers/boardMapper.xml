@@ -14,7 +14,7 @@
 		SELECT * FROM op_board ORDER BY board_srl DESC
 	</select> -->
 	
-	<select id="listPage" resultType="com.cafe24.ourplanners.board.dto.BoardDTO">
+	<select id="listPage" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
 		SELECT * FROM (
 			SELECT Tb.*, rownum rNum FROM (
 				SELECT * FROM op_board ORDER BY board_srl DESC 
@@ -23,7 +23,25 @@
 		WHERE rNum BETWEEN #{start} AND #{end}
 	</select> 
 	
- 	<select id="view" resultType="com.cafe24.ourplanners.board.dto.BoardDTO">
+ 	<select id="view" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
  		SELECT * FROM op_board WHERE board_srl = #{param1}
  	</select>
+ 	
+ 	<insert id="insert" parameterType="com.cafe24.ourplanners.board.dto.BoardDTO">
+ 		insert into op_board (
+ 			board_srl, user_id, location, service_time_start, service_time_end,
+ 			title, contents, contact_time_start, contact_time_end, category_srl,
+ 			subcategory_srl, service_cost, board_type) 
+		values (
+			board_srl_seq.nextval, #{user_id}, #{location}, #{service_time_start}, #{service_time_end},
+            #{title}, #{contents}, #{contact_time_start}, #{contact_time_end}, #{category_srl},
+            #{subcategory_srl}, #{service_cost}, #{board_type}) 
+ 	</insert>
  </mapper>
+
+ 
+ 
+ 
+ 
+ 
+ 
