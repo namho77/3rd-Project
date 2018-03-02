@@ -4,10 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
-	//ajax json데이터 캐쉬 방지
-	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
+	if (request.getProtocol().equals("HTTP/1.1"))
+		response.setHeader("Cache-Control", "no-cache");
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member_password_change.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

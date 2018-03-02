@@ -3,10 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
-	//ajax json데이터 캐쉬 방지
-	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
+	if (request.getProtocol().equals("HTTP/1.1"))
+		response.setHeader("Cache-Control", "no-cache");
 %>
 <script type="text/javascript">
 window.jQuery = window.$ = jQuery;
