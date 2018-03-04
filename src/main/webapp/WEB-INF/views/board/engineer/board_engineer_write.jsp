@@ -1,37 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> --%>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/writeForm.js"/>"></script>
+
+<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+	</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
-	
- 	//ckedit
-	/* $(function(){
-    	         
-        CKEDITOR.replace( 'contents', {//해당 이름으로 된 textarea에 에디터를 적용
-            width:'100%',
-            height:'600px',
-            filebrowserImageUploadUrl: './engineer/writeAction' //여기 경로로 파일을 전달하여 업로드 시킨다.
-        });
-         
-         
-        CKEDITOR.on('dialogDefinition', function( ev ){
-            var dialogName = ev.data.name;
-            var dialogDefinition = ev.data.definition;
-          
-            switch (dialogName) {
-                case 'image': //Image Properties dialog
-                    //dialogDefinition.removeContents('info');
-                    dialogDefinition.removeContents('Link');
-                    dialogDefinition.removeContents('advanced');
-                    break;
-            }
-        });
-   	         
-    }); */
-	
 	 
 	$('#listGO').click(function(){
 		location.href = "./engineer";
@@ -69,7 +50,7 @@ $(document).ready(function(){
 			$("input[type='text'][name='contact_time']").focus();
 			return;
 		}
-		
+	/* 	
 		//폼값전송
 		var params = $('#writeFrm').serialize();	
 		$.ajax({
@@ -95,11 +76,12 @@ $(document).ready(function(){
 				alert("요청실패:"+e.status+" "+e.statusText);
 			}
 		});
+		 */
 	});
 });
 </script>
 
-<%-- <c:choose>
+ <c:choose>
 	<c:when test="${empty sessionScope.loginUserInfo }">
 		<!-- 로그인 정보가 없다면 경고메시지를 띄우고 로그인 페이지로 이동한다. -->
 		<script>
@@ -107,9 +89,10 @@ $(document).ready(function(){
 			location.href="../member/login";
 		</script>
 	</c:when>
-	<c:otherwise> --%>
+	<c:otherwise> 
 	
-		<form id="writeFrm">
+		<!-- <form id="writeFrm"> -->
+		<form action="./engineer/writeAction" method="post" id="frm">
 			
 			<input type="hidden" name="user_id" value="${sessionScope.loginUserInfo.user_id }" />
 			<input type="hidden" name="board_type" value="E" />
@@ -182,10 +165,11 @@ $(document).ready(function(){
 					<div class="write-btn">
 						<button type="button" class="btn btn-success" id="listGO">목록보기</button>
 						<button type="button" class="btn btn-success" id="writeActionBtn">글쓰기</button>
+						<input type="submit" id="addBtn" value="글쓰기" />
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
 			</div>
 		</form>
-<%-- 	</c:otherwise>
-</c:choose>	 --%>
+ 	</c:otherwise>
+</c:choose>	 
