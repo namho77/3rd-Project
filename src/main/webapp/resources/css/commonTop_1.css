@@ -36,10 +36,29 @@
 	height: 32px;
 }
 
+#navbar-nav>li>ul{
+	display: none;
+}
+
+#navbar-nav>li:hover ul{
+	display: block;
+}
+
 #navbar-nav>li>a {
 	color: #353535;
 	font-weight: 900;
 	font-size: 1em;
+}
+
+#navbar-nav>li>a:hover{
+	color: white;
+	font-weight: 900;
+	font-size: 1.1em;
+	
+}
+
+#navbar-nav>li>a:first-child{
+	background-color: transparent;
 }
 
 #dropdown-menu{
