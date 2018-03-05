@@ -31,8 +31,11 @@ $(function() {
         // 이부분에 에디터 validation 검증
         var el = document.createElement('html');
         el.innerHTML = editor_object.getById["contents"].elPlaceHolder.value;
+        
         //폼 submit
         $("#frm").submit();
+        
+        
     });
     
     function getContextPath() {

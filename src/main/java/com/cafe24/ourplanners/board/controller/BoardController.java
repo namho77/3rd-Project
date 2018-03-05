@@ -141,16 +141,29 @@ public class BoardController {
 		
 	}*/
 	
+	//글쓰기 처리
 	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.POST)
-	public ModelAndView write(HttpServletRequest request) throws IOException, FileUploadException {
-		String title = request.getParameter("title");
-		String smarteditor = request.getParameter("contents");
-//		
-		System.out.println("title = " + title);
-		System.out.println("contents = " + smarteditor);
-		ModelAndView model = new ModelAndView("write");
+	public void write(HttpServletResponse resp, HttpServletRequest req, HttpSession session, Model model) throws IOException, FileUploadException {
 		
-		return model;
+		resp.setContentType("text/html; charset=UTF-8");
+		
+		try {
+			
+			if(session.getAttribute("loginUserInfo")==null) {
+				return;
+			}
+			
+			int result = service.write(req, model);
+			
+			if(result > 0) {
+				resp.getWriter().write("writeSuccess");
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

@@ -1,7 +1,6 @@
 package com.cafe24.ourplanners.board.dto;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardDTO {
 
@@ -9,8 +8,8 @@ public class BoardDTO {
 	private String title;
 	private String contents;
     private String location;
-    private java.util.Date service_time_start;
-    private java.util.Date service_time_end;     	
+    private java.sql.Date service_time_start;
+    private java.sql.Date service_time_end;     	
     private int contact_time_start;
     private int contact_time_end;  
     private int category_srl;
@@ -59,19 +58,19 @@ public class BoardDTO {
 		this.location = location;
 	}
 
-	public java.util.Date getService_time_start() {
+	public java.sql.Date getService_time_start() {
 		return service_time_start;
 	}
 
-	public void setService_time_start(java.util.Date service_time_start) {
+	public void setService_time_start(java.sql.Date service_time_start) {
 		this.service_time_start = service_time_start;
 	}
 
-	public java.util.Date getService_time_end() {
+	public java.sql.Date getService_time_end() {
 		return service_time_end;
 	}
 
-	public void setService_time_end(java.util.Date service_time_end) {
+	public void setService_time_end(java.sql.Date service_time_end) {
 		this.service_time_end = service_time_end;
 	}
 	

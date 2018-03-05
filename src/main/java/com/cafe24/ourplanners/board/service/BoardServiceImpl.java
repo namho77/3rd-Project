@@ -59,7 +59,6 @@ public class BoardServiceImpl implements BoardService{
 		utilDate = fm.parse(strService_time_start);
 		java.sql.Date sqlService_time_start = new java.sql.Date(utilDate.getTime());
 		
-		
 		String strService_time_end = req.getParameter("service_time_end");
 		utilDate = fm.parse(strService_time_end);
 		java.sql.Date sqlService_time_end = new java.sql.Date(utilDate.getTime());
