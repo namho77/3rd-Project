@@ -29,7 +29,7 @@
 							<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>
 							<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>
 							<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>
-							<li><a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');">FAQ</a></li>
+							<li><a href="${pageContext.request.contextPath}/customercenter/faq">FAQ</a></li>
 					
 	</ul>
 	<div class="row">
@@ -43,7 +43,7 @@
 						
 					</div>
 					<div class="col-xs-2">
-						<a href="#"><img class="footer-gara" src="${pageContext.request.contextPath}/resources/images/gara.jpg" title="서비스센터" /></a>
+						<a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');"><img class="footer-gara" src="${pageContext.request.contextPath}/resources/images/gara.jpg" title="서비스센터" /></a>
 					</div>
 				</div>
 			</div>

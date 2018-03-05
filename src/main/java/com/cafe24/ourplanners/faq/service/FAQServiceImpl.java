@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.cafe24.ourplanners.faq.domain.FAQVO;
 import com.cafe24.ourplanners.faq.persistence.FAQDAO;
+import com.cafe24.ourplanners.notice.dto.ABoardDTO;
+import com.cafe24.ourplanners.util.PagingUtil;
 import com.cafe24.ourplanners.util.SearchFAQCriteria;
 
 @Service
@@ -24,9 +26,21 @@ public class FAQServiceImpl implements FAQService {
 	@Override
 	public void getFAQListJson(SearchFAQCriteria scri, HashMap<String, Object> map) {
 
-		List<FAQVO> list = new ArrayList<FAQVO>();
-		list = dao.getFAQListJson(scri);
-		map.put("faqList", list);
+		List<FAQVO> lists = new ArrayList<FAQVO>();
+		lists = dao.getFAQListJson(scri);
+		
+		for(FAQVO list:lists) {
+			list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
+		}
+		int pageSize = scri.getPageSize();
+		int blockPage = scri.getBlockPage();
+		int nowPage = scri.getNowPage();
+		
+		int totalRecordCount = dao.getTotalCount();
+		String pagingDiv = PagingUtil.pagingAjax2(totalRecordCount, pageSize, blockPage, nowPage, "faqPaging");
+		
+		map.put("faqLists", lists);
+		map.put("pagingDiv", pagingDiv);
 	}
 
 	@Override
