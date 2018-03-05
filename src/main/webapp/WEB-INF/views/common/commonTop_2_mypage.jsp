@@ -8,8 +8,8 @@
 			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 			<div class="col-lg-8 col-sm-10 col-xs-12">
 				<ul class="nav navbar-nav navbar-left" id="navbar-nav2">
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">마이플레너스</a>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="${pageContext.request.contextPath}/mypage/myplan">마이플레너스</a>
 					</li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">채택관리
@@ -31,10 +31,16 @@
 						</ul>
 					</li>
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">메시지</a>
+						data-toggle="dropdown" href="#">계정설정
+						<span class="glyphicon glyphicon-chevron-down"></span></a>
+						<ul class="dropdown-menu navbar-nav3">
+							<li><a href="${pageContext.request.contextPath}/mypage/myinfo">계정정보</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
+						</ul>
 					</li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">계정설정</a>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="${pageContext.request.contextPath}/message">메시지</a>
 					</li>
 				</ul>
 			</div>

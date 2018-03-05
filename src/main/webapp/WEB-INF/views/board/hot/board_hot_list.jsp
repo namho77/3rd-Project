@@ -181,12 +181,13 @@ $(window).load(function(){
 		<!-- engineer section(기술자 게시글부분) -->
 		<section id="hot_engineer_board">
 			<div class="container">
-				<h2>기술자 HOT 게시글</h2>
+				<div class="hot-title1">
+					<h3><b>기술자 HOT 게시글</b></h3>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="carousel slide multi-item-carousel" id="hot_engineer_board_list">
 							<div class="carousel-inner" id="hot_engineer_div">
-
 							</div>
 							<a class="left carousel-control" href="#hot_engineer_board_list" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#hot_engineer_board_list" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 						</div>
@@ -198,7 +199,9 @@ $(window).load(function(){
 		<!-- buyer section(요청자 게시글부분) -->
 		<section id="hot_client_board">
 			<div class="container">
-				<h2>요청자 HOT 게시글</h2>
+				<div class="hot-title2">
+					<h3><b>요청자 HOT 게시글</b></h3>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="carousel slide multi-item-carousel" id="hot_client_board_list">
@@ -209,7 +212,7 @@ $(window).load(function(){
 
 
 							</div>
-							<a class="left carousel-control" href="#hot_client_board_list" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a> <a class="right carousel-control" href="#hot_client_board_list" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+							<a class="left carousel-control" href="#hot_client_board_list" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="margin-right: 200px;"></i></a> <a class="right carousel-control" href="#hot_client_board_list" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 						</div>
 					</div>
 				</div>

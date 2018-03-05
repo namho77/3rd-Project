@@ -25,10 +25,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/video.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -41,139 +45,423 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script src="${pageContext.request.contextPath}/resources/js/op.index.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+
 
 	
 </head>
 
-<body>
+<body id="total-bg">
 
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	<div id="wrapper" class="preloader_hide">
-
-		<!-- header section -->
-			<%@ include file="./common/commonTop_1.jsp"%>
-		<!--// header section -->
-		<!-- header section -->
-			<%@ include file="./common/commonTop_2.jsp"%>
-		<!--// header section -->
-		
-
-		<!-- 모달창 메시지 -->
-			<%@ include file="common/modal_msg.jsp"%>
-		<!--// 모달창 메시지 -->
-
-		<section id="wordcloud" class="section">
-			<!-- 검색, 핫 키워드 -->
-			<%@ include file="wordcloud/wordcloud.jsp"%>
-			<!--// 검색, 핫 키워드 -->
-		</section>
 	
-		<!-- category section(분야별 부분) -->
-		<section id="works" class="works section no-padding">
-			<div class="container-fluid">
-				<div class="row no-gutter">
+
+	<!-- header section -->
+		<%-- <%@ include file="./common/commonTop_1.jsp"%> --%>
+	<!--// header section -->
+	<!-- header section -->
+		<%-- <%@ include file="./common/commonTop_2.jsp"%> --%>
+	<!--// header section -->
+		
+	<!-- 모달창 메시지 -->
+		<%@ include file="common/modal_msg.jsp"%>
+	<!--// 모달창 메시지 
+	
+	<!-- 탑부분(기본적인 틀) -->
+	<nav class="navber" id="navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+				<div class="col-lg-8 col-sm-10 col-xs-12">
+					<div class="navbar-header">
+						<a class="navbar-brand" id="navbar-brand"
+							href="${pageContext.request.contextPath}"><b>♣</b>
+							OurPlanners</a>
+					</div>
+					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
+						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판</a></li>
+						<c:choose>
+						<c:when test="${empty loginUserInfo}">
+							<li><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
+								<ul class="dropdown-menu" id="dropdown-menu">
+									<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+										<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
+									</c:if>
+									<li><a href="${pageContext.request.contextPath}/mypage/myplan">마이플랜</a></li>
+									<li><a href="${pageContext.request.contextPath}/message">쪽지함</a></li>
+									<li><a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">프로필</a></li>
+									<li><a href="${pageContext.request.contextPath}/mypage/myinfo">계정정보</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
+								</ul>
+							</li>
+							<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+						</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			</div>
+		</div>
+	</nav>
+	<!-- 탑부분(기본적인 틀) -->
+	
+	<!-- 검색, 핫 키워드 -->
+	<%@ include file="wordcloud/wordcloud.jsp"%>
+	<!--// 검색, 핫 키워드 -->
+			
+	<!-- 카테고리(분야별 링크 부분) -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row">
 					<!-- 건축분야 -->
-					<div class="col-lg-3 col-md-3 col-sm-3 work">
-						<a href="" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
-							<div class="overlay">
-								<div class="overlay-caption">
-									<p>건축</p>
-								</div>
-							</div>
+					<div class="col-lg-2 col-sm-2 image-size-c">
+						<a href="${pageContext.request.contextPath}/board/engineer?category=1" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
 						</a>
 					</div>
-
+					
 					<!-- 자동차분야 -->
-					<div class="col-lg-3 col-md-3 col-sm-3 work">
+					<div class="col-lg-2 col-sm-2 image-size-c">
 						<a href="${pageContext.request.contextPath}/board/engineer?category=2" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie3.jpg" alt="">
-							<div class="overlay">
-								<div class="overlay-caption">
-									<p>자동차</p>
-								</div>
-							</div>
 						</a>
 					</div>
 
 					<!-- IT분야 -->
-					<div class="col-lg-3 col-md-3 col-sm-3 work">
+					<div class="col-lg-2 col-sm-2 image-size-c">
 						<a href="${pageContext.request.contextPath}/board/engineer?category=3" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie2.jpg" alt="">
-							<div class="overlay">
-								<div class="overlay-caption">
-									<p>IT</p>
-								</div>
-							</div>
 						</a>
 					</div>
 
 					<!-- 교육분야 -->
-					<div class="col-lg-3 col-md-3 col-sm-3 work">
+					<div class="col-lg-2 col-sm-2 image-size-c">
 						<a href="${pageContext.request.contextPath}/board/engineer?category=4" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie4.jpg" alt="">
-							<div class="overlay">
-								<div class="overlay-caption">
-									<p>교육</p>
-								</div>
-							</div>
+						</a>
+					</div>
+					
+					<!-- 마케팅분야 -->
+					<div class="col-lg-2 col-sm-2 image-size-c">
+						<a href="${pageContext.request.contextPath}/board/engineer?category=5" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/marketing.jpg" alt="">
+						</a>
+					</div>
+					
+					<!-- 컨텐츠분야 -->
+					<div class="col-lg-2 col-sm-2 image-size-c">
+						<a href="${pageContext.request.contextPath}/board/engineer?category=6" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/tile3.jpg" alt="">
 						</a>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- category section(분야별 부분) -->
-
-		<%@ include file="board/hot/board_hot_list.jsp"%>
-
-		<!-- video section(홍보영상 분분) -->
-
-		<section class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 xs-box2">
-						<h2 class="section-title mb25 text-left st2">홍보영상</h2>
-						<p class="mb25">이달의 기술자 소개 영상 입니다...</p>
-						<p>
-							<i class="fa fa-cloud-download"></i> &nbsp; 건축 타일 기술자
-						</p>
-						<p>
-							<i class="fa fa-comments"></i> &nbsp; 이주찬
-						</p>
-						<p>
-							<i class="fa fa-github-alt"></i> &nbsp; 저는 ~~~~~~~~~
-						</p>
-						<p class="mt30 mb0">
-							<a href="#" class="btn voyo-btn-2 br2">자세히 보기</a>
-						</p>
-					</div>
-					<div class="col-sm-6">
-					
-						<iframe class="rs-video" src="https://www.youtube.com/embed/_T_VPnwGrbk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- video section(홍보영상 분분) -->
-
-		<!-- up section(위로가기 부분) -->
-		<section class="section section-gray">
-			<div class="container">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<h3>어떤 분야를 찾고 계십니까? 분야별 이미지를 클릭해주세요!</h3>
-					<a href="#" class="btn btn-large">위로가기</a>
-				</div>
-			</div>
-		</section>
-		<!-- up section(위로가기 부분) -->
-
-		<!-- Footer (하단부분) -->
-		<%@ include file="./common/commonBottom.jsp"%>
-		<!--// Footer (하단부분) -->
-
+		</div>
 	</div>
+	<!-- 카테고리(분야별 링크 부분) -->
+			
+	<!-- 인기게시물(의뢰인 기술주 부분) -->
+	<%@ include file="board/hot/board_hot_list.jsp"%>
+
+	<!-- 플레너스 자랑하는부분 -->
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-2 col-xs-1"></div>
+			<div class="col-sm-8 col-xs-10">
+				<div class="sub-ments">
+					<h4>전문적인 서비스</h4>
+					<p>각 분야 전문가 98,868명의 </p>
+					<p>차별화된 서비스를 이용해보세요.</p>
+				</div>
+				<div class="sub-ments">
+					<h4>만족도 높은 결과물</h4>
+					<p>의뢰인 평점 98%에 달하는 </p>
+					<p>정확하고 만족도 높은 서비스를 경험해보세요.</p>
+				</div>
+				<div class="sub-ments">
+					<h4>안전한 거래 시스템</h4>
+					<p>543,613건의 거래를 완료한 </p>
+					<p>안전한 주문 시스템을 이용해보세요.</p>
+				</div>
+			</div>
+			<div class="col-sm-2 col-xs-1"></div>
+		</div>
+	</div>
+	<!-- 플레너스 자랑하는부분 -->
 	
-	<!-- JS FILES(자바스크립트 연결부분) -->
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="index-seller-modal-dialog modal-dialog" role="document" style="width: 853px;">
+            <div class="modal-content border-radius-none position-relative">
+                <a class="index-seller-close plain position-absolute font-size-h1 color-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                <div class="modal-body position-relative padding-all-0">
+                    <video id="firstVideo" style="display: none;" class="video-js vjs-default-skin" width="853px" height="479px" controls preload="none" poster='https://d2v80xjmx68n4w.cloudfront.net/intro/FRNfMx5PJ7xCLBwMRkBP.png'>
+                        <source src="https://d2v80xjmx68n4w.cloudfront.net/intro/FRNfMx5PJ7xCLBwMRkBP.mp4" type='video/mp4' />
+                    </video>
+
+                    <video id="secondVideo" style="display: none;" class="video-js vjs-default-skin" width="853px" height="479px" controls preload="none" poster='https://d2v80xjmx68n4w.cloudfront.net/intro/DA7y28XVQYYeDTFYOaru.png'>
+                        <source src="https://d2v80xjmx68n4w.cloudfront.net/intro/DA7y28XVQYYeDTFYOaru.mp4" type='video/mp4' />
+                    </video>
+
+                    <video id="thirdVideo" style="display: none;" class="video-js vjs-default-skin" width="853px" height="479px" controls preload="none" poster='https://d2v80xjmx68n4w.cloudfront.net/intro/47D2uBC8XpuifXhWY8Pb.png'>
+                        <source src="https://d2v80xjmx68n4w.cloudfront.net/intro/47D2uBC8XpuifXhWY8Pb.mp4" type='video/mp4' />
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+      var videos = {}
+      var currentVideoTarget = ''
+      var $videoModal = $('#videoModal')
+
+      videos['firstPlayer'] = videojs('firstVideo', {}, function onPlayerReady () {})
+      videos['secondPlayer'] = videojs('secondVideo', {}, function onPlayerReady () {})
+      videos['thirdPlayer'] = videojs('thirdVideo', {}, function onPlayerReady () {})
+      function openVideoModal (id) {
+        currentVideoTarget = id
+        $('#' + currentVideoTarget + 'Video').show()
+        $('#' + currentVideoTarget + 'Video_html5_api').show()
+        $videoModal.modal('show')
+      }
+
+      $videoModal.on('shown.bs.modal', function () {
+        videos[currentVideoTarget + 'Player'].play()
+      })
+
+      $videoModal.on('hide.bs.modal', function () {
+        $('#' + currentVideoTarget + 'Video').hide()
+        videos[currentVideoTarget + 'Player'].pause()
+      })
+
+      var currentViewGigsSlider = null
+      $(document).ready(function () {
+
+        var mainHeaderGigsContainerHeight = $('#mainHeaderGigsContainer').height() + 40, // padding-botttom-40
+          rootCategoryContainerScrollTop = $('#rootCategoryContainer').height() + 80 + mainHeaderGigsContainerHeight - 120, // margin-top-80 headerheight=60
+          $window = $(window),
+          $kmongNavBar = $('#mainKmongNavBar'),
+          $categoryHeader = $('#indexCategoryHeader'),
+          isAnimatingKmongHeader = false,
+          isAnimatingCategoryHeader = false
 
 
+        if ($window.scrollTop() > mainHeaderGigsContainerHeight) {
+          if (!$kmongNavBar.is(':visible') && isAnimatingKmongHeader === false) {
+            isAnimatingKmongHeader = true
+            $kmongNavBar.fadeIn(300, function () {
+              isAnimatingKmongHeader = false
+            })
+          }
 
+          if ($(this).scrollTop() > rootCategoryContainerScrollTop) {
+            if (!$categoryHeader.is(':visible') && isAnimatingCategoryHeader === false) {
+              isAnimatingCategoryHeader = true
+              $categoryHeader.fadeIn(300, function () {
+                isAnimatingCategoryHeader = false
+              })
+            }
+          } else {
+            if ($categoryHeader.is(':visible') && isAnimatingCategoryHeader === false) {
+              isAnimatingCategoryHeader = true
+              $categoryHeader.fadeOut(300, function () {
+                isAnimatingCategoryHeader = false
+              })
+            }
+          }
+
+        } else {
+          if ($kmongNavBar.is(':visible') && isAnimatingKmongHeader === false) {
+            isAnimatingKmongHeader = true
+            if (isAnimatingKmongHeader)
+              $kmongNavBar.fadeOut(300, function () {
+                isAnimatingKmongHeader = false
+              })
+          }
+        }
+        $window.scroll(function () {
+          var scrollTop = $(this).scrollTop()
+          if (scrollTop > mainHeaderGigsContainerHeight) {
+            if (!$kmongNavBar.is(':visible') && isAnimatingKmongHeader === false) {
+              isAnimatingKmongHeader = true
+              $kmongNavBar.fadeIn(300, function () {
+                isAnimatingKmongHeader = false
+              })
+            }
+
+            if (scrollTop > rootCategoryContainerScrollTop) {
+              if (!$categoryHeader.is(':visible') && isAnimatingCategoryHeader === false) {
+                isAnimatingCategoryHeader = true
+                $categoryHeader.fadeIn(300, function () {
+                  isAnimatingCategoryHeader = false
+                })
+              }
+            } else {
+              if ($categoryHeader.is(':visible') && isAnimatingCategoryHeader === false) {
+                isAnimatingCategoryHeader = true
+                $categoryHeader.fadeOut(300, function () {
+                  isAnimatingCategoryHeader = false
+                })
+              }
+            }
+
+          } else {
+            if ($kmongNavBar.is(':visible') && isAnimatingKmongHeader === false) {
+              isAnimatingKmongHeader = true
+              if (isAnimatingKmongHeader)
+                $kmongNavBar.fadeOut(300, function () {
+                  isAnimatingKmongHeader = false
+                })
+            }
+          }
+        })
+
+        if (typeof master_vue !== 'undefined') {
+          var currentViewedGigs = getCookie('CURRENT_VIEWED_GIGS')
+
+          if (!(currentViewedGigs === '' || currentViewedGigs === '[]')) {
+            $('#currentViewedGigsContainer').fadeIn(300)
+            master_vue.getCurrentViewGigs()
+          }
+        }
+      })
+    </script>
+
+	<!-- video section(홍보영상 분분) -->
+	<div class="container">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<div id="buyerVideoCarousel" class="carousel slide index-carousel"
+				data-ride="carousel" data-interval="false">
+				<div class="carousel-inner" role="listbox" style="padding-left: 15px; padding-right: 15px;">
+					<div style="padding-bottom: 0px;"
+						class="item panel panel-default border-radius-0 margin-none position-relative active">
+						<div class="row">
+							<div
+								class="col-xs-5 padding-right-0 position-relative overflow-hidden">
+								<a class="index-buyer-images" href="javascript:void(0);"
+									onclick="openVideoModal('first')">
+										<img class="width-100" style="width: 100%; height: 360px;"
+											src="https://kmong.com/img/main/desktop/buyer_review_1.png"
+											alt="전문가 동영상"> <img style="width: 50px; height: 50px;"
+											class="width-50px index-seller-play-image"
+											src="https://kmong.com/img/main/desktop/index_seller_play.png"
+											alt="플레이 버튼">
+								</a>
+							</div>
+							<div class="col-xs-7 padding-left-0">
+								<div class="buyer-video-text">
+									<h2
+										class="padding-left-50 margin-bottom-0 margin-top-10 color-e6"
+										style="font-size: 50px !important; text-align: left; ">“</h2>
+									<h4
+										class="text-center text-style margin-none padding-left-60 padding-right-60"
+										style="height: 110px; font-size: 17px; font-weight:bold; color: #787878;">
+										장사하기 바빠서 마케팅에 신경 쓸 여유가 많이 없는데,<br> 아워플레너스는 가격도 저렴하고 효과도 좋아서
+										종종 이용하고 있습니다.<br> 다른 사람들한테 소개하기 좀 아까울 정도로 좋은 사이트예요!
+									</h4>
+									<h2 class="padding-right-50 margin-top-10 text-right color-e6"
+										style="font-size: 50px !important;">”</h2>
+									<h5 class="text-center margin-top-0 margin-bottom-5">
+										<b>최상규님</b>
+									</h5>
+									<h6 class="header-margin-none text-center">와인바 부사장</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="item panel panel-default border-radius-0 margin-none position-relative">
+						<div class="row">
+							<div
+								class="col-xs-5 padding-right-0 position-relative overflow-hidden">
+								<a class="index-buyer-images" href="javascript:void(0);"
+									onclick="openVideoModal('second')">
+										<img class="width-100" style="width: 100%; height: 360px;"
+											src="https://kmong.com/img/main/desktop/buyer_review_2.png"
+											alt="전문가 동영상"> <img style="width: 50px; height: 50px;"
+											class="width-50px index-seller-play-image"
+											src="https://kmong.com/img/main/desktop/index_seller_play.png"
+											alt="플레이 버튼">
+								</a>
+							</div>
+							<div class="col-xs-7 padding-left-0">
+								<div class="buyer-video-text">
+									<h2
+										class="padding-left-50 margin-bottom-0 margin-top-10 color-e6"
+										style="font-size: 50px !important; text-align: left;">“</h2>
+									<h4
+										class="text-center text-style margin-none padding-left-60 padding-right-60"
+										style="height: 110px; font-size: 17px; font-weight:bold; color: #787878;">그냥 한 번 들어나보자 하는 마음으로 구매했던 건데, 생각보다
+										많은 조언을 들을 수 있었습니다. 실시간으로 메시지가 바로바로 되니까 미팅 장소, 날짜 잡기도 수월했습니다.
+										앞으로는 창업해서 멘티가 아닌 멘토로서 활동해보고 싶네요!</h4>
+									<h2 class="padding-right-50 margin-top-10 text-right color-e6"
+										style="font-size: 50px !important;">”</h2>
+									<h5 class="text-center margin-top-0 margin-bottom-5">
+										<b>김진우님</b>
+									</h5>
+									<h6 class="header-margin-none text-center">창업 준비생</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="item panel panel-default border-radius-0 margin-none position-relative">
+						<div class="row">
+							<div
+								class="col-xs-5 padding-right-0 position-relative overflow-hidden">
+								<a class="index-buyer-images" href="javascript:void(0);"
+									onclick="openVideoModal('third')">
+										<img class="width-100" style="width: 100%; height: 360px;"
+											src="https://kmong.com/img/main/desktop/buyer_review_3.png"
+											alt="전문가 동영상"> <img style="width: 50px; height: 50px;"
+											class="width-50px index-seller-play-image"
+											src="https://kmong.com/img/main/desktop/index_seller_play.png"
+											alt="플레이 버튼">
+								</a>
+							</div>
+							<div class="col-xs-7 padding-left-0">
+								<div class="buyer-video-text">
+									<h2
+										class="padding-left-50 margin-bottom-0 margin-top-10 color-e6"
+										style="font-size: 50px !important; text-align: left;">“</h2>
+									<h4
+										class="text-center text-style margin-none padding-left-60 padding-right-60"
+										style="height: 110px; font-size: 17px; font-weight:bold; color: #787878;">
+										홈페이지 제작이 필요해서 아워플레너스를 처음 써봤어요.<br> 상세페이지에 경력이랑 포트폴리오가 잘 정리되어
+										있어서 좋은 작업자분 만날 수 있었던 것 같아요~ 나름대로 큰 돈 쓴거라 걱정이 많았는데, 아워플레너스 덕분에 안전하게
+										거래가 끝났어요!
+									</h4>
+									<h2 class="padding-right-50 margin-top-10 text-right color-e6"
+										style="font-size: 50px !important;">”</h2>
+									<h5 class="text-center margin-top-0 margin-bottom-5">
+										<b>황영화님</b>
+									</h5>
+									<h6 class="header-margin-none text-center">쇼핑몰 대표</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="#myCarousel" class="left carousel-control" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a href="#myCarousel" class="right carousel-control"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	<!-- video section(홍보영상 분분) -->
+
+	<!-- Footer (하단부분) -->
+	<%@ include file="./common/commonBottom.jsp"%>
+	<!--// Footer (하단부분) -->
 </body>
 </html>

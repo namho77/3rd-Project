@@ -21,7 +21,7 @@
 	});
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: white;">
 	<ul class="footer-menu">
 		<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>
 							<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>
