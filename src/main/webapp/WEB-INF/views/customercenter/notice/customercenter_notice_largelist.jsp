@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
 	function paging(pNum) {
-		var url = "${pageContext.request.contextPath}/notice/aBoard.do"
+		var url = "${pageContext.request.contextPath}/notice/aBoard.do";
 		$.ajax({
 			url : url,
 			dataType : "html",
@@ -21,7 +21,7 @@
 		});
 	}
 	function deleteRow(idx) {
-		var url = "${pageContext.request.contextPath}/notice/deleteRow"
+		var url = "${pageContext.request.contextPath}/notice/deleteRow";
 		$.ajax({
 			url:url,
 			type:"get",
@@ -44,7 +44,7 @@
 	}
 	
 	function modifyRow(idx) {
-		var url = "${pageContext.request.contextPath}/notice/modifyRow"
+		var url = "${pageContext.request.contextPath}/notice/modifyRow";
 			$.ajax({
 				url:url,
 				type:"get",

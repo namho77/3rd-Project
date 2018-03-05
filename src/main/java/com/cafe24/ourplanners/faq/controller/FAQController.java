@@ -15,11 +15,13 @@ import org.springframework.core.io.support.ResourcePropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.ourplanners.faq.domain.FAQVO;
 import com.cafe24.ourplanners.faq.service.FAQService;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.util.SearchFAQCriteria;
@@ -69,14 +71,18 @@ public class FAQController {
 
 		if (category_srl != null) {
 			scri.setCategory_srl(category_srl);
+			System.out.println("category_srl:"+category_srl);
 		}
 		
 		if (service_srl != null) {
+			System.out.println("service_srl:"+service_srl);
 			scri.setService_srl(service_srl);
 		}
 		scri.setNowPage(nowPage);
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
+		
+		System.out.println("nowPage:"+nowPage);
 		
 		if(searchType != null && searchType.length() != 0)
 		scri.setSearchType(searchType);
@@ -140,15 +146,32 @@ public class FAQController {
 
 	// 글수정 폼
 	@RequestMapping(value = "/customercenter/faq/{faq_srl}/edit", method = RequestMethod.GET)
-	public String modifyFormFAQ(@PathVariable Integer faq_srl) {
+	public String modifyFormFAQ(@PathVariable Integer faq_srl,Model model) {
+		//model.addAttribute("faq_srl",faq_srl);
+		service.readFAQ(faq_srl,model);
 		return "customercenter/faq/customercenter_faq_modify";
 	}
 
 	// 글수정 처리
 	@ResponseBody
 	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method= {RequestMethod.PUT, RequestMethod.PATCH})
-	public Map<String, Object> modifyActionFAQ(@PathVariable Integer faq_srl,HttpServletRequest req,HttpSession session) {
+	public Map<String, Object> modifyActionFAQ(@PathVariable Integer faq_srl,HttpServletRequest req,HttpSession session,@RequestBody FAQVO vo) {
+		
+		vo.setFaq_srl(faq_srl);
+		/*
+		System.out.println("service_srl:"+vo.getService_srl());
+		System.out.println("faq_srl:"+faq_srl);
+		System.out.println("category_srl:"+vo.getCategory_srl());
+		System.out.println("title:"+vo.getTitle());
+		System.out.println("contents:"+vo.getContents());
+		*/
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if (session.getAttribute("loginUserInfo") == null) {
+			map.put("result", "fail");
+			map.put("errorMsg", "isNotLogin");
+			return map;
+		}
 		
 		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
 			map.put("result", "fail");
@@ -156,12 +179,13 @@ public class FAQController {
 			return map;
 		}
 		
-		int result = service.modifyFAQ(faq_srl,req);
+		int result = service.modifyFAQ(vo);
 
 		if (result <= 0) {
-			map.put("result", "success");
-		} else {
 			map.put("result", "fail");
+			map.put("errorMsg", "sqlError");
+		} else {
+			map.put("result", "success");
 		}
 
 		return map;
@@ -173,6 +197,12 @@ public class FAQController {
 	public Map<String, Object> deleteFAQ(HttpServletRequest req, HttpSession session, Model model, @PathVariable Integer faq_srl) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
+		if (session.getAttribute("loginUserInfo") == null) {
+			map.put("result", "fail");
+			map.put("errorMsg", "isNotLogin");
+			return map;
+		}
+		
 		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
 			map.put("result", "fail");
 			map.put("errorMsg", "isNotAdmin");

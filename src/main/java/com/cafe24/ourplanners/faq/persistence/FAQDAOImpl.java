@@ -32,21 +32,21 @@ public class FAQDAOImpl implements FAQDAO{
 		return sqlSession.delete(namespace + ".deleteFAQ", faq_srl);
 	}
 	@Override
-	public int modifyFAQ(String title, String contents, int faq_srl) {
-		
-		Map<String,Object> paramMap = new HashMap<String , Object>();
-		paramMap.put("title", title);
-		paramMap.put("contents", contents);
-		paramMap.put("faq_srl", faq_srl);
-		return sqlSession.delete(namespace + ".modifyFAQ", paramMap);
+	public int modifyFAQ(FAQVO vo) {
+	
+		return sqlSession.delete(namespace + ".modifyFAQ", vo);
 		
 	}
 	@Override
-	public int writeFAQ(String title, String contents) {
-		Map<String,Object> paramMap = new HashMap<String , Object>();
+	public int writeFAQ(FAQVO vo) {
+		/*Map<String,Object> paramMap = new HashMap<String , Object>();
 		paramMap.put("title", title);
-		paramMap.put("contents", contents);
-		return sqlSession.insert(namespace + ".writeFAQ", paramMap);
+		paramMap.put("contents", contents);*/
+		return sqlSession.insert(namespace + ".writeFAQ", vo);
+	}
+	@Override
+	public FAQVO readFAQ(Integer faq_srl) {
+		return sqlSession.selectOne(namespace+".readFAQ",faq_srl);
 	}
 	
 	

@@ -37,7 +37,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		var url = "${pageContext.request.contextPath}/notice/aBoard.do"
+		var url = "${pageContext.request.contextPath}/notice/aBoard.do";
 		$.ajax({
 			url : url,
 			dataType : "html",

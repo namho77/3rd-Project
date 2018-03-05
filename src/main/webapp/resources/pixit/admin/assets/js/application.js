@@ -53,6 +53,12 @@ if ($.fn.setBreakpoints) {
 // ******************************** PROGRESS BAR
 // *******************************//
 
+sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
+function getContextPath() {
+	return sessionStorage.getItem("contextpath");
+}
+
 NProgress.configure({
 	showSpinner : false
 }).start();
@@ -316,7 +322,9 @@ function chatSidebar() {
 
 var setColor = function(color) {
 	var color_ = 'color-' + color;
-	$('#theme-color').attr("href", "${pageContext.request.contextPath}/resources/pixit/admin/assets/css/colors/" + color_ + ".css");
+	var ctx = getContextPath();
+	
+	$('#theme-color').attr("href", ctx+"/resources/pixit/admin/assets/css/colors/" + color_ + ".css");
 	if ($.cookie) {
 		$.cookie('style-color', color);
 	}
@@ -383,12 +391,13 @@ $('.theme-color').click(function(e) {
 
 var absoluteUrl = '${pageContext.request.scheme}' + '://' + '${pageContext.request.serverName}' + ':' + '${pageContext.request.serverPort}' + '${pageContext.request.contextPath}';
 
+var ctx = getContextPath();
 /* If skin color selected in menu, we display it */
 if ($.cookie('style-color')) {
 	var color_ = 'color-' + $.cookie('style-color');
-	$('#theme-color').attr("href", "${pageContext.request.contextPath}/resources/pixit/admin/assets/css/colors/" + color_ + ".css");
+	$('#theme-color').attr("href", ctx+"/resources/pixit/admin/assets/css/colors/" + color_ + ".css");
 } else {
-	$('#theme-color').attr("href", "${pageContext.request.contextPath}/resources/pixit/admin/assets/css/colors/color-dark.css");
+	$('#theme-color').attr("href", ctx+"/resources/pixit/admin/assets/css/colors/color-dark.css");
 }
 
 // *********************************** CUSTOM FUNCTIONS

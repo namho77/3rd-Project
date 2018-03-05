@@ -76,6 +76,11 @@ service_srl FROM op_faq where faq_srl > 0
 		insert into op_faq(faq_srl,category_srl,service_srl,title,contents) values (op_faq_srl_seq.nextval, #{category_srl}, #{service_srl},#{title},#{contents})
 	</insert>
 	<update id="modifyFAQ">
-		update op_faq set title=#{title}, contents=#{contents} where faq_srl=${faq_srl}
+		update op_faq set title=#{title}, contents=#{contents} where faq_srl=#{faq_srl}
 	</update>
+	
+	<select id="readFAQ" resultType="FAQVO">
+		select * from op_faq where faq_srl=#{faq_srl}
+	</select>
+	
 </mapper>
