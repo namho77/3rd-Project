@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8" src="<c:url value="/resources/js/writeForm.js"/>"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/resources/js/writeForm.js"/></script>
 
 <script type="text/javascript" charset="utf-8">
 		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
@@ -101,8 +101,8 @@ $(document).ready(function(){
 			
 			<div class="row" id="row-body-write">
 			
-				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
-				<div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+				<div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
+				<div class="col-lg-6 col-md-6 col-sm-8 col-xs-10">
 					<div class="write-body">
 						<div class="title">
 							<p class="p-title">제목</p>
@@ -168,7 +168,7 @@ $(document).ready(function(){
 						<input type="submit" id="addBtn" value="글쓰기" />
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
+				<div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>
 			</div>
 		</form>
  	</c:otherwise>

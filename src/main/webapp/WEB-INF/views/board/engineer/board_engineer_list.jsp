@@ -3,8 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/list2.css" />
+
+
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	
 	
 	//글쓰기 폼이동
