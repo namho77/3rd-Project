@@ -47,10 +47,12 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	
  	<!-- 세션키 체크 -->
 	<select id="checkSessionKey" resultType="MemberVO">
+	<![CDATA[  
 	select user_id,Session_Key sessionKey
 	from op_member
 	where Session_Key = #{value}
 	  and Session_Limit > sysdate
+	  ]]>
 	</select>
  	
  	<select id="isValidAuthKey" resultType="Integer">

@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.cafe24.ourplanners.faq.domain.FAQVO;
 import com.cafe24.ourplanners.util.SearchCriteria;
 import com.cafe24.ourplanners.util.SearchFAQCriteria;
 
@@ -19,6 +21,8 @@ public interface FAQService {
 
 	int writeFAQ(HttpServletRequest req, Map<String, Object> map);
 
-	int modifyFAQ(int faq_srl, HttpServletRequest req);
+	void readFAQ(Integer faq_srl, Model model);
+
+	int modifyFAQ(FAQVO vo);
 	
 }

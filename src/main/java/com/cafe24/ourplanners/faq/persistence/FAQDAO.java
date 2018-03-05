@@ -13,9 +13,11 @@ public interface FAQDAO {
 	
 	public int deleteFAQ(int faq_srl);
 	
-	public int modifyFAQ(String title, String contents, int faq_srl);
+	public int modifyFAQ(FAQVO vo);
 
-	public int writeFAQ(String title, String contents);
+	public int writeFAQ(FAQVO vo);
+
+	public FAQVO readFAQ(Integer faq_srl);
 
 	
 

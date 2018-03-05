@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <script type="text/javascript">
 function paging(pNum) {
-	 var url = "${pageContext.request.contextPath}/notice/smallABoard"
+	 var url = "${pageContext.request.contextPath}/notice/smallABoard";
 	$.ajax({
 		url:url,
 		dataType:"html",

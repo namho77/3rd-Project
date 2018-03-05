@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
 function deleteRow(idx) {
-	var url = "${pageContext.request.contextPath}/notice/deleteRow"
+	var url = "${pageContext.request.contextPath}/notice/deleteRow";
 	$.ajax({
 		url:url,
 		type:"get",
