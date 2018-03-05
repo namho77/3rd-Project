@@ -24,8 +24,7 @@ public class FAQDAOImpl implements FAQDAO{
 	}
 	@Override
 	public int getTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne(namespace+".getTotalCount");
 	}
 	@Override
 	public int deleteFAQ(int faq_srl) {

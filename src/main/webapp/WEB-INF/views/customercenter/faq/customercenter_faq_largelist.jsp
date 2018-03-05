@@ -20,12 +20,18 @@
 			}
 		});
 	}
-	function deleteRow(idx) {
-		var url = "${pageContext.request.contextPath}/customercenter/faq/"+idx
+	function deleteFAQ(faq_srl) {
+		var url = "${pageContext.request.contextPath}/customercenter/faq/"+faq_srl
 		$.ajax({
 			url:url,
-			type:"delete",
-			//data:{srl:idx},
+			type : 'delete',
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "DELETE"
+			},
+			/* data : JSON.stringify({
+				replytext : replytext
+			}), */
 			dataType:"json",
 			contentType:"text/html; charset:utf-8",
 			success:function(d){
@@ -34,7 +40,7 @@
 				}
 				else if(d.result == "success"){
 					alert("게시물 삭제에 성공하였습니다.");
-					$("#noticeText_"+idx).hide(1000);
+					$("#noticeText_"+faq_srl).hide(1000);
 				}						
 			},
 			error:function(e){
@@ -43,12 +49,12 @@
 		});
 	}
 	
-	function modifyRow(idx) {
-		var url = "${pageContext.request.contextPath}/faq/"+idx+"/edit"
+	function modifyRow(faq_srl) {
+		var url = "${pageContext.request.contextPath}/faq/"+faq_srl+"/edit"
 			$.ajax({
 				url:url,
 				type:"get",
-				//data:{srl:idx},
+				//data:{nowPage:faq_srl},
 				dataType:"html",
 				contentType:"text/html; charset:utf-8",
 				success:function(d){

@@ -37,10 +37,10 @@ public class FAQController {
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
 
 			@RequestParam(required = false) Integer category_srl,
-			@RequestParam(required = false) Integer subcategory_srl,
+			@RequestParam(required = false) Integer service_srl,
 
-			@RequestParam(required = false, defaultValue = "") String board_type,
-			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer blockPage,
+			@RequestParam(required = false) Integer pageSize,
+			@RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false, defaultValue = "") String searchType,
 			@RequestParam(required = false, defaultValue = "") String keyword) {
 
@@ -67,6 +67,13 @@ public class FAQController {
 
 		SearchFAQCriteria scri = new SearchFAQCriteria();
 
+		if (category_srl != null) {
+			scri.setCategory_srl(category_srl);
+		}
+		
+		if (service_srl != null) {
+			scri.setService_srl(service_srl);
+		}
 		scri.setNowPage(nowPage);
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
@@ -82,13 +89,17 @@ public class FAQController {
 	}
 
 	// 글 상세 보기
-	// @RequestMapping(value = "/customercenter/faq/{faq_srl}", method =
-	// RequestMethod.GET)
+	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = RequestMethod.GET)
+	public String viewFAQ(@PathVariable Integer faq_srl,Model model) {
+		model.addAttribute("faq_srl",faq_srl);		
+		return "customercenter/faq/customercenter_faq_view";
+	}
 
 	// 리스트 보기
 	@RequestMapping(value = "/customercenter/faq", method = RequestMethod.GET)
 	public String listFAQ(Model model) {
-
+		
+		
 		return "customercenter/faq/customercenter_faq_list";
 	}
 
@@ -135,7 +146,7 @@ public class FAQController {
 
 	// 글수정 처리
 	@ResponseBody
-	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method= {RequestMethod.PUT, RequestMethod.PATCH})
 	public Map<String, Object> modifyActionFAQ(@PathVariable Integer faq_srl,HttpServletRequest req,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
