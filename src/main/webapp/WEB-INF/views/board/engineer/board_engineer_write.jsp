@@ -76,6 +76,9 @@ $(document).ready(function(){
 				alert("요청실패:"+e.status+" "+e.statusText);
 			}
 		});
+		
+		
+		욕나온다 ㅡㅡ
 		 */
 	});
 });
