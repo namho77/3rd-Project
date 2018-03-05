@@ -1,17 +1,21 @@
 package com.cafe24.ourplanners.board.domain;
 
-import java.util.Date;
+import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class BoardVO {
 
 	private int board_srl;
 	private String user_id;
 	private String location;
-	private java.util.Date service_time_start;
-	private java.util.Date service_time_end;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private java.sql.Date service_time_start;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private java.sql.Date service_time_end;
 	private String title;
 	private String contents;
-	private java.util.Date postdate;
+	private java.sql.Date postdate;
 	private int visitcount;
 	private int contact_time_start;
 	private int contact_time_end;
@@ -25,7 +29,7 @@ public class BoardVO {
 	private int limit_person;
 	private String board_type;
 	private int service_score;
-	private java.util.Date last_update;
+	private java.sql.Date last_update;
 	
 	
 	public BoardVO() {}
@@ -94,22 +98,22 @@ public class BoardVO {
 	}
 
 
-	public java.util.Date getService_time_start() {
+	public java.sql.Date getService_time_start() {
 		return service_time_start;
 	}
 
 
-	public void setService_time_start(java.util.Date service_time_start) {
+	public void setService_time_start(java.sql.Date service_time_start) {
 		this.service_time_start = service_time_start;
 	}
 
 
-	public java.util.Date getService_time_end() {
+	public java.sql.Date getService_time_end() {
 		return service_time_end;
 	}
 
 
-	public void setService_time_end(java.util.Date service_time_end) {
+	public void setService_time_end(java.sql.Date service_time_end) {
 		this.service_time_end = service_time_end;
 	}
 
@@ -134,12 +138,12 @@ public class BoardVO {
 	}
 
 
-	public java.util.Date getPostdate() {
+	public java.sql.Date getPostdate() {
 		return postdate;
 	}
 
 
-	public void setPostdate(java.util.Date postdate) {
+	public void setPostdate(java.sql.Date postdate) {
 		this.postdate = postdate;
 	}
 
@@ -274,12 +278,12 @@ public class BoardVO {
 	}
 
 
-	public java.util.Date getLast_update() {
+	public java.sql.Date getLast_update() {
 		return last_update;
 	}
 
 
-	public void setLast_update(java.util.Date last_update) {
+	public void setLast_update(java.sql.Date last_update) {
 		this.last_update = last_update;
 	}
 	
