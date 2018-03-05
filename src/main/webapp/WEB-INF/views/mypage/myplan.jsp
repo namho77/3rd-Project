@@ -22,6 +22,10 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<!-- CSS작업부분 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -49,15 +53,20 @@
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
-		<!-- HEADER -->
-
-		<%@ include file="../common/top_main2.jsp"%>
+		<!-- Top영역 1첫번째 -->
+		<div class="row">
+			<%@ include file="../common/commonTop_1.jsp"%>
+		</div>
+		<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+		<div class="row">
+			<%@ include file="../common/commonTop_2_mypage.jsp"%>
+		</div>
 
 		<!-- HOME -->
 		<section id="main" class="section">
 
 			<!-- CONTAINER -->
-			<div class="container">
+			<div class="container" style="margin-top: 100px; margin-bottom: 50px;">
 				<div class="row margin-top-20">
 					<div class="col-xs-12">
 						<h2>
@@ -365,9 +374,8 @@
 
 
 		<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
+		<%@ include file="../common/commonBottom.jsp"%>
 		<!-- Footer section(하단부분) -->
-
 	</div>
 </body>
 </html>

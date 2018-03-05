@@ -383,71 +383,91 @@ function limitCharacters(textid, limit, spanid)
 }
 
 </script>
+<style>
+.title-ment>h3{
+	font-size: 30px;
+	margin-bottom: 15px;
+	color: #4D4D4D;
+}
+.title-ment>h4{
+	font-size: 17px;
+	color: #4F4E4C;
+}
+
+#board_type{
+	height: 40px;
+	width: 90px;
+}
+
+#mainKeyword{
+	height: 40px;
+	width: 220px;
+	margin-right: 0px;
+}
+
+#mainSearchBtn{
+	height: 42px;
+	width: 80px;
+	background-color: #333333;
+	margin-top: 4px;
+	margin-left: -10px;
+	border-radius: 5px;
+}
 
 
-<section class="section-full-height large-padding custom-bg parallax" data-bg="${pageContext.request.contextPath}/resources/images/main/s-203.jpg">
-	<div class="bg-layer op6"></div>
+
+
+</style>
+<%-- <section class="section-full-height large-padding custom-bg parallax" data-bg="${pageContext.request.contextPath}/resources/images/main/s-203.jpg"> --%>
+<section class="section-full-height large-padding custom-bg parallax" style="background-color: #27CEA7; height: 440px;">
+	<div class="bg-layer op6" style="padding-left: 900px;">
+		<img src="${pageContext.request.contextPath}/resources/images/main/main-top-image.png" alt="" />
+	</div>
 	<div class="container align-middle">
 		<div class="row">
-			<div class="col-xs-5 padding-left-45" style="z-index: 30;">
+			<div class="col-xs-6 padding-left-45" style="z-index: 30;">
 				<div class="row ">
 					<div class="col-xs-12 banner-text">
-						<div class="col-xs-12">
-							모든 일에는 전문가가 필요합니다.<br /> 각 분야 전문가들의 실력을 빌려보세요.
+						<div class="col-xs-12 title-ment">
+							<h3>모든 일에는</h3>
+							<h3>전문가가 필요합니다.</h3>
+							<h4>각 분야 전문가들의 실력을 빌려보세요.</h4>
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<form method="GET" action="${pageContext.request.contextPath}/board/search" accept-charset="UTF-8" id="searchKeyword" class="margin-bottom-0" data-name="메인 상단" data-type="기본">
 						<div class="col-xs-12">
-							<div class="col-xs-3">
+							<div class="col-xs-12 search-group form-inline">
 								<select class="form-control" id="board_type" name="board_type">
 									<option value="E">기술자</option>
 									<option value="C">요청자</option>
 								</select>
+								<input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
+								<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
 							</div>
-							<div class="col-xs-6 search-group">
-
-								<span id="searchLimit"></span> <input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
-							</div>
-							<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
-
 						</div>
 					</form>
-
 				</div>
-
 			</div>
 
-			<div class="col-xs-7 padding-right-45">
+			<div class="col-xs-6 padding-right-45">
 				<div id="tagsList">
-
 					<span><a href="http://www.daum.net">다음</a></span> <span><a href="http://www.google.com">구글</a></span>
-
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 </section>
-
-
-
-
 
 <div class="modal fade " id="service-search-modal" tabindex="-1" role="dialog" aria-labelledby="layer_msg_title" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-
 				<div>
-
 					<h1>"${searchWord }"에 대한 검색 결과가 없습니다.</h1>
 
 					<h1>다음 서비스를 찾고 있나요?</h1>
-
 				</div>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
