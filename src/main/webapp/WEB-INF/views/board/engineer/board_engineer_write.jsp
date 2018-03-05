@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	 
+	   
 	$('#listGO').click(function(){
 		location.href = "./engineer";
 	});
