@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.dto.BoardDTO;
@@ -110,7 +112,7 @@ public class BoardController {
 	public String writeEngineerBoard() {
 		return "board/engineer/board_engineer_write";
 	}
-	
+/*	
 	//글쓰기 처리
 	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.GET)
 	public void writeActionEngineerBoard(HttpServletResponse resp, 
@@ -121,10 +123,10 @@ public class BoardController {
 		
 		try {
 		
-			/*if(session.getAttribute("siteUserInfo")==null) {
+			if(session.getAttribute("loginUserInfo")==null) {
 				resp.getWriter().write("loginFail");
 				return;
-			}*/
+			}
 			
 			int result = service.write(req, model);
 			
@@ -137,6 +139,18 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
+	}*/
+	
+	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.POST)
+	public ModelAndView write(HttpServletRequest request) throws IOException, FileUploadException {
+		String title = request.getParameter("title");
+		String smarteditor = request.getParameter("contents");
+//		
+		System.out.println("title = " + title);
+		System.out.println("contents = " + smarteditor);
+		ModelAndView model = new ModelAndView("write");
+		
+		return model;
 	}
 	
 	
