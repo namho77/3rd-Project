@@ -37,7 +37,7 @@ public class SearchRestController {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		// 2.외부파일에서 페이지 설정값 가져오기(Environment 객체 사용)
+		// 외부파일에서 페이지 설정값 가져오기(Environment 객체 사용)
 		int pageSize = 5;
 		int blockPage = 5;
 
@@ -172,7 +172,8 @@ public class SearchRestController {
 			@RequestParam(required = false) Integer subcategory_srl,
 
 			@RequestParam(required = false, defaultValue = "") String board_type,
-			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer blockPage,
+			@RequestParam(required = false) Integer pageSize, 
+			@RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false, defaultValue = "") String searchType,
 			@RequestParam(required = false, defaultValue = "") String keyword) {
 

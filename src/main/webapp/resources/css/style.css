@@ -3203,3 +3203,44 @@
 .width-50px {
 	width: 50px !important
 }
+
+.modal-content {
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 15px;
+	box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+	outline: 0
+}
+.border-radius-0, .border-radius-none, .user-profile-bottom-container {
+	border-radius: 0 !important
+}
+.position-absolute {
+	position: absolute
+}
+
+.font-size-h1 {
+	font-size: 36px !important
+}
+
+.color-white {
+	color: #fff !important
+}
+
+.selling-panels>.events-more-btn>a, .selling-panels>.events-more-btn>a:active,
+	.selling-panels>.events-more-btn>a:hover, a.plain, a.plain:active, a.plain:hover
+	{
+	text-decoration: none;
+	color: #4d4d4d
+}
+
+.padding-all-0 {
+	padding: 0 !important
+}
+
+.modal-body {
+	position: relative;
+	padding: 15px
+}
+

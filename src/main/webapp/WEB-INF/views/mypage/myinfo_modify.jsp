@@ -133,7 +133,7 @@ function winOpenAtCenter(sURL, sWindowName, w, h, sScroll) {
 }
 function openPopChangeEmail() {
 	winOpenAtCenter(
-			"../member/member_email_change",
+			"${pageContext.request.contextPath}/member/change_email",
 			"emailchange", screen.width, screen.height, "yes");
 }
 
