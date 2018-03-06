@@ -50,14 +50,34 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
+	public void visitCount(Integer boardSrl) throws Exception {
+		sqlSession.update(namespace + ".visitCount", boardSrl);
+	}
+	
+	@Override
 	public int write(BoardDTO dto) throws Exception {
-		System.out.println(dto.getBoard_type());
-		System.out.println(dto.getCategory_srl());
-		System.out.println(dto.getLocation());
 		return sqlSession.insert(namespace + ".insert", dto); 
 	}
 	
-
+	@Override
+	public BoardVO modify(Integer board_srl) {
+		return sqlSession.selectOne(namespace + ".modify", board_srl);
+	}
+	
+	@Override
+	public int modifyAction(BoardDTO dto) throws Exception {
+		return sqlSession.update(namespace + ".modifyAction", dto); 
+	}
+	
+	@Override
+	public int delete(Integer board_srl) throws Exception {
+		return sqlSession.delete(namespace + ".delete", board_srl); 
+	}
+	
+	
+	
+	
+	
 	@Override
 	public BoardVO read(Integer bno) throws Exception {
 		return sqlSession.selectOne(namespace + ".read", bno);
@@ -74,11 +94,7 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 
-	@Override
-	public void delete(Integer bno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 

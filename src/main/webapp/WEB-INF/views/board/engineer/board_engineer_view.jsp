@@ -1,11 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/view.css" />
 <script type="text/javascript">
+$(document).ready(function(){
+	$('#listGO').click(function(){
+		location.href = "./engineer";
+	});
+});
 
+//수정폼 가져오기
+function modify(board_srl) {
+	
+	var url = "./engineer/modify/"+board_srl;
+	
+	$.ajax({
+		
+		url : url,
+		type : "get",
+		dataType : "html",
+		contentType : "text/html; charset=UTF-8",
+		success : function(d){
+			$("#boardHTML").html(d);
+		},
+		error : function(e){
+			alert("요청 실패 : "+ e.status+":"+e.statusText);
+		}
+	});
+}
+
+//삭제하기
+function deleteBoard(board_srl){
+	if(confirm("삭제 하시겠습니까?")){
+		var url = "engineer/delete/"+board_srl;
+		
+		$.ajax({
+			url : url,
+			type : "post",
+			dataType : "html",
+			contentType : "text/html; charset=UTF-8",
+			success : function(d){
+				alert("삭제 되었습니다");
+				location.href = "./engineer"
+			},
+			error : function(e){
+				alert("요청 실패 : "+ e.status+":"+e.statusText);
+			}
+		});
+	}
+}
 </script>
-
 	<!-- Body영역 -->
 	<div class="row" id="row-body-view">
 		<div class="col-lg-4 col-md-3 col-sm-2 col-xs-1"></div>
@@ -43,7 +88,7 @@
 						<p>서비스기간 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
 							${view.service_time_start } ~ ${view.service_time_end }</p>
 						<p>서비스비용 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
-							${view.service_cost }원</p>
+							<fmt:formatNumber value="${view.service_cost }"/>원</p>
 						<p>연락가능시간 &nbsp;&nbsp;: &nbsp;&nbsp; ${view.contact_time_start } ~ ${view.contact_time_end }</p>
 					</div>
 				</div>
@@ -57,9 +102,18 @@
 
 			<!-- 뷰페이지 버튼부분 -->
 			<div class="view-btn">
-				<button type="button" class="btn btn-success" id="btn-modify">수정하기</button>
-				<button type="button" class="btn btn-success" id="btn-delete">삭제하기</button>
-				<button type="button" class="btn btn-success" id="btn-list">목록보기</button>
+			
+			<c:if test="${sessionScope.loginUserInfo.user_id eq view.user_id}">
+				
+				<button type="button" class="btn btn-success" id="btn-modify" 
+					name="modifyBtn" onclick="javascript:modify(${view.board_srl});">수정하기</button>
+				
+				<button type="button" class="btn btn-success" id="btn-delete"
+					
+					onclick="javascript:deleteBoard(${view.board_srl});">삭제하기</button>
+			</c:if>
+				
+				<button type="button" class="btn btn-success" id="listGo">목록보기</button>
 			</div>
 
 
@@ -83,6 +137,7 @@
 											</tr>
 										</thead>
 										<tbody>
+											
 											<tr>
 												<td>wncks2121</td>
 												<td>6평짜리 화장실 타일공사 부탁드려요 기술자님</td>
@@ -91,81 +146,7 @@
 														id="btn-select">채택하기</button>
 												</td>
 											</tr>
-											<tr>
-												<td>kosmo14</td>
-												<td>싱크대 타일좀 공사해주세요 채택부탁드립니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>love12</td>
-												<td>저희집 부탁드립니다. 평당 10만원에 가능하나요?</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>choose432</td>
-												<td>수도설비 공사 해드립니다.!!!</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>cake1134</td>
-												<td>싱크대 타일좀 공사해주세요. 저희 동네는 강원도입니다. 자꾸 타일이 떨어지네요
-													빠른공사부탁드려요</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>monotein</td>
-												<td>타일장인이 타일붙여드립니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>wncks2121</td>
-												<td>화장실 타일,도기 공사해드립니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>kosmo14</td>
-												<td>돈 더 드리겠습니다. 빨리 해주세요!! 지역은 인천이고요 6평짜리 화장실과 주방벽타일
-													공사부탁드립니다. 2배로 돈드리겠습니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>love12</td>
-												<td>싱크대 타일좀 공사해주세요.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											<tr>
-												<td>choose432</td>
-												<td>저희집 부탁드립니다.@@@!</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-
+											
 										</tbody>
 									</table>
 								</div>
@@ -208,79 +189,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>wncks2121</td>
-												<td>공사 잘 마무리를 해주십니다. 별 5개짜리 기술자입니다. 강추해드려요!!</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>kosmo14</td>
-												<td>저희 집공사 해주셨는데 그저 그래요 그래도 친절하긴합니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>love12</td>
-												<td>매너 좋으시고 자기 집처럼 공사해주십니다.!!! 강추드려요</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>choose432</td>
-												<td>아!!! 강 력 추 천 입 니 다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>cake1134</td>
-												<td>사진보세요. 깔끔하게 줄눈이 예술적으로 떨어집니다. 감탄밖에 나오지 않아요
-													빠른공사감사드립니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>monotein</td>
-												<td>굿굿굿 좋습니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>wncks2121</td>
-												<td>별로예요. 전 별로였습니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>kosmo14</td>
-												<td>음.. 남편을 마음에 들어하지만 전 별로예요.. 싼맛에 했습니다.</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
-											<tr>
-												<td>love12</td>
-												<td>굿잡입니다. 굿굿</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">댓글삭제</button>
-												</td>
-											</tr>
+											
 											<tr>
 												<td>choose432</td>
 												<td>잘 공사해주셨서 감사해요!</td>

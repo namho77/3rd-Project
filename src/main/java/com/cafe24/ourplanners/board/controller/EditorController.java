@@ -37,8 +37,11 @@ public class EditorController implements ServletContextAware {
 		//파일 기본경로
 		String root = request.getContextPath() + "/resources";
 		String defaultPath = context.getRealPath("/resources");
+		
+		System.out.println("게시판 번호"+request.getParameter("board_srl"));
+		
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath + File.separator + "upload" + File.separator;
+		String path = defaultPath + File.separator + "upload" + File.separator + "service";
 		File file = new File(path);
 		if(!file.exists()) {
 		  file.mkdirs();
@@ -59,7 +62,7 @@ public class EditorController implements ServletContextAware {
 		os.flush();
 		os.close();
 
-		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=" + root + "/upload/"+realname;
+		sFileInfo += "&bNewLine=true&sFileName="+ name+"&sFileURL=" + root + "/upload/service/"+realname;
 		PrintWriter out = response.getWriter();
 		out.println(sFileInfo);
 	}
@@ -67,6 +70,8 @@ public class EditorController implements ServletContextAware {
 	@RequestMapping(value="/file_uploader", method=RequestMethod.POST)
 	public void file_uploader(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
 		request.setCharacterEncoding("utf-8");
+		
+		System.out.println("게시판 번호"+request.getParameter("board_srl"));
 		String return1="";
 		String return2="";
 		String return3="";
@@ -90,7 +95,7 @@ public class EditorController implements ServletContextAware {
 		                //파일 기본경로
 		                String defaultPath = context.getRealPath("/");
 		                //파일 기본경로 _ 상세경로
-		                String path = defaultPath + "upload" + File.separator;
+		                String path = defaultPath + "upload" + File.separator + "service";
 		                 
 		                File file = new File(path);
 		                 
@@ -114,7 +119,7 @@ public class EditorController implements ServletContextAware {
 		                ///////////////// 서버에 파일쓰기 /////////////////
 		                String root = request.getContextPath();
 
-		                return3 += "&bNewLine=true&sFileName="+name+"&sFileURL=" + root + "/upload/"+realname;	// by ksseo
+		                return3 += "&bNewLine=true&sFileName="+name+"&sFileURL=" + root + "/upload/service/"+realname;	// by ksseo
 		            }else {
 		                return3 += "&errstr=error";
 		            }

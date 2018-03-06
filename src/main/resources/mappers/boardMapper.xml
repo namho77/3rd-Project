@@ -27,6 +27,10 @@
  		SELECT * FROM op_board WHERE board_srl = #{param1}
  	</select>
  	
+ 	<update id="visitCount">
+ 		update op_board set visitcount = visitcount + 1 where board_srl = #{board_srl} 
+ 	</update> 
+ 	
  	<insert id="insert" parameterType="com.cafe24.ourplanners.board.dto.BoardDTO">
  		insert into op_board (
  			board_srl, user_id, location, service_time_start, service_time_end,
@@ -37,6 +41,22 @@
             #{title}, #{contents}, #{contact_time_start}, #{contact_time_end}, #{category_srl},
             #{subcategory_srl}, #{service_cost}, #{board_type}) 
  	</insert>
+ 	
+ 	<select id="modify" resultType ="com.cafe24.ourplanners.board.domain.BoardVO">
+ 		select * from op_board where board_srl = #{board_srl}
+ 	</select>
+ 	
+ 	<update id="modifyAction">
+		update op_board set 
+			location=#{location}, service_time_start=#{service_time_start}, service_time_end = #{service_time_end},
+			title=#{title}, contents=#{contents}, contact_time_start=#{contact_time_start}, contact_time_end=#{contact_time_end},
+			service_cost=#{service_cost}
+		where board_srl=#{board_srl}
+	</update>
+	
+	<delete id="delete">
+		delete from op_board where board_srl=#{board_srl}
+	</delete>
  </mapper>
 
  

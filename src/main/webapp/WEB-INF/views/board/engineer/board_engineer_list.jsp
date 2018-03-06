@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/list2.css" />
 
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
-	
 	
 	//글쓰기 폼이동
 	$('#write').click(function(){		
@@ -25,6 +23,7 @@ $(document).ready(function(){
 		});
 	});	
 });
+
 //상세보기 폼으로 이동하기
 function viewPage(board_srl){
 	
@@ -113,7 +112,7 @@ function paging(pNum){
 						<tr>
 							<td>${lists.user_id }</td>
 							<td><a href="javascript:viewPage(${lists.board_srl })">${lists.title }</a></td>
-							<td>${lists.service_cost }</td>
+							<td><fmt:formatNumber value="${lists.service_cost }"/></td>
 							<td>${lists.service_time_start } <br /> ~ ${lists.service_time_end }</td>
 							<td>${lists.location }</td>
 							<td>${lists.visitcount }</td>
