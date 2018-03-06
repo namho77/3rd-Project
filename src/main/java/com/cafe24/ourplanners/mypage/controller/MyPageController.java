@@ -47,10 +47,10 @@ public class MyPageController {
 
 		String action = req.getParameter("action");
 		
-		if(action.equalsIgnoreCase("password"))
+		//if(action.equalsIgnoreCase("password"))
+		//return "mypage/myinfo_modify_confirm_password";
+		//else
 		return "mypage/myinfo_modify";
-		else
-		return "mypage/myinfo_modify_confirm_password";
 	}
 	
 	

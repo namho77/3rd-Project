@@ -13,8 +13,8 @@
 
 <%
 
-	if ((request.getAttribute("loginUserInfo") == null) || (request.getAttribute("isAdmin"))=="N" && (request.getAttribute("isMatchedPass") != "Y"))
-		request.getRequestDispatcher("/mypage/myinfo").forward(request, response);
+	//if ((request.getAttribute("loginUserInfo") == null) || (request.getAttribute("isAdmin"))=="N" && (request.getAttribute("isMatchedPass") != "Y"))
+	//	request.getRequestDispatcher("/mypage/myinfo").forward(request, response);
 %>
 
 <!DOCTYPE html>
