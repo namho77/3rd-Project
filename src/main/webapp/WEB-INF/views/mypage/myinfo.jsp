@@ -78,14 +78,14 @@
 				<a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 			</div>
 			<!-- 기본정보부분 -->
+			<form action="${pageContext.request.contextPath}/mypage/myinfo" method="post">
 			<div class="col-xs-10" id="profile-info">
 				<h4>기본정보</h4>
-				<form action="${pageContext.request.contextPath}/mypage/myinfo" method="post">
 				<input type="hidden" name="action" value="password"/>
 				<table>
 					<tr class="mini-title">
 						<!-- 프로필이미지 -->
-						<td rowspan="13" class="image-area" align="center">
+						<td rowspan="14" class="image-area" align="center">
 								
 								<c:choose>
 		
@@ -158,6 +158,23 @@
 						<td colspan="4"><input type="text" class="form-control"
 							placeholder="${loginUserInfo.email_address}" disabled="disabled"/></td>
 					</tr>
+					<tr>
+						<td colspan="2">
+							이메일수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.
+						</td>
+						<td colspan="2" style="float: right;">
+							<c:choose>
+								<c:when test="${loginUserInfo.allow_mailing == 'Y' }">
+									<label><input type="radio" name="allow_mailing" value="Y" checked="checked" disabled="disabled"/> 예 </label>&nbsp;&nbsp;
+									<label><input type="radio" name="allow_mailing" value="N" disabled="disabled"/> 아니오</label>
+								</c:when>
+								<c:otherwise>
+									<label><input type="radio" name="allow_mailing" value="Y" disabled="disabled"/> 예 </label>
+									<label><input type="radio" name="allow_mailing" value="N" checked="checked" disabled="disabled"/> 아니오 </label>
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
 					<tr  class="mini-title">
 						<td colspan="4"><span class="info-title">연락처</span></td>
 					</tr>
@@ -165,16 +182,30 @@
 						<td colspan="4"><input type="text" class="form-control"
 							placeholder="${loginUserInfo.mobile}" disabled="disabled"/></td>
 					</tr>
-					<tr  class="mini-title">
-						<td colspan="4" class="edit">
-						<input type="submit" id="modifyBtn" class="btn btn-info" value="수정하기">
-						
-						<a href="${pageContext.request.contextPath}/mypage/" >
-						<b>기본정보 수정하러가기></b></a></td>
+					<tr>
+						<td colspan="2">
+							메시지수신동의 시에 기본서비스(할인혜택과 이벤트 등의 소식 안내)를 받아보실수 있습니다.
+						</td>
+						<td colspan="2" style="float: right;">
+							<c:choose>
+								<c:when test="${loginUserInfo.allow_message == 'Y' }">
+									<label><input type="radio" name="allow_message" value="Y" checked="checked" disabled="disabled"/> 예</label>&nbsp;&nbsp;
+									<label><input type="radio" name="allow_message" value="N" disabled="disabled"/> 아니오</label>
+								</c:when>
+								<c:otherwise>
+									<label><input type="radio" name="allow_message" value="Y" disabled="disabled"/> 예</label>
+									<label><input type="radio" name="allow_message" value="N" checked="checked" disabled="disabled"/> 아니오</label>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</table>
-				</form>
 			</div>
+			<!-- 버튼부분 -->
+			<div class="myinfo-edit-btn">
+				<button type="submit" class="btn btn-success">수정하기</button>
+			</div>
+			</form>
 		</div>
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 	</div>
