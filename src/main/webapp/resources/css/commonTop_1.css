@@ -8,6 +8,7 @@
 	height: 60px;
 	padding-top: 7px;
 	padding-right: 10px;
+	z-index: 120;
 }
 
 #navbar-brand {
@@ -71,4 +72,6 @@
 	font-size: 1.1em;
 	background-color: #27cea7;
 }
-
+.nav-up {
+	top: -100px; /* 네비게이션이랑 높이 같게 */
+}
