@@ -48,9 +48,11 @@ table {
 
 .profile-image {
 	border-radius: 50%;
-	width: 120px;
+	width: 150px;
 	margin-top: 10px;
 	margin-bottom: 20px;
+	margin-left: 70px;
+	margin-right: 70px;
 }
 
 img {
@@ -85,3 +87,18 @@ td>.form-control {
 .edit{
 	float:right;
 }
+
+.myinfo-edit-btn{
+	text-align: right;
+}
+
+.myinfo-edit-btn>button{
+	margin-top: 20px;
+	height: 55px;
+	width: 420px;
+	color: #4d4d4d;
+	font-weight: bold;
+	background-color: #27CEA7;
+	font-size: 15px;
+}
+
