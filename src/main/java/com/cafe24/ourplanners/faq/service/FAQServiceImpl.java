@@ -32,9 +32,10 @@ public class FAQServiceImpl implements FAQService {
 		for(FAQVO list:lists) {
 			
 			//싱글 쿼테이션 더블 쿼테이션 변경
-			list.setContents(list.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\" ", "\""));
+			list.setContents(list.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\"", "\""));
 			//줄바꿈 처리
-			list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
+			//list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
+			list.setContents(list.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
 		}
 	
 		
@@ -79,7 +80,11 @@ public class FAQServiceImpl implements FAQService {
 		// TODO Auto-generated method stub
 		FAQVO vo = new FAQVO();
 		vo = dao.readFAQ(faq_srl);
-		vo.setContents(vo.getContents().replaceAll("\r\n", "<br/>"));
+		//싱글 쿼테이션 더블 쿼테이션 변경
+		vo.setContents(vo.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\"", "\""));
+		//줄바꿈 처리
+		//vo.setContents(vo.getContents().replaceAll("\r\n", "<br/>"));
+		vo.setContents(vo.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
 		model.addAttribute("faqVO", vo);
 	}
 	

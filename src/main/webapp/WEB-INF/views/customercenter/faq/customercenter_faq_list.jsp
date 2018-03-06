@@ -38,162 +38,158 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		getListFAQ(1,1,"");
+		getListFAQ(1, 1, "");
 	});
-	
+
 	$(document).ready(function() {
-		
-	$("#writeFAQBtn").on("click", function(){
-		getWriteFormFAQ();
-	});
 
-	
-	//글쓰기 폼 가져오기
-	function getWriteFormFAQ() {
-		$("#faqHead").text("FAQ 글쓰기");
-		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/customercenter/faq/new",
-			type : "get",
-			dataType : "html",
-			contentType : "text/html; charset=UTF-8",
-			success : function(d){
-				//alert(d);
-				$("#faqBody").empty();
-				$("#faqBody").html(d);
-			},
-			error : function(e){
-				popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
-			}
+		$("#writeFAQBtn").on("click", function() {
+			getWriteFormFAQ();
 		});
-		
-	}
-	
-	
-	
-	});
-	
-	function faqPaging(nowPage,service_srl,category_srl) {
-		getListFAQ(nowPage,service_srl,category_srl);
-	}
-	
-	//리스트 가져오기
-	function getListFAQ(nowPage=1,service_srl=1,category_srl){
-		var url = "${pageContext.request.contextPath}/customercenter/faq/json/faq_list.json";
-			var inHTML = "";
-			
-			inHTML += "<div class=\"panel-group panel-accordion dark-accordion\">";
-			inHTML += "		<div class=\"row\" >";
 
-			var inHTMLPaging = "";
-			$("#faqBody").empty();
-			var params="category_srl="+category_srl+"&service_srl="+service_srl+"&nowPage="+nowPage;
+		//글쓰기 폼 가져오기
+		function getWriteFormFAQ() {
+			$("#faqHead").text("FAQ 글쓰기");
+
 			$.ajax({
-				url : url,
-				dataType : "json",
+				url : "${pageContext.request.contextPath}/customercenter/faq/new",
 				type : "get",
-				data : params,
-				contentType : "text/html; charset=utf-8",
-				success : function(data) {
-					$.each(data.faqLists, function(index, faqList) { // each로 모든 데이터 가져와서 items 배열에 넣고
-						
-						inHTML += "<div id=\"faqDiv_"+faqList.faq_srl+"\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\"" + (index + 1) + "\" style=\"display: inline-block;\">";
-						inHTML += "	<div class=\"panel-heading\">";
-						inHTML += "		<h4 class=\"panel-title\">";
-						inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + ".</strong> " + faqList.title;
-						inHTML += "			</a>";
-						inHTML += "		</h4>";
-						
-						
-					
-						inHTML += "	</div>";
-						inHTML += "	<div id=\"question" + (index + 1) + "\" class=\"panel-collapse collapse\" style=\"height: 0px;\">";
-						inHTML += "		<div class=\"panel-body\">";
-						inHTML += "			<p>" + faqList.contents + "</p>";
-						inHTML += "		</div>";
-						inHTML += "	</div>";
-						
-						<c:choose>
-						<c:when	test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
-						inHTML += "<div>";
-						inHTML += "<button type=\"button\" class=\"btn btn-warning\" onclick=\"javascript:modifyFAQ('" + faqList.faq_srl + "');\" >수정</button>";
-						inHTML += "<button type=\"button\" class=\"btn btn-danger\" onclick=\"javascript:deleteFAQ('" + faqList.faq_srl + "');\" >삭제</button>";
-						inHTML += "</div>";
-						</c:when>
-						</c:choose>
-						
-						inHTML += "</div>";
-						
-						
-
-					});//each끝
-					inHTML += "<div class=\"row text-center\">";
-					inHTML += "<ul class=\"pagination\" id=\"faqPagingDiv\">";
-					inHTML += "</ul> </div>";
-					inHTML += "		</div>";
-					inHTML += "		</div>";
-					$("#faqBody").html(inHTML);
-					$("#faqPagingDiv").html(data.pagingDiv);
+				dataType : "html",
+				contentType : "text/html; charset=UTF-8",
+				success : function(d) {
+					//alert(d);
+					$("#faqBody").empty();
+					$("#faqBody").html(d);
 				},
 				error : function(e) {
-					popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+					popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
 				}
 			});
+
+		}
+
+	});
+
+	function faqPaging(nowPage, service_srl, category_srl) {
+		getListFAQ(nowPage, service_srl, category_srl);
 	}
-	
-	function deleteFAQ(faq_srl) {
-		
-		if(confirm("정말로 삭제 하시겠습니까?")){
-		var url = "${pageContext.request.contextPath}/customercenter/faq/"+faq_srl;
-		//alert(url);
+
+	//리스트 가져오기
+	function getListFAQ(nowPage, service_srl, category_srl) {
+		nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+		service_srl = typeof service_srl !== 'undefined' ? service_srl : 1;
+
+		var url = "${pageContext.request.contextPath}/customercenter/faq/json/faq_list.json";
+		var inHTML = "";
+
+		inHTML += "<div class=\"panel-group panel-accordion dark-accordion\">";
+		inHTML += "		<div class=\"row\" >";
+
+		var inHTMLPaging = "";
+		$("#faqBody").empty();
+		var params = "category_srl=" + category_srl + "&service_srl=" + service_srl + "&nowPage=" + nowPage;
 		$.ajax({
-			url:url,
-			type : 'delete',
-			headers : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "DELETE"
+			url : url,
+			dataType : "json",
+			type : "get",
+			data : params,
+			contentType : "text/html; charset=utf-8",
+			success : function(data) {
+				$.each(data.faqLists, function(index, faqList) { // each로 모든 데이터 가져와서 items 배열에 넣고
+
+					inHTML += "<div id=\"faqDiv_" + faqList.faq_srl + "\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\"" + (index + 1) + "\" style=\"display: inline-block;\">";
+					inHTML += "	<div class=\"panel-heading\">";
+					inHTML += "		<h4 class=\"panel-title\">";
+					inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + ".</strong> " + faqList.title;
+					inHTML += "			</a>";
+					inHTML += "		</h4>";
+
+					inHTML += "	</div>";
+					inHTML += "	<div id=\"question" + (index + 1) + "\" class=\"panel-collapse collapse\" style=\"height: 0px;\">";
+					inHTML += "		<div class=\"panel-body\">";
+					inHTML += "			<p>" + faqList.contents + "</p>";
+					inHTML += "		</div>";
+					inHTML += "	</div>";
+
+					<c:choose>
+					<c:when	test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+					inHTML += "<div>";
+					inHTML += "<button type=\"button\" class=\"btn btn-warning\" onclick=\"javascript:modifyFAQ('" + faqList.faq_srl + "');\" >수정</button>";
+					inHTML += "<button type=\"button\" class=\"btn btn-danger\" onclick=\"javascript:deleteFAQ('" + faqList.faq_srl + "');\" >삭제</button>";
+					inHTML += "</div>";
+					</c:when>
+					</c:choose>
+
+					inHTML += "</div>";
+
+				});//each끝
+				inHTML += "<div class=\"row text-center\">";
+				inHTML += "<ul class=\"pagination\" id=\"faqPagingDiv\">";
+				inHTML += "</ul> </div>";
+				inHTML += "		</div>";
+				inHTML += "		</div>";
+				$("#faqBody").html(inHTML);
+				$("#faqPagingDiv").html(data.pagingDiv);
 			},
-			/* data : JSON.stringify({
-				replytext : replytext
-			}), */
-			dataType:"json",
-			contentType:"text/html; charset:utf-8",
-			success:function(d){
-				if(d.result == "fail"){
-					popLayerMsg("게시물 삭제에 실패하였습니다.");
-				}
-				else if(d.result == "success"){
-					popLayerMsg("게시물 삭제에 성공하였습니다.");
-					$("#faqDiv_"+faq_srl).hide(1000);
-					//$(this).parent().hide();
-				}						
-			},
-			error:function(e){
-				popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+			error : function(e) {
+				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
 			}
 		});
+	}
+
+	function deleteFAQ(faq_srl) {
+
+		if (confirm("정말로 삭제 하시겠습니까?")) {
+			var url = "${pageContext.request.contextPath}/customercenter/faq/" + faq_srl;
+			//alert(url);
+			$.ajax({
+				url : url,
+				type : 'delete',
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "DELETE"
+				},
+				/* data : JSON.stringify({
+					replytext : replytext
+				}), */
+				dataType : "json",
+				contentType : "text/html; charset:utf-8",
+				success : function(d) {
+					if (d.result == "fail") {
+						popLayerMsg("게시물 삭제에 실패하였습니다.");
+					} else if (d.result == "success") {
+						popLayerMsg("게시물 삭제에 성공하였습니다.");
+						$("#faqDiv_" + faq_srl).hide(1000);
+						//$(this).parent().hide();
+					}
+				},
+				error : function(e) {
+					popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+				}
+			});
 		}
 	}
-	
+
 	//수정폼 가져오기
 	function modifyFAQ(faq_srl) {
-	$("#faqHead").text("FAQ 글수정");
-	var url = "${pageContext.request.contextPath}/customercenter/faq/"+faq_srl+"/edit";
+		$("#faqHead").text("FAQ 글수정");
+		var url = "${pageContext.request.contextPath}/customercenter/faq/" + faq_srl + "/edit";
 
 		$.ajax({
-			
-			url:url,
+
+			url : url,
 			type : "get",
 			dataType : "html",
 			contentType : "text/html; charset=UTF-8",
-			success : function(d){
+			success : function(d) {
 				//alert(d);
 				$("#faqBody").empty();
 				$("#faqBody").html(d);
-					
+
 			},
-			error : function(e){
-				popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+			error : function(e) {
+				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
 			}
 		});
 	}

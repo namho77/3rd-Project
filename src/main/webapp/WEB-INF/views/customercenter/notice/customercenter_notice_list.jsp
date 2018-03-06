@@ -78,7 +78,8 @@
 	}
 	
 	//리스트 가져오기
-	function getListNotice(nowPage=1){
+	function getListNotice(nowPage){
+		nowPage = typeof nowPage !== 'undefined' ? nowPage : 1 ;
 		var url = "${pageContext.request.contextPath}/customercenter/notice/json/notice_list.json";
 			var inHTML = "";
 			

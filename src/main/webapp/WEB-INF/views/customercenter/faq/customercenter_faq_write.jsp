@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -92,7 +92,7 @@
 
 						popLayerMsg("글쓰기를 성공하였습니다.");
 						//location.href = "${pageContext.request.contextPath}/customercenter/faq";
-						getListFAQ(1,1,"");
+						getListFAQ(1, 1, "");
 					}
 
 				},
@@ -148,7 +148,7 @@
 	$(document).ready(function() {
 
 		$('#listView').click(function() {
-			getListFAQ(1,1,"");
+			getListFAQ(1, 1, "");
 		});
 
 	});
@@ -159,11 +159,11 @@
 	<div class="write-body">
 		<div class="service">
 			<p class="p-title">서비스 번호</p>
-			<input type="text" class="form-control " placeholder="서비스 번호를 입력하세요" name="service_srl" />
+			<input type="text" class="form-control " placeholder="서비스 번호를 입력하세요 (1:기획안 매칭 서비스 , 2:채팅)" name="service_srl" />
 
 		</div>
 		<div class="category">
-			<p class="p-title">서비스 번호</p>
+			<p class="p-title">카테고리 번호</p>
 			<input type="text" class="form-control " placeholder="카테고리 번호를 입력하세요" name="category_srl" />
 		</div>
 
