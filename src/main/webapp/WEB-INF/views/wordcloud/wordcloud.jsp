@@ -444,6 +444,7 @@ function limitCharacters(textid, limit, spanid)
 									<option value="C">요청자</option>
 								</select>
 								<input class="form-control " placeholder="어떤 서비스가 필요하세요?" id="mainKeyword" name="keyword" type="text">
+								<input class="form-control " placeholder="검색 필터(t,c,tc:title contents,i:id)" id="searchType" name="searchType" type="hidden" value="tc">
 								<button id="mainSearchBtn" type="submit" class="btn btn-success">검색</button>
 							</div>
 						</div>
