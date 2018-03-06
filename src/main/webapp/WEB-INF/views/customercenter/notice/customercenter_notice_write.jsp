@@ -11,7 +11,7 @@
 		//전역변수선언
 		var editor_object = [];
 		var ctx = getContextPath();
-		//alert(ctx);
+		
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : editor_object,
 			elPlaceHolder : "contents",
