@@ -84,8 +84,10 @@ public class BoardController {
 		try {
 			vo = service.view(Integer.parseInt(req.getParameter("board_srl")));
 			
+			//줄바꿈
 			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
 			
+			//조회수
 			service.visitCount(Integer.parseInt(req.getParameter("board_srl")));
 		}
 		catch(Exception e) {
