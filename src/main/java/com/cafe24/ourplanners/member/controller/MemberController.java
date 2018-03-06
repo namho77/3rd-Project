@@ -100,12 +100,12 @@ public class MemberController {
 	@RequestMapping(value = "member/uploadProfile", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public void uploadProfile(MultipartFile file, String str, HttpSession session, HttpServletRequest request,
 			Model model) throws Exception {
-		
+
 		Object obj = session.getAttribute("loginUserInfo");
-		
+
 		MemberVO memVO = (MemberVO) obj;
-				
-		String uploadPath = "upload/member/"+memVO.getMember_srl()+"/profile";
+
+		String uploadPath = "upload/member/" + memVO.getMember_srl() + "/profile";
 
 		ResponseEntity<String> imgPath = new ResponseEntity<String>(
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
@@ -114,7 +114,7 @@ public class MemberController {
 		String memberPicture = (String) imgPath.getBody();
 
 		logger.info(memberPicture);
-		
+
 		memVO.setProfile_img_path(memberPicture);
 		try {
 			service.uploadPicture(memVO);
@@ -129,103 +129,92 @@ public class MemberController {
 
 		return "member/member_withdraw";
 	}
-	
+
 	// 회원탈퇴 처리
 	@RequestMapping(value = "member/withdraw", method = RequestMethod.POST)
-	public String withdraw(Model model,HttpServletRequest req, HttpSession session,RedirectAttributes rediAttr) {
+	public String withdraw(Model model, HttpServletRequest req, HttpSession session, RedirectAttributes rediAttr) {
 
 		int affected = 0;
-		if(req.getParameter("step").equalsIgnoreCase("2"))
-		{
+		if (req.getParameter("step").equalsIgnoreCase("2")) {
 			return "member/member_withdraw_confirm_password";
 		}
-		
-		else if(req.getParameter("step").equalsIgnoreCase("3"))
-		{
-			affected = service.withdrawMember(model,req,session);
+
+		else if (req.getParameter("step").equalsIgnoreCase("3")) {
+			affected = service.withdrawMember(model, req, session);
 		}
-		
-		
-		
-		if(affected<=0) {
+
+		if (affected <= 0) {
 			model.addAttribute("layer_msg", "회원탈퇴를 실패 하였습니다.");
 			return "member/member_withdraw";
-		}
-		else
-		{
+		} else {
 			rediAttr.addFlashAttribute("layer_msg", "회원탈퇴 처리 되었습니다.");
-			//model.addAttribute("layer_msg", "회원탈퇴 처리 되었습니다.");
-			/*UriComponents uri = ServletUriComponentsBuilder
-                    .fromServletMapping(req)
-                    .fromPath("/member/logout")
-                    .build();*/
+			// model.addAttribute("layer_msg", "회원탈퇴 처리 되었습니다.");
+			/*
+			 * UriComponents uri = ServletUriComponentsBuilder .fromServletMapping(req)
+			 * .fromPath("/member/logout") .build();
+			 */
 			return "redirect:/member/logout";
-			//return "redirect:"+req.getContextPath()+"member/logout";
+			// return "redirect:"+req.getContextPath()+"member/logout";
 		}
-		
+
 	}
-	
+
 	/*
-	 RedirectAttributes rediAttr
-	 
-	  rediAttr.addFlashAttribute("msg", "비밀번호가 변경 되었습니다.");
-		return "redirect:/member/change_password";
+	 * RedirectAttributes rediAttr
+	 * 
+	 * rediAttr.addFlashAttribute("msg", "비밀번호가 변경 되었습니다."); return
+	 * "redirect:/member/change_password";
 	 */
-	//비밀번호 변경 페이지
-	@RequestMapping(value="member/change_password",method =RequestMethod.GET)
+	// 비밀번호 변경 페이지
+	@RequestMapping(value = "member/change_password", method = RequestMethod.GET)
 	public String changePassword(Model model) {
 		return "member/member_password_change";
 	}
-	
-	//비밀번호 변경 처리
-		@RequestMapping(value="member/change_password",method =RequestMethod.POST)
-		public String changePassword(Model model,HttpServletRequest req, HttpSession session) {
-			
-		
-			int affected = service.updatePassword(model,req,session);
-			if(affected<=0) {
-				System.out.println("현재 비밀번호가 일치하지 않습니다.");
-				model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
-				return "member/member_password_change";	
-			}
-			else
-			{
-				model.addAttribute("layer_msg", "비밀번호가 변경 되었습니다.");
-				return "index";
-			}
+
+	// 비밀번호 변경 처리
+	@RequestMapping(value = "member/change_password", method = RequestMethod.POST)
+	public String changePassword(Model model, HttpServletRequest req, HttpSession session) {
+
+		int affected = service.updatePassword(model, req, session);
+		if (affected <= 0) {
+			System.out.println("현재 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("error_msg", "현재 비밀번호가 일치하지 않습니다.");
+			return "member/member_password_change";
+		} else {
+			model.addAttribute("layer_msg", "비밀번호가 변경 되었습니다.");
+			return "index";
 		}
+	}
 
 	// 로그인 화면
 	@RequestMapping(value = "member/login", method = RequestMethod.GET)
 	public String login(Model model, HttpServletRequest req, HttpSession session) {
 		logger.info("로그인");
 		String referer_url = req.getHeader("referer");
-		 System.out.println("리퍼러 = "+referer_url);
+		System.out.println("리퍼러 = " + referer_url);
 		String contextPath = req.getContextPath();
-		//System.out.println("contextPath = "+contextPath);
+		// System.out.println("contextPath = "+contextPath);
 		String command = null;
 		String auth_prev_url = (String) session.getAttribute("auth_prev_url");
-		
-		
-		//auth인터셉터로 타고온 로그인 처리인 경우
-		if (auth_prev_url != null && auth_prev_url.length()!=0) {
+
+		// auth인터셉터로 타고온 로그인 처리인 경우
+		if (auth_prev_url != null && auth_prev_url.length() != 0) {
 			System.out.println("auth인터셉터 타고온 로그인");
 			session.removeAttribute("auth_prev_url");
 			session.setAttribute("prev_url", auth_prev_url);
 			return "member/member_login";
 		}
-		
+
 		// 직접 경로로 들어오는 경우 메인 페이지로 설정
-		if (referer_url == null || referer_url.length()==0) {
+		if (referer_url == null || referer_url.length() == 0) {
 			String prev_url = (String) session.getAttribute("prev_url");
-			if(prev_url==null || prev_url.length()==0)
-			{
+			if (prev_url == null || prev_url.length() == 0) {
 				referer_url = "http://" + req.getServerName() + ":" + req.getServerPort() + contextPath;
 				session.setAttribute("prev_url", referer_url);
 			}
 			return "member/member_login";
 		}
-		
+
 		// command = prev_url.substring(contextPath.length());
 		int start = referer_url.indexOf(contextPath) + contextPath.length();
 		int end = referer_url.length();
@@ -245,8 +234,6 @@ public class MemberController {
 		return "member/member_login";
 	}
 
-	
-	
 	// 로그인 처리
 	@RequestMapping(value = "member/loginPost", method = RequestMethod.POST)
 	public void login(LoginDTO dto, HttpServletRequest req, HttpSession session, Model model) throws Exception {
@@ -285,7 +272,8 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "member/logout", method = RequestMethod.GET)
-	public String logout(Model model, HttpServletRequest req, HttpServletResponse resp,HttpSession session) throws Exception  {
+	public String logout(Model model, HttpServletRequest req, HttpServletResponse resp, HttpSession session)
+			throws Exception {
 
 		String prev_url = req.getHeader("referer");
 
@@ -299,7 +287,7 @@ public class MemberController {
 			MemberVO vo = (MemberVO) loginObj;
 
 			session.removeAttribute("loginUserInfo");
-			session.invalidate(); //prev_url 등 다른 세션도 삭제위해..
+			session.invalidate(); // prev_url 등 다른 세션도 삭제위해..
 			Cookie loginCookie = WebUtils.getCookie(req, "loginCookie");
 
 			if (loginCookie != null) {
@@ -311,7 +299,7 @@ public class MemberController {
 		}
 
 		// 로그아웃처리
-		//session.removeAttribute("loginUserInfo");
+		// session.removeAttribute("loginUserInfo");
 
 		// return "redirect:login";
 		return "member/member_login";
@@ -332,36 +320,40 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "member/confirmPassword", method = RequestMethod.GET)
-	public String confirmPassword(Model model,HttpServletRequest request) {
+	public String confirmPassword(Model model, HttpServletRequest request) {
 		logger.info("비밀번호 확인");
 
 		return "member/member_info_view";
 	}
-	
-	
+
 	@RequestMapping(value = "find/id")
-	public ModelAndView findId(Model model,HttpServletRequest req) {
+	public ModelAndView findId(Model model, HttpServletRequest req) {
 		logger.info("아이디 찾기");
-		
+
 		ModelAndView mv = new ModelAndView();
-		service.findId(model,req,mv);
-		
-		//vm.setViewName("redirect:/board/boardList");
+		service.findId(model, req, mv);
+
+		// vm.setViewName("redirect:/board/boardList");
 		mv.setViewName("find/find_id");
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "find/password")
-	public ModelAndView findPassword(Model model,HttpServletRequest req) {
+	public ModelAndView findPassword(Model model, HttpServletRequest req) {
 		logger.info("비밀번호 찾기");
 
 		ModelAndView mv = new ModelAndView();
-		service.findPassword(model,req,mv);
-		
+		service.findPassword(model, req, mv);
+
 		mv.setViewName("find/find_password");
-		//vm.setViewName("redirect:/board/boardList");
+		// vm.setViewName("redirect:/board/boardList");
 
 		return mv;
 	}
 
+	// 이메일 변경 페이지
+	@RequestMapping(value = "member/change_email", method = RequestMethod.GET)
+	public String changeEmail(Model model) {
+		return "member/member_email_change";
+	}
 }

@@ -151,7 +151,7 @@
 			<!-- CONTAINER -->
 			<div class="container">
 				<br /> <br /> <br /> <br />
-				<form class="form-horizontal" name="emailFrm" method="post" action="member_email_change" onsubmit="return emailFrmCheck(this);">
+				<form class="form-horizontal" name="emailFrm" method="post" action="${pageContext.request.contextPath}/member/change_email" onsubmit="return emailFrmCheck(this);">
 					<input type="hidden" name="action" value="change">
 
 					<div class="row text-center">
