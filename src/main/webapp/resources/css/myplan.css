@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/* 마의 플랜 부분 */
+
+#body-bg{
+	background-color: #FAFAFA;
+}
+.container-body{
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.myplan-title h2 b{
+	font-size: 20px;
+	color: #646664;
+	
+}
+
+.myplan-title{
+	margin-top: 40px;
+}
+
+#panel-body {
+	height: 515px;
+}
+
+#thumbnail {
+	border-radius: 5px;
+	margin-top: 15px;
+}
+
+#satisfaction {
+	display: inline-block;
+}
+
+.myplan-result {
+	display: inline;
+	float: right;
+}
+
+.header-margin-none {
+	margin-top: 15px;
+}
+
+.menu-sotitle {
+	font-size: 16px;
+	color: #646664;
+}
+
+.padding-myplan {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.height-good {
+	height: 70px;
+}

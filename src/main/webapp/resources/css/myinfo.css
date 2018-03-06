@@ -82,10 +82,6 @@ td>.form-control {
 	padding-top: 30px;
 }
 
-.edit {
-	text-align: right;
-}
-
-#margin-right20 {
-	padding-right: 20px;
+.edit{
+	float:right;
 }

@@ -51,9 +51,8 @@
 
 <body>
 	<!-- PRELOADER -->
-	<img id="preloader"
-		src="${pageContext.request.contextPath}/resources/images/preloader.gif"
-		alt="" />
+	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
+	<div class="preloader_hide">
 	<!-- //PRELOADER -->
 
 	<!-- Top영역 1첫번째 -->
@@ -81,10 +80,12 @@
 			<!-- 기본정보부분 -->
 			<div class="col-xs-10" id="profile-info">
 				<h4>기본정보</h4>
+				<form action="${pageContext.request.contextPath}/mypage/myinfo" method="post">
+				<input type="hidden" name="action" value="password"/>
 				<table>
 					<tr class="mini-title">
 						<!-- 프로필이미지 -->
-						<td rowspan="8" class="image-area" align="center">
+						<td rowspan="13" class="image-area" align="center">
 								
 								<c:choose>
 		
@@ -117,7 +118,7 @@
 							placeholder="${loginUserInfo.user_id}" disabled="disabled" /></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2">
+						<td colspan="4">
 							<span class="info-title">
 							이름 (
 							<c:choose>
@@ -131,118 +132,48 @@
 							)
 							</span>
 						</td>
-						<td colspan="2" class="edit"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.user_name}" /></td>
+							placeholder="${loginUserInfo.user_name}" disabled="disabled"/></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2"><span class="info-title">생년월일</span></td>
-						<td colspan="2" class="edit"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
+						<td colspan="4"><span class="info-title">생년월일</span></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.birthday}" /></td>
+							placeholder="${loginUserInfo.birthday}" disabled="disabled"/></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2"><span class="info-title">지역</span></td>
-						<td colspan="2" class="edit"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
+						<td colspan="4"><span class="info-title">지역</span></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.address}" /></td>
+							placeholder="${loginUserInfo.address}" disabled="disabled"/></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2"><span class="info-title">이메일</span></td>
-						<td colspan="2" class="edit"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
+						<td colspan="4"><span class="info-title">이메일</span></td>
 					</tr>
 					<tr>
 						<td colspan="4"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.email_address}" /></td>
+							placeholder="${loginUserInfo.email_address}" disabled="disabled"/></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="1"><span class="info-title">연락가능시간설정</span></td>
-						<td colspan="1" class="edit" id="margin-right20"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
-						<td colspan="1"><span class="info-title">연락처</span></td>
-						<td colspan="1" class="edit"><a href="#"><span
-								class="glyphicon glyphicon-pencil"></span>수정</a></td>
+						<td colspan="4"><span class="info-title">연락처</span></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<div class="form-inline">
-								<select id="av_time_to1"
-									class="form-control input-sm padding-side-15">
-									<option value="0"></option>
-									<option value="0">0시</option>
-									<option value="1">1시</option>
-									<option value="2">2시</option>
-									<option value="3">3시</option>
-									<option value="4">4시</option>
-									<option value="5">5시</option>
-									<option value="6">6시</option>
-									<option value="7">7시</option>
-									<option value="8">8시</option>
-									<option value="9">9시</option>
-									<option value="10">10시</option>
-									<option value="11">11시</option>
-									<option value="12">12시</option>
-									<option value="13">13시</option>
-									<option value="14">14시</option>
-									<option value="15">15시</option>
-									<option value="16">16시</option>
-									<option value="17">17시</option>
-									<option value="18">18시</option>
-									<option value="19">19시</option>
-									<option value="20">20시</option>
-									<option value="21">21시</option>
-									<option value="22">22시</option>
-									<option value="23">23시</option>
-									<option value="24">24시</option>
-								</select> ~ <select id="av_time_to2"
-									class="form-control input-sm padding-side-15">
-									<option value="0"></option>
-									<option value="0">0시</option>
-									<option value="1">1시</option>
-									<option value="2">2시</option>
-									<option value="3">3시</option>
-									<option value="4">4시</option>
-									<option value="5">5시</option>
-									<option value="6">6시</option>
-									<option value="7">7시</option>
-									<option value="8">8시</option>
-									<option value="9">9시</option>
-									<option value="10">10시</option>
-									<option value="11">11시</option>
-									<option value="12">12시</option>
-									<option value="13">13시</option>
-									<option value="14">14시</option>
-									<option value="15">15시</option>
-									<option value="16">16시</option>
-									<option value="17">17시</option>
-									<option value="18">18시</option>
-									<option value="19">19시</option>
-									<option value="20">20시</option>
-									<option value="21">21시</option>
-									<option value="22">22시</option>
-									<option value="23">23시</option>
-									<option value="24">24시</option>
-								</select>
-							</div>
-						</td>
-						<td colspan="2"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.mobile}" /></td>
+						<td colspan="4"><input type="text" class="form-control"
+							placeholder="${loginUserInfo.mobile}" disabled="disabled"/></td>
 					</tr>
 					<tr  class="mini-title">
-						<td colspan="2" class="edit"><a href="#" >프로필 수정하러가기></a>
+						<td colspan="4" class="edit">
+						<input type="submit" id="modifyBtn" class="btn btn-info" value="수정하기">
+						
+						<a href="${pageContext.request.contextPath}/mypage/" >
+						<b>기본정보 수정하러가기></b></a></td>
 					</tr>
-					
 				</table>
+				</form>
 			</div>
 		</div>
 		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
@@ -256,6 +187,6 @@
 	<%@ include file="../common/commonBottom.jsp"%>
 	<!-- Footer section(하단부분) -->
 
-
+	</div>
 </body>
 </html>
