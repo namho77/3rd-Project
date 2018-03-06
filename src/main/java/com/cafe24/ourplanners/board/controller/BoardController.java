@@ -1,8 +1,6 @@
 package com.cafe24.ourplanners.board.controller;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,25 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
-import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.board.service.BoardService;
 import com.cafe24.ourplanners.util.PagingUtil;
-
-
-
-
-
 
 @Controller
 @RequestMapping("/board/*")
@@ -96,6 +85,8 @@ public class BoardController {
 			vo = service.view(Integer.parseInt(req.getParameter("board_srl")));
 			
 			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
+			
+			service.visitCount(Integer.parseInt(req.getParameter("board_srl")));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -112,75 +103,113 @@ public class BoardController {
 	public String writeEngineerBoard() {
 		return "board/engineer/board_engineer_write";
 	}
-/*	
-	//글쓰기 처리
-	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.GET)
-	public void writeActionEngineerBoard(HttpServletResponse resp, 
-			HttpServletRequest req, HttpSession session, Model model) {
-			
-		
-		resp.setContentType("text/html; charset=UTF-8");
-		
-		try {
-		
-			if(session.getAttribute("loginUserInfo")==null) {
-				resp.getWriter().write("loginFail");
-				return;
-			}
-			
-			int result = service.write(req, model);
-			
-			if(result > 0) {
-				resp.getWriter().write("writeSuccess");
-			}
-			
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}*/
 	
-	//글쓰기 처리
-	@RequestMapping(value = "engineer/writeAction", method = RequestMethod.POST)
-	public void write(HttpServletResponse resp, HttpServletRequest req, HttpSession session, Model model) throws IOException, FileUploadException {
-		
-		resp.setContentType("text/html; charset=UTF-8");
+	// 글쓰기 처리
+	@ResponseBody
+	@RequestMapping(value = "engineer/writeAciton", method = RequestMethod.POST)
+	public Map<String, Object> writeAction(HttpServletRequest req, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int result = 0;
+		if (session.getAttribute("loginUserInfo") == null) {
+			map.put("code", "login");
+			map.put("message", "로그인 후 작성해주세요");
+			return map;
+		}
 		
 		try {
-			
-			if(session.getAttribute("loginUserInfo")==null) {
-				return;
-			}
-			
-			int result = service.write(req, model);
-			
-			if(result > 0) {
-				resp.getWriter().write("writeSuccess");
-			}
-			
+			result = service.write(req);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+		if (result <= 0) {
+			map.put("code", "FAIL");
+			map.put("message", "작성 실패 하였습니다.");
+		} else {
+			map.put("code", "SUCCESS");
+			map.put("message", "글쓰기를 성공하였습니다.");
+		}
+		
+		return map;
 	}
-	
-	
-	
 	
 
-	
-	
-	//글수정
-	@RequestMapping(value = "engineer/{boardSrl}", method = RequestMethod.PUT)
-	public String modifyEngineerBoard(@PathVariable String boardSrl) {
+	//글수정 폼 가져오기
+	@RequestMapping(value = "engineer/modify/{board_srl}", method = RequestMethod.GET)
+	public String modifyEngineerBoard(@PathVariable Integer board_srl, Model model) {
+		try {
+			service.modify(board_srl, model);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "board/engineer/board_engineer_modify";
 	}
-	//해당 글 삭제
-	@RequestMapping(value = "engineer/{boardSrl}", method = RequestMethod.DELETE)
-	public String deleteEngineerBoard(@PathVariable String boardSrl) {
-		return "board/engineer/board_engineer_list";
+	
+	//글수정 처리
+	@ResponseBody
+	@RequestMapping(value = "engineer/modifyAction", method = RequestMethod.POST)
+	public Map<String, Object> modifyActionEngineerBoard(HttpServletRequest req, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int result = 0;
+		if (session.getAttribute("loginUserInfo") == null) {
+			map.put("code", "login");
+			map.put("message", "로그인 후 수정해주세요");
+			return map;
+		}
+		
+		try {
+			result = service.modifyAction(req);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (result <= 0) {
+			map.put("code", "FAIL");
+			map.put("message", "수정 실패 하였습니다.");
+		} else {
+			map.put("code", "SUCCESS");
+			map.put("message", "글수정을 성공하였습니다.");
+		}
+		
+		return map;
+	}
+	
+	//삭제 처리
+	@ResponseBody
+	@RequestMapping(value = "engineer/delete/{board_srl}", method = RequestMethod.POST)
+	public Map<String, Object> deleteEngineerBoard(@PathVariable Integer board_srl, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int result = 0;
+		
+		if (session.getAttribute("loginUserInfo") == null) {
+			map.put("code", "login");
+			map.put("message", "로그인 후 삭제해주세요");
+			return map;
+		}
+		
+		try {
+			result = service.delete(board_srl);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (result <= 0) {
+			map.put("code", "FAIL");
+			map.put("message", "삭제 실패 하였습니다.");
+		} else {
+			map.put("code", "SUCCESS");
+			map.put("message", "삭제 하였습니다.");
+		}
+		
+		return map;
 	}
 	
 	

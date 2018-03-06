@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BoardDTO {
 
+	private int board_srl;
 	private String user_id;
 	private String title;
 	private String contents;
@@ -19,10 +20,11 @@ public class BoardDTO {
     
     public BoardDTO() {}
     
-	public BoardDTO(String user_id, String title, String contents, String location, Date service_time_start,
+	public BoardDTO(int board_srl, String user_id, String title, String contents, String location, Date service_time_start,
 			Date service_time_end, int contact_time_start, int contact_time_end, int category_srl, int subcategory_srl,
 			int service_cost, String board_type) {
 		super();
+		this.board_srl = board_srl;
 		this.user_id = user_id;
 		this.title = title;
 		this.contents = contents;

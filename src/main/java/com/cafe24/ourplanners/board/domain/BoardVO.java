@@ -9,9 +9,9 @@ public class BoardVO {
 	private int board_srl;
 	private String user_id;
 	private String location;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	//@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private java.sql.Date service_time_start;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	//@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private java.sql.Date service_time_end;
 	private String title;
 	private String contents;
