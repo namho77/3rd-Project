@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -39,7 +39,12 @@
 				//var contentsVal = "${faqVO.contents }";
 				//contentsVal = contentsVal.replaceAll("\\\"", "\\\\\"");
 				//alert(contentsVal);
-				oEditors.getById["contents"].exec("PASTE_HTML", ["${faqVO.contents }"]);
+				//${fn:replace(faqVO.contents, "'", "\\'") }
+				//${fn:replace(faqVO.contents, '"', '\\"') }
+				
+				//${fn:replace(fn:replace(faqVO.contents, "'", "\\'"), '"', '\\"') }
+				//oEditors.getById["contents"].exec("PASTE_HTML", ["${faqVO.contents }"]);
+				oEditors.getById["contents"].exec("PASTE_HTML", ["${fn:replace(fn:replace(faqVO.contents, "'", "\\'"), '"', '\\"') }"]);
 				
 			},
 			fCreator: "createSEditor2"
@@ -94,7 +99,7 @@
 
 			//글수정 처리
 			var params = $('#modifyFAQFrm').serialize();
-			alert(params);
+			//alert(params);
 			var faq_srl = '<c:out value="${faqVO.faq_srl}"/>';
 			//$("input[type='text'][name='contents']").val();
 			var contents = oEditors.getById["contents"].getIR(); 
@@ -104,7 +109,7 @@
 			var service_srl = $("input[type='text'][name='service_srl']").val();
 			
 			var url = "${pageContext.request.contextPath}/customercenter/faq/"+faq_srl;
-			alert(url);
+			//alert(url);
 			$.ajax({
 				cache : false, // 캐시 사용 없애기
 				url : url,

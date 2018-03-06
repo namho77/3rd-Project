@@ -650,6 +650,7 @@ body{
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
+		<div class="preloader_hide">
 
 			<!-- 탑부분(기본적인 틀) -->
 			<nav class="navber navbar-fixed-top" id="navbar-fixed-top">
@@ -1398,11 +1399,6 @@ body{
 			<!-- //HOME -->
 
 
-
-		</div>
-		<!-- //PAGE -->
-
-
 		<!-- 모달창 -->
 
 		<div class="modal fade" id="layer_resend" role="dialog">
@@ -1472,27 +1468,8 @@ body{
 			</div>
 		</div>
 
-	<!-- 페이지이동시 필요한 부분 -->
-	<script type="text/javascript">
-	$(document).ready(function() {
-		var url = "${pageContext.request.contextPath}/notice/smallABoard"
-		$.ajax({
-			url : url,
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:utf-8",
-			data : {
-				param1 : "값1"
-			},
-			success : function(d) {
-				$('#smallABoard').html(d);
-			},
-			error : function(e) {
-				alert("실패" + e);
-			}
-		});
-	});
-	</script>
+	<!-- 이미지 프리로더,우측 사이드바 필요한 부분 -->
+
 	<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 </div>
 </body>

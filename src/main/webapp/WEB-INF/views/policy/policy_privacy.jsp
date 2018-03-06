@@ -66,12 +66,12 @@
 							</li>
 							<li>
 								<h5 class="margin-bottom-0">
-									<a class="plain" href="https://kmong.com/terms_of_service">서비스 이용약관</a>
+									<a class="plain" href="${pageContext.request.contextPath}/policy/provision">서비스 이용약관</a>
 								</h5>
 							</li>
 							<li>
 								<h5 class="margin-bottom-0">
-									<a class="plain" href="https://kmong.com/privacy_policy">개인정보 취급방침</a>
+									<a class="plain" href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방침</a>
 								</h5>
 							</li>
 						</ul>
