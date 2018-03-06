@@ -133,21 +133,21 @@
 			});
 		});
 
-		function getContextPath() {
-			return sessionStorage.getItem("contextpath");
-		}
-
-		function setDefaultFont() {
-
-			var sDefaultFont = '궁서';
-
-			var nFontSize = 24;
-
-			oEditors.getById["contents"].setDefaultFont(sDefaultFont, nFontSize);
-
-		}
-
 	});
+	
+	function getContextPath() {
+		return sessionStorage.getItem("contextpath");
+	}
+
+	function setDefaultFont() {
+
+		var sDefaultFont = '궁서';
+
+		var nFontSize = 24;
+
+		oEditors.getById["contents"].setDefaultFont(sDefaultFont, nFontSize);
+
+	}
 </script>
 <script type="text/javascript" charset="utf-8">
 	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
