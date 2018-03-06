@@ -1,141 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%
-	response.setHeader("Cache-Control", "no-store");
-	response.setHeader("Pragma", "no-cache");
-	response.setDateHeader("Expires", 0);
-	if (request.getProtocol().equals("HTTP/1.1"))
-		response.setHeader("Cache-Control", "no-cache");
-%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>|OUR PLANNERS</title>
-<jsp:useBean id="today" class="java.util.Date" scope="page" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script charset="utf-8">
+	$(function() {
+		//전역변수선언
+		var editor_object = [];
+		var ctx = getContextPath();
+		//alert(ctx);
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : editor_object,
+			elPlaceHolder : "contents",
+			sSkinURI : ctx + "/resources/smarteditor/SmartEditor2Skin.html",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : true,
+				fOnBeforeUnload : function() {
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
-<script type="text/javascript">
-	function writeRow() {
-		if ($("textarea[name='contents']").val() == "") {
-			alert("내용을 입력해주세요.");
-			$("textarea[name='contents']").focus();
-			return;
-		} else if ($("input[name='title']").val() == "") {
-			alert("제목을 입력해주세요.");
-			$("input[name='title']").focus();
-			return;
-		}
-
-		var params = $('#writeFrm').serialize();
-		var url = "${pageContext.request.contextPath}/notice/writeRowAction";
-
-		$.ajax({
-			url : url,
-			dataType : "json",
-			type : "get",
-			contentType : "text/html; charset=utf-8",
-			data : params,
-			success : function(d) {
-				if (d.writeCode == 1) {
-					alert("글입력완료");
-					location.href = "${pageContext.request.contextPath}/notice/aBoard";
-				} else if (d.writeCode == 0) {
-					alert("글입력실패");
-				} else if (d.writeCode == 2) {
-					alert("관리자로그인을 하세요.");
-					location.href = "${pageContext.request.contextPath}/member/login";
 				}
-			},
-			error : function(e) {
-				alert("작성실패:" + e.status + ":" + e.statusText);
 			}
 		});
-	}
+
+		$('#writeActionBtn').click(function() {
+
+			if ($("input[type='text'][name='title']").val() == "") {
+				popLayerMsg("제목을 입력해주세요");
+				$("input[type='text'][name='title']").focus();
+				return;
+			}
+
+			//id가 smarteditor인 textarea에 에디터에서 대입
+			editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+
+			// 이부분에 에디터 validation 검증
+			var el = document.createElement('html');
+			el.innerHTML = editor_object.getById["contents"].elPlaceHolder.value;
+
+			//var elClickedObj = $("#writeNoticeFrm");
+
+			//폼 검증
+			var contentsVal = $("#contents").val();
+
+			if (contentsVal == null || contentsVal == "" || contentsVal == '&nbsp;' || contentsVal == '<p>&nbsp;</p>') {
+				popLayerMsg("내용을 입력해주세요");
+				editor_object.getById["contents"].exec("FOCUS"); //포커싱
+				return;
+			}
+
+			//글쓰기 처리
+			var params = $('#writeNoticeFrm').serialize();
+
+			$.ajax({
+				cache : false, // 캐시 사용 없애기
+				url : "${pageContext.request.contextPath}/customercenter/notice",
+				type : "post",
+				dataType : "json",
+				//contentType : "text/html; charset=utf-8",
+				data : params,
+				success : function(d) {
+					if (d.result == "fail") {
+						if (d.errorMsg == "isNotLogin") {
+							popLayerMsg("공지사항을 작성하시려면 관리자 아이디로 로그인 해주세요.");
+							location.href = "${pageContext.request.contextPath}/member/login";
+						} else if (d.errorMsg == "isNotAdmin") {
+							popLayerMsg("공지사항을 작성하시려면 관리자 아이디로 로그인 해주세요.");
+							location.href = "${pageContext.request.contextPath}/member/login";
+						}
+
+					} else if (d.result == "success") {
+
+						popLayerMsg("글쓰기를 성공하였습니다.");
+						//location.href = "${pageContext.request.contextPath}/customercenter/notice";
+						getListNotice(1);
+					}
+
+				},
+				error : function(e) {
+					alert("요청실패:" + e.status + " " + e.statusText);
+				}
+			});
+		});
+
+		function getContextPath() {
+			return sessionStorage.getItem("contextpath");
+		}
+	});
 </script>
-</head>
+<script type="text/javascript" charset="utf-8">
+	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
 
-<body>
-	<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
-	<!-- //PRELOADER -->
-	<div class="preloader_hide">
+<script type="text/javascript">
+	/* 
+	 $(function() {
+	 //전역변수선언
+	 var editor_object = [];
+	 var ctx = getContextPath();
 
-		<!-- HEADER -->
+	 nhn.husky.EZCreator.createInIFrame({
+	 oAppRef: editor_object,
+	 elPlaceHolder: "contents",
+	 sSkinURI: ctx + "/resources/smarteditor/SmartEditor2Skin.html",
+	 htParams : {
+	 // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+	 bUseToolbar : true,             
+	 // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+	 bUseVerticalResizer : true,     
+	 // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+	 bUseModeChanger : true,
+	 fOnBeforeUnload : function(){
+	
+	 }
+	 }
+	 });
+	
 
-		<%@ include file="../../common/top_main2.jsp"%>
+	
+	 function getContextPath(){
+	 var offset=location.href.indexOf(location.host)+location.host.length;
+	 var ctxPath=location.href.substring(offset,location.href.indexOf('/',offset+1));
+	 return ctxPath;
+	 }
+	
+	 }); */
 
-		<!-- HOME -->
-		<section id="main" class="section">
+	$(document).ready(function() {
 
-			<!-- CONTAINER -->
-			<div class="container ">
-				<!-- test용 시작-->
-				<div class="col-xs-4 col-md-4"></div>
-				<div class="col-xs-6 col-md-6">
-					<form id="writeFrm">
-						<table>
-							<colgroup>
-								<col width="20%" />
-								<col width="*" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<th>제목</th>
-									<td>
-										<input type="text" style="width: 100px" name="title" />
-									</td>
-								</tr>
-								<tr>
-									<th>내용</th>
-									<td>
-										<textarea name="contents" rows="10" style="color: black;"></textarea>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<button type="button" onclick="javascript:writeRow()" class="btn btn-info">글입력하기</button>
-						<button type="reset" class="btn btn-danger">Reset</button>
-					</form>
-				</div>
+		$('#listView').click(function() {
+			getListNotice(1);
+		});
 
-				<div class="col-xs-2 col-md-2"></div>
-				<!-- test용 끝 -->
-			</div>
-			<!-- //CONTAINER -->
+	});
+</script>
 
+<form id="writeNoticeFrm">
 
-		</section>
-		<!-- //HOME -->
+	<div class="write-body">
 
-		<!-- 모달창 -->
-		<%@ include file="../../common/modal_msg.jsp"%>
-		<!-- //모달창 끝 -->
+		<div class="title2">
+
+			<p class="p-title">제목</p>
+			<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" />
+		</div>
+		<div class="contents">
+			<p class="p-title">내용</p>
 
 
-		<!-- Footer section(하단부분) -->
-		<%@ include file="../../common/bottom.jsp"%>
-		<!-- Footer section(하단부분) -->
+			<textarea class="form-control" name="contents" id="contents" rows="10" cols="80" placeholder="서비스 내용을 입력하세요"></textarea>
+		</div>
+
 
 	</div>
-</body>
-</html>
+	<div class="write-btn">
+		<button type="button" class="btn btn-info" id="listView">목록보기</button>
+		<button type="button" class="btn btn-success" id="writeActionBtn">작성완료</button>
+	</div>
+
+
+
+</form>

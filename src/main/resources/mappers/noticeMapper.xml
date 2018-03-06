@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.mapper.NoticeMapper">
+
+	<sql id="search">
+		<choose>
+			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">
+
+			</when>
+			<otherwise>
+				<if test="searchType == 't'.toString()">
+					and title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'c'.toString()">
+					and contents like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				
+				<if test="searchType == 'tc'.toString()">
+					and ( title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%') OR contents like
+					CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%'))
+				</if>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	
+		<!-- 자주 묻는 질문 게시판 검색후 리스트 가져오기 -->
+	
+	<select id="getNoticeListJson" resultType="NoticeVO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT notice_srl ,
+TITLE ,
+CONTENTS ,
+POSTDATE FROM op_notice where notice_srl > 0 
+]]>
+
+
+		<include refid="search"></include>
+  
+	<![CDATA[    
+	  ORDER BY notice_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+	]]>
+
+	</select>
+	
+	<select id="getTotalCount" resultType="Integer">
+		select count(*) from op_notice
+	</select>
+	
+	<delete id="deleteNotice">
+		delete from op_notice where notice_srl=#{notice_srl}
+	</delete>
+	<insert id="writeNotice">
+		insert into op_notice(notice_srl,title,contents,postdate) values (op_notice_srl_seq.nextval, #{title},#{contents},sysdate)
+	</insert>
+	<update id="modifyNotice">
+		update op_notice set title=#{title}, contents=#{contents} where notice_srl=#{notice_srl}
+	</update>
+	
+	<select id="readNotice" resultType="NoticeVO">
+		select * from op_notice where notice_srl=#{notice_srl}
+	</select>
+	
+</mapper>

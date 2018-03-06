@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		var url = "${pageContext.request.contextPath}/notice/smallABoard"
 		$.ajax({
 			url : url,
@@ -18,7 +18,52 @@
 				alert("실패" + e);
 			}
 		});
-	});
+	}); */
+	$(document).ready(function() {
+		getListNoticeOne(1);
+	}); 
+	
+	function noticePaging(nowPage) {
+		getListNoticeOne(nowPage);
+	}
+
+	//공지사항 리스트 개수 지정해서 가져오기
+	function getListNoticeOne(nowPage){
+		
+		// 파라미터에 nowPage=1로 기본값 파라미터 설정.
+		// 디폴트 기본값 세팅 ( Edge, IE 11 버전에서는 작동하지 않으므로 다음과 같이 씀)
+		nowPage = typeof nowPage !== 'undefined' ? nowPage : 1 ;
+		
+		var url = "${pageContext.request.contextPath}/customercenter/notice/json/notice_list.json";
+			var inHTML = "";
+			
+			var inHTMLPaging = "";
+			$("#noticeBodyBottom").empty();
+			var params="nowPage="+nowPage+"&pageSize=1&blockPage=1";
+			$.ajax({
+				url : url,
+				dataType : "json",
+				type : "get",
+				data : params,
+				contentType : "text/html; charset=utf-8",
+				success : function(data) {
+					$.each(data.noticeLists, function(index, noticeList) { // each로 모든 데이터 가져와서 items 배열에 넣고
+						
+						inHTML += "<a href=\"${pageContext.request.contextPath}/customercenter/notice/"+noticeList.notice_srl+"\" style=\"font-size: 15px;\">"+noticeList.title+"&nbsp;&nbsp;</a>";
+
+					});//each끝
+					inHTML += "<div class=\"row text-center\">";
+					inHTML += "<ul class=\"pagination\" id=\"noticePagingDiv\">";
+					inHTML += "</ul> </div>";
+					inHTML += "		</div>";
+					$("#noticeBodyBottom").html(inHTML);
+					$("#noticePagingDiv").html(data.pagingDiv);
+				},
+				error : function(e) {
+					popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+				}
+			});
+	}
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <div class="container-fluid" style="background-color: white;">
@@ -38,8 +83,8 @@
 			<div class="footer-body">
 				<div class="row">
 					<div class="col-xs-10">
-						<h4><a href="./notice/aBoard" style="font-size: 15px;">공지사항</a></h4>
-						<div id="smallABoard">2018년 3월14일에 발표합니다. 준비하세요!</div>
+						<h4><a href="${pageContext.request.contextPath}/customercenter/notice" style="font-size: 15px;">공지사항</a></h4>
+						<div id="noticeBodyBottom">2018년 3월14일에 발표합니다. 준비하세요!</div>
 						
 					</div>
 					<div class="col-xs-2">

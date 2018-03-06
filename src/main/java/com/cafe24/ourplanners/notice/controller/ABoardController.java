@@ -1,4 +1,4 @@
-package com.cafe24.ourplanners.notice.controller;
+/*package com.cafe24.ourplanners.notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class ABoardController {
 		
 		String pagingDiv = PagingUtil.pagingAjax(totalRecordCount, pageSize, blockPage, nowPage, "");
 		
-		/*model.addAttribute("nowPage", nowPage);*/
+		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("pagingDiv", pagingDiv);
 		model.addAttribute("lists", lists);
 		
@@ -199,3 +199,4 @@ public class ABoardController {
 		return map;
 	}
 }
+*/
