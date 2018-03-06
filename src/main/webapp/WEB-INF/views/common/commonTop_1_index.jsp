@@ -1,7 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+	// [ 네비게이션 스크롤 시 변화 JS ] 
+	//Hide Header on on scroll down
+	var didScroll;
+	var lastScrollTop = 0;
+	var delta = 5;
+	var navbarHeight = $('#navbar-fixed-top').outerHeight();
+	$(window).scroll(function(event) {
+		didScroll = true;
+	});
+	setInterval(function() {
+		if (didScroll) {
+			hasScrolled();
+			didScroll = false;
+		}
+	}, 1000);
+	function hasScrolled() {
+		var st = $(this).scrollTop();
+		// Make sure they scroll more than delta
+		if (Math.abs(lastScrollTop - st) <= delta)
+			return;
+		// If they scrolled down and are past the navbar, add class .nav-up. 
+		// This is necessary so you never see what is "behind" the navbar. 
+		if (st > lastScrollTop && st > navbarHeight) {
+			// Scroll Down
+			$('#navbar-fixed-top, #navbar-fixed-top2').removeClass('nav-up').addClass('nav-down').removeClass('hide');
+		} else {
+			// Scroll Up
+			if (st + $(window).height() < $(document).height()) {
+				$('#navbar-fixed-top, #navbar-fixed-top2').removeClass('nav-down').addClass('nav-up');
+			}
+		}
+		lastScrollTop = st;
+	}
+</script>
 <header>
-	<nav class="navber navbar-fixed-top" id="navbar-fixed-top">
+	<nav class="navber navbar-fixed-top hide" id="navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
@@ -20,8 +55,8 @@
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
-						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판 리스트</a></li>
-						<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판 리스트</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판</a></li>
 	
 						<c:choose>
 						<c:when test="${empty loginUserInfo}">

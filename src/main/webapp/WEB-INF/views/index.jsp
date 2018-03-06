@@ -33,7 +33,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/video.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
-
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,27 +42,22 @@
     <![endif]-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script src="${pageContext.request.contextPath}/resources/js/op.index.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
-
-
-	
 </head>
 
 <body id="total-bg">
-
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
-	
+	<div class="preloader_hide">
 
-	<!-- header section -->
-		<%-- <%@ include file="./common/commonTop_1.jsp"%> --%>
-	<!--// header section -->
-	<!-- header section -->
-		<%-- <%@ include file="./common/commonTop_2.jsp"%> --%>
-	<!--// header section -->
+	<!-- header1(네비게이션 탑1) -->
+		<%@ include file="./common/commonTop_1_index.jsp"%>
+	<!-- header1(네비게이션 탑1) -->
+	<!-- header2(네비게이션 탑2) -->
+		<%@ include file="./common/commonTop_2_index.jsp"%>
+	<!-- header2(네비게이션 탑2) -->
 		
 	<!-- 모달창 메시지 -->
 		<%@ include file="common/modal_msg.jsp"%>
@@ -463,5 +457,6 @@
 	<!-- Footer (하단부분) -->
 	<%@ include file="./common/commonBottom.jsp"%>
 	<!--// Footer (하단부분) -->
+	</div>
 </body>
 </html>
