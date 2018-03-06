@@ -89,7 +89,7 @@ body{
 <body>
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
-
+		<div class="preloader_hide">
 	<!-- 탑부분(기본적인 틀) -->
 	<nav class="navber navbar-fixed-top" id="navbar-fixed-top">
 		<div class="container-fluid">
@@ -190,27 +190,8 @@ body{
 
 	<!-- 모달창 -->
 	<%@ include file="../common/modal_msg.jsp"%>
-	<!-- 페이지이동시 필요한 부분 -->
-	<script type="text/javascript">
-	$(document).ready(function() {
-		var url = "${pageContext.request.contextPath}/notice/smallABoard"
-		$.ajax({
-			url : url,
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:utf-8",
-			data : {
-				param1 : "값1"
-			},
-			success : function(d) {
-				$('#smallABoard').html(d);
-			},
-			error : function(e) {
-				alert("실패" + e);
-			}
-		});
-	});
-	</script>
+
 	<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+</div>
 </body>
 </html>

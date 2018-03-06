@@ -56,6 +56,7 @@ public class SearchRestController {
 			propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
 			// 5) getProperty로 해당 데이터를 읽어와서 변수에 저장한다.
 			// 단, 반환 결과가 String 타입이므로 사용하려는 int타입으로 캐스팅 후 사용해야 한다.
+			
 			pageSize = Integer.parseInt(env.getProperty("board.pageSize"));
 			blockPage = Integer.parseInt(env.getProperty("board.blockPage"));
 		} catch (Exception e) {

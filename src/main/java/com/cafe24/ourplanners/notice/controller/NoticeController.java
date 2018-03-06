@@ -1,4 +1,4 @@
-package com.cafe24.ourplanners.faq.controller;
+package com.cafe24.ourplanners.notice.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,31 +21,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cafe24.ourplanners.faq.domain.FAQVO;
-import com.cafe24.ourplanners.faq.service.FAQService;
 import com.cafe24.ourplanners.member.domain.MemberVO;
-import com.cafe24.ourplanners.util.SearchFAQCriteria;
+import com.cafe24.ourplanners.notice.domain.NoticeVO;
+import com.cafe24.ourplanners.notice.service.NoticeService;
+import com.cafe24.ourplanners.util.SearchCriteria;
 
 @Controller
-public class FAQController {
+public class NoticeController {
 
 	@Inject
-	private FAQService service;
+	private NoticeService service;
 
-	// faq 게시판 JSON
+	// notice 게시판 JSON
 	@ResponseBody
-	@RequestMapping(value = "/customercenter/faq/json/faq_list.json")
-	public HashMap<String, Object> getFAQListJson(HttpServletRequest req, Model model,
+	@RequestMapping(value = "/customercenter/notice/json/notice_list.json")
+	public HashMap<String, Object> getNoticeListJson(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
-
-			@RequestParam(required = false) Integer category_srl,
-			@RequestParam(required = false) Integer service_srl,
 
 			@RequestParam(required = false) Integer pageSize,
 			@RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false, defaultValue = "") String searchType,
 			@RequestParam(required = false, defaultValue = "") String keyword) {
-
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		if (pageSize == null || blockPage == null) {
@@ -58,9 +55,9 @@ public class FAQController {
 			try {
 				propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
 				if(pageSize == null)
-				pageSize = Integer.parseInt(env.getProperty("faq.pageSize"));
+				pageSize = Integer.parseInt(env.getProperty("notice.pageSize"));
 				if(blockPage == null)
-				blockPage = Integer.parseInt(env.getProperty("faq.blockPage"));
+				blockPage = Integer.parseInt(env.getProperty("notice.blockPage"));
 			} catch (Exception e) {
 				
 				e.printStackTrace();
@@ -69,58 +66,51 @@ public class FAQController {
 			ctx.close();
 		}
 
-		SearchFAQCriteria scri = new SearchFAQCriteria();
+		SearchCriteria scri = new SearchCriteria();
 
-		if (category_srl != null) {
-			scri.setCategory_srl(category_srl);
-			System.out.println("category_srl:"+category_srl);
-		}
-		
-		if (service_srl != null) {
-			System.out.println("service_srl:"+service_srl);
-			scri.setService_srl(service_srl);
-		}
+
 		scri.setNowPage(nowPage);
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
 		
-		System.out.println("nowPage:"+nowPage);
+
 		
 		if(searchType != null && searchType.length() != 0)
 		scri.setSearchType(searchType);
 		if(keyword != null && keyword.length() != 0)
 		scri.setKeyword(keyword);		
 		
-		service.getFAQListJson(scri, map);
+		service.getNoticeListJson(scri, map);
 
 		return map;
 	}
 
 	// 글 상세 보기
-	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = RequestMethod.GET)
-	public String viewFAQ(@PathVariable Integer faq_srl,Model model) {
-		model.addAttribute("faq_srl",faq_srl);		
-		return "customercenter/faq/customercenter_faq_view";
+	@RequestMapping(value = "/customercenter/notice/{notice_srl}", method = RequestMethod.GET)
+	public String viewNotice(@PathVariable Integer notice_srl,Model model) {
+		//model.addAttribute("notice_srl",notice_srl);
+		service.readNotice(notice_srl,model);
+		return "customercenter/notice/customercenter_notice_view";
 	}
 
 	// 리스트 보기
-	@RequestMapping(value = "/customercenter/faq", method = RequestMethod.GET)
-	public String listFAQ(Model model) {
+	@RequestMapping(value = "/customercenter/notice", method = RequestMethod.GET)
+	public String listNotice(Model model) {
 		
 		
-		return "customercenter/faq/customercenter_faq_list";
+		return "customercenter/notice/customercenter_notice_list";
 	}
 
 	// 글쓰기 폼 가져오기
-	@RequestMapping(value = "/customercenter/faq/new", method = RequestMethod.GET)
-	public String writeFormFAQ() {
-		return "customercenter/faq/customercenter_faq_write";
+	@RequestMapping(value = "/customercenter/notice/new", method = RequestMethod.GET)
+	public String writeFormNotice() {
+		return "customercenter/notice/customercenter_notice_write";
 	}
 
 	// 글쓰기 처리
 	@ResponseBody
-	@RequestMapping(value = "/customercenter/faq", method = RequestMethod.POST)
-	public Map<String, Object> writeActionFAQ(HttpServletRequest req, HttpSession session) {
+	@RequestMapping(value = "/customercenter/notice", method = RequestMethod.POST)
+	public Map<String, Object> writeActionNotice(HttpServletRequest req, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (session.getAttribute("loginUserInfo") == null) {
@@ -135,7 +125,7 @@ public class FAQController {
 			return map;
 		}
 
-		int result = service.writeFAQ(req,map);
+		int result = service.writeNotice(req,map);
 
 		if (result <= 0) {
 			map.put("result", "fail");
@@ -147,22 +137,22 @@ public class FAQController {
 	}
 
 	// 글수정 폼
-	@RequestMapping(value = "/customercenter/faq/{faq_srl}/edit", method = RequestMethod.GET)
-	public String modifyFormFAQ(@PathVariable Integer faq_srl,Model model) {
-		//model.addAttribute("faq_srl",faq_srl);
-		service.readFAQ(faq_srl,model);
-		return "customercenter/faq/customercenter_faq_modify";
+	@RequestMapping(value = "/customercenter/notice/{notice_srl}/edit", method = RequestMethod.GET)
+	public String modifyFormNotice(@PathVariable Integer notice_srl,Model model) {
+		//model.addAttribute("notice_srl",notice_srl);
+		service.readNotice(notice_srl,model);
+		return "customercenter/notice/customercenter_notice_modify";
 	}
 
 	// 글수정 처리
 	@ResponseBody
-	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method= {RequestMethod.PUT, RequestMethod.PATCH})
-	public Map<String, Object> modifyActionFAQ(@PathVariable Integer faq_srl,HttpServletRequest req,HttpSession session,@RequestBody FAQVO vo) {
+	@RequestMapping(value = "/customercenter/notice/{notice_srl}", method= {RequestMethod.PUT, RequestMethod.PATCH})
+	public Map<String, Object> modifyActionNotice(@PathVariable Integer notice_srl,HttpServletRequest req,HttpSession session,@RequestBody NoticeVO vo) {
 		
-		vo.setFaq_srl(faq_srl);
+		vo.setNotice_srl(notice_srl);
 		/*
 		System.out.println("service_srl:"+vo.getService_srl());
-		System.out.println("faq_srl:"+faq_srl);
+		System.out.println("notice_srl:"+notice_srl);
 		System.out.println("category_srl:"+vo.getCategory_srl());
 		System.out.println("title:"+vo.getTitle());
 		System.out.println("contents:"+vo.getContents());
@@ -181,7 +171,7 @@ public class FAQController {
 			return map;
 		}
 		
-		int result = service.modifyFAQ(vo);
+		int result = service.modifyNotice(vo);
 
 		if (result <= 0) {
 			map.put("result", "fail");
@@ -195,8 +185,8 @@ public class FAQController {
 
 	// 해당 글 삭제
 	@ResponseBody
-	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = RequestMethod.DELETE)
-	public Map<String, Object> deleteFAQ(HttpServletRequest req, HttpSession session, Model model, @PathVariable Integer faq_srl) {
+	@RequestMapping(value = "/customercenter/notice/{notice_srl}", method = RequestMethod.DELETE)
+	public Map<String, Object> deleteNotice(HttpServletRequest req, HttpSession session, Model model, @PathVariable Integer notice_srl) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (session.getAttribute("loginUserInfo") == null) {
@@ -211,7 +201,7 @@ public class FAQController {
 			return map;
 		}
 		
-		int result = service.deleteFAQ(faq_srl);
+		int result = service.deleteNotice(notice_srl);
 
 		if (result <= 0) {
 			map.put("result", "fail");
