@@ -21,8 +21,8 @@ public class NoticeDAOImpl implements NoticeDAO{
 		return sqlSession.selectList(namespace + ".getNoticeListJson", scri);
 	}
 	@Override
-	public int getTotalCount() {
-		return sqlSession.selectOne(namespace+".getTotalCount");
+	public int getTotalCount(SearchCriteria scri) {
+		return sqlSession.selectOne(namespace+".getTotalCount",scri);
 	}
 	@Override
 	public int deleteNotice(int notice_srl) {

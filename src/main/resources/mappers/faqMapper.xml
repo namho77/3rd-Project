@@ -66,7 +66,30 @@ service_srl FROM op_faq where faq_srl > 0
 	</select>
 	
 	<select id="getTotalCount" resultType="Integer">
+	
+	<![CDATA[  
 		select count(*) from op_faq
+		  where faq_srl > 0 
+	]]>
+	
+	<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="service_srl == null or service_srl == ''">
+
+			</when>
+			<otherwise>
+				AND service_srl = #{service_srl}
+			</otherwise>
+		</choose>
+		<include refid="search"></include>
 	</select>
 	
 	<delete id="deleteFAQ">

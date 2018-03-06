@@ -8,7 +8,7 @@ import com.cafe24.ourplanners.util.SearchCriteria;
 public interface NoticeDAO {
 	public List<NoticeVO> getNoticeListJson(SearchCriteria scri);
 	
-	public int getTotalCount();
+	public int getTotalCount(SearchCriteria scri);
 	
 	public int deleteNotice(int notice_srl);
 	

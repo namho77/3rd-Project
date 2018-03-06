@@ -48,7 +48,10 @@ POSTDATE FROM op_notice where notice_srl > 0
 	</select>
 	
 	<select id="getTotalCount" resultType="Integer">
-		select count(*) from op_notice
+	<![CDATA[ 
+		select count(*) from op_notice where notice_srl > 0 
+		]]>
+		<include refid="search"></include>
 	</select>
 	
 	<delete id="deleteNotice">

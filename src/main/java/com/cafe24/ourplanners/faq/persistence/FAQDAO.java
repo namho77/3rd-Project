@@ -9,7 +9,7 @@ public interface FAQDAO {
 
 	public List<FAQVO> getFAQListJson(SearchFAQCriteria scri);
 	
-	public int getTotalCount();
+	public int getTotalCount(SearchFAQCriteria scri);
 	
 	public int deleteFAQ(int faq_srl);
 	
