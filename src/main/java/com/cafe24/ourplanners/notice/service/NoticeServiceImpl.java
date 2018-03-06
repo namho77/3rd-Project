@@ -29,11 +29,14 @@ public class NoticeServiceImpl implements NoticeService{
 		lists = dao.getNoticeListJson(scri);
 		
 		for(NoticeVO list:lists) {
+			//싱글 쿼테이션 더블 쿼테이션 변경
+			list.setContents(list.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\" ", "\""));
+			//줄바꿈 처리
 			list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
 		}
 	
 		
-		int totalRecordCount = dao.getTotalCount();
+		int totalRecordCount = dao.getTotalCount(scri);
 		String pagingDiv = PagingUtil.pagingAjaxBySearchCriteria(totalRecordCount, scri, "noticePaging");
 		
 		map.put("noticeLists", lists);

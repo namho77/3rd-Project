@@ -1,30 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> --%>
 
+<c:choose>
+<c:when test="${empty sessionScope.loginUserInfo }">
+	<!-- 로그인 정보가 없다면 경고메시지를 띄우고 로그인 페이지로 이동한다. -->
+	<script>
+		alert("로그인 후 작성해주세요.");
+		location.href="../member/login";
+	</script>
+</c:when>
+<c:otherwise> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/resources/js/writeForm.js"/></script>
-
-<script type="text/javascript" charset="utf-8">
-		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
-	</script>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	   
+	
+	var editor_object = [];
+	var ctx = sessionStorage.getItem("contextpath");
+	
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : editor_object,
+		elPlaceHolder : "contents",
+		sSkinURI : ctx + "/resources/smarteditor/SmartEditor2Skin.html",
+		htParams : {
+			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseToolbar : true,
+			// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseVerticalResizer : true,
+			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+			bUseModeChanger : true,
+			fOnBeforeUnload : function() {
+
+			}
+		}
+	});
+	
+	//목록으로
 	$('#listGO').click(function(){
 		location.href = "./engineer";
 	});
 			
+	//글쓰기
 	$('#writeActionBtn').click(function(){
-	//폼값 검증
+		
+		//폼값 검증
 		if($("input[type='text'][name='title']").val()==""){
 			alert("제목을 입력해주세요");
 			$("input[type='text'][name='title']").focus();
 			return;
 		}
+	
+		//id가 smarteditor인 textarea에 에디터에서 대입
+		editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		// 이부분에 에디터 validation 검증
+		var el = document.createElement('html');
+		el.innerHTML = editor_object.getById["contents"].elPlaceHolder.value;
+		
+        var ir1 = $("#contents").val();
+
+        if( ir1 == ""  || ir1 == null || ir1 == '&nbsp;' || ir1 == '<p>&nbsp;</p>')  {
+             alert("내용을 입력하세요.");
+             editor_object.getById["contents"].exec("FOCUS"); //포커싱
+             return;
+        }
 	/* 	if($("textarea[name='contents']").val()==""){
 			alert("내용을 입력해주세요");
 			$("textarea[name='contents']").focus();
@@ -50,52 +91,45 @@ $(document).ready(function(){
 			$("input[type='text'][name='contact_time']").focus();
 			return;
 		}
-	/* 	
-		//폼값전송
-		var params = $('#writeFrm').serialize();	
+		
+		//폼값 전송
+		var params = $('#writeFrm').serialize();
+		
 		$.ajax({
-			url : "./engineer/writeAction",
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset=utf-8",
+			url : "./engineer/writeAciton",
+			dataType : "json",
+			type : "post",
+			//contentType : "text/html; charset=utf-8",
 			data : params,
-			success : function(d){
-				if(d == "loginFail"){
-					alert("로그인후 작성해주세요")
+			success : function(d) {
+				if(d.code == "SUCCESS"){
+					alert(d.message);
+					location.href = "./engineer";
+				}
+				else if(d.code == "login"){
+					alert(d.message);
 					location.href = "../member/login";
 				}
-				else if(d=="writeSuccess"){
-					alert("글쓰기를 성공하였습니다.")
-					location.href = "./engineer";	
-				}
-				else {
-					alert("글쓰기 실패!");
+				else{
+					alert(d.message);
 				}
 			},
 			error : function(e){
 				alert("요청실패:"+e.status+" "+e.statusText);
 			}
 		});
-		
-		
-		욕나온다 ㅡㅡㄴㅇㅁㅇㄴㅇ
-		 */
 	});
 });
 </script>
 
- <c:choose>
-	<c:when test="${empty sessionScope.loginUserInfo }">
-		<!-- 로그인 정보가 없다면 경고메시지를 띄우고 로그인 페이지로 이동한다. -->
-		<script>
-			alert("로그인 후 작성해주세요.");
-			location.href="../member/login";
-		</script>
-	</c:when>
-	<c:otherwise> 
+<script type="text/javascript" charset="utf-8">
+		sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
+
+
 	
 		<!-- <form id="writeFrm"> -->
-		<form action="./engineer/writeAction" method="post" id="frm">
+		<form id="writeFrm">
 			
 			<input type="hidden" name="user_id" value="${sessionScope.loginUserInfo.user_id }" />
 			<input type="hidden" name="board_type" value="E" />
@@ -168,7 +202,6 @@ $(document).ready(function(){
 					<div class="write-btn">
 						<button type="button" class="btn btn-success" id="listGO">목록보기</button>
 						<button type="button" class="btn btn-success" id="writeActionBtn">글쓰기</button>
-						<input type="submit" id="addBtn" value="글쓰기" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>

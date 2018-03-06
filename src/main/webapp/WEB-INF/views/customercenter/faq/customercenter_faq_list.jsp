@@ -1,8 +1,9 @@
 <%@page import="com.cafe24.ourplanners.member.dto.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
@@ -229,7 +230,7 @@
 							<nav class="navigation-sidebar">
 								<ul>
 
-									<li class="active"><a href="javascript:getListFAQ(1,1,'');"><i class="fa "></i>가입/인증/탈퇴</a></li>
+									<li class=""><a href="javascript:getListFAQ(1,1,'');"><i class="fa "></i>가입/인증/탈퇴</a></li>
 									<li><a href="javascript:getListFAQ(1,1,2);"><i class="fa "></i> 서비스문의/구매</a></li>
 									<li><a href="javascript:getListFAQ(1,1,3);"><i class="fa "></i> 평가/구매확정</a></li>
 									<li><a href="javascript:getListFAQ(1,1,4);"><i class="fa "></i> 서비스등록/승인/수정</a></li>
@@ -240,9 +241,9 @@
 									<li><a href="javascript:getListFAQ(1,1,9);"><i class="fa "></i> 결제/세금계산서</a></li>
 									<li><a href="javascript:getListFAQ(1,1,10);"><i class="fa "></i> 수정/취소/환불</a></li>
 									<li><a href="javascript:getListFAQ(1,1,11);"><i class="fa "></i> 판매/수익금</a></li>
-									
-									
-									
+
+
+
 								</ul>
 							</nav>
 						</aside>

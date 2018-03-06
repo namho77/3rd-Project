@@ -24,7 +24,7 @@ $(function() {
     });
     
   //전송버튼 클릭이벤트
-    $("#addBtn").click(function(){
+/*    $("#addBtn").click(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
         editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
          
@@ -33,10 +33,8 @@ $(function() {
         el.innerHTML = editor_object.getById["contents"].elPlaceHolder.value;
         
         //폼 submit
-        $("#frm").submit();
-        
-        
-    });
+        $("#frm").submit(); 
+    });*/
     
     function getContextPath() {
     	return sessionStorage.getItem("contextpath");

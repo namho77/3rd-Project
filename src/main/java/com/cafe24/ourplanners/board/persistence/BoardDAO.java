@@ -18,7 +18,17 @@ public interface BoardDAO {
 	
 	public BoardVO view (Integer boardSrl) throws Exception;
 	
+	public void visitCount(Integer boardSrl) throws Exception;
+	
 	public int write(BoardDTO dto) throws Exception;
+	
+	public BoardVO modify(Integer board_srl) throws Exception;
+	
+	public int modifyAction(BoardDTO dto) throws Exception;
+	
+	public int delete(Integer board_srl) throws Exception;
+	
+	
 	
 	public BoardVO read(Integer boardSrl) throws Exception;
 
@@ -33,7 +43,7 @@ public interface BoardDAO {
 
 	public void update(BoardVO vo) throws Exception;
 
-	public void delete(Integer bno) throws Exception;
+	
 
 	
 

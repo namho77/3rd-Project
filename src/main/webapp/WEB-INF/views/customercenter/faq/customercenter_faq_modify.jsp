@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+	if (request.getProtocol().equals("HTTP/1.1"))
+		response.setHeader("Cache-Control", "no-cache");
+%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -9,7 +17,7 @@
 	$(function() {
 		//전역변수선언
 		var oEditors = [];
-		var sLang = "ko_KR";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
+		var sLang = "ko_KR"; // 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
 		var ctx = getContextPath();
 
 		nhn.husky.EZCreator.createInIFrame({
@@ -26,38 +34,12 @@
 				fOnBeforeUnload : function() {
 
 				}
-			}, //boolean
-			fOnAppLoad : function(){
-				
-				//내용초기화
-				oEditors.getById["contents"].exec("SET_IR", [""]); 
-				
-				//내용 붙여넣기
-				//var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-				//oEditors.getById["contents"].exec("PASTE_HTML", [sHTML]);
-				//내용 가져와서 붙여넣기
-				//var contentsVal = "${faqVO.contents }";
-				//contentsVal = contentsVal.replaceAll("\\\"", "\\\\\"");
-				//alert(contentsVal);
-				//${fn:replace(faqVO.contents, "'", "\\'") }
-				//${fn:replace(faqVO.contents, '"', '\\"') }
-				
-				//${fn:replace(fn:replace(faqVO.contents, "'", "\\'"), '"', '\\"') }
-				//oEditors.getById["contents"].exec("PASTE_HTML", ["${faqVO.contents }"]);
-				oEditors.getById["contents"].exec("PASTE_HTML", ["${fn:replace(fn:replace(faqVO.contents, "'", "\\'"), '"', '\\"') }"]);
-				
-			},
-			fCreator: "createSEditor2"
+			}
 		});
-		
-	
-
-
 
 		//alert("${faqVO.contents }");
 		//oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 		//$("#contents").val("${faqVO.contents }");
-		
 
 		$('#modifyActionBtn').click(function() {
 
@@ -82,8 +64,7 @@
 
 			//id가 smarteditor인 textarea에 에디터에서 대입
 			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-			
-			
+
 			// 이부분에 에디터 validation 검증
 			var el = document.createElement('html');
 			el.innerHTML = oEditors.getById["contents"].elPlaceHolder.value;
@@ -102,13 +83,13 @@
 			//alert(params);
 			var faq_srl = '<c:out value="${faqVO.faq_srl}"/>';
 			//$("input[type='text'][name='contents']").val();
-			var contents = oEditors.getById["contents"].getIR(); 
-				
+			var contents = oEditors.getById["contents"].getIR();
+
 			var title = $("input[type='text'][name='title']").val();
 			var category_srl = $("input[type='text'][name='category_srl']").val();
 			var service_srl = $("input[type='text'][name='service_srl']").val();
-			
-			var url = "${pageContext.request.contextPath}/customercenter/faq/"+faq_srl;
+
+			var url = "${pageContext.request.contextPath}/customercenter/faq/" + faq_srl;
 			//alert(url);
 			$.ajax({
 				cache : false, // 캐시 사용 없애기
@@ -118,7 +99,7 @@
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "PUT"
 				},
-				
+
 				dataType : "json",
 				//contentType : "text/html; charset=utf-8",
 				data : JSON.stringify({
@@ -126,7 +107,7 @@
 					category_srl : category_srl,
 					title : title,
 					contents : contents
-			}),
+				}),
 				//data : params,
 				success : function(d) {
 					if (d.result == "fail") {
@@ -155,7 +136,7 @@
 		function getContextPath() {
 			return sessionStorage.getItem("contextpath");
 		}
-		
+
 		function setDefaultFont() {
 
 			var sDefaultFont = '궁서';
@@ -173,12 +154,10 @@
 </script>
 
 <script type="text/javascript">
-
 	$(document).ready(function() {
 
-
 		$("#listView").click(function() {
-			getListFAQ(1,1,"");
+			getListFAQ(1, 1, "");
 		});
 
 	});
@@ -189,24 +168,24 @@
 	<div class="write-body">
 		<div class="service">
 			<p class="p-title">서비스 번호</p>
-			<input type="text" class="form-control " placeholder="서비스 번호를 입력하세요" name="service_srl" value="${faqVO.service_srl }"/>
+			<input type="text" class="form-control " placeholder="서비스 번호를 입력하세요" name="service_srl" value="${faqVO.service_srl }" />
 
 		</div>
 		<div class="category">
 			<p class="p-title">서비스 번호</p>
-			<input type="text" class="form-control " placeholder="카테고리 번호를 입력하세요" name="category_srl" value="${faqVO.category_srl }"/>
+			<input type="text" class="form-control " placeholder="카테고리 번호를 입력하세요" name="category_srl" value="${faqVO.category_srl }" />
 		</div>
 
 		<div class="title2">
 
 			<p class="p-title">제목</p>
-			<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" value="${faqVO.title }"/>
+			<input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" value="${faqVO.title }" />
 		</div>
 		<div class="contents">
 			<p class="p-title">내용</p>
 
 
-			<textarea class="form-control" name="contents" id="contents" rows="10" cols="80" placeholder="서비스 내용을 입력하세요"></textarea>
+			<textarea class="form-control" name="contents" id="contents" rows="10" cols="80" placeholder="서비스 내용을 입력하세요">${faqVO.contents }</textarea>
 		</div>
 
 
