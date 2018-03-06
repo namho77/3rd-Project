@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	response.setHeader("Cache-Control", "no-store");
+	response.setHeader("Pragma", "no-cache");
+	response.setDateHeader("Expires", 0);
+	if (request.getProtocol().equals("HTTP/1.1"))
+		response.setHeader("Cache-Control", "no-cache");
+%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -26,23 +34,7 @@
 				fOnBeforeUnload : function() {
 
 				}
-			}, //boolean
-			fOnAppLoad : function(){
-				
-				//내용초기화
-				oEditors.getById["contents"].exec("SET_IR", [""]); 
-				
-				//내용 붙여넣기
-				//var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-				//oEditors.getById["contents"].exec("PASTE_HTML", [sHTML]);
-				//내용 가져와서 붙여넣기
-				//var contentsVal = "${noticeVO.contents }";
-				//contentsVal = contentsVal.replaceAll("\\\"", "\\\\\"");
-				//alert(contentsVal);
-				oEditors.getById["contents"].exec("PASTE_HTML", ["${noticeVO.contents }"]);
-				
-			},
-			fCreator: "createSEditor2"
+			}
 		});
 		
 	
@@ -177,7 +169,7 @@
 			<p class="p-title">내용</p>
 
 
-			<textarea class="form-control" name="contents" id="contents" rows="10" cols="80" placeholder="내용을 입력하세요"></textarea>
+			<textarea class="form-control" name="contents" id="contents" rows="10" cols="80" placeholder="내용을 입력하세요">${noticeVO.contents }</textarea>
 		</div>
 
 

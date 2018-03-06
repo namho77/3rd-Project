@@ -23,8 +23,8 @@ public class FAQDAOImpl implements FAQDAO{
 		return sqlSession.selectList(namespace + ".getFAQListJson", scri);
 	}
 	@Override
-	public int getTotalCount() {
-		return sqlSession.selectOne(namespace+".getTotalCount");
+	public int getTotalCount(SearchFAQCriteria scri) {
+		return sqlSession.selectOne(namespace+".getTotalCount",scri);
 	}
 	@Override
 	public int deleteFAQ(int faq_srl) {
