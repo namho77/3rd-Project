@@ -96,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
 
 		java.sql.Date change_password_date = today;
 
-		String profile_img_path = "profile.jpg";
+		String profile_img_path = req.getParameter("profile_img_path");
 
 		String member_grade = "E";
 
