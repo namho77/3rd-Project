@@ -88,7 +88,7 @@
 						
 					</div>
 					<div class="col-xs-2">
-						<a href="javascript:void(0);" onclick="popModal('#layer_faq_qna');"><img class="footer-gara" src="${pageContext.request.contextPath}/resources/images/gara.jpg" title="서비스센터" /></a>
+						<a href="javascript:void(0);" onclick="getHotFAQList(1, 1, '');popModal('#layer_faq_qna');"><img class="footer-gara" src="${pageContext.request.contextPath}/resources/images/gara.jpg" title="서비스센터" /></a>
 					</div>
 				</div>
 			</div>
