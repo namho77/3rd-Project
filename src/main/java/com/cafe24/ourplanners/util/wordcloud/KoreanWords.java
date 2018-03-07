@@ -35,11 +35,11 @@ public class KoreanWords {
 	public synchronized static List<SearchServiceBoardCriteria> getNounWords(SearchServiceBoardCriteria ssbcri) {
 		String searchWord = ssbcri.getKeyword();
 		// wordcloud에 저장할 명사 list
-		List<SearchServiceBoardCriteria> wcList = new ArrayList<>();
+		List<SearchServiceBoardCriteria> wcList = new ArrayList<SearchServiceBoardCriteria>();
 		// 단어와 반복회수를 갖는 MAP
-		Map<String, Integer> wordCountMap = new HashMap<>();
+		Map<String, Integer> wordCountMap = new HashMap<String, Integer>();
 		// 단어,품사 속성을 갖는 MAP
-		Map<String, String> wordPartMap = new HashMap<>();
+		Map<String, String> wordPartMap = new HashMap<String, String>();
 		
 		
 		Seq<KoreanTokenizer.KoreanToken> tokens = KoreanTextParser.getTokens(searchWord);
