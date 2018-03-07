@@ -13,7 +13,7 @@
 	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-		<property name="user" value="kosmo" />
+		<property name="user" value="ko31ourplanners" />
 		<property name="password" value="1234" />
 	</bean>
 	
