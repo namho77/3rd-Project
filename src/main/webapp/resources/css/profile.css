@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+/* 프로필 부분 */
+
+.header-top{
+	height: 340px;
+	background-color: #27CEA7;
+	margin-right: -15px;
+}
+
+.image-title{
+	text-align: center;
+}
+
+.image-title>img{
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	margin-top: 110px;
+}
+
+.text-title{
+	text-align: center;
+}
+
+.text-title>h4{
+	margin-bottom: 8px;
+}
+
+.text-title>p{
+	color: #5D5D5D;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.body-center{
+	background-color: #FAFAFA;
+	padding-right: 72px;
+	padding-top: 50px;
+}
+
+.nav-title{
+	text-align:center;
+}
+
+.nav-sotitle{
+	display: inline-block;
+	border: 1px solid #E1E1E1;
+	background-color: white;
+	width: 210px;
+	height: 60px;
+	margin-left: -2px;
+	margin-right: -2px;
+	box-shadow: 3px 2px 4px #ccc;
+}
+
+.nav-sotitle>p{
+	color: #949494;
+	font-weight:bold;
+	font-size: 14px;
+	margin-top: 15px;
+}
+
+.nav-btn>button{
+	color: white;
+	font-weight: bold;
+	background-color: #F26656;
+	border: 0px solid;
+	width: 100%;
+	height: 100%;
+	padding-bottom: 4px;
+}
+
+.nav-btn{
+	display: inline-block;
+	width: 180px;
+	height: 60px;
+	margin-left: -1px;
+	margin-right: -2px;
+	margin-top: 20px;
+	border: 0px;
+}
+
+.btn-red{
+	background-color: #F26656;
+	height: 20px;
+	width: 20px;
+	transform: rotate(-135deg);
+	top: 300px;
+    margin-left: 80px;
+    position: absolute;
+}
+
+.work-board{
+	width: 1020px;
+	height: 100%;
+	padding: 0px;
+}
+
+.board-view>h3{
+	font-size: 16px;
+	font-weight: bold;
+	color: #5D5D5D;
+	margin-top: 30px;
+}
+
+.service-regist{
+	border: 0xp solid;
+	background-color: #E6E6E6;
+	width: 230px;
+	height: 310px;
+	padding: 15px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.service-image>img{
+	height: 100px;
+	width: 100px;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+.service-text>p{
+	color: #595959;
+	font-weight: bold;
+	font-size: 15px;
+	margin-bottom: 3px;
+}
+
+.service-btn{
+	margin-top: 45px;
+	background-color: #F26656;
+	height: 45px;
+	width: 100%;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+.board-view>span{
+	font-size: 16px;
+	font-weight: bold;
+	color: #5D5D5D;
+}
+
+.service-response{
+	border: 0xp solid;
+	background-color: #E6E6E6;
+	width: 750px;;
+	height: 260px;
+	padding: 15px;
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 50px;
+}
+
+.service-response>img{
+	height: 60px;
+	width: 60px;
+	margin-top: 80px;
+}
+
+.service-response>p{
+	font-weight: bold;
+}

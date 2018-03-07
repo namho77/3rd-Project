@@ -26,57 +26,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-
-<style type="text/css">
-
-.header-top{
-	height: 340px;
-	background-color: #27CEA7;
-}
-
-.image-title{
-	text-align: center;
-}
-
-.image-title>img{
-	height: 100px;
-	width: 100px;
-	border-radius: 50%;
-	margin-top: 110px;
-}
-
-.text-title{
-	text-align: center;
-}
-
-.text-title>h4{
-	margin-bottom: 8px;
-}
-
-.text-title>p{
-	color: #5D5D5D;
-	font-weight: bold;
-	font-size: 14px;
-}
-
-.body-center{
-	height: 700px;
-	background-color: #FAFAFA;
-}
-
-.nav-title{
-	width: 100%;
-}
-
-.nav-title>table{
-	border: 1px solid #E1E1E1;
-	background-color: white;
-	height: 50px;
-	width: 100%;
-	text-align: center;
-}
-
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profile.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -111,22 +61,480 @@
 			<p>한줄소개를 작성하여 자신의 프로필을 더욱 어필해보세요!</p>
 		</div>
 		<div class="nav-title">
-			<table>
-				<tr>
-					<td>만족도:78%</td>
-					<td>총 작업수:10 개</td>
-					<td>문의하기</td>
-					<td>평균 응답시간:1시간이내</td>
-					<td>최종 작업물 발송:3 주일 전</td>
-				</tr>
-			</table>
+			<div class="nav-sotitle">
+				<p>만족도:78%</p>
+			</div>
+			<div class="nav-sotitle">
+				<p>총 작업수:10 개</p>
+			</div>
+			<div class="nav-btn">
+				<div class="btn-red"></div>
+				<button type="button">의뢰인 시점으로 보기</button>
+			</div>
+			<div class="nav-sotitle">
+				<p>평균 응답시간:1시간이내</p>
+			</div>
+			<div class="nav-sotitle">
+				<p>최종 작업물 발송:3 주일 전</p>
+			</div>
 		</div>
 	</div>
 	<div class="container-fluid body-center">
-		
-	</div>
-		
+		<div class="row">
+			<div class="col-xs-3"></div>
+			<div class="col-xs-6 work-board">
+				<div class="row">
+					<div class="col-xs-9 board-view">
+						<h3>kosmo1004님의 서비스</h3>
+						<div class="service-regist">
+							<div class="service-image">
+								<img src="${pageContext.request.contextPath}/resources/images/user_gig.png">
+							</div>
+							<div class="service-text">
+								<p>서비스를 등록하여</p>
+								<p>수익을 얻어보세요!</p>
+							</div>
+							<button type="button" class="btn btn-danger service-btn">서비스 등록하기</button>
+						</div>
+						<span>kosmo1004님의 받은 평가
+						<img src="${pageContext.request.contextPath}/resources/images/star.png">
+						<img src="${pageContext.request.contextPath}/resources/images/star.png">
+						<img src="${pageContext.request.contextPath}/resources/images/star.png">
+						<img src="${pageContext.request.contextPath}/resources/images/star.png">
+						<img src="${pageContext.request.contextPath}/resources/images/star.png">
+						</span>
+						<div class="service-response">
+							<img src="${pageContext.request.contextPath}/resources/images/nothing.png">
+							<p>받은 평가가 없습니다.</p>
+						</div>
+					</div>
+					<div class="col-xs-3">
+						<!-- 자기소개, 자격증 추가하는 부분 -->
+						<div class="border-left padding-left-10 padding-bottom-30 position-relative">
+							<div class="inline-block side-info-circle">
+								<div class="user-side-circle"></div>
+							</div>
+							<h5 class="margin-top-0 margin-bottom-5">
+								<span class="NGB"> 기술 / 자격 <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="선택된 태그는 서비스 상세페이지에 노출됩니다."></i>
+								</span>
+							</h5>
+							<div id="userMetadataWrapper" class="panel panel-default margin-top-5 margin-bottom-10">
+								<div class="panel-body padding-all-10" v-show="isEditUserMetadata == false">
+									<div class="row">
+										<div class="col-xs-12" v-show="selected_metadata.length > 0" style="display: none;">
+											<span v-for="selected_metadata in selected_metadata" class="position-relative">
+												<button v-if="!(selected_metadata.user_metadata.need_certification == 1 && selected_metadata.status == 'APPROVED')" type="button" class="btn btn-gray-reverse font-color-light btn-xs btn-tag position-relative" data-toggle="tooltip" data-placement="top" title="{{tag.description.seller}}">{{ selected_metadata.user_metadata.title }}</button>
+												<button v-if="selected_metadata.user_metadata.need_certification == 1 && selected_metadata.status == 'APPROVED'" type="button" class="btn btn-certification-reverse btn-xs btn-tag position-relative" data-toggle="tooltip" data-placement="top" title="전문가가 관련 서류를 제출하였습니다.">
+													<img class="width-10px" src="/img/user/desktop/tag_on.png" /> {{ selected_metadata.user_metadata.title }}
+												</button>
+											</span>
+										</div>
+										<div id="selectedUserMetadataNone" class="col-xs-12" style="display: none;">등록된 태그가 없습니다.</div>
+										<div id="selectedUserMetadataLoading" class="col-xs-12 text-center">
+											<div class="la-ball-fall color-black">
+												<div></div>
+												<div></div>
+												<div></div>
+											</div>
+										</div>
+									</div>
+								</div>
 
+								<div class="panel-body padding-all-10" v-show="isEditUserMetadata == true" style="display: none">
+									<div id="userMetadataCategorySelectWrapper" class="row">
+										<div class="col-xs-12">
+											<select class="form-control input-xs" v-model="selected_category_for_user_metadata">
+												<option v-for="metadata in user_metadata" value="{{ metadata.category_id }}" v-html="metadata.name"></option>
+											</select>
+										</div>
+									</div>
+
+									<div id="userMetadataSelectWrapper" class="row margin-top-10">
+										<div class="col-xs-12">
+											<div class="border-radius bg-color-fa padding-all-10">
+												<span v-for="tag in user_metadata_tag_list">
+													<button v-if="tag.selected_user_metadata == null" type="button" class="btn btn-gray-reverse font-color-light btn-xs btn-tag" data-toggle="tooltip" data-placement="top" title="{{tag.description.seller}}" v-on:click="selectUserMetadata($event, tag.id, 'enable')">
+														<img v-if="tag.need_certification == 1" class="width-10px" src="/img/user/desktop/tag.png" /> {{ tag.title }}
+													</button>
+													<button v-if="tag.selected_user_metadata != null" type="button" class="btn btn-gray-reverse font-color-light btn-xs btn-tag btn-tag-select" data-toggle="tooltip" data-placement="top" title="{{tag.description.seller}}" v-on:click="selectUserMetadata($event, tag.id, 'disable')">
+														<img v-if="tag.selected_user_metadata.user_metadata.need_certification == 1 && tag.selected_user_metadata.status == 'WAITING'" class="width-10px" src="/img/user/desktop/tag.png" /> <img v-if="tag.selected_user_metadata.user_metadata.need_certification == 1 && tag.selected_user_metadata.status == 'APPROVED'" class="width-10px" src="/img/user/desktop/tag_on.png" /> {{ tag.selected_user_metadata.user_metadata.title }}
+													</button>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div id="selectedUserMetadataListWrapper" class="row margin-top-10">
+										<div class="col-xs-12">
+											<span v-for="selected_metadata in selected_metadata" class="position-relative">
+												<button type="button" class="btn btn-gray-reverse font-color-light btn-xs btn-tag btn-tag-select  position-relative" data-toggle="tooltip" data-placement="top" title="{{tag.description.seller}}">
+													<img v-if="selected_metadata.user_metadata.need_certification == 1 && selected_metadata.status == 'WAITING'" class="width-10px" src="/img/user/desktop/tag.png" /> <img v-if="selected_metadata.user_metadata.need_certification == 1 && selected_metadata.status == 'APPROVED'" class="width-10px" src="/img/user/desktop/tag_on.png" /> {{ selected_metadata.user_metadata.title }} <i class="fa fa-times-circle tag-close cursor" aria-hidden="true" v-on:click="selectUserMetadata($event, selected_metadata.user_metadata.id, 'disable')"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+
+									<div id="userMetadataCertificationBtn" class="row margin-top-10" v-show="need_certification_selected_metadata.length > 0">
+										<div class="col-xs-12">
+											<button type="button" class="btn btn-gray-reverse font-color-light btn-sm btn-block" data-toggle="modal" data-target="#tagCertificationModal">
+												<img class="user-metadata-certification-btn-img" src="/img/user/desktop/tag.png" /> 태그 인증받기
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div>
+								<div id="certificatedReady" style="display: none" class="font-size-h6 color-red margin-left-5">
+									<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; 인증 심사중입니다.
+								</div>
+								<div id="limitUserMetadataCntError" class="font-size-h6 color-red margin-left-5" style="display: none">
+									<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; 기술 / 자격은 {{ limitUserMetadataCnt }}개이상 등록 할 수 없습니다.
+								</div>
+							</div>
+
+
+
+							<div v-show="isEditUserMetadata == true" style="display: none;">
+								<h5 class="margin-top-20">
+									<span class="NGB">기술 / 자격 추천</span> <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="이 외 기술 / 자격을 추천해주세요."></i>
+								</h5>
+								<div class="form-group margin-bottom-0 position-relative">
+									<input type="text" class="form-control input-xs" v-model="user_metadata_etc" /> <a class="btn btn-primary font-size-h6 tag-btn" :disabled="user_metadata_etc.length == 0" v-on:click="submitUserMetadataEtcToOp">보내기</a>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="border-left padding-left-10 padding-bottom-30 position-relative">
+							<div class="inline-block side-info-circle">
+								<div class="user-side-circle"></div>
+							</div>
+
+							<h5 class="margin-top-0 margin-bottom-10">
+								<span class="NGB">소개</span> <span id="descriptionEditBtnGroup"> <span class="pull-right font-size-h6" v-show="description == null"><a class="user-edit-text" href="javascript:void(0);" v-on:click="openCreateInput('description')">+ 추가</a></span> <span class="pull-right font-size-h6" v-show="description != null"><a class="user-edit-text" href="javascript:void(0);" v-on:click="openUpdateInput('description')">편집</a></span>
+								</span>
+							</h5>
+
+
+							<div id="descriptionView" class="panel panel-default margin-top-5 margin-bottom-10">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10 word-break">
+									<span v-if="description == null || description.data.description == ''">소개가 없습니다.</span> <span class="word-break" v-if="description != null && description.data.description != ''" v-html="description.data.description | nl2br"></span>
+								</div>
+							</div>
+
+							<div id="descriptionInput" class="panel panel-default margin-top-5 margin-bottom-10" style="display: none;">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+									<textarea class="form-control padding-all-5 introduce-text" rows="5" placeholder="자기소개를 입력하세요." v-model="descriptionInformation" maxlength="255"></textarea>
+									<div class="text-right margin-top-10">
+										<a class="btn btn-default btn-xs" href="javascript:void(0);" v-on:click="hideCreateInput('description')">취소</a> <a class="btn btn-primary btn-xs margin-left-5" href="javascript:void(0);" v-on:click="createUserInformation('description')" :disabled="descriptionInformation.length == 0">저장</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="border-left padding-left-10 padding-bottom-30 position-relative">
+							<div class="inline-block side-info-circle">
+								<div class="user-side-circle"></div>
+							</div>
+							<h5 class="margin-top-0 margin-bottom-10">
+								<span class="NGB">경력사항</span> <span id="careerEditBtnGroup"> <span id="career_AddBtn" class="pull-right font-size-h6"><a class="user-edit-text" href="javascript:void(0);" v-on:click="openCreateInput('career')">+ 추가</a></span>
+								</span>
+							</h5>
+							<div id="careerView" class="panel panel-default margin-top-5 margin-bottom-10" v-show="career.length == 0">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+									<h5 class="margin-all-0">경력사항이 없습니다.</h5>
+								</div>
+							</div>
+
+							<div v-for="data in career" class="position-relative">
+								<div id="career_{{ data.id }}_view" class="panel panel-default margin-top-5 margin-bottom-10">
+									<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10 word-break">
+										<div>
+											<span class="word-break">{{data.data.description}}</span> <span class="pull-right careerUserInformationEditBtnGroup"> <i class="fa fa-pencil cursor" aria-hidden="true" v-on:click="openUpdateUserInformation('career', data.id, $index)"></i> &nbsp; <i class="fa fa-trash cursor" aria-hidden="true" v-on:click="deleteUserInformation('career', data.id, $index, 'delete')"></i>
+											</span>
+										</div>
+										<h6 class="margin-bottom-0">{{data.data.period_start}} ~ {{data.data.period_end}}</h6>
+									</div>
+								</div>
+
+								<div id="career_{{ data.id }}_input" class="panel panel-default margin-top-5 margin-bottom-10" style="display: none">
+									<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+										<div class="row">
+											<div class="col-xs-12">
+												<div class="form-group margin-bottom-0">
+													<input id="career_description_{{ data.id }}_input" type="text" class="career_description_input form-control input-xs" placeholder="경력사항" v-model="careerInformation" />
+												</div>
+											</div>
+										</div>
+										<div class="row margin-top-10">
+											<div class="col-xs-5 padding-right-0">
+												<input id="career_period_start_{{ data.id }}_input" type="text" class="career_period_start_input form-control input-xs date-input" v-model="period_start" onkeydown="return false">
+											</div>
+											<div class="col-xs-2">
+												<div class="margin-top-5">~</div>
+											</div>
+											<div class="col-xs-5 padding-left-0">
+												<input type="text" class="form-control input-xs date-input" v-model="period_end" onkeydown="return false">
+											</div>
+										</div>
+										<div class="row margin-top-10">
+											<div class="col-xs-12">
+												<div class="text-right">
+													<a class="btn btn-default btn-xs" href="javascript:void(0);" v-on:click="hideUpdateUserInformation('career', data.id, $index)">취소</a> <a class="btn btn-primary btn-xs margin-left-5" href="javascript:void(0);" v-on:click="updateUserInformation('career', data.id, $index)" :disabled="careerInformation.length == 0">저장</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="margin-left-15">
+									<span id="career_description_{{ data.id }}_error" class="career_description_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;경력사항을 입력해주세요.</span> <span id="career_period_start_{{ data.id }}_error" class="career_period_start_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;경력시작일을 선택해주세요.</span>
+								</div>
+							</div>
+
+							<div id="careerInput" class="panel panel-default margin-top-5 margin-bottom-10" style="display: none">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group margin-bottom-0">
+												<input id="career_description_input" type="text" class="career_description_input form-control input-xs" placeholder="경력사항" v-model="careerInformation" />
+											</div>
+										</div>
+									</div>
+									<div class="row margin-top-10">
+										<div class="col-xs-5 padding-right-0">
+											<input id="career_period_start_input" type="text" class="career_period_start_input form-control input-xs date-input" value="2017.03" v-model="period_start" onkeydown="return false">
+										</div>
+										<div class="col-xs-2">
+											<div class="margin-top-5">~</div>
+										</div>
+										<div class="col-xs-5 padding-left-0">
+											<input type="text" class="form-control input-xs date-input" v-model="period_end" onkeydown="return false">
+										</div>
+									</div>
+									<div class="row margin-top-10">
+										<div class="col-xs-12">
+											<div class="text-right">
+												<a class="btn btn-default btn-xs" href="javascript:void(0);" v-on:click="hideCreateInput('career')">취소</a> <a class="btn btn-primary btn-xs margin-left-5" href="javascript:void(0);" v-on:click="createUserInformation('career')" :disabled="careerInformation.length == 0">저장</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="margin-left-15">
+								<span id="career_description_error" class="career_description_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;경력사항을 입력해주세요.</span> <span id="career_period_start_error" class="career_period_start_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;경력시작일을 선택해주세요.</span>
+							</div>
+						</div>
+
+						<div class="border-left padding-left-10 padding-bottom-30 position-relative">
+							<div class="inline-block side-info-circle">
+								<div class="user-side-circle"></div>
+							</div>
+							<h5 class="margin-top-0 margin-bottom-10">
+								<span class="NGB">자격증</span> <span id="licenseEditBtnGroup"> <span id="license_AddBtn" class="pull-right font-size-h6"><a class="user-edit-text" href="javascript:void(0);" v-on:click="openCreateInput('license')">+ 추가</a></span>
+								</span>
+							</h5>
+							<div id="licenseView" class="panel panel-default margin-top-5 margin-bottom-10" v-show="license.length == 0">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+									<h5 class="margin-all-0">자격증이 없습니다.</h5>
+								</div>
+							</div>
+
+							<div v-for="data in license" class="position-relative">
+								<div id="license_{{ data.id }}_view" class="panel panel-default margin-top-5 margin-bottom-10">
+									<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10 word-break">
+										<div>
+											<span>{{data.data.description}}</span> <span class="pull-right licenseUserInformationEditBtnGroup"> <i class="fa fa-pencil cursor" aria-hidden="true" v-on:click="openUpdateUserInformation('license', data.id, $index)"></i> &nbsp; <i class="fa fa-trash cursor" aria-hidden="true" v-on:click="deleteUserInformation('license', data.id, $index, 'delete')"></i>
+											</span>
+										</div>
+										<h6 class="margin-bottom-0">{{data.data.licensed_at}} / {{ data.data.licensed_provider_center }}</h6>
+									</div>
+								</div>
+
+								<div id="license_{{ data.id }}_input" class="panel panel-default margin-top-5 margin-bottom-10" style="display: none">
+									<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+										<div class="row">
+											<div class="col-xs-12">
+												<div class="form-group margin-bottom-0">
+													<input id="license_description_{{ data.id }}_input" type="text" class="license_description_input form-control input-xs" placeholder="자격증" v-model="licenseInformation" />
+												</div>
+											</div>
+										</div>
+										<div class="row margin-top-10">
+											<div class="col-xs-6 padding-right-5">
+												<input id="license_licensed_at_{{ data.id }}_input" type="text" class="license_licensed_at_input form-control input-xs date-input" value="2018.03" v-model="licensed_at" onkeydown="return false">
+											</div>
+											<div class="col-xs-6 padding-left-5">
+												<div class="form-group margin-bottom-0">
+													<input id="license_licensed_provider_center_{{ data.id }}_input" type="text" class="license_licensed_provider_center_input form-control input-xs" placeholder="발급기관" v-model="licensed_provider_center" />
+												</div>
+											</div>
+										</div>
+										<div class="row margin-top-10">
+											<div class="col-xs-12">
+												<div class="text-right">
+													<a class="btn btn-default btn-xs" href="javascript:void(0);" v-on:click="hideUpdateUserInformation('license', data.id, $index)">취소</a> <a class="btn btn-primary btn-xs margin-left-5" href="javascript:void(0);" v-on:click="updateUserInformation('license', data.id, $index)" :disabled="licenseInformation.length == 0">저장</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="margin-left-15">
+									<span id="license_description_{{ data.id }}_error" class="license_description_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증명을 입력해주세요.</span> <span id="license_licensed_at_{{ data.id }}_error" class="license_licensed_at_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증 발급일을 선택해주세요.</span> <span id="license_licensed_provider_center_{{ data.id }}_error" class="license_licensed_provider_center_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증 발급기관을 입력해주세요.</span>
+								</div>
+							</div>
+
+							<div id="licenseInput" class="panel panel-default margin-top-5 margin-bottom-10" style="display: none">
+								<div class="panel-body padding-top-10 padding-bottom-10 padding-left-10 padding-right-10">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group margin-bottom-0">
+												<input id="license_description_input" type="text" class="license_description_input form-control input-xs" placeholder="자격증명" v-model="licenseInformation" />
+											</div>
+										</div>
+									</div>
+									<div class="row margin-top-10">
+										<div class="col-xs-6 padding-right-5">
+											<input id="license_licensed_at_input" type="text" class="license_licensed_at_input form-control  input-xs date-input" value="2018.03" v-model="licensed_at" onkeydown="return false">
+										</div>
+										<div class="col-xs-6 padding-left-5">
+											<div class="form-group margin-bottom-0">
+												<input id="license_licensed_provider_center_input" type="text" class="license_licensed_provider_center_input form-control input-xs" placeholder="발급기관" v-model="licensed_provider_center" />
+											</div>
+										</div>
+									</div>
+									<div class="row margin-top-10">
+										<div class="col-xs-12">
+											<div class="text-right">
+												<a class="btn btn-default btn-xs" href="javascript:void(0);" v-on:click="hideCreateInput('license')">취소</a> <a class="btn btn-primary btn-xs margin-left-5" href="javascript:void(0);" v-on:click="createUserInformation('license')" :disabled="licenseInformation.length == 0">저장</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="margin-left-15">
+								<span id="license_description_error" class="license_description_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증명을 입력해주세요.</span> <span id="license_licensed_at_error" class="license_licensed_at_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증 발급일을 선택해주세요.</span> <span id="license_licensed_provider_center_error" class="license_licensed_provider_center_error help-block color-danger padding-left-0 hidden"><i class="fa fa-exclamation-triangle"></i>&nbsp;자격증 발급기관을 입력해주세요.</span>
+							</div>
+						</div>
+						</div>
+						
+						<!-- 자기소개, 자격증 추가하는 부분 -->
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3"></div>
+		</div>		
+	</div>
+	
+	
+	
+	
+<script>
+    function hideFileUpload(id){
+        for(var i in user_vue.need_certification_selected_metadata) {
+            if(typeof user_vue.need_certification_selected_metadata[i] == 'object') {
+                if(user_vue.need_certification_selected_metadata[i].id == id) {
+                    user_vue.needToRemoveCertificationFiles.push({
+                        id : id,
+                        file_id : {
+                            FID : user_vue.need_certification_selected_metadata[i].file_id.FID,
+                            ori_fname : user_vue.need_certification_selected_metadata[i].file_id.ori_fname
+                        }
+                    });
+                    user_vue.need_certification_selected_metadata[i].file_id = null;
+                    break;
+                }
+            }
+            if( i == (user_vue.need_certification_selected_metadata.length)-1) break;
+        }
+    }
+</script>
+				
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/op.certification_metadata.file.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
+<script>
+    $('.date-input').datepicker({
+        format: 'yyyy.mm',
+        maxViewMode: 2,
+        minViewMode: 'months',
+        orientation: "bottom auto",
+        endDate: '0m',
+        language: "kr",
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+<script src="${pageContext.request.contextPath}/resources/js/op.common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/op.user_profile.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+                    var $scrollFix = $("#userScrollFix"),
+                $navigationFixed = $('.user-nav-fixed')
+                ;
+            const defaultHeight = 285 - 30;
+
+            $(window).on('scroll',function(){
+                var userScrollTop = $(this).scrollTop();
+                if( userScrollTop > defaultHeight ){
+                    $scrollFix.removeClass('user-info-nave').addClass('user-nav-fixed').css('top', sassVariables.globalMarginTopOnlyYellowHeader+'px');
+                } else {
+                    $scrollFix.removeClass('user-nav-fixed').addClass('user-info-nave').css('top',0);
+                }
+            });
+
+        
+        user_vue.profileUSERID = '346478';
+
+  
+
+
+                user_vue.default_date = '2017.03';
+        user_vue.licensed_at = user_vue.default_date;
+        user_vue.period_start = user_vue.default_date;
+        user_vue.type = 'seller';
+
+            });
+
+    function getViewport() {
+
+        var viewPortWidth;
+        var viewPortHeight;
+
+        // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+        if (typeof window.innerWidth != 'undefined') {
+            viewPortWidth = window.innerWidth,
+            viewPortHeight = window.innerHeight
+        }
+
+        // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+        else if (typeof document.documentElement != 'undefined'
+            && typeof document.documentElement.clientWidth !=
+            'undefined' && document.documentElement.clientWidth != 0) {
+            viewPortWidth = document.documentElement.clientWidth,
+                viewPortHeight = document.documentElement.clientHeight
+        }
+
+        // older versions of IE
+        else {
+            viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
+                viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
+        }
+        return [viewPortWidth, viewPortHeight];
+    }
+	</script>
+	
 	<!-- 모달창 -->
 	<%@ include file="../common/modal_msg.jsp"%>
 	<!-- //모달창 끝 -->
