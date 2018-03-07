@@ -31,18 +31,16 @@
 					</div>
 					<div class="modal-body">
 
-						<ul class="list-group">
-							<li>1. 자주 묻는 질문 테스트</li>
+						<ul class="list-group" id="FAQInnerUL">
+							<li><a href="">1. 자주 묻는 질문 테스트</a></li>
 							
 						</ul>
-						<p>자주 묻는 질문</p>
-
 
 					</div>
 
 					<div class="modal-footer">
 						<p>원하는 결과를 찾지 못했나요?</p>
-						<button class="btn btn-default" onclick="$('#CustomerCenter').trigger('click');" type="button">플래너스 고객센터</button>
+						<button class="btn btn-default" onclick="location.href='${pageContext.request.contextPath}/customercenter/email';" type="button">플래너스 고객센터</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							<span class="glyphicon glyphicon-remove"></span>닫기
 						</button>
@@ -54,7 +52,69 @@
 
 
 <script>
+
+
+//페이징
+function faqPaging(nowPage, service_srl, category_srl) {
+	getHotFAQList(nowPage, service_srl, category_srl);
+}
+
+//리스트 가져오기
+function getHotFAQList(nowPage, service_srl, category_srl) {
+	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+	service_srl = typeof service_srl !== 'undefined' ? service_srl : 1;
+
+	var url = "${pageContext.request.contextPath}/customercenter/faq/json/faq_list.json";
+	var inHTML = "";
+
+	inHTML += "<div class=\"panel-group panel-accordion dark-accordion\">";
+	inHTML += "		<div class=\"row\" >";
+
+	var inHTMLPaging = "";
+	$("#FAQInnerUL").empty();
+	var params = "category_srl=" + category_srl + "&service_srl=" + service_srl + "&nowPage=" + nowPage;
+	$.ajax({
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			$.each(data.faqLists, function(index, faqList) { // each로 모든 데이터 가져와서 items 배열에 넣고
+
+				inHTML += "<div id=\"faqDiv_" + faqList.faq_srl + "\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\"" + (index + 1) + "\" style=\"display: inline-block;\">";
+				inHTML += "	<div class=\"panel-heading\">";
+				inHTML += "		<h4 class=\"panel-title\">";
+				inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + ".</strong> " + faqList.title;
+				inHTML += "			</a>";
+				inHTML += "		</h4>";
+
+				inHTML += "	</div>";
+				inHTML += "	<div id=\"question" + (index + 1) + "\" class=\"panel-collapse collapse\" style=\"height: 0px;\">";
+				inHTML += "		<div class=\"panel-body\">";
+				inHTML += "			<p>" + faqList.contents + "</p>";
+				inHTML += "		</div>";
+				inHTML += "	</div>";
+
+				inHTML += "</div>";
+
+			});//each끝
+			inHTML += "<div class=\"row text-center\">";
+			inHTML += "<ul class=\"pagination\" id=\"FAQInnerULPagingDiv\">";
+			inHTML += "</ul> </div>";
+			inHTML += "		</div>";
+			inHTML += "		</div>";
+			$("#FAQInnerUL").html(inHTML);
+			$("#FAQInnerULPagingDiv").html(data.pagingDiv);
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+}
 	//레이어 팝업창 (alert 왠만하면 쓰지말자.. 사용자가 짜증나니깐)
+	
 	var modalVerticalCenterClass = ".modal";
 
 	function popModal(modalSelector) {

@@ -47,19 +47,19 @@
 		if (ans == true) {
 			location.href = "logout.jsp";
 		} else {
-			alert("로그아웃을 취소하셨습니다.");
+			popLayerMsg("로그아웃을 취소하셨습니다.");
 		}
 	}
 
 	function loginFrmCheck() {
 		var f = document.loginFrm;
 		if (f.user_id.value == "") {
-			alert("아이디를 입력하세요");
+			popLayerMsg("아이디를 입력하세요");
 			f.user_id.focus();
 			return false;
 		}
 		if (f.password.value == "") {
-			alert("패스워드를 입력하세요");
+			popLayerMsg("패스워드를 입력하세요");
 			f.password.focus();
 			return false;
 		}
@@ -105,29 +105,35 @@
 	function registFrmCheck() {
 		var f = document.registFrm;
 		if (f.user_id.value == "") {
-			alert("아이디를 입력하세요");
+			popLayerMsg("아이디를 입력하세요");
 			f.id.focus();
 			return false;
 		}
 		if (f.DuplicationCheckId.value == "N") {
-			alert("아이디 중복 체크를 하세요.");
+			popLayerMsg("아이디 중복 체크를 하세요.");
 			return false;
 		}
+		
+		if (f.DuplicationCheckEmail.value == "N") {
+			popLayerMsg("이메일 중복 체크를 하세요.");
+			return false;
+		}
+		
 
 		if (!f.password.value) {
-			alert("비밀번호를 입력하세요");
+			popLayerMsg("비밀번호를 입력하세요");
 			f.password.focus();
 			return false;
 		}
 		if (!f.user_pw2.value) {
-			alert("비밀번호 확인을 입력하세요");
+			popLayerMsg("비밀번호 확인을 입력하세요");
 			f.user_pw2.focus();
 			return false;
 		}
 
 		//패스워드가 동일한지 검증
 		if (f.password.value != f.user_pw2.value) {
-			alert("입력한 비밀번호가 일치하지 않습니다.");
+			popLayerMsg("입력한 비밀번호가 일치하지 않습니다.");
 			f.password.value = "";
 			f.user_pw2.value = "";
 			f.password.focus();
@@ -135,7 +141,7 @@
 		}
 
 		if (!f.user_name.value) {
-			alert("이름을 입력하세요");
+			popLayerMsg("이름을 입력하세요");
 			f.user_name.focus();
 			return false;
 		}
@@ -156,13 +162,13 @@
 		}
 
 		if (isGender == false) {
-			alert("성별을 선택하세요.");
+			popLayerMsg("성별을 선택하세요.");
 			f.gender[0].focus();
 			return false;
 		}
 
 		if (!f.birthday.value ) {
-			alert("생년월일을 입력하세요");
+			popLayerMsg("생년월일을 입력하세요");
 			f.birthday.focus();
 			return false;
 		}
@@ -172,7 +178,7 @@
 		}
 
 		if ((!f.email_id.value) || (!f.email_host.value)) {
-			alert("이메일 주소를 입력하세요");
+			popLayerMsg("이메일 주소를 입력하세요");
 			f.email_id.focus();
 
 		}
@@ -183,7 +189,7 @@
 
 
 		if ((!f.mno1.value) || (!f.mno2.value) || (!f.mno3.value)) {
-			alert("휴대폰 번호를 입력하세요");
+			popLayerMsg("휴대폰 번호를 입력하세요");
 			f.mno1.focus();
 			return false;
 		}
@@ -218,7 +224,7 @@
 		var f = document.registFrm;
 		var namePattern = /[^가-힣a-zA-Z0-9]/gi;
 		if (namePattern.test(f.user_name.value)) {
-			alert("한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+			popLayerMsg("한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
 			return false;
 		}
 		return true;
@@ -300,7 +306,7 @@
 		var birthday = f.birthday.value;
 
 		if (!isValidDate(birthday)) {
-			alert("생년월일을 다시 확인해주세요.");
+			popLayerMsg("생년월일을 다시 확인해주세요.");
 			return false;
 		}
 
@@ -308,7 +314,7 @@
 
 		var age = calcAge(birthday);
 		if (age < 0) {
-			alert("미래에서 오셨나요?");
+			popLayerMsg("미래에서 오셨나요?");
 			return false;
 		}
 
@@ -330,18 +336,73 @@
 		//한글 들어가 있는지 확인
 		var isHan = /[ㄱ-ㅎ가-힣]/g;
 		if (!isEmail.test(email_address) || isHan.test(email_address)) {
-			alert("이메일 주소를 다시 확인해주세요.");
+			popLayerMsg("이메일 주소 형식이 맞지 않습니다. 이메일을 다시 확인해주세요.");
 			return false;
 		}
 		f.email_address.value = email_address;
 		return true;
 	}
+	
+	function checkEmailDuplication(){
+		var f = document.registFrm;
+		if(!checkEmail())
+		{
+			
+			
+				$('#emailCheckSpan').removeClass();
+				$("#emailCheckSpan").addClass("alert-danger");
+				document.getElementById("emailCheckSpan").innerText = "이메일 주소 형식이 맞지 않습니다. 이메일을 다시 확인해주세요.";
+				document.registFrm.DuplicationCheckEmail.value="N";
+				return;
+		}	
+			
+			//var url = '/json/id_check.json?user_id=' + uid.value;
+	    	var email_address = f.email_address.value;
+	     $.ajax({
+	      url:'${pageContext.request.contextPath}/member/json/email_check.json',  //url에 주소 넣기
+		  contentType : "text/html; charset=utf-8;",	  
+	      data : {email_address : email_address},			  
+	      dataType:'json',      //dataType에 데이터 타입 넣기
+	      
+	      success:function(data){     //success에 성공했을 때 동작 넣기.
+	       
+	       //중복되지 않은 경우 hasId=> N
+	       if(data.result == "N"){
+	        idCheck = true; 
+	        $('#emailCheckSpan').removeClass();
+			$("#emailCheckSpan").addClass("alert-success");
+	        document.getElementById("emailCheckSpan").innerText = "사용 가능한 이메일입니다.";
+	        document.registFrm.DuplicationCheckEmail.value="Y";
+	       }
+	       //중복된 경우 hasId =>Y
+	       else{
+	    	   
+	        idCheck = false;
+	        $('#emailCheckSpan').removeClass();
+			$("#emailCheckSpan").addClass("alert-danger");
+	        document.getElementById("emailCheckSpan").innerText = "이미 사용중인 이메일 입니다.";
+	        document.registFrm.DuplicationCheckEmail.value="N";
+	       }
+	       
+	      },
+	      error: function (e) {
+	    	  popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+	    	  
+	      }
+	      
+	     });
+	    
+	    }
+			
+		
+	
+	
 
 	function checkID() {
 		var f = document.registFrm;
 
 		if (!f.user_id.value) {
-			alert("아이디를 입력하세요.");
+			popLayerMsg("아이디를 입력하세요.");
 			return false;
 		}
 
@@ -349,7 +410,7 @@
 		
 		var isValidID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
 		if (!isValidID.test(id)) {
-			alert("아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			popLayerMsg("아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
 			
 			return false;
 		}		
@@ -421,6 +482,9 @@
 	function resetDuplicationCheckId() {
 		var fn = document.registFrm;
 		fn.DuplicationCheckId.value = "N";
+		$('#idCheckSpan').removeClass();
+        document.getElementById("idCheckSpan").innerText = "";
+		
 	}
 
 	
@@ -460,6 +524,8 @@
 		    	
 		    	
 				if (!isValidID.test(uid.value)) {
+					$('#idCheckSpan').removeClass();
+					$("#idCheckSpan").addClass("alert-danger");
 					document.getElementById("idCheckSpan").innerText = "아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
 					document.registFrm.DuplicationCheckId.value="N";
 					return;
@@ -468,7 +534,7 @@
 				//var url = '/json/id_check.json?user_id=' + uid.value;
 		    	
 		     $.ajax({
-		      url:'./json/id_check.json',  //url에 주소 넣기
+		      url:'${pageContext.request.contextPath}/member/json/id_check.json',  //url에 주소 넣기
 			  contentType : "text/html; charset=utf-8;",	  
 		      data : {user_id : uid.value},			  
 		      dataType:'json',      //dataType에 데이터 타입 넣기
@@ -478,13 +544,17 @@
 		       //중복되지 않은 경우 hasId=> N
 		       if(data.result == "N"){
 		        idCheck = true; 
+		        $('#idCheckSpan').removeClass();
+				$("#idCheckSpan").addClass("alert-success");
 		        document.getElementById("idCheckSpan").innerText = "좋은 아이디네요!";
 		        document.registFrm.DuplicationCheckId.value="Y";
 		       }
 		       //중복된 경우 hasId =>Y
 		       else{
 		        idCheck = false;
-		        document.getElementById("idCheckSpan").innerText = "이미 사용중이거나 탈퇴한 아이디입니다."+data.result;
+		        $('#idCheckSpan').removeClass();
+				$("#idCheckSpan").addClass("alert-danger");
+		        document.getElementById("idCheckSpan").innerText = "이미 사용중이거나 탈퇴한 아이디입니다.";
 		        document.registFrm.DuplicationCheckId.value="N";
 		       }
 		       
@@ -694,7 +764,7 @@ body{
 						<h3>회원가입 약관 동의</h3>
 					</div>
 
-					<form class="form-horizontal" name="step1Frm" method="post" action="join" onsubmit="return agreeCheck(this);">
+					<form class="form-horizontal" name="step1Frm" method="post" action="${pageContext.request.contextPath}/member/join" onsubmit="return agreeCheck(this);">
 						<input type="hidden" id="action" name="action" value="signup">
 						<div class="form-group">
 							<div class="col-lg-12" id="provision">
@@ -900,7 +970,7 @@ body{
 							계정 정보 입력
 						</h3>
 					</div>
-					<form class="form-horizontal" name="registFrm" method="post" action="join" onsubmit="return registFrmCheck();">
+					<form class="form-horizontal" name="registFrm" method="post" action="${pageContext.request.contextPath}/member/join" onsubmit="return registFrmCheck();">
 						<input type="hidden" id="action" name="action" value="authmail">
 						
 						<div class="row">
@@ -923,9 +993,9 @@ body{
 							<div class="form-group">
 								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 								<div class="col-md-6 col-sm-8 col-xs-10">
-									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호를 입력해주세요"/>
-									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호의 회사명을 입력해주세요"/>
-									<input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호의 대표자명을 입력해주세요"/>
+									<input class="form-control form-up company-input" name="company_number" type="text" placeholder="사업자등록번호를 입력해주세요"/>
+									<input class="form-control form-up company-input" name="company_name" type="text" placeholder="사업자등록번호의 회사명을 입력해주세요"/>
+									<!-- <input class="form-control form-up company-input" name="" type="text" placeholder="사업자등록번호의 대표자명을 입력해주세요"/> -->
 								</div>
 								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
@@ -936,7 +1006,7 @@ body{
 								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 								<div class="col-md-6 col-sm-8 col-xs-10">
 									<label class="control-label"><em style="color: red;">*</em> 아이디</label>
-									<input class="form-control form-up" id="user_id" name="user_id" type="text" placeholder="5~20자의 영문소문자,숫자,특수기호(_),(-)을 사용해주세요" onkeydown="resetDuplicationCheckId()" /> <span id="idCheckSpan" class="joinhelpred"></span> <input type="hidden" name="DuplicationCheckId" value="N">
+									<input class="form-control form-up" id="user_id" name="user_id" type="text" placeholder="5~20자의 영문소문자,숫자,특수기호(_),(-)을 사용해주세요" onkeydown="resetDuplicationCheckId()" /> <strong id="idCheckSpan" class="joinhelpred"></strong> <input type="hidden" name="DuplicationCheckId" value="N">
 								</div>
 								<div class="col-md-3 col-sm-2 col-xs-1"></div>
 							</div>
@@ -1031,6 +1101,7 @@ body{
 								<div class="col-md-6 col-sm-8 col-xs-10">
 									<input name="email_address" type="hidden" />
 									<label class="control-label"><em style="color: red;">* </em>이메일</label>
+									
 									<div class="form-inline">
 										<div id="email_id">
 											<input class="form-control form-up" name="email_id" type="text" /> @ 
@@ -1046,6 +1117,10 @@ body{
 												<option value="yahoo.com">yahoo.com</option>
 											</select>
 										</div>
+										<input type="hidden" name="DuplicationCheckEmail" value="Y"/>
+										
+										<button type="button" class="btn" id="emailCheckBtn" onclick="checkEmailDuplication();">중복체크</button>
+										<strong id="emailCheckSpan" class="joinhelpred"></strong>
 									</div>	
 									<div class="joinhelp" id="joinhelp">이메일 수신동의 시, 신상품/할인혜택/이벤트 등의 정보를 받아보실
 										수 있습니다
@@ -1155,7 +1230,7 @@ body{
 					</div>
 					<br /><br /><br />
 
-					<form class="form-horizontal" name="step1Frm" method="post" action="join" onsubmit="return checkAuthKey(this);">
+					<form class="form-horizontal" name="step1Frm" method="post" action="${pageContext.request.contextPath}/member/join" onsubmit="return checkAuthKey(this);">
 						<input type="hidden" id="action" name="action" value="complete">
 
 						<div class="form-group text-center">
@@ -1216,7 +1291,7 @@ body{
 						
 						
 						 
-						 var url="./json/authkey_check.json";
+						 var url="${pageContext.request.contextPath}/member/json/authkey_check.json";
 						 var params= "auth_key="+f.authkey.value+"&user_id=${joinInfo.user_id}&password=${joinInfo.password}";
 						 var isMatched = false;
 						// alert(url+"?"+params);
@@ -1277,7 +1352,7 @@ body{
 						//countdown( "countdown", 10, 0 );
 						
 						 var authkey = document.getElementById("authkey");
-						 var url="../mail/mail_authkey_send.json";
+						 var url="${pageContext.request.contextPath}/mail/mail_authkey_send.json";
 						 var params="to=${joinInfo.email_address}&user_id=${joinInfo.user_id}&password=${joinInfo.password}";
 						 
 						 //popLayerMsg(url+"?"+params);
