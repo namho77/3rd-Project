@@ -32,7 +32,7 @@
 					//return false; //break; true=>continue
 
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
-					alert(hotEngineerBoardList.contents);
+					//alert(hotEngineerBoardList.contents);
 					if (index == 0) {
 						inHTML += "<div class=\"item active\">";
 					} else {
@@ -117,7 +117,7 @@
 					inHTML += "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
 					inHTML += "</h4>";
 					inHTML += "<p class=\"card-description\">";
-					inHTML += hotEngineerBoardList.contents + "<a href=\"./board/client/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/client/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
 					inHTML += "</p>";
 					inHTML += "</div>";
 					inHTML += "</div>";
@@ -148,7 +148,7 @@
 		contents = contents.replace(img_tag, "");
 		//html태그 제거 br,span 허용
 		//contents= removeTags(contents, ["span", "br"]);
-		alert("제거내용 : "+contents);
+		//alert("제거내용 : "+contents);
 		return contents;
 	}
 
