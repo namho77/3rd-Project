@@ -48,7 +48,7 @@ MAIN_IMAGE ,
 CONTENTS_IMAGE ,
 CATEGORY_SRL ,
 SUBCATEGORY_SRL ,
-SERVICE_EXPIRED ,
+service_expired ,
 SERVICE_COST ,
 LIMIT_PERSON ,
 BOARD_TYPE ,
@@ -107,7 +107,7 @@ MAIN_IMAGE ,
 CONTENTS_IMAGE ,
 CATEGORY_SRL ,
 SUBCATEGORY_SRL ,
-SERVICE_EXPIRED ,
+service_expired ,
 SERVICE_COST ,
 LIMIT_PERSON ,
 BOARD_TYPE ,
@@ -220,7 +220,7 @@ MAIN_IMAGE ,
 CONTENTS_IMAGE ,
 CATEGORY_SRL ,
 SUBCATEGORY_SRL ,
-SERVICE_EXPIRED ,
+service_expired ,
 SERVICE_COST ,
 LIMIT_PERSON ,
 BOARD_TYPE ,
@@ -253,7 +253,25 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 				AND subcategory_srl = #{subcategory_srl}
 			</otherwise>
 		</choose>
+		
+		<choose>
+			<when test="user_id == null or user_id == ''">
 
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="service_expired == null or service_expired == ''">
+
+			</when>
+			<otherwise>
+				AND service_expired = #{service_expired,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+			 
 		<include refid="search"></include>
   
 	<![CDATA[    
