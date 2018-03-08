@@ -13,16 +13,17 @@ public class BoardDTO {
     private java.sql.Date service_time_end;     	
     private int contact_time_start;
     private int contact_time_end;  
+    private String main_image;
     private int category_srl;
     private int subcategory_srl;
     private int service_cost; 
     private String board_type;
     
     public BoardDTO() {}
-    
-	public BoardDTO(int board_srl, String user_id, String title, String contents, String location, Date service_time_start,
-			Date service_time_end, int contact_time_start, int contact_time_end, int category_srl, int subcategory_srl,
-			int service_cost, String board_type) {
+
+	public BoardDTO(int board_srl, String user_id, String title, String contents, String location,
+			Date service_time_start, Date service_time_end, int contact_time_start, int contact_time_end,
+			String main_image, int category_srl, int subcategory_srl, int service_cost, String board_type) {
 		super();
 		this.board_srl = board_srl;
 		this.user_id = user_id;
@@ -33,6 +34,7 @@ public class BoardDTO {
 		this.service_time_end = service_time_end;
 		this.contact_time_start = contact_time_start;
 		this.contact_time_end = contact_time_end;
+		this.main_image = main_image;
 		this.category_srl = category_srl;
 		this.subcategory_srl = subcategory_srl;
 		this.service_cost = service_cost;
@@ -42,7 +44,21 @@ public class BoardDTO {
 
 
 
+	public int getBoard_srl() {
+		return board_srl;
+	}
 
+	public void setBoard_srl(int board_srl) {
+		this.board_srl = board_srl;
+	}
+
+	public String getMain_image() {
+		return main_image;
+	}
+
+	public void setMain_image(String main_image) {
+		this.main_image = main_image;
+	}
 
 	public String getUser_id() {
 		return user_id;

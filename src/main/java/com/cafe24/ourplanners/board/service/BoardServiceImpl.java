@@ -63,15 +63,17 @@ public class BoardServiceImpl implements BoardService{
 	    Matcher srcMatcher = srcPattern.matcher(contents);
 	    //Matcher titleMatcher = titlePattern.matcher(contents);
 	    
-	    String imageName = null;
+	    String imageSrc = "";
 	    
 	    while(srcMatcher.find()) {
-	    	System.out.println("이미지 이름0 : "+srcMatcher.group(1)+",");
-	    	imageName += srcMatcher.group(1)+",";
-	    	System.out.println("이미지 이름1 : "+imageName);
+	    	imageSrc += srcMatcher.group(1);
 	    }
+	    int index1 = imageSrc.indexOf("e/");
+	    int index2 = imageSrc.indexOf("&#");
 	    
-	    System.out.println("이미지 이름2 : "+imageName);
+	    String main_image = imageSrc.substring(index1+2, index2);
+	    System.out.println("main_image : " + main_image);
+	    // imageName : baca2009-be88-4092-a316-4c489a8b850e.jpg
 	    
 	    
 	    
@@ -106,7 +108,7 @@ public class BoardServiceImpl implements BoardService{
 		String board_type = req.getParameter("board_type");
 		
 		BoardDTO dto = new BoardDTO(board_srl, user_id, title, contents, location, sqlService_time_start,
-				sqlService_time_end, contact_time_start, contact_time_end, category_srl, subcategory_srl, 
+				sqlService_time_end, contact_time_start, contact_time_end, main_image, category_srl, subcategory_srl, 
 				service_cost, board_type);
 	    
 		return dao.write(dto);
@@ -132,17 +134,20 @@ public class BoardServiceImpl implements BoardService{
 	    String contents = req.getParameter("contents");
 	    
 	    Pattern srcPattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
-	    Pattern titlePattern = Pattern.compile("<img[^>]*title=[\"']?([^>\"']+)[\"']?[^>]*>");
+	    //Pattern titlePattern = Pattern.compile("<img[^>]*title=[\"']?([^>\"']+)[\"']?[^>]*>");
 	    Matcher srcMatcher = srcPattern.matcher(contents);
-	    Matcher titleMatcher = titlePattern.matcher(contents);
+	    //Matcher titleMatcher = titlePattern.matcher(contents);
+	    
+	    String imageSrc = "";
 	    
 	    while(srcMatcher.find()) {
-	    	System.out.println(srcMatcher.group(1));
+	    	imageSrc += srcMatcher.group(1);
 	    }
+	    int index1 = imageSrc.indexOf("e/");
+	    int index2 = imageSrc.indexOf("&#");
 	    
-	    while(titleMatcher.find()) {
-	    	System.out.println(titleMatcher.group(1));
-	    }
+	    String main_image = imageSrc.substring(index1+2, index2);
+	    System.out.println("main_image : " + main_image);
 	    
 	    String location = req.getParameter("location");
 	    
@@ -166,7 +171,7 @@ public class BoardServiceImpl implements BoardService{
 		String board_type = req.getParameter("board_type");
 		
 		BoardDTO dto = new BoardDTO(board_srl, user_id, title, contents, location, sqlService_time_start,
-				sqlService_time_end, contact_time_start, contact_time_end, category_srl, subcategory_srl, 
+				sqlService_time_end, contact_time_start, contact_time_end, main_image, category_srl, subcategory_srl, 
 				service_cost, board_type);
 	    		
 		return dao.modifyAction(dto);
