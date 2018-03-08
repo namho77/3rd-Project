@@ -113,13 +113,7 @@
 							<div class="row text-center" style="">
 								<!-- 각종 버튼 부분 -->
 								<button type="submit" class="btn btn-danger">확인</button>
-								<!-- <button type="reset" class="btn">리셋하기</button> -->
 								<button type="button" class="btn btn-warning" onclick="history.back();">취소</button>
-
-								<!-- <button type="button" class="btn btn-default" onclick="location.href='WriteSkin.jsp';">글쓰기</button> -->
-								<!-- <button type="button" class="btn btn-primary">수정하기</button>
-					<button type="button" class="btn btn-success">삭제하기</button>
-					<button type="button" class="btn btn-info">답글쓰기</button>-->
 
 							</div>
 

@@ -306,20 +306,6 @@ public class MemberController {
 		return "member/member_login";
 	}
 
-	@RequestMapping(value = "member/info", method = RequestMethod.GET)
-	public String viewMemberInfo(Model model) {
-		logger.info("회원정보 보기");
-
-		return "member/member_info_view";
-	}
-
-	@RequestMapping(value = "member/info", method = RequestMethod.PUT)
-	public String modifyMemberInfo(Model model) {
-		logger.info("회원정보 수정");
-
-		return "member/member_info_modify";
-	}
-
 	@RequestMapping(value = "member/confirmPassword", method = RequestMethod.GET)
 	public String confirmPassword(Model model, HttpServletRequest request) {
 		logger.info("비밀번호 확인");
