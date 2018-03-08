@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.kosmo.mapper.MyPageMapper">
+ 	
+ 	<!-- SELECT COUNT(*) FROM op_board WHERE user_id = #{param1} AND board_type = #{board_type} AND service_expired = #{N} -->
+ 	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM op_board
+	</select>
+	
+	<select id="listPage" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM op_board ORDER BY board_srl DESC 
+			) Tb 
+		)
+		WHERE rNum BETWEEN #{start} AND #{end}
+	</select> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </mapper>

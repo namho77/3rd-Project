@@ -40,6 +40,80 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
+<!-- 에이젝스로 나의 리스트 뿌려주기 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//요청자 진행건 버튼 클릭시발동
+	$('#btn_client_ing').click(function(){	
+		$.ajax({
+			url : "myplan_client_ing",
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset:UTF-8",
+			data : {param1:"값1"},
+			success : function(d){
+				$('#mylist-area').html(d); 
+			},
+			error : function(d){
+				alert("실패 : "+d);
+			}
+		});
+	});
+	
+	//요청자 완료건 버튼 클릭시발동
+	$('#btn_client_check').click(function(){	
+		$.ajax({
+			url : "myplan_client_check",
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset:UTF-8",
+			data : {param1:"값1"},
+			success : function(d){
+				$('#mylist-area').html(d); 
+			},
+			error : function(d){
+				alert("실패 : "+d);
+			}
+		});
+	});
+	
+	//기술자 진행건 버튼 클릭시발동
+	$('#btn_engineer_ing').click(function(){	
+		$.ajax({
+			url : "myplan_engineer_ing",
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset:UTF-8",
+			data : {param1:"값1"},
+			success : function(d){
+				$('#mylist-area').html(d); 
+			},
+			error : function(d){
+				alert("실패 : "+d);
+			}
+		});
+	});
+	
+	//기술자 완료건 버튼 클릭시발동
+	$('#btn_engineer_check').click(function(){	
+		$.ajax({
+			url : "myplan_engineer_check",
+			dataType : "html",
+			type : "get",
+			contentType : "text/html; charset:UTF-8",
+			data : {param1:"값1"},
+			success : function(d){
+				$('#mylist-area').html(d); 
+			},
+			error : function(d){
+				alert("실패 : "+d);
+			}
+		});
+	});
+});
+</script>
+
 </head>
 
 <body id="body-bg">
@@ -151,36 +225,28 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-xs-3 text-center border-right">
-										<h5 class="header-margin-none font-color-lighter menu-sotitle">요청자 진행 건</h5>
-										<a class="plain" href="${pageContext.request.contextPath}/seller/selling_history">
+										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_ing">요청자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
 												<b>0</b>
 											</h4>
-										</a>
 									</div>
 									<div class="col-xs-3 text-center border-right">
-										<h5 class="header-margin-none font-color-lighter menu-sotitle">요청자 완료 건</h5>
-										<a class="plain" href="${pageContext.request.contextPath}/my_profits">
+										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_check">요청자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
 												<b>0</b>
 											</h4>
-										</a>
 									</div>
 									<div class="col-xs-3 text-center border-right">
-										<h5 class="header-margin-none font-color-lighter menu-sotitle">기술자 진행 건</h5>
-										<a class="plain" href="${pageContext.request.contextPath}/my_orders">
+										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_ing">기술자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
 												<b>0</b>
 											</h4>
-										</a>
 									</div>
 									<div class="col-xs-3 text-center">
-										<h5 class="header-margin-none font-color-lighter menu-sotitle">기술자 완료 건</h5>
-										<a class="plain" href="${pageContext.request.contextPath}/seller/profits_history">
+										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_check">기술자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
 												<b>0</b>
 											</h4>
-										</a>
 									</div>
 								</div>
 							</div>
@@ -191,9 +257,10 @@
 				<!-- 리스트 뿌려주는 부분 -->
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="mylist-area" style="border: 1px solid red; height: 375px; text-align: center; background-color: white;">
+						<div class="mylist-area" id="mylist-area"
+						style="border: 1px solid #E1E1E1; height: 375px; text-align: center; background-color: white;">
 							<br/><br/><br/><br/><br/><br/><br/>
-							<b>나의 리스트정보를 뿌려주는 곳입니다.</b>
+							<b>각 부분의 버튼을 클릭시 나의 목록정보가 나옵니다.</b>
 						</div>
 					</div>
 				</div>
