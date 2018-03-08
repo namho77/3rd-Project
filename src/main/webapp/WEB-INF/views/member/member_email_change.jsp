@@ -90,16 +90,18 @@
 			$('#email').on('blur', function() {
 
 				//uid에 입력된 값이 있으면
-				if (uid.value != null && uid.value.length > 0) {
+				if (email.value != null && email.value.length > 0) {
 
-					if (checkEmail()) {
-						document.getElementById("idCheckSpan").innerText = "올바른 이메일 주소를 입력하세요.";
+					if (!checkEmail()) {
+						$('#emailCheckSpan').removeClass();
+						$("#emailCheckSpan").addClass("alert-danger");
+						document.getElementById("emailCheckSpan").innerText = "올바른 이메일 주소를 입력하세요.";
 						document.emailFrm.DuplicationCheckEmail.value = "N";
 						return;
 					}
 
 					$.ajax({
-						url : '${pageContext.request.contextPath}/json/email_check.json', //url에 주소 넣기
+						url : '${pageContext.request.contextPath}/member/json/email_check.json', //url에 주소 넣기
 						contentType : "text/html; charset=utf-8;",
 						data : {
 							email_address : email.value
@@ -107,17 +109,23 @@
 						dataType : 'json', //dataType에 데이터 타입 넣기
 						success : function(data) { //success에 성공했을 때 동작 넣기.
 
+							//data.result hasEmail =>
 							//중복되지 않은 경우
-							if (data.result == "success") {
+							if (data.result == "N") {
 								idCheck = true;
+								
+								 $('#emailCheckSpan').removeClass();
+									$("#emailCheckSpan").addClass("alert-success");
 								document.getElementById("emailCheckSpan").innerText = "사용할 수 있는 이메일 입니다.";
-								document.registFrm.DuplicationCheckEmail.value = "Y";
+								document.emailFrm.DuplicationCheckEmail.value = "Y";
 							}
 							//중복된 경우
 							else {
 								idCheck = false;
+								$('#emailCheckSpan').removeClass();
+								$("#emailCheckSpan").addClass("alert-danger");
 								document.getElementById("emailCheckSpan").innerText = "이미 사용중인 이메일 입니다." + data.result;
-								document.registFrm.DuplicationCheckEmail.value = "N";
+								document.emailFrm.DuplicationCheckEmail.value = "N";
 							}
 
 						},
@@ -171,7 +179,7 @@
 									<div>이메일</div>
 								</div>
 								<div class="col-lg-4 text-center">
-									<input type="text" class="form-control" name="email" id="email" data-rule-required="true" placeholder="이메일 주소 입력" onkeydown="resetDuplicationCheckEmail()"> <span id="emailCheckSpan" class="text-danger"></span> <input type="hidden" name="DuplicationCheckEmail" value="N">
+									<input type="text" class="form-control" name="email" id="email" data-rule-required="true" placeholder="이메일 주소 입력" onkeydown="resetDuplicationCheckEmail()"> <strong id="emailCheckSpan" class="text-danger"></strong> <input type="hidden" name="DuplicationCheckEmail" value="N">
 
 
 									<button type="button" class="btn btn-info btn-xs" onclick="sendAuthMail();">발송</button>
@@ -243,7 +251,7 @@
 							return false;
 						}
 
-						var url = "${pageContext.request.contextPath}/json/authkey_check.json";
+						var url = "${pageContext.request.contextPath}/member/json/authkey_check.json";
 						var params = "authkey=" + f.authkey.value + "&user_id=${emailInfo.user_id}&password=${emailInfo.password}";
 						var isMatched = false;
 						// alert(url+"?"+params);
