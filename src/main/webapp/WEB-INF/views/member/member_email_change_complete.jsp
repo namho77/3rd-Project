@@ -41,6 +41,16 @@
 	});
 </script>
 
+<script>
+window.onload=function(){	
+//	document.getElementById("user_id").value = opener.document.registFrm.user_id.value;
+//var parentValue = opener.document.getElementById("email").value;
+//opener.document.getElementById("email").innerText="";
+			popLayerMsg("변경 되었습니다.");
+			window.open("about:blank", "_self").close();
+}
+</script>
+
 </head>
 
 <body>
@@ -72,8 +82,7 @@
 
 
 		<!-- Footer section(하단부분) -->
-
-		<%@ include file="/WEB-INF/views/common/commonBottom.jsp"%>
+		<%@ include file="/WEB-INF/views/common/bottom.jsp"%>
 		<!-- Footer section(하단부분) -->
 
 	</div>

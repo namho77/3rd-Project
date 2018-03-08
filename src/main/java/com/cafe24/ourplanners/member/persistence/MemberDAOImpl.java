@@ -210,6 +210,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	@Override
+	public void updateEmail(Map<String, Object> paramMap) {
+		sqlSession.update(namespace+".updateEmail", paramMap);
+		
+	}
+
+
 
 
 
