@@ -9,7 +9,7 @@ $(document).ready(function(){
 		location.href = "./engineer";
 	});
 	
-	var url = "./reply/list/"+${view.board_srl};
+	/* var url = "./reply/list/"+${view.board_srl};
 	
 	$.ajax({
 		url : url,
@@ -24,7 +24,7 @@ $(document).ready(function(){
 			alert("실패 : "+d.status+":"+d.statusText);
 		}
 	});
-	
+	 */
 });
 
 function listGO(){
