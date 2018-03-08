@@ -16,13 +16,5 @@ public class MyPageServiceImpl implements MyPageService{
 	@Inject
 	private MyPageDAO dao;
 	
-	@Override
-	public List<BoardVO> listPage(int start, int end) throws Exception {
-		return dao.listPage(start, end);
-	}
 	
-	@Override
-	public int getTotalCount() throws Exception {
-		return dao.getTotalCount();
-	}
 }

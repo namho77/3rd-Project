@@ -42,76 +42,120 @@
 
 <!-- 에이젝스로 나의 리스트 뿌려주기 -->
 <script type="text/javascript">
+
 $(document).ready(function(){
 	
+	
+	
 	//요청자 진행건 버튼 클릭시발동
-	$('#btn_client_ing').click(function(){	
-		$.ajax({
-			url : "myplan_client_ing",
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:UTF-8",
-			data : {param1:"값1"},
-			success : function(d){
-				$('#mylist-area').html(d); 
-			},
-			error : function(d){
-				alert("실패 : "+d);
-			}
-		});
+	$('#btn_client_ing').click(function(){
+		getMyPlanList("1", "C","${loginUserInfo.user_id}", "N", "danger");
 	});
 	
 	//요청자 완료건 버튼 클릭시발동
 	$('#btn_client_check').click(function(){	
-		$.ajax({
-			url : "myplan_client_check",
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:UTF-8",
-			data : {param1:"값1"},
-			success : function(d){
-				$('#mylist-area').html(d); 
-			},
-			error : function(d){
-				alert("실패 : "+d);
-			}
-		});
+		getMyPlanList("1", "C","${loginUserInfo.user_id}", "Y", "warning");
 	});
 	
 	//기술자 진행건 버튼 클릭시발동
 	$('#btn_engineer_ing').click(function(){	
-		$.ajax({
-			url : "myplan_engineer_ing",
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:UTF-8",
-			data : {param1:"값1"},
-			success : function(d){
-				$('#mylist-area').html(d); 
-			},
-			error : function(d){
-				alert("실패 : "+d);
-			}
-		});
+		getMyPlanList("1", "E","${loginUserInfo.user_id}", "N", "success");
 	});
 	
 	//기술자 완료건 버튼 클릭시발동
 	$('#btn_engineer_check').click(function(){	
-		$.ajax({
-			url : "myplan_engineer_check",
-			dataType : "html",
-			type : "get",
-			contentType : "text/html; charset:UTF-8",
-			data : {param1:"값1"},
-			success : function(d){
-				$('#mylist-area').html(d); 
-			},
-			error : function(d){
-				alert("실패 : "+d);
-			}
-		});
+		getMyPlanList("1", "E","${loginUserInfo.user_id}", "Y", "info");
 	});
 });
+
+function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
+	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+	service_srl = typeof service_srl !== 'undefined' ? service_srl : 1;
+
+	var url = "${pageContext.request.contextPath}/board/json/service_list.json";
+	
+	var inHTML = "";
+
+	//inHTML += "<div class=\"table-responsive\">";
+		inHTML += "<table class=\"table table-hover\">";
+			inHTML += "<colgroup>";
+				inHTML += "<col width=\"14%\">";
+				inHTML += "<col width=\"12%\">";
+				inHTML += "<col width=\"*%\">";
+				inHTML += "<col width=\"12%\">";
+				inHTML += "<col width=\"14%\">";
+				inHTML += "<col width=\"10%\">";
+				inHTML += "<col width=\"10%\">";
+			inHTML += "</colgroup>"
+			inHTML += "<thead>";
+			inHTML += "<tr class=\""+color+"\">";
+				inHTML += "<th>서브카테고리</th>";
+				inHTML += "<th>아이디</th>";
+				inHTML += "<th>제목</th>";
+				inHTML += "<th>예상비용</th>";
+				inHTML += "<th>서비스기간</th>";
+				inHTML += "<th>지역</th>";
+				inHTML += "<th>조회수</th>";
+			inHTML += "</tr>";
+			inHTML += "</thead>";
+			inHTML += "<tbody>";
+		
+	var inHTMLPaging = "";
+	$("#mylist-area").empty();
+	var params = "nowPage="+nowPage+"&board_type="+board_type+"&user_id="+user_id+"&service_expired="+service_expired;
+	//alert(url); 디버깅용
+	//alert(params); 디버깅용
+	$.ajax({
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			
+			//성공자료 갯수파악
+			alert("sucess : " + data);
+			var count = data;
+			alert(count);
+			alert(count.searchList.length);
+			
+			$.each(data.searchList, function(index, lists) { // each로 모든 데이터 가져와서 items 배열에 넣고
+				
+				
+				
+				inHTML += "<tr>";
+					inHTML += "<td>"+lists.subcategory_name+"</td>";
+					inHTML += "<td>"+lists.user_id+"</td>";
+					inHTML += "<td><a href=\"javascript:viewPage("+lists.board_srl+")\">"+lists.title+"</a></td>";
+					inHTML += "<td>"+lists.service_cost+"</td>";
+					inHTML += "<td>"+lists.service_time_start+"<br/> ~ "+lists.service_time_end+"</td>";
+					inHTML += "<td>"+lists.location+"</td>";
+					inHTML += "<td>"+lists.visitcount+"</td>";
+				inHTML += "</tr>";
+
+			});//each끝
+			inHTML += "</tbody>";
+		inHTML += "</table>";
+		
+		inHTML += "<div class=\"row text-center\">";
+		inHTML += "<ul class=\"pagination\" id=\"myPlanPagingDiv\">";
+		inHTML += "</ul></div>";
+	//inHTML += "</div>";
+		
+		if (jQuery.isEmptyObject(data.searchList)) {
+			$('#mylist-area').html("<div class=\"row\"><br/><br/><br/><br/><br/><br/><br/><b>해당 하는 검색 결과가 없습니다.</b><br/><br/><br/><br/><br/><br/><br/><br/></div>");
+		} else {
+			$('#mylist-area').html(inHTML);
+		}
+			$("#myPlanPagingDiv").html(data.pagingDiv);
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+}
+
 </script>
 
 </head>
@@ -149,7 +193,20 @@ $(document).ready(function(){
 								<div class="row">
 									<div class="col-xs-12 dashboard-profile text-center">
 										<div class="dashboard-profile-body">
-											<img id="thumbnail" class="border-round" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" title="dmacoder" onError="this.onerror=null;this.src='${pageContext.request.contextPath}/resources/images/main_user_gray.png';">
+											<c:choose>
+												<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
+													<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" class="border-round" />
+												</c:when>
+												<c:otherwise>
+													<img class="border-round" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png">
+												</c:otherwise>
+											</c:choose>
+											<input id="thumbnail_upload" name="profile_img_path" type="file"style="display: none;">
+											<div class="margin-top-20">
+												<label id="myplanPictureBtn"
+												class="label-margin-none btn btn-default btn-sm width-100px border-888"
+												for="thumbnail_upload"> 이미지 등록 </label>
+											</div>
 											<div class="dashboard-profile-grade userProfileRanking NEW">
 												<a href="${pageContext.request.contextPath}/grade"> <img src="/img/tools/grade/kmong_grade_NEW.png" data-toggle="tooltip" data-placement="right" title="" data-original-title=NEW>
 												</a>
@@ -257,10 +314,10 @@ $(document).ready(function(){
 				<!-- 리스트 뿌려주는 부분 -->
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="mylist-area" id="mylist-area"
-						style="border: 1px solid #E1E1E1; height: 375px; text-align: center; background-color: white;">
+						<div class="mylist-area panel panel-default border-radius-none" id="mylist-area">
 							<br/><br/><br/><br/><br/><br/><br/>
 							<b>각 부분의 버튼을 클릭시 나의 목록정보가 나옵니다.</b>
+							<br/><br/><br/><br/><br/><br/><br/><br/>
 						</div>
 					</div>
 				</div>

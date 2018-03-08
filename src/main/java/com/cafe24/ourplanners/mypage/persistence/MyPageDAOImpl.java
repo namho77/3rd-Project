@@ -18,21 +18,7 @@ public class MyPageDAOImpl implements MyPageDAO{
 	
 	private static String namespace = "com.kosmo.mapper.MyPageMapper";
 	
-	@Override
-	public List<BoardVO> listPage(int start, int end) throws Exception {
-		
-		Map<String, Object> paramMap = new HashMap<String ,Object>();
-		
-		paramMap.put("start", start);
-		paramMap.put("end", end);
-		
-		return sqlSession.selectList(namespace + ".listPage", paramMap);	
-	}
 	
-	@Override
-	public int getTotalCount() throws Exception {
-		return sqlSession.selectOne(namespace + ".getTotalCount");
-	}
 }
 
 
