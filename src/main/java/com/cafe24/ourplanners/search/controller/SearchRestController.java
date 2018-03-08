@@ -90,7 +90,8 @@ public class SearchRestController {
 			@RequestParam(required = false) Integer subcategory_srl,
 
 			@RequestParam(required = false, defaultValue = "") String board_type,
-			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer blockPage,
+			@RequestParam(required = false) Integer pageSize, 
+			@RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false, defaultValue = "") String keyword) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -113,7 +114,9 @@ public class SearchRestController {
 				propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
 				// 5) getProperty로 해당 데이터를 읽어와서 변수에 저장한다.
 				// 단, 반환 결과가 String 타입이므로 사용하려는 int타입으로 캐스팅 후 사용해야 한다.
+				if(pageSize==null)
 				pageSize = Integer.parseInt(env.getProperty("hotBoard.pageSize"));
+				if(blockPage==null)
 				blockPage = Integer.parseInt(env.getProperty("hotBoard.blockPage"));
 			} catch (Exception e) {
 				e.printStackTrace();

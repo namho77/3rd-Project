@@ -93,12 +93,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 		
 	</select>
 	
-	
-	<select id="selectProfile" resultType = "MemberVO">
-	select profile_img_path		 
-	from op_member
-	where user_id = #{user_id}
-	</select>	
+
 	
 	<!-- 프로필 사진 업데이트 -->
 	<update id="uploadPicture">
@@ -162,6 +157,14 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	<select id="getUserInfoByEmail" resultType="MemberVO">
  	select * from op_member WHERE email_address=#{email_address}
  	</select>
+ 	
+ 	<!-- 사용자 아이디로 프로필 사진 경로 가져오기  -->
+	<select id="selectProfileByUserId" resultType = "MemberVO">
+	select *		 
+	from op_member
+	where user_id = #{user_id}
+	</select>	
+	
  	
  	<!-- 회원탈퇴 -->
  	<delete id="deleteMember">

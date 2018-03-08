@@ -46,6 +46,8 @@
 </script>
 
 <script>
+
+//TOP 인기 검색어
 	$(document).ready(function() {
 
 		var url = "${pageContext.request.contextPath}/board/json/top_search_list.json";
@@ -99,7 +101,7 @@
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 					//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
 					//<a href='${pageContext.request.contextPath}/board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
-					items.push("<a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a>");
+					items.push("<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>");
 
 				});//each끝
 
@@ -211,9 +213,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
-						<h2 class="section-title st2 mb25">해당 검색어에 일치하는 카테고리나 서브카테고리 목록 입니다.</h2>
+						<h2 class="section-title st2 mb25">인기 카테고리 목록</h2>
 						<div class="text-center">
-							<p class="mb0">목록들~ 뿌려주기!!~</p>
+							<div class="mb0">
+							<h3 class="sidebar-title">Tags</h3>
+								<div id="tagsList" class="tags">
+									<a href="#" title="10 Topics"><i class="fa fa-tag"></i> Wordpress</a> 
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -235,7 +242,7 @@
 											<div class="blog-caption">
 												<h3 class="post-title">About Magento</h3>
 												<div class="sub-post-title">
-													<span>12 June, 2014</span> <span><i class="fa fa-user"></i> <a href="#"> by John Doe</a></span>
+													<span>12 June, 2018</span> <span><i class="fa fa-user"></i> <a href="#"> by John Doe</a></span>
 												</div>
 												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis, ipsum, optio.</p>
 												<a href="blog_single_left.html" class="read-more">Read more</a>
@@ -258,6 +265,7 @@
 					</div>
 					<div class="col-sm-5 col-md-3 col-md-pull-9 col-sm-pull-7 pull-off">
 						<aside class="sidebar">
+							<!-- 검색용 위젯 -->
 							<div class="sidebar-widget">
 								<form action="#" role="form">
 									<div class="input-group">
@@ -269,7 +277,28 @@
 									</div>
 								</form>
 							</div>
-
+							
+							<!-- 카테고리별 서브카테고리 부분 -->
+							<div class="sidebar-widget">
+								<h3 class="sidebar-title mb30">서브 카테고리</h3>
+								<ul class="categories">
+								
+									<li><a href="#"><span>1</span>목조</a></li>
+									<li><a href="#"><span>2</span>단열</a></li>
+									<li><a href="#"><span>3</span>창호</a></li>
+									<li><a href="#"><span>4</span>내부마감</a></li>
+									<li><a href="#"><span>5</span>외장마감</a></li>
+									<li><a href="#"><span>6</span>설비</a></li>
+									<li><a href="#"><span>7</span>전기</a></li>
+									<li><a href="#"><span>8</span>징크</a></li>
+									<li><a href="#"><span>9</span>설계&amp;디자인</a></li>
+									<li><a href="#"><span>10</span>데크</a></li>
+									
+									
+								</ul>
+							</div>
+							
+							<!-- 최근/인기 게시글 -->
 							<div class="sidebar-widget">
 								<ul class="nav nav-tabs">
 									<li class="active"><a href="#tab1" data-toggle="tab">최근 게시글</a></li>
@@ -277,16 +306,16 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane fade in active" id="tab1">
-										<ul class="latest-posts">
+										<ul class="latest-posts" id="latest-posts">
 											<li>
 												<div class="image-post">
 													<img src="${pageContext.request.contextPath}/resources/upload/service/1/images/mainimage.jpg" alt="blog post">
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About Wordpress</a>
+														<a href="blog_single_left.html">화장실 타일 공사해드립니다</a>
 													</h5>
-													<span>25 June, 2014 </span>
+													<span>25 3월, 2018 </span>
 												</div>
 											</li>
 											<li>
@@ -295,9 +324,9 @@
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About Joomla</a>
+														<a href="blog_single_left.html">주택 리모델링 해드립니다.</a>
 													</h5>
-													<span>27 June, 2014 </span>
+													<span>27 3월, 2018 </span>
 												</div>
 											</li>
 											<li>
@@ -306,24 +335,24 @@
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About Drupal</a>
+														<a href="blog_single_left.html">오래 된 모텔건물, 집 등 외벽을 철거없이 리모델링 해드립니다</a>
 													</h5>
-													<span>1 July, 2014 </span>
+													<span>1 3월, 2018 </span>
 												</div>
 											</li>
 										</ul>
 									</div>
 									<div class="tab-pane fade" id="tab2">
-										<ul class="latest-posts">
+										<ul class="latest-posts" id="hot-posts">
 											<li>
 												<div class="image-post">
 													<img src="${pageContext.request.contextPath}/resources/upload/service/1/images/mainimage.jpg" alt="blog post">
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About HTML5</a>
+														<a href="blog_single_left.html">싸게 주택 리모델링 해드립니다.</a>
 													</h5>
-													<span>10 July, 2014 </span>
+													<span>10 2월, 2018 </span>
 												</div>
 											</li>
 											<li>
@@ -332,9 +361,9 @@
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About CSS3</a>
+														<a href="blog_single_left.html">고객 만족 100% 화장실 타일 공사</a>
 													</h5>
-													<span>12 July, 2014 </span>
+													<span>12 2월, 2018 </span>
 												</div>
 											</li>
 											<li>
@@ -343,9 +372,9 @@
 												</div>
 												<div class="info-post">
 													<h5>
-														<a href="blog_single_left.html">About Javascript</a>
+														<a href="blog_single_left.html">값싸고 만족되는 석면철거,인테리어철거공사</a>
 													</h5>
-													<span>15 July, 2014 </span>
+													<span>15 2월, 2018 </span>
 												</div>
 											</li>
 										</ul>
@@ -353,23 +382,8 @@
 								</div>
 							</div>
 							
-							<!-- 카테고리별 서브카테고리 부분 -->
-							<div class="sidebar-widget">
-								<h3 class="sidebar-title mb30">서브 카테고리</h3>
-								<ul class="categories">
-									<li><a href="#"><span>40</span> Web Design</a></li>
-									<li><a href="#"><span>12</span> Software Engineering</a></li>
-									<li><a href="#"><span>22</span> Web Graphic</a></li>
-									<li><a href="#"><span>08</span> Web Programming</a></li>
-									<li><a href="#"><span>28</span> Software Design</a></li>
-								</ul>
-							</div>
-							<div class="sidebar-widget">
-								<h3 class="sidebar-title">Tags</h3>
-								<div id="tagsList" class="tags">
-									<a href="#" title="10 Topics"><i class="fa fa-tag"></i> Wordpress</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Concrete5</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Drupal</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Joomla</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> PHP</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> HTML5</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> CSS3</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> jQuery</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Java</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Ruby</a> <a href="#" title="10 Topics"><i class="fa fa-tag"></i> Javascript</a>
-								</div>
-							</div>
+							
+							
 
 						</aside>
 					</div>

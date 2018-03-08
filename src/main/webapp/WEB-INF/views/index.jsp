@@ -61,7 +61,8 @@
 		
 	<!-- 모달창 메시지 -->
 		<%@ include file="common/modal_msg.jsp"%>
-	<!--// 모달창 메시지 
+	<!--// 모달창 메시지 --> 
+
 	
 	<!-- 탑부분(기본적인 틀) -->
 	<nav class="navber" id="navbar-fixed-top">
@@ -70,10 +71,14 @@
 				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 				<div class="col-lg-8 col-sm-10 col-xs-12">
 					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="glyphicon glyphicon-align-justify"></span>
+						</button>
 						<a class="navbar-brand" id="navbar-brand"
 							href="${pageContext.request.contextPath}"><b>♣</b>
 							OurPlanners</a>
 					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
 						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
 						<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판</a></li>
@@ -100,6 +105,7 @@
 						</c:otherwise>
 						</c:choose>
 					</ul>
+					</div>
 				</div>
 				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
 			</div>
@@ -118,38 +124,74 @@
 				<div class="row">
 					<!-- 건축분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=1" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie1.jpg" alt="">
-						</a>
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie11.jpg" alt=""/>
+							<figcaption>
+								<h2><b>건축디자인</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=1"></a>
+						</figure>
 					</div>
 					
-					<!-- 자동차분야 -->
-					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=2" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie3.jpg" alt="">
-						</a>
-					</div>
-
 					<!-- IT분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=3" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie2.jpg" alt="">
-						</a>
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie22.jpg" alt=""/>
+							<figcaption>
+								<h2><b>IT프로그래밍</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=2"></a>
+						</figure>
+					</div>
+
+					<!-- 자동차분야 -->
+					<div class="col-lg-2 col-sm-2 image-size-c">
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie33.jpg" alt=""/>
+							<figcaption>
+								<h2><b>자동차</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=3"></a>
+						</figure>
 					</div>
 
 					<!-- 교육분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=4" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/categorie4.jpg" alt="">
-						</a>
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie44.jpg" alt=""/>
+							<figcaption>
+								<h2><b>교육</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=4"></a>
+						</figure>
 					</div>
 					
-					<!-- 마케팅분야 -->
+					<!-- 번역%통역분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=5" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/marketing.jpg" alt="">
-						</a>
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie55.jpg" alt=""/>
+							<figcaption>
+								<h2><b>번역&통역</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=5"></a>
+						</figure>
 					</div>
 					
 					<!-- 컨텐츠분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
-						<a href="${pageContext.request.contextPath}/board/engineer?category=6" class="work-box"> <img src="${pageContext.request.contextPath}/resources/images/tile3.jpg" alt="">
-						</a>
+						<figure class="snip1206">
+							<img src="${pageContext.request.contextPath}/resources/images/categorie77.jpg" alt=""/>
+							<figcaption>
+								<h2><b>컨텐츠</b></h2>
+								<p>기술자와 의뢰인의 만남에 공간입니다</p>
+							</figcaption>
+							<a href="${pageContext.request.contextPath}/board/engineer?category=6"></a>
+						</figure>
 					</div>
 				</div>
 			</div>

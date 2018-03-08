@@ -403,7 +403,7 @@ function isNumeric(num, opt){
 								</c:otherwise>
 							</c:choose>
 							
-							<input id="thumbnail_upload" name="file" type="file" style="display: none;">
+							<input id="thumbnail_upload" name="profile_img_path" type="file" style="display: none;">
 							<div class="margin-top-20">
 								<label id="profilePictureBtn"
 									class="label-margin-none btn btn-default btn-sm width-100px border-888"
