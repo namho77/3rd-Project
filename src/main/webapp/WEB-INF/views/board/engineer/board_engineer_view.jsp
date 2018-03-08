@@ -10,6 +10,10 @@ $(document).ready(function(){
 	});
 });
 
+function listGO(){
+	location.href = "./engineer";
+}
+
 //수정폼 가져오기
 function modify(board_srl) {
 	
@@ -58,20 +62,20 @@ function deleteBoard(board_srl){
 			<!-- 뷰 머리 -->
 			<div class="view-head">
 				<p class="p-title">시공사례 대표이미지</p>
-				<img class="img-responsive" src="../images/tile4.jpg"
-					style="height: 500px; width: 100%;" /> <br />
+				<!-- <img class="img-responsive" src="../images/tile4.jpg"
+					style="height: 500px; width: 100%;" /> <br /> -->
 				<div class="title">
 					<p class="p-title">제목</p>
 					<h4>${view.title }</h4>
 				</div>
 			</div>
 			<!-- 뷰 별평가 -->
-			<div class="view-star">
+			<!-- <div class="view-star">
 				<img src="../images/star.png" /> <img src="../images/star.png" />
 				<img src="../images/star.png" /> <img src="../images/star.png" />
 				<img src="../images/star.png" />
 				<p>15개의 평가</p>
-			</div>
+			</div> -->
 			<!-- 뷰 상세내용 -->
 			<div class="view-body">
 				<div class="contents">
@@ -94,9 +98,9 @@ function deleteBoard(board_srl){
 				</div>
 				<div class="images">
 					<p class="p-title">시공사례 이미지</p>
-					<img class="img-responsive" src="../images/tile1.jpg" /><br /> <img
+					<!-- <img class="img-responsive" src="../images/tile1.jpg" /><br /> <img
 						class="img-responsive" src="../images/tile2.jpg" /><br /> <img
-						class="img-responsive" src="../images/tile3.jpg" /><br />
+						class="img-responsive" src="../images/tile3.jpg" /><br /> -->
 				</div>
 			</div>
 
@@ -113,7 +117,7 @@ function deleteBoard(board_srl){
 					onclick="javascript:deleteBoard(${view.board_srl});">삭제하기</button>
 			</c:if>
 				
-				<button type="button" class="btn btn-success" id="listGo">목록보기</button>
+				<button type="button" class="btn btn-success" onclick="javascript:listGO();">목록보기</button>
 			</div>
 
 

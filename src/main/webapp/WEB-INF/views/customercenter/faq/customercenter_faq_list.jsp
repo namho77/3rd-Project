@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		getListFAQ(1, 1, "");
+		getListFAQ(1, 1, 1);
 	});
 
 	$(document).ready(function() {
@@ -101,7 +101,7 @@
 					inHTML += "<div id=\"faqDiv_" + faqList.faq_srl + "\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\"" + (index + 1) + "\" style=\"display: inline-block;\">";
 					inHTML += "	<div class=\"panel-heading\">";
 					inHTML += "		<h4 class=\"panel-title\">";
-					inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + ".</strong> " + faqList.title;
+					inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + "</strong> " + faqList.title;
 					inHTML += "			</a>";
 					inHTML += "		</h4>";
 
