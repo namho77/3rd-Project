@@ -466,4 +466,21 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public void updateEmail(String user_id, String email_address) {
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		//update member set email_address = ? , email_id = ? , email_host = ? where user_id = ?
+		String email_id = email_address.split("@")[0];
+
+        String email_host = email_address.split("@")[1];
+        paramMap.put("user_id", user_id);
+		paramMap.put("email_address", email_address);
+		paramMap.put("email_id", email_id);
+		paramMap.put("email_host", email_host);
+        dao.updateEmail(paramMap);
+		
+	}
+
 }

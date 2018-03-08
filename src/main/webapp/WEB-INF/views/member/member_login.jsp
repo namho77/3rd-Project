@@ -167,6 +167,10 @@ body{
 				<div class="col-md-4 col-sm-3"></div>
 			</c:when>
 			<c:otherwise>
+			
+			<script>
+			location.href='${pageContext.request.contextPath}';
+			</script>
 				<table border="1" style="width: 300px">
 					<tr>
 						<td>아이디</td>
