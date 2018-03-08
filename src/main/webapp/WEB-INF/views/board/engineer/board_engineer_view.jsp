@@ -8,6 +8,23 @@ $(document).ready(function(){
 	$('#listGO').click(function(){
 		location.href = "./engineer";
 	});
+	
+	var url = "./reply/list/"+${view.board_srl};
+	
+	$.ajax({
+		url : url,
+		dataType : "html",
+		type : "get",
+		contentType : "text/html; charset:UTF-8",
+		data : {param1:"값1"},
+		success : function(d){
+			$('#listReply').html(d); 
+		},
+		error : function(d){
+			alert("실패 : "+d.status+":"+d.statusText);
+		}
+	});
+	
 });
 
 function listGO(){
@@ -122,6 +139,7 @@ function deleteBoard(board_srl){
 
 
 			<!-- 요청&댓글부분 -->
+			
 			<div class="view-comment-head">
 				<div class="container">
 					<ul class="nav nav-tabs" id="nav-tabs">
@@ -132,27 +150,30 @@ function deleteBoard(board_srl){
 						<!-- 요청리스트부분 -->
 						<div id="home" class="tab-pane fade in active">
 							<div class="write-comment">
-								<div class="table-responsive">
-									<table class="table table-hover" id="table-hover">
-										<thead>
-											<tr class="success">
-												<th>아이디</th>
-												<th colspan="2">채택내용</th>
-											</tr>
-										</thead>
-										<tbody>
-											
-											<tr>
-												<td>wncks2121</td>
-												<td>6평짜리 화장실 타일공사 부탁드려요 기술자님</td>
-												<td>
-													<button type="button" class="btn btn-default"
-														id="btn-select">채택하기</button>
-												</td>
-											</tr>
-											
-										</tbody>
-									</table>
+								
+								<div id="replyList">
+									<div class="table-responsive">
+										<table class="table table-hover" id="table-hover">
+											<thead>
+												<tr class="success">
+													<th>아이디</th>
+													<th colspan="2">채택내용</th>
+												</tr>
+											</thead>
+											<tbody>
+											<c:forEach var="reply" items="${reply }">	
+												<tr>
+													<td>${reply.user_id }</td>
+													<td>${reply.contents }</td>
+													<td>
+														<button type="button" class="btn btn-default"
+															id="btn-select">채택하기</button>
+													</td>
+												</tr>
+											</c:forEach>	
+											</tbody>
+										</table>
+									</div>
 								</div>
 								<div class="container-fluid" align="center">
 									<div class="pagination">
