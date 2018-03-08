@@ -51,7 +51,7 @@
 
 		<!-- HEADER -->
 
-		<%@ include file="./common/top_main2.jsp"%>
+		<%@ include file="/WEB-INF/views/common/top_main2.jsp"%>
 
 		<!-- HOME -->
 		<section id="main" class="section">
@@ -67,12 +67,13 @@
 		<!-- //HOME -->
 
 		<!-- 모달창 -->
-		<%@ include file="./common/modal_msg.jsp"%>
+		<%@ include file="/WEB-INF/views/common/modal_msg.jsp"%>
 		<!-- //모달창 끝 -->
 
 
 		<!-- Footer section(하단부분) -->
-		<%@ include file="./common/bottom.jsp"%>
+
+		<%@ include file="/WEB-INF/views/common/commonBottom.jsp"%>
 		<!-- Footer section(하단부분) -->
 
 	</div>
