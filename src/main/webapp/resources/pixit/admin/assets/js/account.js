@@ -23,18 +23,22 @@ $(function(){
 		});
 	}
 
-	/*  Background slide for lockscreen page  */
+/*	  Background slide for lockscreen page  
 	if($('body').attr('data-page') == 'login' || $('body').attr('data-page') == 'signup'){
 		$('#submit-form').click(function(e){
         e.preventDefault();
         var l = Ladda.create(this);
         l.start();
+        
+        alert(2);
+        this.form.submit();
+        
         setTimeout(function () {
             window.location.href = "index.html";
         }, 2000);
 
     });
-	}
+	}*/
 
 });
 

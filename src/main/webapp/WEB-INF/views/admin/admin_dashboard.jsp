@@ -562,84 +562,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-8 m-b-20">
-					<div class="modal fade" id="event-modal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">
-										<strong>Manage</strong> my events
-									</h4>
-								</div>
-								<div class="modal-body">
-									<p></p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-success save-event">Create event</button>
-									<button type="button" class="btn btn-danger delete-event" data-dismiss="modal">Delete</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="external-events" class="bg-white row m-0">
-						<div class="col-md-4 p-0">
-							<div class="widget bg-gray-l">
-								<div class="widget-body p-b-0">
-									<div class="row">
-										<div class="col-md-12 col-sm-12 col-xs-12">
-											<h2 class="panel-title width-100p c-blue w-500 f-20 carrois" id="calender-current-day">Events Manager</h2>
-											<div>
-												<br> <br> <br>
-												<div class="external-event bg-green" data-class="bg-green" style="position: relative;">
-													<i class="fa fa-move"></i>Sport
-												</div>
-												<div class="external-event bg-purple" data-class="bg-purple" style="position: relative;">
-													<i class="fa fa-move"></i>Meeting
-												</div>
-												<div class="external-event bg-red" data-class="bg-red" style="position: relative;">
-													<i class="fa fa-move"></i>Work
-												</div>
-												<div class="external-event bg-blue" data-class="bg-blue" style="position: relative;">
-													<i class="fa fa-move"></i>Children
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-7 col-md-offset-1 p-0 no-bd">
-							<div class="widget bg-white">
-								<div class="widget-body p-b-0">
-									<div class="row">
-										<div class="col-md-12 col-sm-12 col-xs-12">
-											<div id="calendar"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default map-panel">
-						<form method="post" id="geocoding_form">
-							<input type="text" class="form-control" id="address" name="address" placeholder="Search an address">
-						</form>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-									<div class="map" id="geocoding-map" style="height: 395px"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		<!-- END MAIN CONTENT -->
 
@@ -756,9 +681,9 @@
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/metrojs/metrojs.min.js"></script>
 	<script src='${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/fullcalendar/moment.min.js'></script>
 	<script src='${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/fullcalendar/fullcalendar.min.js'></script>
-	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/google-maps/markerclusterer.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/google-maps/markerclusterer.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/google-maps/gmaps.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/google-maps/gmaps.js"></script> --%>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/charts-flot/jquery.flot.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/charts-flot/jquery.flot.animator.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/charts-flot/jquery.flot.resize.js"></script>

@@ -59,17 +59,28 @@ public class BoardServiceImpl implements BoardService{
 	    String contents = req.getParameter("contents");
 	    
 	    Pattern srcPattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
-	    Pattern titlePattern = Pattern.compile("<img[^>]*title=[\"']?([^>\"']+)[\"']?[^>]*>");
+	    //Pattern titlePattern = Pattern.compile("<img[^>]*title=[\"']?([^>\"']+)[\"']?[^>]*>");
 	    Matcher srcMatcher = srcPattern.matcher(contents);
-	    Matcher titleMatcher = titlePattern.matcher(contents);
+	    //Matcher titleMatcher = titlePattern.matcher(contents);
+	    
+	    String imageName = null;
 	    
 	    while(srcMatcher.find()) {
-	    	System.out.println(srcMatcher.group(1)+",");
+	    	System.out.println("이미지 이름0 : "+srcMatcher.group(1)+",");
+	    	imageName += srcMatcher.group(1)+",";
+	    	System.out.println("이미지 이름1 : "+imageName);
 	    }
 	    
+	    System.out.println("이미지 이름2 : "+imageName);
+	    
+	    
+	    
+	    /*
 	    while(titleMatcher.find()) {
 	    	System.out.println(titleMatcher.group(1)+",");
 	    }
+	    */
+	  
 	    
 	    String location = req.getParameter("location");
 	    

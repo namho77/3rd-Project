@@ -29,7 +29,7 @@ public class EditorController implements ServletContextAware {
 	private ServletContext context;
 	
 	@RequestMapping(value = "/file_uploader_html5", method = RequestMethod.POST)
-	public void file_uploader_html5(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void file_uploader_html5(HttpServletRequest request, HttpServletResponse response) throws IOException {		
 		String sFileInfo = "";
 		//파일명 - 싱글파일업로드와 다르게 멀티파일업로드는 HEADER로 넘어옴 
 		String name = request.getHeader("file-name");
@@ -37,11 +37,8 @@ public class EditorController implements ServletContextAware {
 		//파일 기본경로
 		String root = request.getContextPath() + "/resources";
 		String defaultPath = context.getRealPath("/resources");
-		
-		System.out.println("게시판 번호"+request.getParameter("board_srl"));
-		
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath + File.separator + "upload" + File.separator + "service";
+		String path = defaultPath + File.separator + "upload" + File.separator + "service" + File.separator;
 		File file = new File(path);
 		if(!file.exists()) {
 		  file.mkdirs();
@@ -70,8 +67,6 @@ public class EditorController implements ServletContextAware {
 	@RequestMapping(value="/file_uploader", method=RequestMethod.POST)
 	public void file_uploader(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
 		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("게시판 번호"+request.getParameter("board_srl"));
 		String return1="";
 		String return2="";
 		String return3="";
@@ -95,7 +90,7 @@ public class EditorController implements ServletContextAware {
 		                //파일 기본경로
 		                String defaultPath = context.getRealPath("/");
 		                //파일 기본경로 _ 상세경로
-		                String path = defaultPath + "upload" + File.separator + "service";
+		                String path = defaultPath + "upload" + File.separator + "service" + File.separator;
 		                 
 		                File file = new File(path);
 		                 

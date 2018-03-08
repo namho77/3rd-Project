@@ -175,11 +175,16 @@ public class SearchRestController {
 			@RequestParam(required = false) Integer subcategory_srl,
 
 			@RequestParam(required = false, defaultValue = "") String board_type,
+			
+			@RequestParam(required = false, defaultValue = "") String service_expired,
+			@RequestParam(required = false, defaultValue = "") String user_id,
+			
+			
 			@RequestParam(required = false) Integer pageSize, 
 			@RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false, defaultValue = "") String searchType,
 			@RequestParam(required = false, defaultValue = "") String keyword) {
-
+			
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		if (pageSize == null || blockPage == null) {
@@ -204,6 +209,9 @@ public class SearchRestController {
 		SearchServiceBoardCriteria scri = new SearchServiceBoardCriteria();
 
 		scri.setBoard_type(board_type);
+		scri.setService_expired(service_expired);
+		scri.setUser_id(user_id);
+		
 		if (category_srl != null)
 			scri.setCategory_srl(category_srl);
 		if (subcategory_srl != null)

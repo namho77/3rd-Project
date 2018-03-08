@@ -28,6 +28,7 @@ import com.cafe24.ourplanners.member.dto.LoginDTO;
 import com.cafe24.ourplanners.member.service.MemberService;
 import com.cafe24.ourplanners.util.UploadFileUtils;
 
+
 @Controller
 public class MemberController {
 
@@ -305,20 +306,6 @@ public class MemberController {
 		return "member/member_login";
 	}
 
-	@RequestMapping(value = "member/info", method = RequestMethod.GET)
-	public String viewMemberInfo(Model model) {
-		logger.info("회원정보 보기");
-
-		return "member/member_info_view";
-	}
-
-	@RequestMapping(value = "member/info", method = RequestMethod.PUT)
-	public String modifyMemberInfo(Model model) {
-		logger.info("회원정보 수정");
-
-		return "member/member_info_modify";
-	}
-
 	@RequestMapping(value = "member/confirmPassword", method = RequestMethod.GET)
 	public String confirmPassword(Model model, HttpServletRequest request) {
 		logger.info("비밀번호 확인");
@@ -352,8 +339,37 @@ public class MemberController {
 	}
 
 	// 이메일 변경 페이지
-	@RequestMapping(value = "member/change_email", method = RequestMethod.GET)
-	public String changeEmail(Model model) {
+	@RequestMapping(value = "member/change_email", method= {RequestMethod.GET, RequestMethod.POST})
+	public String changeEmail(Model model,HttpServletRequest req,HttpSession session) {
+
+		
+		Object obj = session.getAttribute("loginUserInfo");
+
+		MemberVO emailInfo = (MemberVO) obj;
+		String user_id = emailInfo.getUser_id();
+		
+		String action = req.getParameter("action");
+		if(action==null || action.length()==0 || action.equals("form"))
+		{
+			System.out.println("이메일 변경할 사용자 아이디 : "+ user_id);
+			
+			
+			
+			System.out.println(emailInfo.getUser_id());
+			System.out.println(emailInfo.getPassword());
+			
+			model.addAttribute("emailInfo", emailInfo);
+			
+			return "member/member_email_change";
+		}
+		else if(action.equals("change"))
+		{
+			String email_address = req.getParameter("email");
+			
+			service.updateEmail(user_id,email_address);
+			
+			return "member/member_email_change_complete";
+		}
 		return "member/member_email_change";
 	}
 }

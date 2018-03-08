@@ -62,13 +62,31 @@
 		
 		<!-- 로그인 필요 페이지 인터셉터 -->
 		<interceptor>
+			<!-- 마이페이지 -->
 			<mapping path="/mypage/*"/>
+			
+			<!-- 프로필 -->
 			<mapping path="/profile/*"/>
+			
+			<!-- 쪽지 -->
 			<mapping path="/message/*"/>
+			
+			<!-- 관리자 페이지 -->
 			<mapping path="/admin**/**"/>
+			
+			<!-- 게시판 -->
 			<!-- <mapping path="/board/client*"/> -->
+			
+			<!-- 회원 관련.. -->
 			<mapping path="/member/withdraw"/>
 			<mapping path="/member/change_password"/>
+			<mapping path="/member/change_email"/>
+			
+			<!-- 공지사항,FAQ -->
+			<mapping path="/customercenter/faq/**/edit"/>
+			<mapping path="/customercenter/faq/new"/>
+			
+			<!-- 로그인 페이지는 예외로 -->
 			<exclude-mapping path="/admin/login**/**"/>
 			<exclude-mapping path="/member/login**/**"/>
    			<exclude-mapping path="/resources/**/"/>

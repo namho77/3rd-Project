@@ -39,6 +39,8 @@ public interface MemberService {
 	public void findId(Model model, HttpServletRequest req, ModelAndView mv);
 
 	public void hasEmail(HttpServletRequest req, HashMap<String, Object> map);
+
+	public void updateEmail(String user_id, String email_address);
 	
 	
 }
