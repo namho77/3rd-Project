@@ -2,27 +2,30 @@ package com.cafe24.ourplanners.board.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.io.support.ResourcePropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.service.BoardService;
-import com.cafe24.ourplanners.util.PagingUtil;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 @Controller
-@RequestMapping("/board/*")
 public class BoardController {
 	
 	@Inject
@@ -31,12 +34,148 @@ public class BoardController {
 	
 /////////////////////////////////////엔지니어 게시판 컨트롤러///////////////////////////////////
 	
-	@RequestMapping(value = "engineer", method = RequestMethod.GET)
-	public String engineerboard() {
-		return "board/engineer/board_engineer";
+	@ResponseBody
+	@RequestMapping(value = "/board/engineer/json/board_list.json")
+	public HashMap<String, Object> getBoardListJson(HttpServletRequest req, Model model,
+			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
+
+			@RequestParam(required = false) Integer category_srl,
+			@RequestParam(required = false) Integer subcategory_srl,
+			@RequestParam(required = false, defaultValue = "E") String board_type,
+
+			@RequestParam(required = false) Integer pageSize,
+			@RequestParam(required = false) Integer blockPage,
+			@RequestParam(required = false, defaultValue = "") String searchType,
+			@RequestParam(required = false, defaultValue = "") String keyword) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		if (pageSize == null || blockPage == null) {
+			ConfigurableApplicationContext ctx = new GenericXmlApplicationContext();
+
+			ConfigurableEnvironment env = ctx.getEnvironment();
+
+			MutablePropertySources propertySources = env.getPropertySources();
+
+			try {
+				propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
+				if(pageSize == null)
+				pageSize = Integer.parseInt(env.getProperty("board.pageSize"));
+				if(blockPage == null)
+				blockPage = Integer.parseInt(env.getProperty("board.blockPage"));
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+			ctx.close();
+		}
+
+		SearchServiceBoardCriteria scri = new SearchServiceBoardCriteria();
+
+		if (category_srl != null) {
+			scri.setCategory_srl(category_srl);
+			System.out.println("category_srl:"+category_srl);
+		}
+		
+		if (subcategory_srl != null) {
+			System.out.println("subcategory_srl:"+subcategory_srl);
+			scri.setSubcategory_srl(subcategory_srl);
+		}
+		
+		if (board_type != null) {
+			System.out.println("board_type:"+board_type);
+			scri.setBoard_type(board_type);
+		}
+		
+		scri.setNowPage(nowPage);
+		scri.setPageSize(pageSize);
+		scri.setBlockPage(blockPage);
+		
+		System.out.println("nowPage:"+nowPage);
+		
+		if(searchType != null && searchType.length() != 0)
+		scri.setSearchType(searchType);
+		if(keyword != null && keyword.length() != 0)
+		scri.setKeyword(keyword);		
+		
+		service.getBoardListJson(scri, map);
+		
+		
+		return map;
 	}
 	
-	//목록보기
+	//리스트 보기
+	@RequestMapping(value = "/board/engineer", method = RequestMethod.GET)
+	public String listEngineerBoard(Model model) {
+		return "board/engineer/board_engineer_list";
+	}
+	
+	//글 상세 보기
+	@RequestMapping(value = "/board/engineer/{board_srl}", method = RequestMethod.GET)
+	public String viewEngineerBoard(@PathVariable Integer board_srl, Model model) {
+		
+		BoardVO vo = null;
+		try {
+			vo = service.view(board_srl);
+			
+			//줄바꿈
+			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
+			
+			//조회수 증가
+			service.visitCount(board_srl);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("view", vo);
+		return "board/engineer/board_engineer_view";
+	}
+	
+	//글쓰기 폼 가져오기
+		@RequestMapping(value = "/board/engineer/write", method = RequestMethod.GET)
+		public String writeEngineerBoard() {
+			return "board/engineer/board_engineer_write";
+		}
+		
+		// 글쓰기 처리
+		@ResponseBody
+		@RequestMapping(value = "/board/engineer/writeAciton", method = RequestMethod.POST)
+		public Map<String, Object> writeAction(HttpServletRequest req, HttpSession session) {
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			int result = 0;
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("code", "login");
+				map.put("message", "로그인 후 작성해주세요");
+				return map;
+			}
+			
+			try {
+				result = service.write(req);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			if (result <= 0) {
+				map.put("code", "FAIL");
+				map.put("message", "작성 실패 하였습니다.");
+			} else {
+				map.put("code", "SUCCESS");
+				map.put("message", "글쓰기를 성공하였습니다.");
+			}
+			
+			return map;
+		}
+	
+	/*@RequestMapping(value = "engineer", method = RequestMethod.GET)
+	public String engineerboard() {
+		return "board/engineer/board_engineer";
+	}*/
+	
+	/*//목록보기
 	@RequestMapping(value = "engineer/list", method = RequestMethod.GET)
 	public String listEngineerBoard(Model model, HttpServletRequest req) {
 		
@@ -73,9 +212,9 @@ public class BoardController {
 		model.addAttribute("pagingDiv", pagingDiv);
 		
 		return "board/engineer/board_engineer_list";
-	}
+	}*/
 	
-	//글읽기
+/*	//글읽기
 	@RequestMapping(value = "engineer/view", method = RequestMethod.GET)
 	public String viewEngineerBoard(Model model, HttpServletRequest req, HttpSession session, HttpServletResponse resp) throws IOException {
 		
@@ -87,7 +226,7 @@ public class BoardController {
 			//줄바꿈
 			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
 			
-			//조회수
+			//조회수 증가
 			service.visitCount(Integer.parseInt(req.getParameter("board_srl")));
 		}
 		catch(Exception e) {
@@ -98,48 +237,13 @@ public class BoardController {
 		
 		
 		return "board/engineer/board_engineer_view";
-	}
+	}*/
 		
-	//글쓰기 폼 가져오기
-	@RequestMapping(value = "engineer/write", method = RequestMethod.GET)
-	public String writeEngineerBoard() {
-		return "board/engineer/board_engineer_write";
-	}
 	
-	// 글쓰기 처리
-	@ResponseBody
-	@RequestMapping(value = "engineer/writeAciton", method = RequestMethod.POST)
-	public Map<String, Object> writeAction(HttpServletRequest req, HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		int result = 0;
-		if (session.getAttribute("loginUserInfo") == null) {
-			map.put("code", "login");
-			map.put("message", "로그인 후 작성해주세요");
-			return map;
-		}
-		
-		try {
-			result = service.write(req);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		if (result <= 0) {
-			map.put("code", "FAIL");
-			map.put("message", "작성 실패 하였습니다.");
-		} else {
-			map.put("code", "SUCCESS");
-			map.put("message", "글쓰기를 성공하였습니다.");
-		}
-		
-		return map;
-	}
 	
 
 	//글수정 폼 가져오기
-	@RequestMapping(value = "engineer/modify/{board_srl}", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/engineer/modify/{board_srl}", method = RequestMethod.GET)
 	public String modifyEngineerBoard(@PathVariable Integer board_srl, Model model) {
 		try {
 			service.modify(board_srl, model);
@@ -153,7 +257,7 @@ public class BoardController {
 	
 	//글수정 처리
 	@ResponseBody
-	@RequestMapping(value = "engineer/modifyAction", method = RequestMethod.POST)
+	@RequestMapping(value = "/board/engineer/modifyAction", method = RequestMethod.POST)
 	public Map<String, Object> modifyActionEngineerBoard(HttpServletRequest req, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -185,7 +289,7 @@ public class BoardController {
 	//삭제 처리
 	@ResponseBody
 	@RequestMapping(value = "engineer/delete/{board_srl}", method = RequestMethod.POST)
-	public Map<String, Object> deleteEngineerBoard(@PathVariable Integer board_srl, HttpSession session){
+	public Map<String, Object> deleteEngineerBoard(@PathVariable Integer board_srl, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int result = 0;

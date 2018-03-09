@@ -1,6 +1,8 @@
 package com.cafe24.ourplanners.board.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +16,8 @@ import org.springframework.ui.Model;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.board.persistence.BoardDAO;
-import com.cafe24.ourplanners.util.Criteria;
-import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.PagingUtil;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 
 @Service
@@ -24,10 +26,27 @@ public class BoardServiceImpl implements BoardService{
 	@Inject
 	private BoardDAO dao;
 	  
-	/*@Override
-	public List<BoardVO> list() throws Exception {
-		return dao.list();
-	}*/
+	@Override
+	public void getBoardListJson(SearchServiceBoardCriteria scri, HashMap<String, Object> map) {
+
+		List<BoardVO> lists = new ArrayList<BoardVO>();
+		lists = dao.getBoardListJson(scri);
+		
+		for(BoardVO list:lists) {
+			//싱글 쿼테이션 더블 쿼테이션 변경
+			list.setContents(list.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\"", "\""));
+			//줄바꿈 처리
+			//list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
+			list.setContents(list.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
+		}
+			
+		int totalRecordCount = dao.getTotalCount(scri);
+		String pagingDiv = PagingUtil.pagingAjaxBoard(totalRecordCount, scri, "boardPaging");
+		
+		map.put("boardLists", lists);
+		map.put("pagingDiv", pagingDiv);
+			
+	}
 	
 	@Override
 	public List<BoardVO> listPage(int start, int end) throws Exception {
@@ -68,8 +87,10 @@ public class BoardServiceImpl implements BoardService{
 	    while(srcMatcher.find()) {
 	    	imageSrc += srcMatcher.group(1);
 	    }
+	    
 	    int index1 = imageSrc.indexOf("e/");
 	    int index2 = imageSrc.indexOf("&#");
+    
 	    
 	    String main_image = imageSrc.substring(index1+2, index2);
 	    System.out.println("main_image : " + main_image);
@@ -133,6 +154,7 @@ public class BoardServiceImpl implements BoardService{
 	    String title = req.getParameter("title");
 	    String contents = req.getParameter("contents");
 	    
+	    //스마트 에디터의 img테그 src값 얻어오기
 	    Pattern srcPattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
 	    //Pattern titlePattern = Pattern.compile("<img[^>]*title=[\"']?([^>\"']+)[\"']?[^>]*>");
 	    Matcher srcMatcher = srcPattern.matcher(contents);
@@ -140,6 +162,7 @@ public class BoardServiceImpl implements BoardService{
 	    
 	    String imageSrc = "";
 	    
+	    // src 속성값 얻어와서 imageSrc에 더하기
 	    while(srcMatcher.find()) {
 	    	imageSrc += srcMatcher.group(1);
 	    }
@@ -179,66 +202,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int delete(Integer board_srl) throws Exception {
-		
 		return dao.delete(board_srl);
 	}
 	
-	
-	
-	@Override
-	public BoardVO read(Integer boardSrl) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.read(boardSrl);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-
-	@Override
-	public void remove(Integer boardSrl) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
-	@Override
-	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int listCountCriteria(Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<String> getAttach(Integer boardSrl) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
 }
