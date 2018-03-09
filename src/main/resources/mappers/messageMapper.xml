@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.mapper.MessageMapper">
+
+	<!-- 자주 묻는 질문 게시판 검색후 리스트 가져오기 -->
+
+	<select id="getMessageListJson" resultType="MessageVO">
+    	<![CDATA[  
+		SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT message_srl ,
+		sender_SRL ,
+		TITLE ,
+		CONTENTS ,
+		
+		postdate FROM op_message where message_srl > 0 
+		]]>
+		<choose>
+			<when test="sender_SRL == null or sender_SRL == ''">
+
+			</when>
+			<otherwise>
+				AND sender_SRL = #{sender_SRL}
+			</otherwise>
+		</choose>
+	</select>
+	<delete id="deleteMessage">
+		delete from op_message where
+		message_srl=#{message_srl}
+	</delete>
+	
+	<insert id="writeMessage">
+		insert into
+		op_message(message_srl,sender_srl,title,contents) values
+		(op_message_srl_seq.nextval,#{sender_srl}, #{category_srl},
+		#{title},#{contents})
+		
+		
+	</insert>
+
+	<select id="readMessage" resultType="MessageVO">
+		select * from op_message where receiver_srl=sender_srl 
+		
+	</select>
+	
+	<select id ="searchId">
+		select member_srl from op_member where #{sender_srl} =member_srl 
+	</select>
+
+
+</mapper>
