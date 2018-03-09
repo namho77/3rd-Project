@@ -115,10 +115,10 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 		success : function(data) {
 			
 			//성공자료 갯수파악
-			alert("sucess : " + data);
+			//alert("sucess : " + data);
 			var count = data;
-			alert(count);
-			alert(count.searchList.length);
+			//alert(count);
+			alert("해당 자료는 총 "+count.searchList.length+"개 입니다.");
 			
 			$.each(data.searchList, function(index, lists) { // each로 모든 데이터 가져와서 items 배열에 넣고
 				
@@ -155,6 +155,29 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 		}
 	});
 }
+
+
+//상세보기 폼으로 이동하기
+function viewPage(board_srl){
+	
+	$.ajax({
+		url : "./myplan/view",
+		dataType : "html",
+		type : "get",
+		contentType : "text/html; charset:utf-8",
+		data : {board_srl : board_srl},
+		success : function(d){
+			$("#mylist-area").empty();
+			$('#mylist-area').html(d);
+			
+		},
+		error : function(e){
+			alert("요청실패:"+e.status+"  "+e.statusText);
+		}
+	});
+}
+
+
 
 </script>
 
@@ -234,7 +257,7 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 									<div class="col-xs-12">
 										<div data-toggle="tooltip" data-placement="right">
 											<h5 class="header-margin-none menu-sotitle">
-												응답률 <span class="pull-right"><b>40%</b></span>
+												의뢰한 건 매칭성공률 <span class="pull-right"><b>${clientMatchingPrecent}%</b></span>
 											</h5>
 										</div>
 									</div>
@@ -242,9 +265,9 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 								<div class="row dashboard-user-information-progress margin-top-5 border-bottom-solid">
 									<div class="padding-myplan">
 										<div class="progress">
-										    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" 
-										    style="width:40%; text-align: center;">
-										      	40%
+										    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
+										    style="width:${clientMatchingPrecent}%; text-align: center;">
+										      	${clientMatchingPrecent}%
 										    </div>
 									  	</div>
 									</div>
@@ -254,7 +277,7 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 									<div class="col-xs-12">
 										<div data-toggle="tooltip" data-placement="right">
 											<h5 class="header-margin-none menu-sotitle">
-												주문 성공률 <span class="pull-right"><b>99%</b></span>
+												기술나눔 매칭성공률 <span class="pull-right"><b>${engineerMatchingPrecent}%</b></span>
 											</h5>
 										</div>
 									</div>
@@ -262,9 +285,9 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 								<div class="row dashboard-user-information-progress margin-top-5 border-bottom-solid">
 									<div class="padding-myplan">
 										<div class="progress">
-										    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" 
-										    style="width:99%; text-align: center;">
-										      	99%
+										    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
+										    style="width:${engineerMatchingPrecent}%; text-align: center;">
+										      	${engineerMatchingPrecent}%
 										    </div>
 									  	</div>
 									</div>
@@ -284,25 +307,25 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_ing">요청자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>0</b>
+												<b> </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_check">요청자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>0</b>
+												<b></b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_ing">기술자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>0</b>
+												<b> </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_check">기술자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>0</b>
+												<b> </b>
 											</h4>
 									</div>
 								</div>
