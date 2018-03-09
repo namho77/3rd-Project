@@ -34,7 +34,7 @@
 						data-toggle="dropdown" href="#">계정설정
 						<span class="glyphicon glyphicon-chevron-down"></span></a>
 						<ul class="dropdown-menu navbar-nav3">
-							<li><a href="${pageContext.request.contextPath}/mypage/myinfo">계정정보</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/myinfo">계정정보</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
 							<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
 						</ul>

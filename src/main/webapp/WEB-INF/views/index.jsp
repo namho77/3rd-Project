@@ -48,7 +48,13 @@
 
 <body id="total-bg">
 	<!-- PRELOADER -->
-	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
+
+<div id="introLoader" class="introloader">
+  <div class="spinner">
+    <div class="spinner-inner"><img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" /></div>
+  </div>
+</div>
+	
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
@@ -96,7 +102,7 @@
 									<li><a href="${pageContext.request.contextPath}/mypage/myplan">마이플랜</a></li>
 									<li><a href="${pageContext.request.contextPath}/message">쪽지함</a></li>
 									<li><a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">프로필</a></li>
-									<li><a href="${pageContext.request.contextPath}/mypage/myinfo">계정정보</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/myinfo">계정정보</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
 									<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
 								</ul>

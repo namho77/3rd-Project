@@ -63,10 +63,13 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  		select count(*) from op_member_auth_mail where auth_key=#{auth_key} and user_id=#{user_id}
  	</select>
  	
+ 	<!-- 이메일 변경 -->
+ 	
  	<update id="updateIsRegisterWithoutPassword">
  		update op_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id}
  	</update>
  	
+ 	<!-- 이메일 인증후 인증 flag 변경 -->
  	<update id="updateIsRegister">
  	
  	update op_member_auth_mail set is_register=#{is_register} where auth_key=#{auth_key} and user_id=#{user_id} and password=#{password}
@@ -94,6 +97,26 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	</select>
 	
 
+	<!-- 나의 정보 수정 -->
+	
+	<update id="updateMyInfo">
+	
+	update op_member
+	set 
+	find_account_answer = #{find_account_answer},
+	find_account_question = #{find_account_question},
+	user_name = #{user_name},
+	gender = #{gender},
+	birthday = #{birthday},
+	address = #{address},
+	allow_mailing = #{allow_mailing},
+	allow_message = #{allow_message},
+	mobile = #{mobile},
+	birthday = #{birthday},
+	
+	where user_id = #{user_id}
+	</update>
+
 	
 	<!-- 프로필 사진 업데이트 -->
 	<update id="uploadPicture">
@@ -102,7 +125,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	where user_id = #{user_id}
 	</update>
 	
-	<!-- 회원 기본 정보 수정 -->
+	<!-- 회원 프로필 정보 수정 -->
 	<update id="updateDefaultProfile">
 	update op_member
 	set 
@@ -159,12 +182,18 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	</select>
  	
  	<!-- 사용자 아이디로 프로필 사진 경로 가져오기  -->
-	<select id="selectProfileByUserId" resultType = "MemberVO">
-	select *		 
+	<select id="selectProfileImgByUserId" resultType = "MemberVO">
+	select profile_img_path	 
 	from op_member
 	where user_id = #{user_id}
 	</select>	
 	
+	<select id="getUserInfoById" resultType="MemberVO">
+ 	select *		 
+	from op_member
+	where user_id = #{user_id}
+ 	</select>
+ 	
  	
  	<!-- 회원탈퇴 -->
  	<delete id="deleteMember">

@@ -1,3 +1,4 @@
+<%@page import="com.cafe24.ourplanners.member.domain.MemberVO"%>
 <%@page import="com.cafe24.ourplanners.member.dto.LoginDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
@@ -10,10 +11,16 @@
 	if (request.getProtocol().equals("HTTP/1.1"))
 		response.setHeader("Cache-Control", "no-cache");
 %>
-<%
-	//if ((request.getAttribute("loginUserInfo") == null) || (request.getAttribute("isAdmin"))=="N" && (request.getAttribute("isMatchedPass") != "Y"))
-	//	request.getRequestDispatcher("/mypage/myinfo").forward(request, response);
-%>
+
+
+
+<%--
+//로그인이 안된 경우나 비밀번호가 틀린 경우 관리자 계정이 아닌 경우 정보보기 페이지로 포워딩
+ if (session == null || request.getAttribute("userInfo") == null || ((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("N") && (request.getAttribute("isMatchedPass") != "Y")) 	
+		request.getRequestDispatcher("/member/myinfo").forward(request, response);
+ 
+ 
+ --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,17 +51,20 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
 $(document).ready(function(){
 	
 	//옵션 순서값으로 선택 (인덱스 0부터)
-	//$("#find_account_question option:eq(${loginUserInfo.find_account_question}+1)").prop("selected", true);
+	//$("#find_account_question option:eq(${userInfo.find_account_question}+1)").prop("selected", true);
 	
 	//밸류값으로 선택
-	$("#find_account_question").val("${loginUserInfo.find_account_question}").prop("selected", true);
+	$("#find_account_question").val("${userInfo.find_account_question}").prop("selected", true);
 	
 	//성별 선택하기 jstl 말고 jquery로 하는법
-	//$('input:radio[name=gender]:input[value='${loginUserInfo.gender}']').attr("checked", true);
+	//$('input:radio[name=gender]:input[value='${userInfo.gender}']').attr("checked", true);
 	
 	//선택된 라디오 값 가져오기
 	//var genderType = $(":input:radio[name=gender]:checked").val();
@@ -141,13 +151,10 @@ function postOpen() {
 	new daum.Postcode({
 		oncomplete : function(data) {
 			var f = document.modifyFrm;
-			f.postcode.value = data.zonecode;
-			f.address1.value = data.address;
-			f.sido.value = data.sido;
-			f.sigungu.value = data.sigungu;
-
-			f.address2.focus();
-
+			
+			f.address.value = data.sido +" "+data.sigungu;
+			
+			
 
 		}
 	}).open();
@@ -352,203 +359,223 @@ function isNumeric(num, opt){
 </head>
 
 <body>
+
+	<c:choose>
+
+		<c:when test="${empty userInfo || (loginUserInfo.is_admin!='Y' && isMatchedPass!='Y')}">
+
+		<script>
+	alert("저장된값 없어요.");
+			location.href='${pageContext.request.contextPath}/member/myinfo';
+		</script>
+
+		</c:when>
+
+		<c:otherwise>
+
+		</c:otherwise>
+	</c:choose>
+
 	<!-- PRELOADER -->
 	<img id="preloader" src="${pageContext.request.contextPath}/resources/images/preloader.gif" alt="" />
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
-	
-	<!-- Top영역 1첫번째 -->
-	<div class="row">
-		<%@ include file="../common/commonTop_1.jsp"%>
-	</div>
-	<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
-	<div class="row">
-		<%@ include file="../common/commonTop_2_mypage.jsp"%>
-	</div>
 
-	<!-- Body영역 -->
-	<div class="row" id="row-body-my-profile">
-		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
-		<div class="col-lg-8 col-sm-10 col-xs-12">
-			<!-- 서브메뉴부분 -->
-			<div class="col-xs-2" id="profile-menu">
-				<h3>계정설정</h3>
-				<a href="${pageContext.request.contextPath}/mypage/myinfo"><p>계정정보</p></a>
-				<a href="#"><p>인증정보</p></a>
-				<a href="#"><p>알림설정</p></a>
-				<a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a>
-				<a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
-			</div>
-			<!-- 기본정보부분 -->
-			<form class="form-horizontal" name="modifyFrm" method="post" action="" onsubmit="return checkForm(this);">
-			<div class="col-xs-10" id="profile-info">
-				<h4>기본정보</h4>
-				<input type="hidden" name="action" value="complete">
-				<table>
-					<tr class="mini-title">
-						<!-- 프로필이미지 -->
-						<td rowspan="17" class="image-area" align="center">
-							<c:choose>
-	
-								<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
-								
-								<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" class="profile-image" />
-								
-								</c:when>
-						
-								<c:otherwise>
-								
-								<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" />
-						
-								</c:otherwise>
-							</c:choose>
-							
-							<input id="thumbnail_upload" name="profile_img_path" type="file" style="display: none;">
-							<div class="margin-top-20">
-								<label id="profilePictureBtn"
-									class="label-margin-none btn btn-default btn-sm width-100px border-888"
-									for="thumbnail_upload"> 이미지 등록 </label>
-							</div>
-						</td>
-						<td colspan="4"><span class="info-title">아이디</span></td>
-					</tr>
-					<tr>
-						<td colspan="4"><input type="text" class="form-control"
-							placeholder="${loginUserInfo.user_id}" disabled="disabled" /></td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="4"><span class="info-title">비밀번호찾기 질문/답변</span></td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<select name="find_account_question" id="find_account_question" class="form-control" style="margin: 0px 0px 8px; display: block;">
-								<option value="1">다른 이메일 주소는?</option>
-								<option value="2">나의 보물 1호는?</option>
-								<option value="3">나의 출신 초등학교는?</option>
-								<option value="4">나의 출신 고향은?</option>
-								<option value="5">나의 이상형은?</option>
-								<option value="6">어머니 성함은?</option>
-								<option value="7">아버지 성함은?</option>
-								<option value="8">가장 좋아하는 색깔은?</option>
-								<option value="9">가장 좋아하는 음식은?</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<input class="form-control" name="find_account_answer" title="비밀번호 찾기 답변" 
-							id="find_account_answer" placeholder="비밀번호 찾기 답변" type="text" data-rule-required="true" 
-							value="${loginUserInfo.find_account_answer}">
-						</td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="2">
-							<span class="info-title">이름</span>
-						</td>
-						<td colspan="2" style="float: right;">
-							<span class="info-title">
-							성별 : 
-							<c:choose>
-								<c:when test="${loginUserInfo.gender == 'M' }">
-									<label><input type="radio" name="gender" value="M" checked="checked" /> 남</label>
-									<label><input type="radio" name="gender" value="W" /> 여</label>
-								</c:when>
-								<c:otherwise>
-									<label><input type="radio" name="gender" value="M" /> 남</label>
-									<label><input type="radio" name="gender" value="W" checked="checked" /> 여</label>
-								</c:otherwise>
-							</c:choose>
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4"><input class="form-control" id="user_name" name="user_name" type="text" 
-						data-rule-required="true" value="${loginUserInfo.user_name}" /></td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="4"><span class="info-title">생년월일</span></td>
-					</tr>
-					<tr>
-						<td colspan="4"><input class="form-control" name="birthday" type="date" step="1" 
-						value="${loginUserInfo.birthday}" /></td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="4"><span class="info-title">지역</span></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input class="form-control" type="text" name="address" size="20" value="${loginUserInfo.address}" />						
-						</td>
-						<td colspan="2">
-							<input class="btnType1 form-control" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />		
-						</td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="4"><span class="info-title">이메일</span></td>
-					</tr>
-					<tr>
-								
-						<td colspan="2"><input type="text" class="form-control" id="email"
-							placeholder="${loginUserInfo.email_address}" disabled="disabled"/></td>
-						<td colspan="2">
-							<button type="button" class="form-control" onclick="openPopChangeEmail();">이메일 변경</button>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							이메일수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.
-						</td>
-						<td colspan="2" style="float: right;">
-							<c:choose>
-								<c:when test="${loginUserInfo.allow_mailing == 'Y' }">
-									<label><input type="radio" name="allow_mailing" value="Y" checked="checked"/> 예 </label>&nbsp;&nbsp;
-									<label><input type="radio" name="allow_mailing" value="N" /> 아니오</label>
-								</c:when>
-								<c:otherwise>
-									<label><input type="radio" name="allow_mailing" value="Y" /> 예 </label>
-									<label><input type="radio" name="allow_mailing" value="N" checked="checked"/> 아니오 </label>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr  class="mini-title">
-						<td colspan="4"><span class="info-title">연락처</span></td>
-					</tr>
-					<tr>
-						<td colspan="4"><input type="text" name="mobile" class="form-control" value="${loginUserInfo.mobile}" maxlength="11">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							메시지수신동의 시에 기본서비스(할인혜택과 이벤트 등의 소식 안내)를 받아보실수 있습니다.
-						</td>
-						<td colspan="2" style="float: right;">
-							<c:choose>
-								<c:when test="${loginUserInfo.allow_message == 'Y' }">
-									<label><input type="radio" name="allow_message" value="Y" checked="checked"/> 예</label>&nbsp;&nbsp;
-									<label><input type="radio" name="allow_message" value="N" /> 아니오</label>
-								</c:when>
-								<c:otherwise>
-									<label><input type="radio" name="allow_message" value="Y" /> 예</label>
-									<label><input type="radio" name="allow_message" value="N" checked="checked"/> 아니오</label>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- 버튼부분 -->
-			<div class="myinfo-edit-btn">
-				<button type="submit" class="btn btn-success">수정완료</button>
-			</div>
-			</form>
+		<!-- Top영역 1첫번째 -->
+		<div class="row">
+			<%@ include file="../common/commonTop_1.jsp"%>
 		</div>
-		<div class="col-lg-2 col-sm-1 col-xs-0"></div>
-	</div>
-	<!-- Body영역 -->
-	
-	<!-- 테스트 후 문제 없을시 삭제요망 -->
-	<%-- 기존에 세창이형이 작업한 코드 (문제없을시 삭제요망)
+		<!-- Top영역 2첫번째  (마이페이지부분의 탑2 적용)-->
+		<div class="row">
+			<%@ include file="../common/commonTop_2_mypage.jsp"%>
+		</div>
+
+		<!-- Body영역 -->
+		<div class="row" id="row-body-my-profile">
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-8 col-sm-10 col-xs-12">
+				<!-- 서브메뉴부분 -->
+				<div class="col-xs-2" id="profile-menu">
+					<h3>계정설정</h3>
+					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a> <a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
+				</div>
+				<!-- 기본정보부분 -->
+				<form class="form-horizontal" name="modifyFrm" method="post" action="" onsubmit="return checkForm(this);">
+					<div class="col-xs-10" id="profile-info">
+						<h4>기본정보</h4>
+						<input type="hidden" name="action" value="complete">
+						<table>
+							<tr class="mini-title">
+								<!-- 프로필이미지 -->
+								<td rowspan="17" class="image-area" align="center">
+									<c:choose>
+
+										<c:when test="${(not empty userInfo) && userInfo.profile_img_path!=''}">
+
+											<img src="${pageContext.request.contextPath}/resources/upload/member/${userInfo.member_srl}/profile/${userInfo.profile_img_path}" class="profile-image" />
+
+										</c:when>
+
+										<c:otherwise>
+
+											<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" />
+
+										</c:otherwise>
+									</c:choose>
+
+									<input id="thumbnail_upload" name="profile_img_path" type="file" style="display: none;">
+									<div class="margin-top-20">
+										<label id="profilePictureBtn" class="label-margin-none btn btn-default btn-sm width-100px border-888" for="thumbnail_upload"> 이미지 등록 </label>
+									</div>
+								</td>
+								<td colspan="4">
+									<span class="info-title">아이디</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input type="text" class="form-control" placeholder="${userInfo.user_id}" disabled="disabled" />
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="4">
+									<span class="info-title">비밀번호찾기 질문/답변</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<select name="find_account_question" id="find_account_question" class="form-control" style="margin: 0px 0px 8px; display: block;">
+										<option value="1">다른 이메일 주소는?</option>
+										<option value="2">나의 보물 1호는?</option>
+										<option value="3">나의 출신 초등학교는?</option>
+										<option value="4">나의 출신 고향은?</option>
+										<option value="5">나의 이상형은?</option>
+										<option value="6">어머니 성함은?</option>
+										<option value="7">아버지 성함은?</option>
+										<option value="8">가장 좋아하는 색깔은?</option>
+										<option value="9">가장 좋아하는 음식은?</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input class="form-control" name="find_account_answer" title="비밀번호 찾기 답변" id="find_account_answer" placeholder="비밀번호 찾기 답변" type="text" data-rule-required="true" value="${userInfo.find_account_answer}">
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="2">
+									<span class="info-title">이름</span>
+								</td>
+								<td colspan="2" style="float: right;">
+									<span class="info-title"> 성별 : <c:choose>
+											<c:when test="${userInfo.gender == 'M' }">
+												<label><input type="radio" name="gender" value="M" checked="checked" /> 남</label>
+												<label><input type="radio" name="gender" value="W" /> 여</label>
+											</c:when>
+											<c:otherwise>
+												<label><input type="radio" name="gender" value="M" /> 남</label>
+												<label><input type="radio" name="gender" value="W" checked="checked" /> 여</label>
+											</c:otherwise>
+										</c:choose>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input class="form-control" id="user_name" name="user_name" type="text" data-rule-required="true" value="${userInfo.user_name}" />
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="4">
+									<span class="info-title">생년월일</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input class="form-control" name="birthday" type="date" step="1" value="${userInfo.birthday}" />
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="4">
+									<span class="info-title">지역</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input class="form-control" type="text" name="address" size="20" value="${userInfo.address}" />
+								</td>
+								<td colspan="2">
+									<input class="btnType1 form-control" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="4">
+									<span class="info-title">이메일</span>
+								</td>
+							</tr>
+							<tr>
+
+								<td colspan="2">
+									<input type="text" class="form-control" id="email" placeholder="${userInfo.email_address}" disabled="disabled" />
+								</td>
+								<td colspan="2">
+									<button type="button" class="form-control" onclick="openPopChangeEmail();">이메일 변경</button>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">이메일수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.</td>
+								<td colspan="2" style="float: right;">
+									<c:choose>
+										<c:when test="${userInfo.allow_mailing == 'Y' }">
+											<label><input type="radio" name="allow_mailing" value="Y" checked="checked" /> 예 </label>&nbsp;&nbsp;
+									<label><input type="radio" name="allow_mailing" value="N" /> 아니오</label>
+										</c:when>
+										<c:otherwise>
+											<label><input type="radio" name="allow_mailing" value="Y" /> 예 </label>
+											<label><input type="radio" name="allow_mailing" value="N" checked="checked" /> 아니오 </label>
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+							<tr class="mini-title">
+								<td colspan="4">
+									<span class="info-title">연락처</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<input type="text" name="mobile" class="form-control" value="${userInfo.mobile}" maxlength="11">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">메시지수신동의 시에 기본서비스(할인혜택과 이벤트 등의 소식 안내)를 받아보실수 있습니다.</td>
+								<td colspan="2" style="float: right;">
+									<c:choose>
+										<c:when test="${userInfo.allow_message == 'Y' }">
+											<label><input type="radio" name="allow_message" value="Y" checked="checked" /> 예</label>&nbsp;&nbsp;
+									<label><input type="radio" name="allow_message" value="N" /> 아니오</label>
+										</c:when>
+										<c:otherwise>
+											<label><input type="radio" name="allow_message" value="Y" /> 예</label>
+											<label><input type="radio" name="allow_message" value="N" checked="checked" /> 아니오</label>
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 버튼부분 -->
+					<div class="myinfo-edit-btn">
+						<button type="submit" class="btn btn-success">수정완료</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+		</div>
+		<!-- Body영역 -->
+
+		<!-- 테스트 후 문제 없을시 삭제요망 -->
+		<%-- 기존에 세창이형이 작업한 코드 (문제없을시 삭제요망)
 	<!-- HOME -->
 	<section id="main" class="section">
 		<!-- CONTAINER -->
@@ -575,7 +602,7 @@ function isNumeric(num, opt){
 
 					<div class="row ">
 						<div class="col-lg-offset-2 col-lg-4 text-center">아이디</div>
-						<div class="col-lg-4 text-left">${loginUserInfo.user_id}</div>
+						<div class="col-lg-4 text-left">${userInfo.user_id}</div>
 					</div>
 
 					<div class="form-group">
@@ -597,14 +624,14 @@ function isNumeric(num, opt){
 
 						<div class="col-lg-offset-2 col-lg-4 text-center">비밀번호 찾기 답변</div>
 						<div class="col-lg-4 text-left">
-							<input class="form-control" name="find_account_answer" title="비밀번호 찾기 답변" id="find_account_answer" placeholder="비밀번호 찾기 답변" type="text" data-rule-required="true" value="${loginUserInfo.find_account_answer}">
+							<input class="form-control" name="find_account_answer" title="비밀번호 찾기 답변" id="find_account_answer" placeholder="비밀번호 찾기 답변" type="text" data-rule-required="true" value="${userInfo.find_account_answer}">
 						</div>
 					</div>
 
 					<div class="form-group" id="divUsername">
 						<div class="col-lg-offset-2 col-lg-4 text-center">이름</div>
 						<div class="col-lg-4 text-left">
-							<input class="form-control" id="user_name" name="user_name" type="text" data-rule-required="true" value="${loginUserInfo.user_name}" />
+							<input class="form-control" id="user_name" name="user_name" type="text" data-rule-required="true" value="${userInfo.user_name}" />
 						</div>
 					</div>
 
@@ -613,7 +640,7 @@ function isNumeric(num, opt){
 						<div class="col-lg-4 text-left">
 
 							<c:choose>
-								<c:when test="${loginUserInfo.gender == 'M' }">
+								<c:when test="${userInfo.gender == 'M' }">
 									<label><input type="radio" name="gender" value="M" checked="checked" /> 남성</label>
 									<label><input type="radio" name="gender" value="W" /> 여성</label>
 
@@ -633,7 +660,7 @@ function isNumeric(num, opt){
 						<div class="col-lg-offset-2 col-lg-4 text-center">생년월일</div>
 						<div class="col-lg-4 text-left">
 
-							<input class="text-center" name="birthday" type="date" step="1" value="${loginUserInfo.birthday}" />
+							<input class="text-center" name="birthday" type="date" step="1" value="${userInfo.birthday}" />
 
 						</div>
 
@@ -645,7 +672,7 @@ function isNumeric(num, opt){
 						<div class="col-lg-offset-2 col-lg-4 text-center">주소</div>
 
 						<div class="col-lg-2 ">
-							<input type="text" name="address" size="20" value="${loginUserInfo.address}" />
+							<input type="text" name="address" size="20" value="${userInfo.address}" />
 						</div>
 						<div class="col-lg-2 ">
 							<input class="btnType1" type="button" style="margin-right: 10px" value="주소 검색" onclick="postOpen();" />
@@ -661,7 +688,7 @@ function isNumeric(num, opt){
 					<div class="row">
 						<div class="col-lg-offset-2 col-lg-4 text-center">이메일</div>
 						<div class="col-lg-4 text-left">
-							<span class="text-left" id="email">${loginUserInfo.email_address}</span>&nbsp;&nbsp;
+							<span class="text-left" id="email">${userInfo.email_address}</span>&nbsp;&nbsp;
 							<button type="button" class="btn btn-info btn-xs" onclick="openPopChangeEmail();">변경</button>
 						</div>
 						<div class="col-lg-offset-2 col-lg-4 text-center">SMS 수신동의</div>
@@ -669,7 +696,7 @@ function isNumeric(num, opt){
 							수신동의 거부 시에도 기본서비스(주문배송 메일)는 발송됩니다.
 
 							<c:choose>
-								<c:when test="${loginUserInfo.allow_mailing == 'Y' }">
+								<c:when test="${userInfo.allow_mailing == 'Y' }">
 									<label><input type="radio" name="allow_mailing" value="Y" checked="checked" /> 예</label>
 									<label><input type="radio" name="allow_mailing" value="N" /> 아니오</label>
 
@@ -686,14 +713,14 @@ function isNumeric(num, opt){
 					<div class="row">
 						<div class="col-lg-offset-2 col-lg-4 text-center">휴대전화</div>
 						<div class="col-lg-4 text-left">
-							<input type="text" name="mobile" value="${loginUserInfo.mobile}" maxlength="11">
+							<input type="text" name="mobile" value="${userInfo.mobile}" maxlength="11">
 						</div>
 
 						<div class="col-lg-offset-2 col-lg-4 text-center">SMS 수신동의</div>
 						<div class="col-lg-4 text-left">
 							할인혜택과 이벤트 등의 소식 안내를 SMS로 받으실 수 있습니다.<br /> 수신동의 거부 시에도 기본서비스는 발송됩니다.
 							<c:choose>
-								<c:when test="${loginUserInfo.allow_message == 'Y' }">
+								<c:when test="${userInfo.allow_message == 'Y' }">
 									<label><input type="radio" name="allow_message" value="Y" checked="checked" /> 예</label>
 									<label><input type="radio" name="allow_message" value="N" /> 아니오</label>
 
@@ -718,15 +745,15 @@ function isNumeric(num, opt){
 		<!-- //CONTAINER -->
 	</section>
 	<!-- //HOME --> --%>
-	<!-- 테스트 후 문제 없을시 삭제요망 -->
+		<!-- 테스트 후 문제 없을시 삭제요망 -->
 
-	<!-- 모달창 -->
-	<%@ include file="../common/modal_msg.jsp"%>
-	<!-- //모달창 끝 -->
+		<!-- 모달창 -->
+		<%@ include file="../common/modal_msg.jsp"%>
+		<!-- //모달창 끝 -->
 
-	<!-- Footer section(하단부분) -->
-	<%@ include file="../common/commonBottom.jsp"%>
-	<!-- Footer section(하단부분) -->
+		<!-- Footer section(하단부분) -->
+		<%@ include file="../common/commonBottom.jsp"%>
+		<!-- Footer section(하단부분) -->
 	</div>
 </body>
 </html>

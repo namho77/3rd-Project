@@ -85,7 +85,7 @@
 							<br />
 							<br />
 						</c:if>
-						<form name="passwordFrm" method="post" action="<c:url value="/mypage/myinfo"/>" onsubmit="return checkPassword(this);">
+						<form name="passwordFrm" method="post" action="<c:url value="/member/myinfo"/>" onsubmit="return checkPassword(this);">
 
 							<input type="hidden" name="action" value="modify" />
 							<table class="table table-bordered">

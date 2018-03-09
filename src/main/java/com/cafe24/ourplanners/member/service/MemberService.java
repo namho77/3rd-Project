@@ -41,6 +41,8 @@ public interface MemberService {
 	public void hasEmail(HttpServletRequest req, HashMap<String, Object> map);
 
 	public void updateEmail(String user_id, String email_address);
+
+	public void updateMyInfo(HttpServletRequest req, Model model, ModelAndView mv);
 	
 	
 }
