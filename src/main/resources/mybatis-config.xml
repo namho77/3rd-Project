@@ -9,6 +9,7 @@
     <package name="com.cafe24.ourplanners.board.domain"/>
     <package name="com.cafe24.ourplanners.faq.domain"/>
     <package name="com.cafe24.ourplanners.notice.domain"/>
+    <package name="com.cafe24.ourplanners.message.domain"/>
   </typeAliases>
 
 
