@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,29 +36,7 @@ public class MyPageController {
 		logger.info("마이 페이지 - 마이 플랜");
 		return "mypage/myplan";
 	}
-	
-	//나의 정보보기
-	@RequestMapping(value = "mypage/myinfo", method = RequestMethod.GET)
-	public String viewMyInfo(Model model, HttpServletRequest req,
-			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("마이 페이지 - 나의 정보 보기(의뢰인시점/기술자시점)");
-		return "mypage/myinfo";
-	}
-	
-	//나의 정보 수정
-	@RequestMapping(value = "mypage/myinfo", method = RequestMethod.POST)
-	public String modifyMyInfo(Model model, HttpServletRequest req,
-			@RequestParam(required = false, defaultValue = "") String type) {
-		logger.info("마이 페이지 - 나의 정보 보기(의뢰인시점/기술자시점)");
 
-		String action = req.getParameter("action");
-		
-		//if(action.equalsIgnoreCase("password"))
-		//return "mypage/myinfo_modify_confirm_password";
-		//else
-		return "mypage/myinfo_modify";
-	}
-	
 	
 	//상대방(또는 자신) 서비스 프로필 보기
 	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)

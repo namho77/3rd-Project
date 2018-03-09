@@ -34,11 +34,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		if(request.getMethod().equals("GET")) {
-			System.out.println("로그인 필요한 페이지 prev_url : " + (uri + query));
 			logger.info("로그인 필요한 페이지 prev_url : " + (uri + query));
-			
-			//referer_FullContextURL = "http://" + req.getServerName() + ":" + req.getServerPort() + contextPath;
-			
+			//referer_FullContextURL = "http://" + req.getServerName() + ":" + req.getServerPort() + contextPath;			
 			request.getSession().setAttribute("auth_prev_url", "http://" + request.getServerName() + ":" + request.getServerPort()+uri + query);
 		}
 	}
@@ -51,20 +48,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		
 		if(session.getAttribute("loginUserInfo")==null) {
 			logger.info("로그인이 필요한 페이지 입니다.현재 로그인된 사용자 없음");
-			System.out.println("로그인이 필요한 페이지 입니다.현재 로그인된 사용자 없음");
 			savePrevURL(request);
 			
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			
 			if(loginCookie != null) {
-				System.out.println("로그인 쿠키 널 아님");
-				System.out.println(loginCookie.getValue());
 				MemberVO vo = service.checkLoginBefore(loginCookie.getValue());
 				
 				logger.info("MemberVO : " + vo);
 				
 				if(vo != null) {
-					System.out.println("DB에 유효한 로그인 정보 존재");
 					session.setAttribute("loginUserInfo", vo);
 					return true;
 				}
