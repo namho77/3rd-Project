@@ -19,4 +19,6 @@ public interface SearchDAO {
 	public List<BoardVO> getServiceListSearch(SearchServiceBoardCriteria scri);
 
 	public int insertWordCloud(SearchServiceBoardCriteria scri);
+
+	public int getTotalServiceCount(SearchServiceBoardCriteria scri);
 }

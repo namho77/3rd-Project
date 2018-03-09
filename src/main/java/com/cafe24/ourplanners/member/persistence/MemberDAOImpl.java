@@ -225,7 +225,14 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public int updateMyInfo(MemberVO userInfo) {
-		return sqlSession.update(namespace+".updateDefaultInfo", userInfo);
+		return sqlSession.update(namespace+".updateMyInfo", userInfo);
+	}
+
+
+	@Override
+	public int getMemberSrlById(int user_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getMemberSrlById", user_id);
 	}
 
 

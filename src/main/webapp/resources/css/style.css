@@ -2027,6 +2027,23 @@
 	padding-right: 45px !important;
 }
 
+
+.tags a, .blog-item .tags a, .footer-widget .tags a {
+    display: inline-block;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    border-radius: 1px;
+    background-color: #22aba6;
+    font-size: 12px!important;
+    line-height: 1.4em!important;
+    color: #fcfcfc;
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 1px;
+    -webkit-transition: all .7s linear;
+    transition: all .7s linear;
+}
+
 /*
 핫 게시물
 */

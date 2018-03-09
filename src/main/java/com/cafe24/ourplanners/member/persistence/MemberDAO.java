@@ -56,4 +56,6 @@ public interface MemberDAO {
 
 	public int updateMyInfo(MemberVO userInfo);
 	
+	public int getMemberSrlById(int user_id);
+	
 }

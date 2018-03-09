@@ -35,7 +35,7 @@ public class FAQServiceImpl implements FAQService {
 			list.setContents(list.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\"", "\""));
 			//줄바꿈 처리
 			//list.setContents(list.getContents().replaceAll("\r\n", "<br/>"));
-			list.setContents(list.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
+			//list.setContents(list.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
 		}
 	
 		
@@ -70,9 +70,9 @@ public class FAQServiceImpl implements FAQService {
 
 	@Override
 	public int modifyFAQ(FAQVO vo) {
-
 		
 		return dao.modifyFAQ(vo);
+		
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class FAQServiceImpl implements FAQService {
 		vo.setContents(vo.getContents().replaceAll("'", "\"").replaceAll("’", "\"").replaceAll("‘", "\"").replaceAll("\"", "\""));
 		//줄바꿈 처리
 		//vo.setContents(vo.getContents().replaceAll("\r\n", "<br/>"));
-		vo.setContents(vo.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
+		//vo.setContents(vo.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
 		model.addAttribute("faqVO", vo);
 	}
 	
