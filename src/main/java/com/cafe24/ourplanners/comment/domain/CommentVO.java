@@ -1,27 +1,26 @@
-package com.cafe24.ourplanners.board.domain;
+package com.cafe24.ourplanners.comment.domain;
 
 import java.sql.Date;
 
-public class ReplyVO {
-	
+public class CommentVO {
 	private int comment_srl;
 	private int parent_board_srl;
 	private String user_id;
-	private String contents;
+	private String comments;
 	private Date postdate;
 	private int parent_comment_srl;
 	private int step;
 	private int indent;
 	private Date last_update;
 	
-	public ReplyVO() {}
+	public CommentVO() {}
 	
-	public ReplyVO(int comment_srl, int parent_board_srl, String user_id, String contents, Date postdate,
+	public CommentVO(int comment_srl, int parent_board_srl, String user_id, String comments, Date postdate,
 			int parent_comment_srl, int step, int indent, Date last_update) {
 		this.comment_srl = comment_srl;
 		this.parent_board_srl = parent_board_srl;
 		this.user_id = user_id;
-		this.contents = contents;
+		this.comments = comments;
 		this.postdate = postdate;
 		this.parent_comment_srl = parent_comment_srl;
 		this.step = step;
@@ -46,11 +45,11 @@ public class ReplyVO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getContents() {
-		return contents;
+	public String getcomments() {
+		return comments;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setcomments(String comments) {
+		this.comments = comments;
 	}
 	public Date getPostdate() {
 		return postdate;
@@ -82,6 +81,4 @@ public class ReplyVO {
 	public void setLast_update(Date last_update) {
 		this.last_update = last_update;
 	}
-	
-	
 }

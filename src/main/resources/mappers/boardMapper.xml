@@ -6,7 +6,109 @@
 
  <mapper namespace="com.kosmo.mapper.BoardMapper">
  	
- 	<select id="getTotalCount" resultType="int">
+	<sql id="search">
+		<choose>
+			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">
+
+			</when>
+			<otherwise>
+				<if test="searchType == 't'.toString()">
+					and title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'c'.toString()">
+					and contents like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				
+				<if test="searchType == 'tc'.toString()">
+					and ( title like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%') OR contents like
+					CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%'))
+				</if>
+			</otherwise>
+		</choose>
+	</sql>
+ 	
+	<select id="getBoardListJson" resultType="BoardVO">
+		<![CDATA[  
+			SELECT * FROM 
+				(SELECT Tb.*, rownum rNum FROM 
+					(SELECT * FROM op_board where board_srl > 0 
+		]]>
+
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="subcategory_srl == null or subcategory_srl == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+  
+		<![CDATA[    
+		  ORDER BY board_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+		]]>
+
+	</select>
+ 	
+	<select id="getTotalCount" resultType="Integer">
+	
+		<![CDATA[  
+			select count(*) from op_board
+			  where board_srl > 0 
+		]]>
+	
+		<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+	
+		<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="subcategory_srl == null or subcategory_srl == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+		<include refid="search"></include>
+	</select>
+ 	
+ 	
+ 	
+ 	
+ 	<select id="getTotalCount1" resultType="int">
 		SELECT COUNT(*) FROM op_board
 	</select>
 	

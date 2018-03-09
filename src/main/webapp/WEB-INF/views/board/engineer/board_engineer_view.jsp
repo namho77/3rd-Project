@@ -9,6 +9,10 @@ $(document).ready(function(){
 		location.href = "./engineer";
 	});
 	
+	var srl = ${view.board_srl};
+	
+	getListComment(1, srl);
+	
 	/* var url = "./reply/list/"+${view.board_srl};
 	
 	$.ajax({
@@ -34,7 +38,7 @@ function listGO(){
 //수정폼 가져오기
 function modify(board_srl) {
 	
-	var url = "./engineer/modify/"+board_srl;
+	var url = "${pageContext.request.contextPath}/board/engineer/modify/"+board_srl;
 	
 	$.ajax({
 		
@@ -43,7 +47,7 @@ function modify(board_srl) {
 		dataType : "html",
 		contentType : "text/html; charset=UTF-8",
 		success : function(d){
-			$("#boardHTML").html(d);
+			$("#row-body-view").html(d);
 		},
 		error : function(e){
 			alert("요청 실패 : "+ e.status+":"+e.statusText);
@@ -54,7 +58,7 @@ function modify(board_srl) {
 //삭제하기
 function deleteBoard(board_srl){
 	if(confirm("삭제 하시겠습니까?")){
-		var url = "engineer/delete/"+board_srl;
+		var url = "${pageContext.request.contextPath}/board/engineer/delete/"+board_srl;
 		
 		$.ajax({
 			url : url,
@@ -71,6 +75,65 @@ function deleteBoard(board_srl){
 		});
 	}
 }
+
+//리스트 가져오기
+function getListComment(nowPage, parent_board_srl) {
+	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+	//service_srl = typeof service_srl !== 'undefined' ? service_srl : 1;
+
+	var url = "${pageContext.request.contextPath}/board/engineer/comment/json/comment_list.json";
+	var inHTML = "";
+
+	var inHTMLPaging = "";
+	$("#commentList").empty();
+	var params = "parent_board_srl=" + parent_board_srl + "&nowPage=" + nowPage;
+	$.ajax({
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			$.each(data.commentLists, function(index, commentList) { // each로 모든 데이터 가져와서 items 배열에 넣고
+
+				inHTML += "<div class=\"table-responsive\">";
+				inHTML += "		<table class=\"table table-hover\" id=\"table-hover\">";
+				inHTML += "			<thead>";
+				inHTML += "			<tr class=\"success\">";
+				inHTML += "				<th>아이디</th>";
+				inHTML += "				<th colspan=\"2\">채택내용</th>";
+				inHTML += "			</tr>";
+				inHTML += "			</thead>";
+				
+				inHTML += "			<tbody>";
+				inHTML += "			<tr>";
+				inHTML += "				<td>"+ commentList.user_id +"</td>";
+				inHTML += "				<td>"+ commentList.comments +"</td>";
+				inHTML += "				<td>";
+				inHTML += "					<button type=\"button\" class=\"btn btn-default\" id=\"btn-select\">채택하기</button>";
+				inHTML += "				</td>";
+				inHTML += "			</tr>";
+				inHTML += "			</tbody>";
+				inHTML += "		</table>";
+				inHTML += "</div>";
+
+			});//each끝
+			inHTML += "<div class=\"row text-center\">";
+			inHTML += "<ul class=\"pagination\" id=\"CommentPagingDiv\">";
+			inHTML += "</ul> </div>";
+			inHTML += "		</div>";
+			inHTML += "		</div>";
+			$("#CommentList").html(inHTML);
+			$("#CommentPagingDiv").html(data.pagingDiv);
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+}
+
+
 </script>
 	<!-- Body영역 -->
 	<div class="row" id="row-body-view">
@@ -151,8 +214,8 @@ function deleteBoard(board_srl){
 						<div id="home" class="tab-pane fade in active">
 							<div class="write-comment">
 								
-								<div id="replyList">
-									<div class="table-responsive">
+								<div id="commentList">
+									<%-- <div class="table-responsive">
 										<table class="table table-hover" id="table-hover">
 											<thead>
 												<tr class="success">
@@ -173,9 +236,9 @@ function deleteBoard(board_srl){
 											</c:forEach>	
 											</tbody>
 										</table>
-									</div>
+									</div> --%>
 								</div>
-								<div class="container-fluid" align="center">
+								<!-- <div class="container-fluid" align="center">
 									<div class="pagination">
 										<ul class="pagination pagination" id="pagination-ul">
 											<li><a href="#"><span
@@ -193,7 +256,7 @@ function deleteBoard(board_srl){
 													class="glyphicon glyphicon-forward"></span></a></li>
 										</ul>
 									</div>
-								</div>
+								</div> -->
 								<div class="view-comment-write">
 									<div class="form-inline">
 										<textarea class="form-control" placeholder="채택요청을 입력하세요"></textarea>
@@ -227,7 +290,7 @@ function deleteBoard(board_srl){
 										</tbody>
 									</table>
 								</div>
-								<div class="container-fluid" align="center">
+								<!-- <div class="container-fluid" align="center">
 									<div class="pagination">
 										<ul class="pagination pagination" id="pagination-ul">
 											<li><a href="#"><span
@@ -245,7 +308,7 @@ function deleteBoard(board_srl){
 													class="glyphicon glyphicon-forward"></span></a></li>
 										</ul>
 									</div>
-								</div>
+								</div> -->
 								<div class="view-comment-write">
 									<div class="form-inline">
 										<textarea class="form-control" placeholder="채택요청을 입력하세요"></textarea>

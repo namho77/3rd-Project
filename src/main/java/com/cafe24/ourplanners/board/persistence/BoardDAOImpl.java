@@ -13,6 +13,7 @@ import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 
 @Repository
@@ -29,6 +30,16 @@ public class BoardDAOImpl implements BoardDAO{
 	}*/
 	
 	@Override
+	public List<BoardVO> getBoardListJson(SearchServiceBoardCriteria scri) {
+		return sqlSession.selectList(namespace + ".getBoardListJson", scri);
+	}
+	
+	@Override
+	public int getTotalCount(SearchServiceBoardCriteria scri) {
+		return sqlSession.selectOne(namespace + ".getTotalCount", scri);
+	}
+	
+	@Override
 	public List<BoardVO> listPage(int start, int end) throws Exception {
 		
 		Map<String, Object> paramMap = new HashMap<String ,Object>();
@@ -41,7 +52,7 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	@Override
 	public int getTotalCount() throws Exception {
-		return sqlSession.selectOne(namespace + ".getTotalCount");
+		return sqlSession.selectOne(namespace + ".getTotalCount1");
 	}
 	
 	@Override
@@ -73,95 +84,4 @@ public class BoardDAOImpl implements BoardDAO{
 	public int delete(Integer board_srl) throws Exception {
 		return sqlSession.delete(namespace + ".delete", board_srl); 
 	}
-	
-	
-	
-	
-	
-	@Override
-	public BoardVO read(Integer bno) throws Exception {
-		return sqlSession.selectOne(namespace + ".read", bno);
-	}
-	
-	
-	
-	
-	
-
-	@Override
-	public void update(BoardVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
-	
-
-	@Override
-	public List<BoardVO> listPage(int page) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int countPaging(Criteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void updateReplyCnt(Integer bno, int amount) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateViewCnt(Integer bno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addAttach(String fullName) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<String> getAttach(Integer bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteAttach(Integer bno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void replaceAttach(String fullName, Integer bno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
