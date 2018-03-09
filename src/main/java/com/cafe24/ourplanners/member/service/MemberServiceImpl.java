@@ -641,10 +641,15 @@ public class MemberServiceImpl implements MemberService {
 			//업데이트 실행
 			int affected = dao.updateMyInfo(userInfo);
 			
-			if (affected != 1)
+			if (affected <= 0)
 			{
-				mv.setViewName("member/myinfo");
+				model.addAttribute("layer_msg", "회원 정보 수정에 실패하였습니다.");
+				//mv.setViewName("member/myinfo");
 				
+			}else {
+				//성공한 경우 변경한 내용으로 로그인 정보도 변경
+				model.addAttribute("loginUserInfo", userInfo);
+				model.addAttribute("layer_msg", "회원 정보가 수정 되었습니다.");
 			}
 			
 		}

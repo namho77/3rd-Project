@@ -111,9 +111,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
 	address = #{address},
 	allow_mailing = #{allow_mailing},
 	allow_message = #{allow_message},
-	mobile = #{mobile},
-	birthday = #{birthday},
-	
+	mobile = #{mobile}
 	where user_id = #{user_id}
 	</update>
 
@@ -199,5 +197,11 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	<delete id="deleteMember">
  	DELETE op_member WHERE user_id=#{user_id}
  	</delete>
+ 	
+ 	
+ 	<!-- 아이디로 회원번호 가져오기 -->
+ 	<select id="getMemberSrlById" resultType="String">
+ 		select member_srl from op_member where user_id=#{userid} 
+ 	</select>
  	
  </mapper>

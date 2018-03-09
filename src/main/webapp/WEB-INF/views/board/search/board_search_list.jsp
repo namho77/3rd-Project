@@ -46,14 +46,123 @@
 </script>
 
 <script>
+function servicePaging(nowPage, category_srl, subcategory_srl , board_type,searchType,keyword) {
+	var params = "board_type="+board_type+"&pageSize=6&blockPage=5&keyword="+keyword+"&searchType="+searchType;
+	alert(params);
+	getServiceSearchList(nowPage, category_srl, subcategory_srl , board_type);
+}
+
+function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_type ,searchType,keyword) {
+	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+	
+	board_type = typeof board_type !== 'undefined' ? board_type : "";
+	
+	category_srl = typeof category_srl !== 'undefined' ? category_srl : "";
+	subcategory_srl = typeof subcategory_srl !== 'undefined' ? subcategory_srl : "";
+	
+	searchType = typeof searchType !== 'undefined' ? searchType : "";
+	
+	keyword = typeof keyword !== 'undefined' ? keyword : "";
+	
+	if(category_srl==0)
+	{
+		category_srl="";
+	}
+	if(subcategory_srl==0){
+		subcategory_srl="";
+	}
+	
+	var url = "${pageContext.request.contextPath}/board/json/service_list.json";
+	var serviceMainImgPath = "${pageContext.request.contextPath}/resources/upload/service/";
+	//내용 지우기
+	$("#search_list_div").empty();
+	var params = "board_type="+board_type+"&pageSize=6&blockPage=5&keyword="+keyword+"&searchType="+searchType;
+	//alert(params);
+	$.ajax({
+		cache : false, // 캐시 사용 없애기
+		type : 'post',
+		url : url,
+		data : params,
+		//data : JSON.stringify({ board_type: 'E', pageSize: '3', blockPage: '1'}),
+		//contentType: 'application/json; charset=utf-8',
+		dataType : 'json',
+		//contentType: "application/x-www-form-urlencoded; charset=utf-8",				
+		//dataType: "text",	
+		success : function(data) {
+			//alert(JSON.stringify(data));
+			var items = [];
+			var inHTML = "";
+			$.each(data.searchList, function(index, boardVO) { // each로 모든 데이터 가져와서 items 배열에 넣고
+
+				//if(index==5)
+				//return false; //break; true=>continue
+
+				//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
+
+				if (index == 0) {
+					inHTML += "<div class=\"item active\">";
+				} else {
+					inHTML += "<div class=\"item\">";
+				}
+				inHTML += "<div class=\"col-md-4\">";
+				inHTML += "<div class=\"card card-blog\">";
+				inHTML += "<div class=\"card-image\">";
+				inHTML += "<a href=\"#pablo\"> <img class=\"img img-raised\" src=\""+serviceMainImgPath+boardVO.board_srl+"/images/"+boardVO.main_image+"\">";
+				inHTML += "</a>";
+				inHTML += "<div class=\"colored-shadow\" style=\"background-image: url('" + serviceMainImgPath + boardVO.board_srl + "/images/" + boardVO.main_image + "'); opacity: 1;\"></div>";
+				inHTML += "<div class=\"ripple-container\"></div>";
+				inHTML += "</div>";
+				inHTML += "<div class=\"card-content\">";
+				inHTML += "<h6 class=\"category text-info\">" + boardVO.subcategory_srl + "</h6>";
+				inHTML += "<h4 class=\"card-title\">";
+				inHTML += "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\">" + boardVO.title + "</a>";
+				inHTML += "</h4>";
+				inHTML += "<p class=\"card-description text-left\">";
+				
+				inHTML +="서비스 지역 : " +boardVO.location+"<br/>";
+				inHTML +="서비스 비용 : " +boardVO.service_cost+"<br/>";
+				inHTML +="서비스 기간 : " +boardVO.service_time_start + " ~ " + boardVO.service_time_end+"<br/>";
+			
+			
+				inHTML += "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\"> 자세히 보기 </a>";
+				inHTML += "</p>";
+				inHTML += "</div>";
+				inHTML += "</div>";
+				inHTML += "</div>";
+				inHTML += "</div>";
+
+				//inHTML+="<span><a href='./board/engineer/"+boardVO.board_srl+"?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
+
+				
+			});//each끝
+			if (jQuery.isEmptyObject(data.searchList)) {
+				$('#search_list_div').html("<div class=\"row\">해당 하는 검색 결과가 없습니다.</div>");
+			} else {
+				$('#search_list_div').html(inHTML);
+			}
+
+			$("#search_list_paging_div").html(data.pagingDiv);
+			
+			//alert(inHTML);
+			//$('#hot_engineer_div').html(items);
+
+		},
+
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+
+	});
+}
 
 //TOP 인기 검색어
 	$(document).ready(function() {
 
 		var url = "${pageContext.request.contextPath}/board/json/top_search_list.json";
 
+		var params = "category=${category_srl}&subcategory=${subcategory_srl}";
 		//태그리스트 내용 지우기
-		$("#tagsList").empty();
+		$("#tags").empty();
 
 		//var params="";
 		//alert(url);
@@ -62,7 +171,7 @@
 			cache : false, // 캐시 사용 없애기
 			type : 'post',
 			url : url,
-			//param : params,
+			param : params,
 			//contentType: 'application/json; charset=utf-8',
 			dataType : 'json',
 			//contentType: "application/x-www-form-urlencoded; charset=utf-8",				
@@ -92,7 +201,7 @@
 				//var key = Object.keys(data["bbsList"][0]); // 키 값 가져오기 num, title, content, id, postdate,visitcount, name, commentCnt
 
 				var items = [];
-
+				var tagInHTML = "";
 				$.each(resdata.list, function(index, hotKeyWord) { // each로 모든 데이터 가져와서 items 배열에 넣고
 
 					if (index == 10)
@@ -101,11 +210,12 @@
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 					//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
 					//<a href='${pageContext.request.contextPath}/board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
-					items.push("<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>");
+					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
 
 				});//each끝
-
-				$('#tagsList').html(items.join(''));
+				//alert(tagInHTML);
+				$('#tags').html(tagInHTML);
+				//$('#tagsList').html(items.join(''));
 			},
 			error : function(e) {
 				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
@@ -113,11 +223,18 @@
 			}
 		});
 
-		url = "${pageContext.request.contextPath}/board/json/service_list.json";
+		
+		//서치 리스트
+		//getServiceSearchList(nowPage, category_srl, subcategory_srl , board_type ,searchType,keyword
+		//alert("${category_srl}, ${subcategory_srl} , ${board_type} ,${searchType},${keyword}");
+		getServiceSearchList(1, null, null , "${board_type}" ,"${searchType}","${keyword}");
+		
+		//최초 서치 리스트		
+		/* url = "${pageContext.request.contextPath}/board/json/service_list.json";
 		var serviceMainImgPath = "${pageContext.request.contextPath}/resources/upload/service/";
 		//내용 지우기
 		$("#search_list_div").empty();
-		var params = "board_type=${board_type}&pageSize=5&blockPage=1&keyword=${keyword}&searchType=tc";
+		var params = "board_type=${board_type}&pageSize=6&blockPage=5&keyword=${keyword}&searchType=tc";
 		//alert(params);
 		$.ajax({
 			cache : false, // 캐시 사용 없애기
@@ -168,6 +285,7 @@
 
 					//inHTML+="<span><a href='./board/engineer/"+boardVO.board_srl+"?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
 
+					
 				});//each끝
 				if (jQuery.isEmptyObject(data.searchList)) {
 					$('#search_list_div').html("<div class=\"row\">해당 하는 검색 결과가 없습니다.</div>");
@@ -175,6 +293,8 @@
 					$('#search_list_div').html(inHTML);
 				}
 
+				$("#search_list_paging_div").html(data.pagingDiv);
+				
 				//alert(inHTML);
 				//$('#hot_engineer_div').html(items);
 
@@ -184,7 +304,7 @@
 				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
 			}
 
-		});
+		}); */
 
 	});
 </script>
@@ -213,12 +333,12 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
-						<h2 class="section-title st2 mb25">인기 카테고리 목록</h2>
+						<h2 class="section-title st2 mb25">현재 카테고리 인기 검색어 목록</h2>
 						<div class="text-center">
 							<div class="mb0">
-							<h3 class="sidebar-title">Tags</h3>
-								<div id="tagsList" class="tags">
-									<a href="#" title="10 Topics"><i class="fa fa-tag"></i> Wordpress</a> 
+							<h3 class="text-danger">현재 카테고리 인기 검색어 목록</h3>
+								<div id="tags" class="tags">
+									<a href="#" title="10 Topics"><i class="fa fa-tag"></i> 검색어</a> 
 								</div>
 							</div>
 						</div>
@@ -253,7 +373,9 @@
 								</div>
 							</div>
 						</div>
-						<ul class="pagination">
+						
+						<div class="text-center">
+						<ul class="pagination" id="search_list_paging_div">
 							<li class="disabled"><a href="#"><i class="fa fa-chevron-left"></i></a></li>
 							<li class="active"><a href="#">1</a></li>
 							<li><a href="#">2</a></li>
@@ -262,6 +384,7 @@
 							<li><a href="#">5</a></li>
 							<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
 						</ul>
+						</div>
 					</div>
 					<div class="col-sm-5 col-md-3 col-md-pull-9 col-sm-pull-7 pull-off">
 						<aside class="sidebar">

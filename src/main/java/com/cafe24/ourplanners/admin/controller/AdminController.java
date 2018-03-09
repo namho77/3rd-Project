@@ -110,6 +110,29 @@ public class AdminController {
 		return "admin/admin_login";
 	}
 
+	
+	//관리자 프로필
+	@RequestMapping(value="admin/profile")
+	public String adminProfile(HttpServletRequest req, Model model) {
+		System.out.println("프로필 페이지");
+		return "admin/admin_profile";
+	}
+	
+	//관리자 계정 설정
+	@RequestMapping(value="admin/profile/edit")
+	public String adminEdit(HttpServletRequest req, Model model) {
+		System.out.println("관리자 계정 설정(수정)");
+		return "admin/admin_profile_modify";
+	}
+	
+	//관리자 계정 생성
+	@RequestMapping(value="admin/profile/new")
+	public String adminModify(HttpServletRequest req, Model model) {
+		System.out.println("관리자 아이디 생성");
+		return "admin/admin_profile_modify";
+	}
+	
+	
 	@RequestMapping(value="admin/member")
 	public String adminMember(HttpServletRequest req, Model model) {
 		System.out.println("회원 관리 페이지");

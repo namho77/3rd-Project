@@ -14,6 +14,7 @@ import com.cafe24.ourplanners.board.domain.WordCloudVO;
 import com.cafe24.ourplanners.notice.domain.NoticeVO;
 import com.cafe24.ourplanners.search.persistence.SearchDAO;
 import com.cafe24.ourplanners.util.Criteria;
+import com.cafe24.ourplanners.util.PagingUtil;
 import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 import com.cafe24.ourplanners.util.wordcloud.KoreanWords;
 
@@ -75,5 +76,11 @@ public class SearchServiceImpl implements SearchService {
 		// todo 공백을 기준으로 형태소 분석해서 명사만 등록하기
 
 		map.put("searchList", list);
+		
+		int totalRecordCount = dao.getTotalServiceCount(scri);
+		String pagingDiv = PagingUtil.pagingAjaxService(totalRecordCount, scri, "servicePaging");
+		
+		map.put("pagingDiv", pagingDiv);
+		
 	}
 }

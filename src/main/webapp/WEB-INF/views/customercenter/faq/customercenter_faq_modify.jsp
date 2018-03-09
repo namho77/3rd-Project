@@ -37,9 +37,7 @@
 			}
 		});
 
-		//alert("${faqVO.contents }");
-		//oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-		//$("#contents").val("${faqVO.contents }");
+		
 
 		$('#modifyActionBtn').click(function() {
 
