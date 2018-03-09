@@ -51,5 +51,11 @@ public interface MemberDAO {
 	public int hasEmail(String email_address);
 
 	public void updateEmail(Map<String, Object> paramMap);
+
+	public MemberVO getUserInfoById(String user_id);
+
+	public int updateMyInfo(MemberVO userInfo);
+	
+	public int getMemberSrlById(int user_id);
 	
 }

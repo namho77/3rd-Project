@@ -87,7 +87,7 @@ function checkPassword(f){
 				<!-- 서브메뉴부분 -->
 				<div class="col-xs-2" id="profile-menu">
 					<h3>계정설정</h3>
-					<a href="${pageContext.request.contextPath}/mypage/myinfo"><p>계정정보</p></a>
+					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a>
 					<a href="#"><p>인증정보</p></a>
 					<a href="#"><p>알림설정</p></a>
 					<a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a>

@@ -81,6 +81,7 @@
 			<mapping path="/member/withdraw"/>
 			<mapping path="/member/change_password"/>
 			<mapping path="/member/change_email"/>
+			<mapping path="/member/myinfo"/>
 			
 			<!-- 공지사항,FAQ -->
 			<mapping path="/customercenter/faq/**/edit"/>

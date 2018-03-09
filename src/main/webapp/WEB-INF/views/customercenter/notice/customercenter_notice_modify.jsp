@@ -41,9 +41,6 @@
 
 
 
-		//alert("${noticeVO.contents }");
-		//oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-		//$("#contents").val("${noticeVO.contents }");
 		
 
 		$('#modifyActionBtn').click(function() {

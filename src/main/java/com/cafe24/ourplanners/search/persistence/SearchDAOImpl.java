@@ -57,4 +57,8 @@ public class SearchDAOImpl implements SearchDAO {
 		
 		return sqlSession.insert(wordCloudMapper + ".insertWordCloud", paramMap);
 	}
+	@Override
+	public int getTotalServiceCount(SearchServiceBoardCriteria scri) {
+		return sqlSession.selectOne(searchMapper+".getTotalServiceCount",scri);
+	}
 }

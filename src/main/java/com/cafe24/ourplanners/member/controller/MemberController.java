@@ -1,6 +1,10 @@
 package com.cafe24.ourplanners.member.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -305,21 +310,29 @@ public class MemberController {
 		// return "redirect:login";
 		return "member/member_login";
 	}
+	
+	//나의 정보 보기
+		@RequestMapping(value = "member/myinfo", method = RequestMethod.GET)
+		public String viewMyInfo(Model model, HttpServletRequest req,
+				@RequestParam(required = false, defaultValue = "") String type) {
+			logger.info("나의 정보 보기");
+			return "member/myinfo";
+		}
+			
+		//나의 정보 수정
+		@RequestMapping(value = "member/myinfo", method = RequestMethod.POST)
+		public ModelAndView modifyMyInfoForm(Model model, HttpServletRequest req,HttpSession session) {
+			
+			logger.info("나의 정보 보기");
+			
+			ModelAndView mv = new ModelAndView();
+			
+			service.updateMyInfo(req,model,mv);
+			
 
-	@RequestMapping(value = "member/info", method = RequestMethod.GET)
-	public String viewMemberInfo(Model model) {
-		logger.info("회원정보 보기");
-
-		return "member/member_info_view";
-	}
-
-	@RequestMapping(value = "member/info", method = RequestMethod.PUT)
-	public String modifyMemberInfo(Model model) {
-		logger.info("회원정보 수정");
-
-		return "member/member_info_modify";
-	}
-
+			return mv;
+		}
+		
 	@RequestMapping(value = "member/confirmPassword", method = RequestMethod.GET)
 	public String confirmPassword(Model model, HttpServletRequest request) {
 		logger.info("비밀번호 확인");

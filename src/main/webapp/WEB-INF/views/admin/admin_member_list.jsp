@@ -49,261 +49,291 @@
 
         <!-- BEGIN MAIN CONTENT -->
         <div id="main-content">
-            <div class="page-title"> <i class="icon-custom-left"></i>
-                <h2>Members <small>list of users registered</small></h2>
+            <div class="top-page clearfix">
+                <div class="page-title pull-left">
+                    <h3 class="pull-left"><strong>Manage Articles</strong></h3>
+                </div>
+                 <div class="pull-right">
+                    <a href="post_edit.html" class="btn btn-primary m-t-10"><i class="fa fa-plus p-r-10"></i> 회원 생성</a>
+                </div>
+            </div>
+            <div class="top-menu">
+                <a href="#"><strong>All</strong></a><span class="label label-default m-l-10">112</span> <span class="c-gray p-l-10 p-r-5">|</span>
+                <a href="#">Draft</a><span class="label label-default m-l-10">18</span> <span class="c-gray p-l-10 p-r-5">|</span>
+                <a href="#">Deleted</a><span class="label label-default m-l-10">42</span> <span class="c-gray p-l-10 p-r-5">|</span>
+                <a href="#">Scheduled</a><span class="label label-default m-l-10">4</span>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <input type="text" id="member-finder" class="form-control" placeholder="Search a member...">
-                                </div>
-                                <div class="col-md-8 align-right m-t-10">
-                                    <span class="c-gray m-r-20">Filter by
-                                        <a href="#" class="m-l-10 m-r-5">Date</a> 
-                                        <span class="c-gray-light">/</span> 
-                                        <a href="#" class="m-l-5 m-r-5">Name</a> 
-                                        <span class="c-gray-light">/</span> 
-                                        <a href="#" class="c-blue m-l-5">City</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar1_big.png" alt="avatar 1" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>John Snow</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> cameso@it.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/jsnow</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 6 may 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> New York</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar2_big.png" alt="avatar 2" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Bobby Brown</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> brown@gmail.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/bbrown</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 2 may 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Chicago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar10_big.png" alt="avatar 3" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Melissa Johnson</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> m-johnson@yahoo.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/mjohnson</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 28 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Miami</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar6_big.png" alt="avatar 5" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Meggan Miller</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> m-miller@outlook.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/mmiller</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 26 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Paris</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar8_big.png" alt="avatar 4" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Scott Thomson</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> s-thomson@gmail.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/sthomson</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 24 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Boston</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar6_big.png" alt="avatar 6" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Samantha Harris</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> s-harris@yahoo.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/sharris</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 23 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Los Angeles</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar7_big.png" alt="avatar 7" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Alfred Benson</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> a-benson@it.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/abenson</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 22 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> New York</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar8_big.png" alt="avatar 8" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Kim Addams</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> k-addams@hotmail.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/kaddams</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 20 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Madrid</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar9_big.png" alt="avatar 9" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Melissa Johnson</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> m-johnson@yahoo.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/mjohnson</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 28 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Miami</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar10_big.png" alt="avatar 10" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Harold Maxwell</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> h-maxwell@yahoo.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/hmaxwell</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 22 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Chicago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar11_big.png" alt="avatar 11" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Morris Phillip</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> m-phillip@gmail.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/mphillip</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 20 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Harlem</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 member-entry">
-                                    <div class="row member">
-                                        <div class="col-xs-3">
-                                            <img src="${pageContext.request.contextPath}/resources/pixit/admin/assets/img/avatars/avatar12_big.png" alt="avatar 12" class="pull-left img-responsive">
-                                        </div>
-                                        <div class="col-xs-9">
-                                            <h3 class="m-t-0 member-name"><strong>Eddy Malon</strong></h3>
-                                            <div class="pull-left">
-                                                <p><i class="fa fa-envelope-o c-gray-light p-r-10"></i> e-malon@yahoo.com</p>
-                                                <p><i class="fa fa-facebook c-gray-light p-r-10"></i> facebook.com/emalon</p>
-                                            </div>
-                                            <div class="pull-right align-right">
-                                                <p><i class="fa fa-calendar c-gray-light p-r-10"></i> 15 april 2014</p>
-                                                <p><i class="fa fa-map-marker c-gray-light p-r-10"></i> Sydney</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-t-30 align-center">
-                               <ul class="pagination">
-                                    <li><span><i class="fa fa-angle-left c-gray-light"></i></span></li>
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><span>...</span></li>
-                                    <li><a href="#">9</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+                    <div class="filter-checkbox">
+                        <select>
+                            <option value="">Bulk Actions</option>
+                            <option value="delete">Deleted</option>
+                            <option value="publish">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                        <a href="#" class="btn btn-default">Apply</a>
                     </div>
+                    <table id="posts-table" class="table table-tools table-striped">
+                        <thead>
+                            <tr>
+                                <th style="min-width:50px">
+                                    <input type="checkbox" class="check_all"/>
+                                </th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Categories</th>
+                                <th>Tags</th>
+                                <th>Creation</th>
+                                <th>Comments</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Geolocation API</a></td>
+                                <td><a href="profil_edit.html">Fred Aster</a></td>
+                                <td><a href="#">Javascript</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> map</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> jquery</span>
+                                </td>
+                                <td>06/10/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Authentification</a></td>
+                                <td><a href="profil_edit.html">Miles Bines</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> session</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> cookie</span>
+                                </td>
+                                <td>06/08/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Upload Files</a></td>
+                                <td><a href="profil_edit.html">Bobby Brown</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> upload</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> php</span>
+                                </td>
+                                <td>06/07/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Loop functions</a></td>
+                                <td><a href="profil_edit.html">Martin Vones</a></td>
+                                <td><a href="#">Jquery</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> jquery</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> function</span>
+                                </td>
+                                <td>03/05/2014</td>
+                                <td>6</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Sending Email</a></td>
+                                <td><a href="profil_edit.html">John Milo</a></td>
+                                <td><a href="#">HTML</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> html</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> email</span>
+                                </td>
+                                <td>06/03/2014</td>
+                                <td>4</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">User Profil</a></td>
+                                <td><a href="profil_edit.html">Alex Wilson</a></td>
+                                <td><a href="#">HTML</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> profil</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> css</span>
+                                </td>
+                                <td>03/02/2014</td>
+                                <td>6</td>
+                                <td class="text-center">
+                                    <span class="label label-dark w-300">Draft</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Ajax PHP</a></td>
+                                <td><a href="profil_edit.html">Steve Nils</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> ajax</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> php</span>
+                                </td>
+                                <td>06/10/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">PayPal API</a></td>
+                                <td><a href="profil_edit.html">Miles Bines</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> session</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> cookie</span>
+                                </td>
+                                <td>03/10/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-dark w-300">Draft</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Image Croping</a></td>
+                                <td><a href="profil_edit.html">Martin Crew</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> image</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> resize</span>
+                                </td>
+                                <td>05/09/2014</td>
+                                <td>8</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">MySQL Connection</a></td>
+                                <td><a href="profil_edit.html">Alexa Johnson</a></td>
+                                <td><a href="#">SQL</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> sql</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> connect</span>
+                                </td>
+                                <td>02/09/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-dark w-300">Draft</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Watermark Image</a></td>
+                                <td><a href="profil_edit.html">Ben Bills</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> image</span>
+                                </td>
+                                <td>01/08/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">CSS3 Animation</a></td>
+                                <td><a href="profil_edit.html">Miles Bines</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> css</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> animation</span>
+                                </td>
+                                <td>03/10/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-danger w-300">Deleted</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Margin &amp; Padding</a></td>
+                                <td><a href="profil_edit.html">Henry Steward</a></td>
+                                <td><a href="#">CSS</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> css</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> margin</span>
+                                </td>
+                                <td>06/009/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Header &amp; Footer</a></td>
+                                <td><a href="profil_edit.html">Miles Bines</a></td>
+                                <td><a href="#">HTML</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> html</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> header</span>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> footer</span>
+                                </td>
+                                <td>01/09/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-danger w-300">Deleted</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Security</a></td>
+                                <td><a href="profil_edit.html">Fred Aster</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> security</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> php</span>
+                                </td>
+                                <td>06/09/2014</td>
+                                <td>5</td>
+                                <td class="text-center">
+                                    <span class="label label-success w-300">Online</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="post_edit.html">Shopping Cart</a></td>
+                                <td><a href="profil_edit.html">Miles Bines</a></td>
+                                <td><a href="#">PHP</a></td>
+                                <td>
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> cart</span> 
+                                    <span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> shoppping</span>
+                                </td>
+                                <td>03/09/2014</td>
+                                <td>2</td>
+                                <td class="text-center">
+                                    <span class="label label-dark w-300">Draft</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+              
             </div>
         </div>
         <!-- END MAIN CONTENT -->

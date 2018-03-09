@@ -217,6 +217,25 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 
+	@Override
+	public MemberVO getUserInfoById(String user_id) {
+		return sqlSession.selectOne(namespace+".getUserInfoById", user_id);
+	}
+
+
+	@Override
+	public int updateMyInfo(MemberVO userInfo) {
+		return sqlSession.update(namespace+".updateMyInfo", userInfo);
+	}
+
+
+	@Override
+	public int getMemberSrlById(int user_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getMemberSrlById", user_id);
+	}
+
+
 
 
 

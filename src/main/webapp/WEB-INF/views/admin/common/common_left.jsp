@@ -18,7 +18,7 @@
 					<li><a href="#"><i class="glyph-icon flaticon-account"></i><span class="sidebar-text">관리자 계정 관리</span><span class="fa arrow"></span></a>
 						<ul class="submenu collapse">
 							<li><a href="${pageContext.request.contextPath}/admin/profile"><span class="sidebar-text">프로필</span></a></li>
-							<li><a href="${pageContext.request.contextPath}/admin/profile/modify"><span class="sidebar-text">계정 설정</span></a></li>
+							<li><a href="${pageContext.request.contextPath}/admin/profile/edit"><span class="sidebar-text">계정 설정</span></a></li>
 
 							<li><a href="${pageContext.request.contextPath}/admin/regist"><span class="sidebar-text">관리자 계정 생성</span></a></li>
 							<li><a href="${pageContext.request.contextPath}/admin/lockscreen"><span class="sidebar-text">화면 잠금</span></a></li>
@@ -93,7 +93,7 @@
 					</div>
 				</div>
 				<div class="sidebar-footer clearfix">
-					<a class="pull-left" href="${pageContext.request.contextPath}/admin/profile/modify" data-rel="tooltip" data-placement="top" data-original-title="Settings"><i class="glyph-icon flaticon-settings21"></i></a> <a class="pull-left toggle_fullscreen" href="#" data-rel="tooltip" data-placement="top" data-original-title="Fullscreen"><i class="glyph-icon flaticon-fullscreen3"></i></a> <a class="pull-left" href="${pageContext.request.contextPath}/admin/lockscreen" data-rel="tooltip" data-placement="top" data-original-title="Lockscreen"><i class="glyph-icon flaticon-padlock23"></i></a> <a class="pull-left" href="${pageContext.request.contextPath}/admin/logout" data-rel="tooltip" data-placement="top" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
+					<a class="pull-left" href="${pageContext.request.contextPath}/admin/profile/edit" data-rel="tooltip" data-placement="top" data-original-title="Settings"><i class="glyph-icon flaticon-settings21"></i></a> <a class="pull-left toggle_fullscreen" href="#" data-rel="tooltip" data-placement="top" data-original-title="Fullscreen"><i class="glyph-icon flaticon-fullscreen3"></i></a> <a class="pull-left" href="${pageContext.request.contextPath}/admin/lockscreen" data-rel="tooltip" data-placement="top" data-original-title="Lockscreen"><i class="glyph-icon flaticon-padlock23"></i></a> <a class="pull-left" href="${pageContext.request.contextPath}/admin/logout" data-rel="tooltip" data-placement="top" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
 				</div>
 			</div>
 		</nav>
