@@ -1,9 +1,6 @@
 package com.cafe24.ourplanners.mypage.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.ourplanners.MainController;
-import com.cafe24.ourplanners.member.domain.MemberVO;
+import com.cafe24.ourplanners.board.domain.BoardVO;
+import com.cafe24.ourplanners.board.service.BoardService;
 import com.cafe24.ourplanners.mypage.service.MyPageService;
-
+import com.cafe24.ourplanners.util.PagingUtil;
 
 @Controller
 public class MyPageController {
-	
-	
+		
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
-	//@Inject
-	//private MyPageService service;
+	@Inject
+	private MyPageService service;
 		
 	// 마이 플래너스
 	@RequestMapping(value = "mypage/myplan", method = RequestMethod.GET)
@@ -39,7 +36,7 @@ public class MyPageController {
 		logger.info("마이 페이지 - 마이 플랜");
 		return "mypage/myplan";
 	}
-	
+
 	
 	//상대방(또는 자신) 서비스 프로필 보기
 	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)

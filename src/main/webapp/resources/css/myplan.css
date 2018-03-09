@@ -42,9 +42,17 @@
 	margin-top: 15px;
 }
 
-.menu-sotitle {
-	font-size: 16px;
+.cursor{
+	margin-top: -15px;
+}
+
+.btn-sotitle{
+	font-size: 15px;
+	font-weight:bold;
 	color: #646664;
+	border: 0px;
+	margin-top: 10px;
+	margin-bottom: -10px;
 }
 
 .padding-myplan {
@@ -55,3 +63,50 @@
 .height-good {
 	height: 70px;
 }
+
+#btn_client_ing:hover, #btn_client_ing:focus{
+	background-color: #F2DEDE;
+}
+
+#btn_client_check:hover, #btn_client_check:focus{
+	background-color: #FCF8E3;
+}
+
+#btn_engineer_ing:hover, #btn_engineer_ing:focus{
+	background-color: #DFF0D8;
+}
+
+#btn_engineer_check:hover, #btn_engineer_check:focus{
+	background-color: #D9EDF7;
+}
+
+.mylist-area{
+	height: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+table>tbody>tr>td{
+	text-align: left;
+}
+
+.border-round{
+	padding: 20px;
+	height: 220px;
+	width: 100%;
+	border-radius: 10px;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

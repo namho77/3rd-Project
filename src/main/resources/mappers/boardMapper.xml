@@ -34,12 +34,12 @@
  	<insert id="insert" parameterType="com.cafe24.ourplanners.board.dto.BoardDTO">
  		insert into op_board (
  			board_srl, user_id, location, service_time_start, service_time_end,
- 			title, contents, contact_time_start, contact_time_end, category_srl,
- 			subcategory_srl, service_cost, board_type) 
+ 			title, contents, contact_time_start, contact_time_end, main_image, 
+ 			category_srl, subcategory_srl, service_cost, board_type) 
 		values (
 			board_srl_seq.nextval, #{user_id}, #{location}, #{service_time_start}, #{service_time_end},
-            #{title}, #{contents}, #{contact_time_start}, #{contact_time_end}, #{category_srl},
-            #{subcategory_srl}, #{service_cost}, #{board_type}) 
+            #{title}, #{contents}, #{contact_time_start}, #{contact_time_end}, #{main_image}, 
+            #{category_srl}, #{subcategory_srl}, #{service_cost}, #{board_type}) 
  	</insert>
  	
  	<select id="modify" resultType ="com.cafe24.ourplanners.board.domain.BoardVO">
@@ -50,7 +50,7 @@
 		update op_board set 
 			location=#{location}, service_time_start=#{service_time_start}, service_time_end = #{service_time_end},
 			title=#{title}, contents=#{contents}, contact_time_start=#{contact_time_start}, contact_time_end=#{contact_time_end},
-			service_cost=#{service_cost}
+			main_image=#{main_image}, service_cost=#{service_cost}
 		where board_srl=#{board_srl}
 	</update>
 	
