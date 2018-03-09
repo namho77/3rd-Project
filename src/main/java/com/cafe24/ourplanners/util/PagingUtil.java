@@ -350,7 +350,6 @@ public class PagingUtil {
 		pagingStr += "</ul></div>";
 		return pagingStr;
 	}
-<<<<<<< HEAD
 	
 	//서비스 게시판 
 	public static String pagingAjaxBoard(int totalRecordCount, SearchServiceBoardCriteria scri, String jsFnName) {
@@ -476,7 +475,10 @@ public class PagingUtil {
 
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(" + totalPage + "," + parent_board_srl 
 					 + ");'>" + "<span class=\"glyphicon	glyphicon-forward\"></span></a></li>";
-=======
+		}
+		pagingStr += "</ul></div>";
+		return pagingStr;
+	}
 
 	public static String pagingAjaxService(int totalRecordCount, SearchServiceBoardCriteria scri, String jsFnName) {
 		String pagingStr = "";
@@ -537,7 +539,6 @@ public class PagingUtil {
 
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(" + totalPage + "," + category_srl + ","
 					+ subcategory_srl +",\""+board_type+ "\");'>" + "<span class=\"glyphicon	glyphicon-forward\"></span></a></li>";
->>>>>>> branch 'master' of https://github.com/kosmo31/3rd-Project.git
 
 		}
 		pagingStr += "</ul></div>";
