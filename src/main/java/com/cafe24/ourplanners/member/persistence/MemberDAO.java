@@ -1,11 +1,15 @@
 package com.cafe24.ourplanners.member.persistence;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.member.dto.MemberDTO;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 
 public interface MemberDAO {
@@ -57,5 +61,9 @@ public interface MemberDAO {
 	public int updateMyInfo(MemberVO userInfo);
 	
 	public int getMemberSrlById(int user_id);
+
+	public List<MemberDTO> getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
+
+	public int getTotalMemberCount(SearchMemberCriteria scri);
 	
 }

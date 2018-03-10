@@ -121,12 +121,13 @@
 
 						/* console.log("result: " + d.result); */
 						popLayerMsg("글수정을 성공하였습니다.");
-						location.href = "${pageContext.request.contextPath}/customercenter/faq";
+						getListFAQ(1, 1, "");
+						//location.href = "${pageContext.request.contextPath}/customercenter/faq";
 					}
 
 				},
 				error : function(e) {
-					alert("요청실패:" + e.status + " " + e.statusText);
+					popLayerMsg("요청실패:" + e.status + " " + e.statusText);
 				}
 			});
 		});
