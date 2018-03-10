@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+// 아이디클릭시 팦메뉴나오기
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+</script>
 <script type="text/javascript">
 /* 	$(document).ready(function() {
 		var url = "${pageContext.request.contextPath}/notice/smallABoard"
