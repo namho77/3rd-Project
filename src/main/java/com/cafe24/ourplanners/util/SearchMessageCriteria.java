@@ -1,19 +1,25 @@
 package com.cafe24.ourplanners.util;
 
 public class SearchMessageCriteria  extends MessageCriteria{
-	private String Message_type;
-
-	public String getMessage_type() {
-		return Message_type;
+	private String searchType;
+	private String keyword;
+	
+	public String getSearchType() {
+		return searchType;
 	}
-
-	public void setMessage_type(String message_type) {
-		Message_type = message_type;
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	@Override
 	public String toString() {
-		return super.toString() +"SearchCriteria [message_type"+
-				Message_type + "]";
+		return super.toString() +"SearchMessageCriteria [searchType"+
+				searchType + "]";
 	}
 	
 }

@@ -7,6 +7,20 @@ public class MessageVO {
 	private String title;
 	private String contents;
 	private String postdate;
+	private String readed;
+	private String readed_date;
+	public String getReaded() {
+		return readed;
+	}
+	public void setReaded(String readed) {
+		this.readed = readed;
+	}
+	public String getReaded_date() {
+		return readed_date;
+	}
+	public void setReaded_date(String readed_date) {
+		this.readed_date = readed_date;
+	}
 	public int getMessage_srl() {
 		return message_srl;
 	}

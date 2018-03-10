@@ -35,9 +35,9 @@ public class MessageServiceImpl implements MessageService {
 			list.setContents(list.getContents().replaceAll(System.getProperty("line.separator"), "<br/>"));
 		}
 		int totalRecordCount = dao.getTotalCount(scri);
-		String pagingDiv = PagingUtil.pagingAjaxMessage(totalRecordCount,scri,"messagePading");
+		String pagingDiv = PagingUtil.pagingAjaxMessage(totalRecordCount,scri,"messagePaging");
 		
-		map.put("messageLIsts",lists);
+		map.put("messageLists",lists);
 		map.put("pagingDiv", pagingDiv);
 		
 		
@@ -51,12 +51,12 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public int writeMessage(HttpServletRequest req, Map<String, Object> map) {
-		int message_srl =Integer.parseInt(req.getParameter("message_srl"));
 		String title = req.getParameter("title");
 		String contents = req.getParameter("contents");
+		int receiver_srl =Integer.parseInt(req.getParameter("receiver_srl"));
 		MessageVO vo = new MessageVO();
 		vo.setContents(contents);
-		vo.setMessage_srl(message_srl);
+		vo.setReceiver_srl(receiver_srl);
 		vo.setTitle(title);
 		
 		
