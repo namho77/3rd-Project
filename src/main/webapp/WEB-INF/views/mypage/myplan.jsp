@@ -46,6 +46,25 @@
 $(document).ready(function(){
 	
 	
+	var value= getMyPlanCount("1", "C","${loginUserInfo.user_id}", "N");
+
+	setMyPlanCount("#span_client_ing",value);
+
+	value = getMyPlanCount("1", "C","${loginUserInfo.user_id}", "Y");
+
+	setMyPlanCount("#span_client_check",value);
+
+	value = getMyPlanCount("1", "E","${loginUserInfo.user_id}", "N");
+
+	setMyPlanCount("#span_engineer_ing",value);
+
+	value = getMyPlanCount("1", "E","${loginUserInfo.user_id}", "Y");
+
+	setMyPlanCount("#span_engineer_check",value);
+	
+	value = getMyStarScore("${loginUserInfo.user_id}");
+	setMyStarScore(value);
+	
 	
 	//요청자 진행건 버튼 클릭시발동
 	$('#btn_client_ing').click(function(){
@@ -66,7 +85,92 @@ $(document).ready(function(){
 	$('#btn_engineer_check').click(function(){	
 		getMyPlanList("1", "E","${loginUserInfo.user_id}", "Y", "info");
 	});
+	
+	
+	
 });
+
+function getMyStarScore(user_id){
+	var params = "nowPage=1&board_type=&user_id="+user_id+"&service_expired=Y";
+	//alert(url); 디버깅용
+	//alert(params); 디버깅용
+	var url = "${pageContext.request.contextPath}/board/json/service_list.json";
+	var totalScore = 0;
+	var avgScore = 0;
+	$.ajax({
+		async : false,
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			
+			//성공자료 갯수파악
+			//alert("sucess : " + data);
+			$.each(data.searchList, function(index, lists) {
+				totalScore += lists.service_score;	
+			});//each끝
+			
+			//alert("해당 자료는 총 "+count.searchList.length+"개 입니다.");
+		    
+			
+			avgScore = totalScore / data.searchList.length;
+			//alert(count);
+			
+			
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+	return avgScore;
+	
+}
+function setMyStarScore(value){
+	$("#starScore").html(value);
+	
+}
+
+function setMyPlanCount(selectorName,value){
+	
+	
+	//alert(selectorName+value);
+	$(selectorName).html(value);
+}
+
+function getMyPlanCount(nowPage, board_type,user_id, service_expired){
+	
+	var params = "nowPage="+nowPage+"&board_type="+board_type+"&user_id="+user_id+"&service_expired="+service_expired;
+	//alert(url); 디버깅용
+	//alert(params); 디버깅용
+	var url = "${pageContext.request.contextPath}/board/json/service_list.json";
+	var returnVal = 0;
+	$.ajax({
+		async : false,
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			
+			//성공자료 갯수파악
+			//alert("sucess : " + data);
+			var count = data;
+			//alert("해당 자료는 총 "+count.searchList.length+"개 입니다.");
+		    returnVal = count.searchList.length;
+			
+			//alert(count);
+			
+			
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+	return returnVal;
+}
 
 function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
@@ -118,7 +222,7 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 			//alert("sucess : " + data);
 			var count = data;
 			//alert(count);
-			alert("해당 자료는 총 "+count.searchList.length+"개 입니다.");
+			//alert("해당 자료는 총 "+count.searchList.length+"개 입니다.");
 			
 			$.each(data.searchList, function(index, lists) { // each로 모든 데이터 가져와서 items 배열에 넣고
 				
@@ -126,7 +230,17 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 				
 				inHTML += "<tr>";
 					inHTML += "<td>"+lists.subcategory_name+"</td>";
-					inHTML += "<td>"+lists.user_id+"</td>";
+					/* inHTML += "<td>"+lists.user_id+"</td>"; */
+					inHTML += "<td><div class=\"popup\" onclick=\"myFunction()\">"+lists.user_id;
+					inHTML += "<span class=\"popuptext\" id=\"myPopup\">";
+					inHTML += "<a href=\"${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}\">회원정보보기</a><br/>";
+					inHTML += "<a href=\"${pageContext.request.contextPath}/message\">쪽지보내기</a><br/>";
+					<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+					inHTML += "<a href=\"${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}\">작성글보기</a><br/>";
+					inHTML += "<a href=\"${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}\">회원정보관리</a><br/>";							
+					</c:if>
+					inHTML += "</span>";
+					inHTML += "</div></td>";
 					inHTML += "<td><a href=\"javascript:viewPage("+lists.board_srl+")\">"+lists.title+"</a></td>";
 					inHTML += "<td>"+lists.service_cost+"</td>";
 					inHTML += "<td>"+lists.service_time_start+"<br/> ~ "+lists.service_time_end+"</td>";
@@ -237,18 +351,19 @@ function viewPage(board_srl){
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div class="row">
+										<div class="row" style="margin-bottom: 10px;">
 											<div id="satisfaction" class="col-xs-12 cursor">
 												<h5 class="header-margin-none font-color-lighter menu-sotitle">
-												만족도<span class="pull-right"><b>아직몰라요</b></span>
+												만족도(<span id="starScore"></span>)
 												</h5>
-											</div>
-										</div>
-										<div class="row margin-top-10">
-											<div class="col-xs-12">
-												<h5 class="header-margin-none font-color-lighter menu-sotitle">
-												평균응답시간<span class="pull-right"><b>아직몰라요</b></span>
-												</h5>
+												<br/>
+												<span class="pull-left" style="margin-top: -30px;">
+													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+												</span>
 											</div>
 										</div>
 									</div>
@@ -307,25 +422,25 @@ function viewPage(board_srl){
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_ing">요청자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b> </b>
+												<b>(<span id="span_client_ing"></span>) </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_check">요청자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b></b>
+												<b>(<span id="span_client_check"></span>)</b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_ing">기술자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b> </b>
+												<b>(<span id="span_engineer_ing"></span>) </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_check">기술자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b> </b>
+												<b>(<span id="span_engineer_check"></span>) </b>
 											</h4>
 									</div>
 								</div>
