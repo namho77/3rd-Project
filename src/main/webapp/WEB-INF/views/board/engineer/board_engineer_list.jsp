@@ -290,10 +290,3 @@ function viewPage(board_srl){
 	</div>
 </body>
 </html>
-<%-- 
-<!-- 페이징부분 -->
-<div class="row text-center">
-	<ul class="pagination" >
-		${pagingDiv }
-	</ul>
-</div> --%>
