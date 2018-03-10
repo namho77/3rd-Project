@@ -41,9 +41,6 @@
 
 
 
-		//alert("${noticeVO.contents }");
-		//oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-		//$("#contents").val("${noticeVO.contents }");
 		
 
 		$('#modifyActionBtn').click(function() {
@@ -75,15 +72,12 @@
 
 			//글수정 처리
 			var params = $('#modifyNoticeFrm').serialize();
-			alert(params);
 			var notice_srl = '<c:out value="${noticeVO.notice_srl}"/>';
-			//$("input[type='text'][name='contents']").val();
 			var contents = oEditors.getById["contents"].getIR(); 
 				
 			var title = $("input[type='text'][name='title']").val();
 
 			var url = "${pageContext.request.contextPath}/customercenter/notice/"+notice_srl;
-			alert(url);
 			$.ajax({
 				cache : false, // 캐시 사용 없애기
 				url : url,
@@ -114,12 +108,13 @@
 
 						/* console.log("result: " + d.result); */
 						popLayerMsg("글수정을 성공하였습니다.");
-						location.href = "${pageContext.request.contextPath}/customercenter/notice";
+						//location.href = "${pageContext.request.contextPath}/customercenter/notice";
+						getListNotice(1);
 					}
 
 				},
 				error : function(e) {
-					alert("요청실패:" + e.status + " " + e.statusText);
+					popLayerMsg("요청실패:" + e.status + " " + e.statusText);
 				}
 			});
 		});

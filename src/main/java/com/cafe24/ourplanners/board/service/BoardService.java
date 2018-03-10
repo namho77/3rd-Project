@@ -1,5 +1,6 @@
 package com.cafe24.ourplanners.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
-import com.cafe24.ourplanners.util.Criteria;
-import com.cafe24.ourplanners.util.SearchCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 
 
 public interface BoardService {
 	  
-	//public List<BoardVO> list() throws Exception;
+	public void getBoardListJson(SearchServiceBoardCriteria scri, HashMap<String, Object> map);
 	
 	public List<BoardVO> listPage(int start, int end) throws Exception;
 	
@@ -32,27 +32,5 @@ public interface BoardService {
 	
 	public int delete(Integer board_srl) throws Exception;
 	
-	
-	public int listCountCriteria(Criteria cri) throws Exception;
-	
-	
-	
-	public BoardVO read(Integer boardSrl) throws Exception;
-	
-	  
-
-	  public void remove(Integer boardSrl) throws Exception;
-	  
-
-	  public List<BoardVO> listCriteria(Criteria cri) throws Exception;
-
-	  
-
-	  public List<BoardVO> listSearchCriteria(SearchCriteria cri) 
-	      throws Exception;
-
-	  public int listSearchCount(SearchCriteria cri) throws Exception;
-	  
-	  public List<String> getAttach(Integer boardSrl)throws Exception;
  	 
 }

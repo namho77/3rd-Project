@@ -2,8 +2,10 @@ package com.cafe24.ourplanners.member.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -17,8 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.member.dto.MemberDTO;
 import com.cafe24.ourplanners.member.persistence.MemberDAO;
+import com.cafe24.ourplanners.util.PagingUtil;
 import com.cafe24.ourplanners.util.SHA256;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -641,14 +646,31 @@ public class MemberServiceImpl implements MemberService {
 			//업데이트 실행
 			int affected = dao.updateMyInfo(userInfo);
 			
-			if (affected != 1)
+			if (affected <= 0)
 			{
-				mv.setViewName("member/myinfo");
+				model.addAttribute("layer_msg", "회원 정보 수정에 실패하였습니다.");
+				//mv.setViewName("member/myinfo");
 				
+			}else {
+				//성공한 경우 변경한 내용으로 로그인 정보도 변경
+				model.addAttribute("loginUserInfo", userInfo);
+				model.addAttribute("layer_msg", "회원 정보가 수정 되었습니다.");
 			}
 			
 		}
 		
+	}
+
+	@Override
+	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map) {
+		List<MemberDTO> lists = new ArrayList<MemberDTO>();
+		lists = dao.getSearchMemberList(scri,map);
+
+		int totalRecordCount = dao.getTotalMemberCount(scri);
+		String pagingDiv = PagingUtil.pagingAjaxMember(totalRecordCount, scri, "memberPaging");
+		
+		map.put("memberLists", lists);
+		map.put("memberPagingDiv", pagingDiv);
 	}
 
 }

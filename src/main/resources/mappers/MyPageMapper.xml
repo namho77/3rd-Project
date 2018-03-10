@@ -6,7 +6,47 @@
 
  <mapper namespace="com.kosmo.mapper.MyPageMapper">
  	
- 	 
+ 	<select id="view" resultType="com.cafe24.ourplanners.board.domain.BoardVO">
+ 		SELECT * FROM op_board WHERE board_srl = #{param1}
+ 	</select>
+ 	
+ 	<update id="visitCount">
+ 		update op_board set visitcount = visitcount + 1 where board_srl = #{board_srl} 
+ 	</update>
+ 
+ 	<select id="modify" resultType ="com.cafe24.ourplanners.board.domain.BoardVO">
+ 		select * from op_board where board_srl = #{board_srl}
+ 	</select>
+ 
+ 	<update id="modifyAction">
+		update op_board set 
+			location=#{location}, service_time_start=#{service_time_start}, service_time_end = #{service_time_end},
+			title=#{title}, contents=#{contents}, contact_time_start=#{contact_time_start}, contact_time_end=#{contact_time_end},
+			main_image=#{main_image}, service_cost=#{service_cost}
+		where board_srl=#{board_srl}
+	</update>
+ 
+ 	<delete id="delete">
+		delete from op_board where board_srl=#{board_srl}
+	</delete>
+	
+	<select id="getClientListCheck_TotalRecordConut" resultType="int">
+		SELECT COUNT(*) FROM op_board WHERE board_type='C' AND service_expired='Y' AND user_id=#{user_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getClientList_TotalRecordConut" resultType="int">
+		SELECT COUNT(*) FROM op_board WHERE board_type='C' AND user_id=#{user_id}
+	</select>
+	
+	<select id="getEngineerListCheck_TotalRecordConut" resultType="int">
+		SELECT COUNT(*) FROM op_board WHERE board_type='E' AND service_expired='Y' AND user_id=#{user_id}
+	</select>
+	
+	<select id="getEngineerList_TotalRecordConut" resultType="int">
+		SELECT COUNT(*) FROM op_board WHERE board_type='E' AND user_id=#{user_id}
+	</select>
+ 
+ 
  
  
  

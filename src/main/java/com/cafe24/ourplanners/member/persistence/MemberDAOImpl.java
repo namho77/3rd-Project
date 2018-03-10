@@ -2,6 +2,7 @@ package com.cafe24.ourplanners.member.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import com.cafe24.ourplanners.member.domain.MemberAuthMailVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.member.dto.MemberDTO;
 import com.cafe24.ourplanners.util.SHA256;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -225,7 +228,28 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public int updateMyInfo(MemberVO userInfo) {
-		return sqlSession.update(namespace+".updateDefaultInfo", userInfo);
+		return sqlSession.update(namespace+".updateMyInfo", userInfo);
+	}
+
+
+	@Override
+	public int getMemberSrlById(int user_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getMemberSrlById", user_id);
+	}
+
+
+	@Override
+	public List<MemberDTO> getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getSearchMemberList", scri);
+	}
+
+
+	@Override
+	public int getTotalMemberCount(SearchMemberCriteria scri) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".getTotalMemberCount", scri);
 	}
 
 

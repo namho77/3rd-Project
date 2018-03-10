@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.mapper.AdminMapper">
+
+	<sql id="search">
+		<choose>
+			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">
+
+			</when>
+			<otherwise>
+				<if test="searchType == 'e'.toString()">
+					and email_address like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'n'.toString()">
+					and user_name like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+				<if test="searchType == 'i'.toString()">
+					and user_id like CONCAT(CONCAT('%', #{keyword,jdbcType=VARCHAR}), '%')
+				</if>
+			</otherwise>
+		</choose>
+	</sql>
+
+
+	<!-- 관리자페이지 회원 리스트 가져오기 -->
+	<select id="getSearchMemberList" resultType="MemberVO">
+<![CDATA[  
+SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from op_member M where member_srl > 0 
+]]>
+
+		<choose>
+			<when test="user_id == null or user_id == ''">
+
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="user_name == null or user_name == ''">
+
+			</when>
+			<otherwise>
+				AND user_name = #{user_name,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="email_address == null or email_address == ''">
+
+			</when>
+			<otherwise>
+				AND email_address = #{email_address,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+  
+	<![CDATA[    
+	  ORDER BY member_srl DESC ) Tb ) WHERE rNum Between #{pageStart} and #{pageEnd}
+	]]>
+
+	</select>
+
+
+
+
+	<!-- 페이징 처리용 total count -->
+	<select id="getTotalMemberCount" resultType="Integer">
+	
+	<![CDATA[  
+		select count(*) from op_member
+		  where member_srl > 0 
+	]]>
+
+		<choose>
+			<when test="user_id == null or user_id == ''">
+
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="user_name == null or user_name == ''">
+
+			</when>
+			<otherwise>
+				AND user_name = #{user_name,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="email_address == null or email_address == ''">
+
+			</when>
+			<otherwise>
+				AND email_address = #{email_address,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+
+		<include refid="search"></include>
+
+	</select>
+
+
+</mapper>

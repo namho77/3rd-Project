@@ -280,8 +280,62 @@ SERVICE_SCORE,LAST_UPDATE  FROM op_board where board_srl > 0
 
 	</select>
 	
-	<!-- 게시판 검색후 검색 키워드 wordcloud에 insert -->
+	<!-- 페이징 처리용 total count -->
+	<select id="getTotalServiceCount" resultType="Integer">
 	
+	<![CDATA[  
+		select count(*) from op_board
+		  where board_srl > 0 
+	]]>
+	
+	<choose>
+			<when test="board_type == null or board_type == ''">
+
+			</when>
+			<otherwise>
+				AND board_type = #{board_type}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="category_srl == null or category_srl == ''">
+
+			</when>
+			<otherwise>
+				AND category_srl = #{category_srl}
+			</otherwise>
+		</choose>
+
+		<choose>
+			<when test="subcategory_srl == null or subcategory_srl == ''">
+
+			</when>
+			<otherwise>
+				AND subcategory_srl = #{subcategory_srl}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="user_id == null or user_id == ''">
+
+			</when>
+			<otherwise>
+				AND user_id = #{user_id,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="service_expired == null or service_expired == ''">
+
+			</when>
+			<otherwise>
+				AND service_expired = #{service_expired,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<include refid="search"></include>
+	
+	</select>
 	
 
 </mapper>

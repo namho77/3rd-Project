@@ -51,8 +51,15 @@
 					inHTML += "<h4 class=\"card-title\">";
 					inHTML += "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
 					inHTML += "</h4>";
-					inHTML += "<p class=\"card-description\">";
-					inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					inHTML += "<p class=\"card-description text-left\">";
+					
+					inHTML +="서비스 지역 : " +hotEngineerBoardList.location+"<br/>";
+					inHTML +="서비스 비용 : " +hotEngineerBoardList.service_cost+"<br/>";
+					inHTML +="서비스 기간 : " +hotEngineerBoardList.service_time_start + " ~ " + hotEngineerBoardList.service_time_end+"<br/>";
+					inHTML +="<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					
+					//inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					
 					inHTML += "</p>";
 					inHTML += "</div>";
 					inHTML += "</div>";
@@ -116,8 +123,16 @@
 					inHTML += "<h4 class=\"card-title\">";
 					inHTML += "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
 					inHTML += "</h4>";
-					inHTML += "<p class=\"card-description\">";
-					inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/client/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					inHTML += "<p class=\"card-description text-left\">";
+					
+					//inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/client/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					
+					inHTML +="서비스 지역 : " +hotEngineerBoardList.location+"<br/>";
+					inHTML +="서비스 비용 : " +hotEngineerBoardList.service_cost+"<br/>";
+					inHTML +="서비스 기간 : " +hotEngineerBoardList.service_time_start + " ~ " + hotEngineerBoardList.service_time_end+"<br/>";
+					inHTML +="<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					
+					
 					inHTML += "</p>";
 					inHTML += "</div>";
 					inHTML += "</div>";

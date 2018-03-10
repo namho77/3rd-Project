@@ -255,6 +255,13 @@
             </div>
         </div>
     </div>
+    
+    <!-- 
+    팝업창 열기
+    <a href="popup.html" onclick="window.open(this.href, 'popupName', 'width=300,height=200'); return false;">
+	<img src="openWindow.gif">
+</a>
+     -->
 	<script>
       var videos = {}
       var currentVideoTarget = ''
