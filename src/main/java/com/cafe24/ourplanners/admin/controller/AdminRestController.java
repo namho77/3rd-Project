@@ -49,8 +49,8 @@ public class AdminRestController {
 
 				try {
 					propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
-					pageSize = Integer.parseInt(env.getProperty("member.pageSize"));
-					blockPage = Integer.parseInt(env.getProperty("member.blockPage"));
+					pageSize = Integer.parseInt(env.getProperty("admin.member.pageSize"));
+					blockPage = Integer.parseInt(env.getProperty("admin.member.blockPage"));
 				} catch (Exception e) {
 					
 					e.printStackTrace();

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 public interface MemberService {
 
@@ -43,6 +44,8 @@ public interface MemberService {
 	public void updateEmail(String user_id, String email_address);
 
 	public void updateMyInfo(HttpServletRequest req, Model model, ModelAndView mv);
+
+	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
 	
 	
 }

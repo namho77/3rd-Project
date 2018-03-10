@@ -2,8 +2,10 @@ package com.cafe24.ourplanners.member.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -17,8 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.member.dto.LoginDTO;
+import com.cafe24.ourplanners.member.dto.MemberDTO;
 import com.cafe24.ourplanners.member.persistence.MemberDAO;
+import com.cafe24.ourplanners.util.PagingUtil;
 import com.cafe24.ourplanners.util.SHA256;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -654,6 +659,18 @@ public class MemberServiceImpl implements MemberService {
 			
 		}
 		
+	}
+
+	@Override
+	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map) {
+		List<MemberDTO> lists = new ArrayList<MemberDTO>();
+		lists = dao.getSearchMemberList(scri,map);
+
+		int totalRecordCount = dao.getTotalMemberCount(scri);
+		String pagingDiv = PagingUtil.pagingAjaxMember(totalRecordCount, scri, "memberPaging");
+		
+		map.put("memberLists", lists);
+		map.put("memberPagingDiv", pagingDiv);
 	}
 
 }

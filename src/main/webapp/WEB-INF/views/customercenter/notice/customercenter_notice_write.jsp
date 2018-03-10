@@ -84,7 +84,7 @@
 
 				},
 				error : function(e) {
-					alert("요청실패:" + e.status + " " + e.statusText);
+					popLayerMsg("요청실패:" + e.status + " " + e.statusText);
 				}
 			});
 		});
