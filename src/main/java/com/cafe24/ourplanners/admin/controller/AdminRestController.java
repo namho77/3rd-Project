@@ -1,4 +1,4 @@
-/*package com.cafe24.ourplanners.admin.controller;
+package com.cafe24.ourplanners.admin.controller;
 
 import java.util.HashMap;
 
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cafe24.ourplanners.search.service.SearchService;
-import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
+import com.cafe24.ourplanners.admin.service.AdminService;
+import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 @RestController
 public class AdminRestController {
+	
 	@Inject
 	private AdminService adminService;
 	
@@ -27,17 +28,13 @@ public class AdminRestController {
 		@RequestMapping(value = "/admin/json/member_list.json")
 		public HashMap<String, Object> getMemberListSearch(HttpServletRequest req, Model model,
 				@RequestParam(required = false, defaultValue = "1") Integer nowPage,
-
-				
-
-				@RequestParam(required = false, defaultValue = "") String board_type,
-				
-				@RequestParam(required = false, defaultValue = "") String service_expired,
-				@RequestParam(required = false, defaultValue = "") String user_id,
-				
-				
 				@RequestParam(required = false) Integer pageSize, 
 				@RequestParam(required = false) Integer blockPage,
+				@RequestParam(required = false) Integer member_srl,
+				@RequestParam(required = false, defaultValue = "") String user_id,
+				@RequestParam(required = false, defaultValue = "") String user_name,
+				@RequestParam(required = false, defaultValue = "") String email_address,
+								
 				@RequestParam(required = false, defaultValue = "") String searchType,
 				@RequestParam(required = false, defaultValue = "") String keyword) {
 				
@@ -52,8 +49,8 @@ public class AdminRestController {
 
 				try {
 					propertySources.addLast(new ResourcePropertySource("classpath:Environment.properties"));
-					pageSize = Integer.parseInt(env.getProperty("board.pageSize"));
-					blockPage = Integer.parseInt(env.getProperty("board.blockPage"));
+					pageSize = Integer.parseInt(env.getProperty("member.pageSize"));
+					blockPage = Integer.parseInt(env.getProperty("member.blockPage"));
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -62,16 +59,15 @@ public class AdminRestController {
 				ctx.close();
 			}
 
-			SearchServiceBoardCriteria scri = new SearchServiceBoardCriteria();
+			SearchMemberCriteria scri = new SearchMemberCriteria();
 
-			scri.setBoard_type(board_type);
-			scri.setService_expired(service_expired);
-			scri.setUser_id(user_id);
+			if (member_srl != null && member_srl != 0)
+				scri.setMember_srl(member_srl);
 			
-			if (category_srl != null)
-				scri.setCategory_srl(category_srl);
-			if (subcategory_srl != null)
-				scri.setSubcategory_srl(subcategory_srl);
+			scri.setUser_id(user_id);
+			scri.setUser_name(user_name);
+			scri.setEmail_address(email_address);
+			
 			scri.setNowPage(nowPage);
 			scri.setPageSize(pageSize);
 			scri.setBlockPage(blockPage);
@@ -79,12 +75,11 @@ public class AdminRestController {
 			if(searchType != null && searchType.length() != 0)
 			scri.setSearchType(searchType);
 			if(keyword != null && keyword.length() != 0)
-			scri.setKeyword(keyword);		
+			scri.setKeyword(keyword);
 			
-			adminService.getServiceListSearch(scri, map);
+			adminService.getSearchMemberList(scri, map);
 
 			return map;
 		}
 		
 }
-*/
