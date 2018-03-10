@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.message.service.MessageService;
 import com.cafe24.ourplanners.util.SearchMessageCriteria;
 
@@ -65,7 +64,7 @@ public class MessageController {
 		SearchMessageCriteria scri = new SearchMessageCriteria();
 
 		if (receiver_srl != null) {
-			scri.setMessage_srl(receiver_srl);
+			scri.setReceiver_srl(receiver_srl);
 		}
 		
 		if (sender_srl != null) {
@@ -117,11 +116,7 @@ public class MessageController {
 			return map;
 		}
 
-		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotAdmin");
-			return map;
-		}
+		
 
 		int result = service.writeMessage(req, map);
 

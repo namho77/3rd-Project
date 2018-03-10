@@ -6,7 +6,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script charset="utf-8">
-$(document).ready(function() {
+	$(document).ready(function() {
 		//전역변수선언
 		$('#writeActionBtn').click(function() {
 
@@ -16,19 +16,18 @@ $(document).ready(function() {
 				$("input[type='text'][name='receiver_srl']").focus();
 				return;
 			}
-			
+
 			if ($("input[type='text'][name='title']").val() == "") {
 				popLayerMsg("제목을 입력해주세요");
 				$("input[type='text'][name='title']").focus();
 				return;
 			}
-			
+
 			if ($("input[type='text'][name='contents']").val() == "") {
 				popLayerMsg("내용 입력해주세요");
 				$("input[type='text'][name='contents']").focus();
 				return;
 			}
-
 
 			//글쓰기 처리
 			var params = $('#writeMessageFrm').serialize();
@@ -38,13 +37,13 @@ $(document).ready(function() {
 				url : "${pageContext.request.contextPath}/message",
 				type : "post",
 				dataType : "json",
-				//contentType : "text/html; charset=utf-8",
+
 				data : params,
 				success : function(d) {
 					if (d.result == "success") {
 
 						popLayerMsg("쪽지를 보냈습니다.");
-						//location.href = "${pageContext.request.contextPath}/customercenter/faq";
+
 						getListMessage(1, 1, "");
 					}
 
@@ -58,7 +57,7 @@ $(document).ready(function() {
 		function getContextPath() {
 			return sessionStorage.getItem("contextpath");
 		}
-});
+	});
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -73,7 +72,8 @@ $(document).ready(function() {
 
 	});
 </script>
-<form id="writeMessageFrm" action="${pageContext.request.contextPath}/message" method ="post">
+<form id="writeMessageFrm"
+	action="${pageContext.request.contextPath}/message" method="post">
 
 	<div class="write-body">
 		<div class="service">
