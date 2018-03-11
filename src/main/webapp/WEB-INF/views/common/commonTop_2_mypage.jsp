@@ -11,7 +11,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" href="${pageContext.request.contextPath}/mypage/myplan">마이플레너스</a>
 					</li>
-					<li class="dropdown"><a class="dropdown-toggle"
+					<!-- <li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">채택관리
 						<span class="glyphicon glyphicon-chevron-down"></span></a>
 						<ul class="dropdown-menu navbar-nav3">
@@ -29,7 +29,7 @@
 							<li><a href="#">서비스등록</a></li>
 							<li><a href="#">광고신청</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">계정설정
 						<span class="glyphicon glyphicon-chevron-down"></span></a>
