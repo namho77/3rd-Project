@@ -56,7 +56,7 @@ function myFunction() {
 				success : function(data) {
 					$.each(data.noticeLists, function(index, noticeList) { // each로 모든 데이터 가져와서 items 배열에 넣고
 						
-						inHTML += "<a href=\"${pageContext.request.contextPath}/customercenter/notice/"+noticeList.notice_srl+"\" style=\"font-size: 15px;\">"+noticeList.title+"&nbsp;&nbsp;</a>";
+						inHTML += "<a href=\"${pageContext.request.contextPath}/customercenter/notice/"+noticeList.notice_srl+"\" style=\"font-size: 14px;\"> - "+noticeList.title+"&nbsp;&nbsp;</a>";
 
 					});//each끝
 					inHTML += "<div class=\"row text-center\">";
@@ -75,13 +75,13 @@ function myFunction() {
 <script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <div class="container-fluid" style="background-color: white;">
 	<ul class="footer-menu">
-		<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>
-							<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>
-							<li><a href="${pageContext.request.contextPath}/about/service">서비스소개</a></li>
-							<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>
-							<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>
-							<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>
-							<li><a href="${pageContext.request.contextPath}/customercenter/faq">FAQ</a></li>
+		<li><a href="${pageContext.request.contextPath}/about/ourplanners">기술자들 팀</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/about/recruit">인재채용</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/about/service">서비스소개</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/policy/provision">이용약관</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/policy/privacy">개인정보 취급방식</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/about/sitemap">사이트맵</a></li>ㅣ
+		<li><a href="${pageContext.request.contextPath}/customercenter/faq">FAQ</a></li>
 					
 	</ul>
 	<div class="row">
@@ -90,7 +90,7 @@ function myFunction() {
 			<div class="footer-body">
 				<div class="row">
 					<div class="col-xs-10">
-						<h4><a href="${pageContext.request.contextPath}/customercenter/notice" style="font-size: 15px;">공지사항</a></h4>
+						<h4><a href="${pageContext.request.contextPath}/customercenter/notice" class="notice-title">공지사항</a></h4>
 						<div id="noticeBodyBottom">2018년 3월14일에 발표합니다. 준비하세요!</div>
 						
 					</div>
