@@ -69,11 +69,10 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tab-team1" data-toggle="tab">Managers &amp; CEO</a></li>
-								<li><a href="#tab-team2" data-toggle="tab">Web Designers</a></li>
-								<li><a href="#tab-team3" data-toggle="tab">Developers</a></li>
-								<li><a href="#tab-team4" data-toggle="tab">Community Support</a></li>
-								<li><a href="#tab-team5" data-toggle="tab">Marketing</a></li>
+								<li class="active"><a href="#tab-team1" data-toggle="tab">프로젝트관리자</a></li>
+								<li><a href="#tab-team2" data-toggle="tab">웹 디자이너</a></li>
+								<li><a href="#tab-team3" data-toggle="tab">개발자</a></li>
+								<li><a href="#tab-team4" data-toggle="tab">마케팅</a></li>
 							</ul>
 						</div>
 					</div>
@@ -85,7 +84,7 @@
 										<div class="col-sm-6 xs-box2">
 											<div class="box-team">
 												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-102.jpg" alt="team">
+													<img src="${pageContext.request.contextPath}/resources/images/team/ourplanners1.jpg" alt="team">
 													<div class="team-links">
 														<ul class="social-icon circle">
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -97,17 +96,17 @@
 												</div>
 												<div class="team-info">
 													<h3>
-														Jay Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Jay Doe"> ... </a>
+														박세창
 													</h3>
-													<h5>Team Manager</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
+													<h5>프로젝트관리자</h5>
+													<p>프로젝트의 전반적인 부분은 관리하고 기획, DB설계, 개발, 등을 총괄하고 있다.</p>
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="box-team">
 												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-107.jpg" alt="team">
+													<img src="${pageContext.request.contextPath}/resources/images/team/ourplanners2.jpg" alt="team">
 													<div class="team-links">
 														<ul class="social-icon circle">
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -119,21 +118,19 @@
 												</div>
 												<div class="team-info">
 													<h3>
-														Mark Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Mark Doe"> ... </a>
+														이용현
 													</h3>
-													<h5>C.E.O.</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
+													<h5>웹 개발자</h5>
+													<p>프로젝트의 핵심적인 부분인 게시판과 매칭부분을 개발하고 있다. 또한 DB기획 및 설계 구현을 담당하고 있다.</p>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="tab-pane fade" id="tab-team2">
-									<div class="row mb50">
+									<div class="row" style="margin-top: 40px;">
 										<div class="col-sm-6 xs-box2">
 											<div class="box-team">
 												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-103.jpg" alt="team">
+													<img src="${pageContext.request.contextPath}/resources/images/team/ourplanners3.png" alt="team">
 													<div class="team-links">
 														<ul class="social-icon circle">
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -145,17 +142,17 @@
 												</div>
 												<div class="team-info">
 													<h3>
-														Alex Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Alex Doe"> ... </a>
+														이주찬
 													</h3>
-													<h5>Web Designer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
+													<h5>웹 디자이너</h5>
+													<p>프로젝트의 전반적인 뷰페이지를 기획하고 디자인을 하고 있다. </p>
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="box-team">
 												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-104.jpg" alt="team">
+													<img src="${pageContext.request.contextPath}/resources/images/team/ourplanners4.png" alt="team">
 													<div class="team-links">
 														<ul class="social-icon circle">
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -167,19 +164,19 @@
 												</div>
 												<div class="team-info">
 													<h3>
-														Sophia Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Sophia Doe"> ... </a>
+														김남호
 													</h3>
-													<h5>Graphic Designer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
+													<h5>웹 개발자</h5>
+													<p>프로젝트의 전반적인 메세지구현기능을 담당하고 있다.</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									<div class="row" style="margin-top: 40px;">
 										<div class="col-sm-6 xs-box2">
 											<div class="box-team">
 												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-101.jpg" alt="team">
+													<img src="${pageContext.request.contextPath}/resources/images/team/ourplanners5.jpg" alt="team">
 													<div class="team-links">
 														<ul class="social-icon circle">
 															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -191,247 +188,16 @@
 												</div>
 												<div class="team-info">
 													<h3>
-														Cecillia Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Cecillia Doe"> ... </a>
+														서정훈
 													</h3>
-													<h5>Web Designer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
+													<h5>웹 디자이너</h5>
+													<p>프로젝트의 전반적인 뷰페이지를 포토샵작업과 디자인을 담당하고있다. 또한 테스트작업을 담당하고 있다. </p>
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-105.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														John Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about John Doe"> ... </a>
-													</h3>
-													<h5>Web Designer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="tab-team3">
-									<div class="row mb50">
-										<div class="col-sm-6 xs-box2">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-102.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Jay Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Jay Doe"> ... </a>
-													</h3>
-													<h5>Web Developer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-103.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Justin Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Justin Doe"> ... </a>
-													</h3>
-													<h5>Frontend Developer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-107.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Joe Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Joe Doe"> ... </a>
-													</h3>
-													<h5>Backend Developer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="tab-team4">
-									<div class="row mb50">
-										<div class="col-sm-6 xs-box2">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-103.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Alex Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Alex Doe"> ... </a>
-													</h3>
-													<h5>Forum Support</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-104.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Sophia Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Sophia Doe"> ... </a>
-													</h3>
-													<h5>Knowledgebase writer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-6 xs-box2">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-101.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Cecillia Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Cecillia Doe"> ... </a>
-													</h3>
-													<h5>Email Support</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-105.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														John Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about John Doe"> ... </a>
-													</h3>
-													<h5>Community Manager</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="tab-team5">
-									<div class="row">
-										<div class="col-sm-6 xs-box2">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-102.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Jay Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Jay Doe"> ... </a>
-													</h3>
-													<h5>Accountant</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="box-team">
-												<div class="team-image">
-													<img src="${pageContext.request.contextPath}/resources/images/team/t-104.jpg" alt="team">
-													<div class="team-links">
-														<ul class="social-icon circle">
-															<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-															<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-															<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-															<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-														</ul>
-													</div>
-												</div>
-												<div class="team-info">
-													<h3>
-														Sophia Doe <a href="page_about_me.html" data-toggle="tooltip" title="" data-original-title="Find out more about Sophia Doe"> ... </a>
-													</h3>
-													<h5>Social Marketer</h5>
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum vitae tempora officiis reprehenderit expedita iure.</p>
-												</div>
+												
 											</div>
 										</div>
 									</div>
