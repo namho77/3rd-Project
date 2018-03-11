@@ -177,7 +177,12 @@ public class MyPageController {
 		 * type => E:기술자시점 C:의뢰인시점
 		 */
 		logger.info("상대방 서비스 프로필 보기(문의하기 기능 message)");
-		return "mypage/profile";
+		
+		//다른사람이 보는 프로필페이지
+		return "mypage/profile_others";
+		
+		//내가보는 프로필페이지
+		//return "mypage/profile";
 	}
 	
 }
