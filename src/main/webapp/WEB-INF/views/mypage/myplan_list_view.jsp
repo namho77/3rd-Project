@@ -181,7 +181,19 @@ function deleteBoard(board_srl){
 									</thead>
 									<tbody>
 										<tr>
-											<td>choose432</td>
+											<!-- 아이디 메뉴작업 -->
+											<td>
+												<div class="popup" onclick="myFunction()">EL아이디
+													<span class="popuptext" id="myPopup">
+														<a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">회원정보보기</a><br/>
+														<a href="${pageContext.request.contextPath}/message">쪽지보내기</a><br/>
+														<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+															<a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">작성글보기</a><br/>
+												  			<a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">회원정보관리</a><br/>							
+														</c:if>
+													</span>
+												</div>
+											</td>
 											<td>잘 공사해주셨서 감사해요!</td>
 											<td>
 												<button type="button" class="btn btn-default"
