@@ -119,6 +119,35 @@ public class MyPageServiceImpl implements MyPageService{
 		return dao.getEngineerList_TotalRecordConut(user_id);
 	}
 	
+	@Override
+	public int getEngineerMember_TotalConut() throws Exception {
+		return dao.getEngineerMember_TotalConut();
+	}
+	
+	@Override
+	public int getEngineerCateGory1_TotalConut() throws Exception {
+		return dao.getEngineerCateGory1_TotalConut();
+	}
+	
+	@Override
+	public int getEngineerCateGory2_TotalConut() throws Exception {
+		return dao.getEngineerCateGory2_TotalConut();
+	}
+	
+	@Override
+	public int getEngineerCateGory3_TotalConut() throws Exception {
+		return dao.getEngineerCateGory3_TotalConut();
+	}
+	
+	@Override
+	public int getEngineerCateGory4_TotalConut() throws Exception {
+		return dao.getEngineerCateGory4_TotalConut();
+	}
+	
+	@Override
+	public int getEngineerCateGory5_TotalConut() throws Exception {
+		return dao.getEngineerCateGory5_TotalConut();
+	}
 }
 
 

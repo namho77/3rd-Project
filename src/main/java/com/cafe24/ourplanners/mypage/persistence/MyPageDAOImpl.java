@@ -63,6 +63,38 @@ public class MyPageDAOImpl implements MyPageDAO{
 	public int getEngineerList_TotalRecordConut(String user_id) throws Exception {
 		return sqlSession.selectOne(namespace + ".getEngineerList_TotalRecordConut", user_id); 
 	}
+	
+	@Override
+	public int getEngineerMember_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerMember_TotalConut"); 
+	}
+	
+	@Override
+	public int getEngineerCateGory1_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerCateGory1_TotalConut"); 
+	}
+	
+	@Override
+	public int getEngineerCateGory2_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerCateGory2_TotalConut"); 
+	}
+	
+	@Override
+	public int getEngineerCateGory3_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerCateGory3_TotalConut"); 
+	}
+	
+	@Override
+	public int getEngineerCateGory4_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerCateGory4_TotalConut"); 
+	}
+	
+	@Override
+	public int getEngineerCateGory5_TotalConut() throws Exception {
+		return sqlSession.selectOne(namespace + ".getEngineerCateGory5_TotalConut"); 
+	}
+	
+	
 }
 
 
