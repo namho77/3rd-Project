@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -100,10 +101,11 @@ public class UploadController {
   //이미지 표시 매핑
   @ResponseBody // view가 아닌 data리턴
   @RequestMapping("upload/displayFile")
-  public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
+  public ResponseEntity<byte[]> displayFile(String fileName,String directory, HttpServletRequest request) throws Exception {
       // 서버의 파일을 다운로드하기 위한 스트림
-      InputStream in = null; //java.io
+	  InputStream in = null; //java.io
       ResponseEntity<byte[]> entity = null;
+      
       try {
           // 확장자를 추출하여 formatName에 저장
           String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -112,7 +114,19 @@ public class UploadController {
           // 헤더 구성 객체(외부에서 데이터를 주고받을 때에는 header와 body를 구성해야하기 때문에)
           HttpHeaders headers = new HttpHeaders();
           // InputStream 생성
-          in = new FileInputStream(uploadPath + fileName);
+         
+        //파일 기본경로
+         String path = request.getSession().getServletContext().getRealPath("/resources/upload/"+directory);
+         
+  		File file = new File(path);
+  		if(!file.exists()) {
+  		  file.mkdirs();
+  		}
+  		
+  		System.out.println("display 전체 파일 경로명:"+path+File.separator+fileName); 		
+          
+          in = new FileInputStream(path +File.separator+ fileName);
+          //System.out.println("upload path :"+uploadPath);
           // 이미지 파일이면
           if (mType != null) { 
               headers.setContentType(mType);

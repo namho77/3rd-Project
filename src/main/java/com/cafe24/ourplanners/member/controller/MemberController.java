@@ -111,8 +111,8 @@ public class MemberController {
 
 		MemberVO memVO = (MemberVO) obj;
 
-		String uploadPath = "upload/member/" + memVO.getMember_srl() + "/profile";
-
+		String uploadPath = request.getSession().getServletContext().getRealPath("resources/upload/member/" + memVO.getMember_srl() + "/profile");
+		
 		ResponseEntity<String> imgPath = new ResponseEntity<String>(
 				UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
@@ -124,8 +124,9 @@ public class MemberController {
 		memVO.setProfile_img_path(memberPicture);
 		try {
 			service.uploadPicture(memVO);
+			System.out.println("업로드 완료");
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
