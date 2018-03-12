@@ -21,6 +21,7 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
 
@@ -121,12 +122,25 @@
 	<!-- //PRELOADER -->
 	<div class="preloader_hide">
 
-		<!-- HEADER -->
-
-		<%@ include file="../common/top_main2.jsp"%>
+	<!-- 탑부분(기본적인 틀) -->
+	<nav class="navber navbar-fixed-top" id="navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+				<div class="col-lg-8 col-sm-10 col-xs-12">
+					<div class="navbar-header">
+						<a class="navbar-brand" id="navbar-brand"
+							href="${pageContext.request.contextPath}"><b>♣</b>
+							OurPlanners</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			</div>
+		</div>
+	</nav>
 
 		<!-- HOME -->
-		<section id="main" class="section">
+		<section id="main" class="section" style="margin-top: 120px;">
 
 			<!-- CONTAINER -->
 			<div class="container">
@@ -714,9 +728,9 @@
 		</div>
 		<!-- //모달창 끝 -->
 
-
+		<script src="${pageContext.request.contextPath}/resources/js/script.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 		<!-- Footer section(하단부분) -->
-		<%@ include file="../common/bottom.jsp"%>
+		<%-- <%@ include file="../common/bottom.jsp"%> --%>
 		<!-- Footer section(하단부분) -->
 
 	</div>
