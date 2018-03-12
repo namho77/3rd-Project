@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -19,12 +20,23 @@ public class UploadFileUtils {
 
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
 
-		// UUID 발급
-		UUID uuid = UUID.randomUUID();
+		// 랜덤의 uid 를 만들어준다.(// UUID 발급)
+		UUID uid = UUID.randomUUID();
 		// 저장할 파일명 = UUID + 원본이름
-		String savedName = uuid.toString() + "_" + originalName;
+		// savedName : 570d570a-7af1-4afe-8ed5-391d660084b7_g.JPG 같은 형식으로 만들어준다.
+		
+		String savedName = uid.toString() +"_"+originalName;
+		
+		//String savedName = "/" + uid.toString() + "_" + originalName;
+
+		
+		
+		logger.info("업로드 경로 : " + uploadPath);
+		// \2017\12\27 같은 형태로 저장해준다.
 		// 업로드할 디렉토리(날짜별 폴더) 생성
+
 		String savedPath = calcPath(uploadPath);
+
 		// 파일 경로(기존의 업로드경로+날짜별경로), 파일명을 받아 파일 객체 생성
 		File target = new File(uploadPath + savedPath, savedName);
 		// 임시 디렉토리에 업로드된 파일을 지정된 디렉토리로 복사
