@@ -59,7 +59,7 @@
 
 		var url = "${pageContext.request.contextPath}/admin/json/member_list.json";
 		var inHTML = "";
-
+		
 		var inHTMLPaging = "";
 		$("#memberTBody").empty();
 		var params = "nowPage=" + nowPage + "&is_admin=" + is_admin + "&member_type=" + member_type;
