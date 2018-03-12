@@ -165,15 +165,14 @@ public class MemberServiceImpl implements MemberService {
 
 		}
 
-		//해당 하는 아이디가 없으면 success N
-		//해당 하는 아이디가 있으면 fail Y
+		// 해당 하는 아이디가 없으면 success N
+		// 해당 하는 아이디가 있으면 fail Y
 		if (hasId <= 0) {
-			 System.out.println(hasId);
+			System.out.println(hasId);
 			map.put("result", "N");
 		} else {
 			map.put("result", "Y");
 		}
-		
 
 	}
 
@@ -181,62 +180,52 @@ public class MemberServiceImpl implements MemberService {
 	public void checkAuthkey(HttpServletRequest req, HashMap<String, Object> map) {
 
 		HttpSession session = req.getSession();
-		
-		//아이디 찾기시 저장 되었던 email
-		String email = (String)session.getAttribute("email");
-		
+
+		// 아이디 찾기시 저장 되었던 email
+		String email = (String) session.getAttribute("email");
+
 		String user_id = req.getParameter("user_id");
 		String password = req.getParameter("password");
 		String auth_key = req.getParameter("auth_key");
-		
-		int result=0;
-		
-		//회원가입시 인증키 확인
-		if(user_id != null && password !=null)
-		{
+
+		int result = 0;
+
+		// 회원가입시 인증키 확인
+		if (user_id != null && password != null) {
 			result = dao.isValidAuthKey(user_id, password, auth_key);
 			if (result == 1) {
 
 				dao.updateIsRegister("Y", auth_key, user_id, password);
-				
+
 				map.put("result", "success");
 			} else if (result == 0) {
 				map.put("result", "fail");
 			}
-			
-		}else {
-			//아이디 찾기시 인증키 확인
+
+		} else {
+			// 아이디 찾기시 인증키 확인
 			MemberVO vo = dao.getUserInfoByEmail(email);
 			user_id = vo.getUser_id();
-			
-			result = dao.isValidAuthKeyWithoutPassword(user_id,auth_key);
-			
-			
-			
-			
-			
+
+			result = dao.isValidAuthKeyWithoutPassword(user_id, auth_key);
+
 			if (result == 1) {
 
 				dao.updateIsRegisterWithoutPassword("Y", auth_key, user_id);
 				session.setAttribute("find_id", user_id);
 				session.setAttribute("find_regdate", vo.getRegdate());
-				
+
 				map.put("result", "success");
-			}else if (result==0){
+			} else if (result == 0) {
 				map.put("result", "fail");
 				map.put("errcode", "0");
-			}else {
+			} else {
 				map.put("result", "fail");
 				map.put("errcode", "-1");
 			}
-			
+
 		}
-		
-		
-		
-		
-		
-		
+
 	}
 
 	@Override
@@ -414,7 +403,6 @@ public class MemberServiceImpl implements MemberService {
 
 			req.setAttribute("action", "checking_email");
 
-
 		} else if (action.equalsIgnoreCase("checking_auth")) {
 			req.setAttribute("action", "checking_auth");
 
@@ -428,12 +416,9 @@ public class MemberServiceImpl implements MemberService {
 
 			session.setAttribute("email", searchEmail);
 
-
-
 		} else if (action.equalsIgnoreCase("change_password")) {
 
 			req.setAttribute("action", "change_password");
-
 
 		} else if (action.equalsIgnoreCase("complete")) {
 
@@ -460,11 +445,11 @@ public class MemberServiceImpl implements MemberService {
 		String email_address = req.getParameter("email_address");
 
 		hasEmail = dao.hasEmail(email_address);
-		
-		//해당 하는 아이디가 없으면 success N
-		//해당 하는 아이디가 있으면 fail Y
+
+		// 해당 하는 아이디가 없으면 success N
+		// 해당 하는 아이디가 있으면 fail Y
 		if (hasEmail <= 0) {
-			 System.out.println(hasEmail);
+			System.out.println(hasEmail);
 			map.put("result", "N");
 		} else {
 			map.put("result", "Y");
@@ -473,34 +458,35 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateEmail(String user_id, String email_address) {
-		
+
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
-		//update member set email_address = ? , email_id = ? , email_host = ? where user_id = ?
+
+		// update member set email_address = ? , email_id = ? , email_host = ? where
+		// user_id = ?
 		String email_id = email_address.split("@")[0];
 
-        String email_host = email_address.split("@")[1];
-        paramMap.put("user_id", user_id);
+		String email_host = email_address.split("@")[1];
+		paramMap.put("user_id", user_id);
 		paramMap.put("email_address", email_address);
 		paramMap.put("email_id", email_id);
 		paramMap.put("email_host", email_host);
-        dao.updateEmail(paramMap);
-		
+		dao.updateEmail(paramMap);
+
 	}
 
 	@Override
 	public void updateMyInfo(HttpServletRequest req, Model model, ModelAndView mv) {
-		
+
 		HttpSession session = req.getSession();
 		String action = req.getParameter("action");
 
 		System.out.println("Method : " + req.getMethod() + " Action : " + req.getParameter("action"));
 
 		Object obj = session.getAttribute("loginUserInfo");
-		
-		MemberVO memVO = (MemberVO) obj;
-		String user_id = memVO.getUser_id();
-		
+
+		MemberVO loginVO = (MemberVO) obj;
+		String user_id = loginVO.getUser_id();
+
 		if (action == null || action.length() == 0 || action.equalsIgnoreCase("view")) {
 
 			mv.setViewName("member/myinfo");
@@ -509,16 +495,13 @@ public class MemberServiceImpl implements MemberService {
 		// confirm password before member info
 		else if (action.equalsIgnoreCase("password")) {
 			mv.setViewName("member/myinfo_modify_confirm_password");
-			
+
 		} else if (action.equalsIgnoreCase("modify")) {
 			// 파라미터 들어온 비밀번호를 확인후 회원 정보 수정 폼 뛰우기
-		
+
 			String password = (String) req.getParameter("password");
 			LoginDTO dto = new LoginDTO();
 			dto.setUser_id(user_id);
-			
-			
-			
 
 			String salt = dao.getSaltById(user_id);
 
@@ -526,10 +509,8 @@ public class MemberServiceImpl implements MemberService {
 
 			dto.setPassword(password);
 
-			
-			
 			int affected = dao.confirmIdPassword(dto);
-			if (affected<=0) {
+			if (affected <= 0) {
 				System.out.println("비번 틀림");
 				// 비밀번호 다른경우 에러메시지와 함께 다시 비밀번호 확인창으로 뷰 이동
 				// 에러 메시지 맵
@@ -538,78 +519,65 @@ public class MemberServiceImpl implements MemberService {
 				// <c:if test="${errors.isNotMatchPassword}">비밀번호가 일치하지 않습니다.</c:if>
 				model.addAttribute("errors", errorsMap);
 				mv.setViewName("member/myinfo_modify_confirm_password");
-			}
-			else {
+			} else {
 				// 비밀번호 맞은경우
 				System.out.println("비번 맞다.");
 				model.addAttribute("isMatchedPass", "Y");
-				
-				MemberVO userInfo = null;
-				
-				userInfo = dao.getUserInfoById(user_id);
-				
-				model.addAttribute("userInfo", userInfo);
-				mv.setViewName("member/myinfo_modify");
-				
-			}
-			
-		} 
-		else if (action.equalsIgnoreCase("modifyAdmin")) {
-			
-			//현재 접속된 계정의 아이디가 관리자인지 확인하고..
-			if(!memVO.getIs_admin().equalsIgnoreCase("Y"))
-			{
-				// 비밀번호 다른경우 에러메시지와 함께 다시 비밀번호 확인창으로 뷰 이동
-				// 에러 메시지 맵
-				Map<String, Boolean> errorsMap = new HashMap<String, Boolean>();
-				errorsMap.put("isNotAdminModifyMember", Boolean.TRUE);
-				// <c:if test="${errors.isNotAdminModifyMember}">관리자 계정만 이용할 수 있습니다.</c:if>
-				model.addAttribute("errors", errorsMap);
-				mv.setViewName("member/member_modify_confirm_password");
-								
-			}
-			else {
-				// 관리자 계정인 경우 파라미터로 받은 user_id의 멤버 변수를 정보에 저장후 포워딩
-				
-				MemberVO userInfo = null;
-				String modify_id = req.getParameter("modify_id");
-				
-				//수정 아이디 없으면 자신계정
-				if(modify_id == null || modify_id.length()==0)
-					userInfo = dao.getUserInfoById(user_id);	
-				else
-					userInfo = dao.getUserInfoById(modify_id);
-				
-				model.addAttribute("userInfo", userInfo);
 
+				MemberVO userInfo = null;
+
+				userInfo = dao.getUserInfoById(user_id);
+
+				model.addAttribute("userInfo", userInfo);
 				mv.setViewName("member/myinfo_modify");
-				
+
 			}
+
 		}
-		
+
 		else if (action.equalsIgnoreCase("complete")) {
 			// 회원정보 수정 완료 처리후 회원정보 보기 페이지로 이동
-			
+
 			MemberVO userInfo = null;
+			//
+			String modify_id = req.getParameter("modify_id");
+
+			if (modify_id == null || modify_id.length() == 0) {
+				userInfo = dao.getUserInfoById(user_id);
+			} else {
+				if (loginVO.getIs_admin().equalsIgnoreCase("Y")) {
+					userInfo = dao.getUserInfoById(modify_id);
+				} else {
+					// 수정 모드는 관리자만 가능합니다!
+					// 비밀번호 다른경우 에러메시지와 함께 다시 비밀번호 확인창으로 뷰 이동
+					// 에러 메시지 맵
+					Map<String, Boolean> errorsMap = new HashMap<String, Boolean>();
+					errorsMap.put("isNotAdminModifyMember", Boolean.TRUE);
+					// <c:if test="${errors.isNotAdminModifyMember}">관리자 계정만 이용할 수 있습니다.</c:if>
+					model.addAttribute("errors", errorsMap);
+					mv.setViewName("member/member_modify_confirm_password");
+					return;
+
+				}
+			}
 			
-			//기존 정보 객체 가져오고
-			userInfo = dao.getUserInfoById(user_id);
-			
-			
-			//파라미터로 넘겨받은 정보로 변환해서 
-			String user_name =req.getParameter("user_name");
-			
+			// 기존 정보 객체 가져오고
+			//userInfo = dao.getUserInfoById(user_id);
+
+			// 파라미터로 넘겨받은 정보로 변환해서
+			String user_name = req.getParameter("user_name");
+
 			String gender = req.getParameter("gender");
-			
+
 			int find_account_question = Integer.parseInt(req.getParameter("find_account_question"));
 
 			String find_account_answer = req.getParameter("find_account_answer");
-			
+
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			String birthday = req.getParameter("birthday");
 
-			java.util.Date utilDate =null;
-			
+			java.util.Date utilDate = null;
+
 			try {
 				utilDate = format.parse(birthday);
 			} catch (ParseException e) {
@@ -618,59 +586,70 @@ public class MemberServiceImpl implements MemberService {
 			}
 
 			java.sql.Date sqlBirthday = new java.sql.Date(utilDate.getTime());
-			
 
 			String address = req.getParameter("address");
-			
+
 			String mobile = req.getParameter("mobile");
 
 			String allow_mailing = req.getParameter("allow_mailing");
 			String allow_message = req.getParameter("allow_message");
-			
+
 			String profile_img_path = req.getParameter("profile_img_path");
-			
+
 			userInfo.setUser_name(user_name);
 			userInfo.setGender(gender);
 			userInfo.setFind_account_question(find_account_question);
 			userInfo.setFind_account_answer(find_account_answer);
-			
+
 			userInfo.setBirthday(sqlBirthday);
-			
+
 			userInfo.setMobile(mobile);
-			
+
 			userInfo.setProfile_img_path(profile_img_path);
-			
+
 			userInfo.setAllow_mailing(allow_mailing);
 			userInfo.setAllow_message(allow_message);
-			
-			//업데이트 실행
+
+			// 업데이트 실행
 			int affected = dao.updateMyInfo(userInfo);
-			
-			if (affected <= 0)
-			{
+
+			if (affected <= 0) {
 				model.addAttribute("layer_msg", "회원 정보 수정에 실패하였습니다.");
-				//mv.setViewName("member/myinfo");
+				// mv.setViewName("member/myinfo");
+
+			} else {
+				// 성공한 경우 변경한 내용으로 로그인 정보도 변경
+				System.out.println("로그인 : " + user_id);
+				System.out.println("수정id : " + userInfo.getUser_id());
+				if (user_id.equalsIgnoreCase(userInfo.getUser_id())) {
+					System.out.println("로그인 계정 = 수정계정 동일 계정 수정");
+					session.setAttribute("loginUserInfo", userInfo);
+				}
 				
-			}else {
-				//성공한 경우 변경한 내용으로 로그인 정보도 변경
-				model.addAttribute("loginUserInfo", userInfo);
+				model.addAttribute("userInfo", userInfo);
 				model.addAttribute("layer_msg", "회원 정보가 수정 되었습니다.");
 			}
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map) {
 		List<MemberDTO> lists = new ArrayList<MemberDTO>();
-		lists = dao.getSearchMemberList(scri,map);
+		lists = dao.getSearchMemberList(scri, map);
 
 		int totalRecordCount = dao.getTotalMemberCount(scri);
 		String pagingDiv = PagingUtil.pagingAjaxMember(totalRecordCount, scri, "memberPaging");
-		
+
 		map.put("memberLists", lists);
 		map.put("memberPagingDiv", pagingDiv);
+	}
+
+	@Override
+	public MemberVO getUserInfoById(String user_id) {
+
+		return dao.getUserInfoById(user_id);
 	}
 
 }

@@ -149,12 +149,10 @@ public class FAQController {
 			e.printStackTrace();
 			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
-		
-		if(((String)map.get("result")).equals("fail"))
-		{
+
+		if (((String) map.get("result")).equals("fail")) {
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
-		}else if (((String)map.get("result")).equals("success"))
-		{
+		} else if (((String) map.get("result")).equals("success")) {
 			System.out.println("글수정 성공");
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
@@ -172,7 +170,7 @@ public class FAQController {
 	// 글수정 처리
 	@ResponseBody
 	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public Map<String, Object> modifyActionFAQ(@PathVariable Integer faq_srl, HttpServletRequest req,
+	public ResponseEntity<Map<String, Object>> modifyActionFAQ(@PathVariable Integer faq_srl, HttpServletRequest req,
 			HttpSession session, @RequestBody FAQVO vo) {
 
 		vo.setFaq_srl(faq_srl);
@@ -184,59 +182,87 @@ public class FAQController {
 		 * System.out.println("contents:"+vo.getContents());
 		 */
 		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseEntity<Map<String, Object>> entity = null;
 
-		if (session.getAttribute("loginUserInfo") == null) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotLogin");
-			return map;
+		try {
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("result", "fail");
+				map.put("errorMsg", "isNotLogin");
+
+			} else {
+
+				if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+					map.put("result", "fail");
+					map.put("errorMsg", "isNotAdmin");
+
+				} else {
+
+					int result = service.modifyFAQ(vo);
+
+					if (result <= 0) {
+						map.put("result", "fail");
+						map.put("errorMsg", "sqlError");
+					} else {
+						map.put("result", "success");
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
 
-		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotAdmin");
-			return map;
+		if (((String) map.get("result")).equals("fail")) {
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
+		} else if (((String) map.get("result")).equals("success")) {
+			System.out.println("글 수정 성공");
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 
-		int result = service.modifyFAQ(vo);
-
-		if (result <= 0) {
-			map.put("result", "fail");
-			map.put("errorMsg", "sqlError");
-		} else {
-			map.put("result", "success");
-		}
-
-		return map;
+		return entity;
 	}
 
 	// 해당 글 삭제
 	@ResponseBody
 	@RequestMapping(value = "/customercenter/faq/{faq_srl}", method = RequestMethod.DELETE)
-	public Map<String, Object> deleteFAQ(HttpServletRequest req, HttpSession session, Model model,
+	public ResponseEntity<Map<String, Object>> deleteFAQ(HttpServletRequest req, HttpSession session, Model model,
 			@PathVariable Integer faq_srl) {
+
 		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseEntity<Map<String, Object>> entity = null;
 
-		if (session.getAttribute("loginUserInfo") == null) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotLogin");
-			return map;
+		try {
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("result", "fail");
+				map.put("errorMsg", "isNotLogin");
+			} else {
+
+				if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
+					map.put("result", "fail");
+					map.put("errorMsg", "isNotAdmin");
+				} else {
+
+					int result = service.deleteFAQ(faq_srl);
+
+					if (result <= 0) {
+						map.put("result", "fail");
+						map.put("errorMsg", "sqlError");
+					} else {
+						map.put("result", "success");
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
 
-		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotAdmin");
-			return map;
+		if (((String) map.get("result")).equals("fail")) {
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
+		} else if (((String) map.get("result")).equals("success")) {
+			System.out.println("글 삭제 성공");
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
-
-		int result = service.deleteFAQ(faq_srl);
-
-		if (result <= 0) {
-			map.put("result", "fail");
-			map.put("errorMsg", "sqlError");
-		} else {
-			map.put("result", "success");
-		}
-
-		return map;
+		return entity;
 	}
 }

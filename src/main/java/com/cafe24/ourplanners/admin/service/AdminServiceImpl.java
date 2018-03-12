@@ -32,6 +32,12 @@ public class AdminServiceImpl implements AdminService {
 		map.put("memberPagingDiv", pagingDiv);
 		
 	}
+
+	@Override
+	public int deleteMember(String user_id) {
+		
+		return dao.deleteMember(user_id);
+	}
 	
 	
 }

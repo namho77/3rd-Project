@@ -10,7 +10,9 @@ import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 public interface AdminService {
 
-	void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
+	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
+
+	public int deleteMember(String user_id);
 
 
 	

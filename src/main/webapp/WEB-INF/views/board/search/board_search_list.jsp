@@ -76,6 +76,8 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 	var serviceMainImgPath = "${pageContext.request.contextPath}/resources/upload/service/";
 	//내용 지우기
 	$("#search_list_div").empty();
+	$("#search_list_paging_div").empty();
+	
 	var params = "board_type="+board_type+"&pageSize=6&blockPage=5&keyword="+keyword+"&searchType="+searchType;
 	//alert(params);
 	$.ajax({
@@ -222,90 +224,10 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 
 			}
 		});
-
 		
 		//서치 리스트
-		//getServiceSearchList(nowPage, category_srl, subcategory_srl , board_type ,searchType,keyword
-		//alert("${category_srl}, ${subcategory_srl} , ${board_type} ,${searchType},${keyword}");
-		getServiceSearchList(1, null, null , "${board_type}" ,"${searchType}","${keyword}");
+		getServiceSearchList(1, "${category_srl}", "${subcategory_srl}" , "${board_type}" ,"${searchType}","${keyword}");
 		
-		//최초 서치 리스트		
-		/* url = "${pageContext.request.contextPath}/board/json/service_list.json";
-		var serviceMainImgPath = "${pageContext.request.contextPath}/resources/upload/service/";
-		//내용 지우기
-		$("#search_list_div").empty();
-		var params = "board_type=${board_type}&pageSize=6&blockPage=5&keyword=${keyword}&searchType=tc";
-		//alert(params);
-		$.ajax({
-			cache : false, // 캐시 사용 없애기
-			type : 'post',
-			url : url,
-			data : params,
-			//data : JSON.stringify({ board_type: 'E', pageSize: '3', blockPage: '1'}),
-			//contentType: 'application/json; charset=utf-8',
-			dataType : 'json',
-			//contentType: "application/x-www-form-urlencoded; charset=utf-8",				
-			//dataType: "text",	
-			success : function(data) {
-				//alert(JSON.stringify(data));
-				var items = [];
-				var inHTML = "";
-				$.each(data.searchList, function(index, boardVO) { // each로 모든 데이터 가져와서 items 배열에 넣고
-
-					//if(index==5)
-					//return false; //break; true=>continue
-
-					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
-
-					if (index == 0) {
-						inHTML += "<div class=\"item active\">";
-					} else {
-						inHTML += "<div class=\"item\">";
-					}
-					inHTML += "<div class=\"col-md-4\">";
-					inHTML += "<div class=\"card card-blog\">";
-					inHTML += "<div class=\"card-image\">";
-					inHTML += "<a href=\"#pablo\"> <img class=\"img img-raised\" src=\""+serviceMainImgPath+boardVO.board_srl+"/images/"+boardVO.main_image+"\">";
-					inHTML += "</a>";
-					inHTML += "<div class=\"colored-shadow\" style=\"background-image: url('" + serviceMainImgPath + boardVO.board_srl + "/images/" + boardVO.main_image + "'); opacity: 1;\"></div>";
-					inHTML += "<div class=\"ripple-container\"></div>";
-					inHTML += "</div>";
-					inHTML += "<div class=\"card-content\">";
-					inHTML += "<h6 class=\"category text-info\">" + boardVO.subcategory_srl + "</h6>";
-					inHTML += "<h4 class=\"card-title\">";
-					inHTML += "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\">" + boardVO.title + "</a>";
-					inHTML += "</h4>";
-					inHTML += "<p class=\"card-description\">";
-					inHTML += boardVO.contents + "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\"> 자세히 보기 </a>";
-					inHTML += "</p>";
-					inHTML += "</div>";
-					inHTML += "</div>";
-					inHTML += "</div>";
-					inHTML += "</div>";
-
-					//inHTML+="<span><a href='./board/engineer/"+boardVO.board_srl+"?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
-
-					
-				});//each끝
-				if (jQuery.isEmptyObject(data.searchList)) {
-					$('#search_list_div').html("<div class=\"row\">해당 하는 검색 결과가 없습니다.</div>");
-				} else {
-					$('#search_list_div').html(inHTML);
-				}
-
-				$("#search_list_paging_div").html(data.pagingDiv);
-				
-				//alert(inHTML);
-				//$('#hot_engineer_div').html(items);
-
-			},
-
-			error : function(e) {
-				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
-			}
-
-		}); */
-
 	});
 </script>
 

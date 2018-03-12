@@ -313,10 +313,64 @@ public class MemberController {
 	
 	//나의 정보 보기
 		@RequestMapping(value = "member/myinfo", method = RequestMethod.GET)
-		public String viewMyInfo(Model model, HttpServletRequest req,
+		public ModelAndView viewMyInfo(Model model, HttpServletRequest req,
 				@RequestParam(required = false, defaultValue = "") String type) {
 			logger.info("나의 정보 보기");
-			return "member/myinfo";
+			
+			ModelAndView mv = new ModelAndView();
+			
+			HttpSession session = req.getSession();
+			String action = req.getParameter("action");
+
+			System.out.println("Method : " + req.getMethod() + " Action : " + req.getParameter("action"));
+
+			Object obj = session.getAttribute("loginUserInfo");
+			
+			MemberVO memVO = (MemberVO) obj;
+			String user_id = memVO.getUser_id();
+			
+			
+			if (action == null || action.length() == 0 || action.equalsIgnoreCase("view")) {
+
+				mv.setViewName("member/myinfo");
+
+			}			
+			else if (action.equalsIgnoreCase("modifyAdmin")) {
+				
+				//현재 접속된 계정의 아이디가 관리자인지 확인하고..
+				if(!memVO.getIs_admin().equalsIgnoreCase("Y"))
+				{
+					// 비밀번호 다른경우 에러메시지와 함께 다시 비밀번호 확인창으로 뷰 이동
+					// 에러 메시지 맵
+					Map<String, Boolean> errorsMap = new HashMap<String, Boolean>();
+					errorsMap.put("isNotAdminModifyMember", Boolean.TRUE);
+					// <c:if test="${errors.isNotAdminModifyMember}">관리자 계정만 이용할 수 있습니다.</c:if>
+					model.addAttribute("errors", errorsMap);
+					mv.setViewName("member/member_modify_confirm_password");
+									
+				}
+				else {
+					// 관리자 계정인 경우 파라미터로 받은 user_id의 멤버 변수를 정보에 저장후 포워딩
+					System.out.println("관리자 계정으로 수정 모드");
+					MemberVO userInfo = null;
+					String modify_id = req.getParameter("modify_id");
+					
+					//수정 아이디 없으면 자신계정
+					if(modify_id == null || modify_id.length()==0)
+						userInfo = service.getUserInfoById(user_id);	
+					else
+						userInfo = service.getUserInfoById(modify_id);
+					
+					model.addAttribute("userInfo", userInfo);
+					
+					model.addAttribute("modify_id", modify_id);
+					
+					mv.setViewName("member/myinfo_modify");
+					
+				}
+			}
+			
+			return mv;
 		}
 			
 		//나의 정보 수정
