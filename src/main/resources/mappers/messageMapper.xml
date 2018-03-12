@@ -37,7 +37,7 @@
 	postdate,
 	readed,
 	readed_date
-	 FROM op_message where message_srl > 0 
+	 FROM op_message where message_srl > 0
 	]]>
 	
 		
@@ -108,12 +108,12 @@
 	</insert>
 
 	<select id="sendedMessage" resultType="MessageVO">
-		select * from op_message where sender_srl=#{login_id}
+		select * from op_message where sender_srl=#{sender_srl}
 		
 	</select>
 	
 	<select id="receivedMessage" resultType="MessageVO">
-		select * from op_message where receiver_srl=#{login_id}
+		select * from op_message where receiver_srl=#{receiver_srl}
 		
 	</select>
 	

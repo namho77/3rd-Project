@@ -256,7 +256,7 @@
 										function(index, messageList) { // each로 모든 데이터 가져와서 items 배열에 넣고
 
 											inHTML += "<div id=\"messageDiv_"
-													+ messageList.message_srl 
+													+messageList.message_srl
 													+ "\" class=\"mix  col-lg-12 panel panel-default\" data-value=\""
 													+ (index + 1)
 													+ "\" style=\"display: inline-block;\">";
@@ -269,9 +269,7 @@
 													+ messageList.sender_srl
 													+ "</br>"
 													+ "</strong> "
-													+ messageList.title
-													
-													+messageList.readed;
+													+ messageList.title;
 
 											inHTML += "			</a>";
 											inHTML += "		</h4>";
@@ -287,7 +285,6 @@
 													+ "</p>";
 											inHTML += "		</div>";
 											inHTML += "		<div class=\"panel-footer\">";
-											inHTML += "받은 날짜 : "
 											inHTML += messageList.postdate
 											inHTML += "		</div>";
 											inHTML += "		<div class=\"panel-footer\">";
@@ -333,8 +330,10 @@
 						popLayerMsg("게시물 삭제에 실패하였습니다.");
 					} else if (d.result == "success") {
 						popLayerMsg("게시물 삭제에 성공하였습니다.");
-						$("#messageDiv_" + message_srl).hide(100);
-						
+						$("#messageDiv_" + message_srl).hide(1000);
+						$(document).ready(function() {
+							getListMessage(1, 1, 1);
+						});
 					}
 				},
 				error : function(e) {
