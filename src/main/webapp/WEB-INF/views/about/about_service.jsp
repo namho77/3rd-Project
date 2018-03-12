@@ -22,8 +22,7 @@
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700|Raleway:300,400,500,600'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_2.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonTop_1_service.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonBottom.css?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />">
 
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/icons/favicon.ico">
@@ -53,324 +52,141 @@
 	<div class="preloader_hide">
 
 	<!-- header1(네비게이션 탑1) -->
-		<%@ include file="../common/commonTop_1.jsp"%>
+		<%-- <%@ include file="../common/commonTop_1.jsp"%> --%>
 	<!-- header1(네비게이션 탑1) -->
 	<!-- header2(네비게이션 탑2) -->
-		<%@ include file="../common/commonTop_2_mypage.jsp"%>
+		<%-- <%@ include file="../common/commonTop_2_mypage.jsp"%> --%>
 	<!-- header2(네비게이션 탑2) -->
-
+	
+	<!-- 탑부분(기본적인 틀) -->
+	<nav class="navber" id="navbar-fixed-top">
+		<div class="container-fluid service-image">
+			<div class="row">
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+				<div class="col-lg-8 col-sm-10 col-xs-12">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="glyphicon glyphicon-align-justify"></span>
+						</button>
+						<a class="navbar-brand" id="navbar-brand"
+							href="${pageContext.request.contextPath}"><b>♣</b>
+							OurPlanners</a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
+						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/client">의뢰인 게시판</a></li>
+						<c:choose>
+						<c:when test="${empty loginUserInfo}">
+							<li><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>
+							<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
+								<ul class="dropdown-menu" id="dropdown-menu">
+									<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+										<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
+									</c:if>
+									<li><a href="${pageContext.request.contextPath}/mypage/myplan">마이플랜</a></li>
+									<li><a href="${pageContext.request.contextPath}/message">쪽지함</a></li>
+									<li><a href="${pageContext.request.contextPath}/profile/${loginUserInfo.user_id}">프로필</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/myinfo">계정정보</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/change_password">비밀번호 변경</a></li>
+									<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
+								</ul>
+							</li>
+							<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
+						</c:otherwise>
+						</c:choose>
+					</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			</div>
+		</div>
+	</nav>
+	<!-- 탑부분(기본적인 틀) -->
+	
+	<!-- 전문적인 서비스알림 -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+			<div class="col-lg-8 col-sm-10 col-xs-12">
+				<div class="service-title-div">
+					<h1>전문적인 서비스</h1>
+					<h2>각 분야의 전문가 <b>5483명</b>의 <b>차별화된 서비스</b>를 이용해보세요.</h2>
+					
+					<div class="position-relative bg-color-f6 padding-all-20" style="width: 29%">
+                        <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_design.png">
+                        <h4 class="margin-none font-color-lighter">디자인 전문가의 자료</h4>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">22,464</span>건</div>
+                    </div>
+                    
+                    <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 24%">
+                        <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_marketing.png">
+                        <h4 class="margin-none font-color-lighter">마케팅 전문가의 자료</h4>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">16,412</span>건</div>
+                    </div>
+                    
+                    <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 17%">
+                        <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_it.png">
+                        <h4 class="margin-none font-color-lighter">IT&amp;개발 전문가자료</h4>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">8,524</span>건</div>
+                    </div>
+                    
+                    <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 11%">
+                        <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_content.png">
+                        <h4 class="margin-none font-color-lighter line-height">컨텐츠제작<br>전문가<br>자료</h4>
+                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">5,390</span>건</div>
+                    </div>
+                    
+                    <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 10%">
+                        <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_translate.png">
+                        <h4 class="margin-none font-color-lighter line-height">번역&amp;<br>통역전문<br>자료</h4>
+                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">4,473</span>건</div>
+                    </div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-sm-1 col-xs-0"></div>
+		</div>
+	</div>
+	<!-- 전문적인 서비스알림 -->
+	
+	
 		<!-- HOME -->
-		<section class="section page-services" style="margin-top: 120px;">
+		<section class="section page-services" style="margin-top: 120px; background-color: #F1F1F1;">
 			<div class="container">
-				<div class="row">
+				<div class="row service-size">
 					<div class="col-sm-4 col-md-3 sm-box">
 						<ul class="nav nav-tabs vertical">
-							<li class="active"><a href="#tab1" data-toggle="tab">HTML5 and CSS3</a></li>
-							<li><a href="#tab2" data-toggle="tab">Wordpress</a></li>
-							<li><a href="#tab3" data-toggle="tab">Joomla vs Drupal</a></li>
-							<li><a href="#tab4" data-toggle="tab">Magento</a></li>
+							<li class="active"><a href="#tab1" data-toggle="tab">서비스 찾기</a></li>
+							<li><a href="#tab2" data-toggle="tab">서비스 비교</a></li>
+							<li><a href="#tab3" data-toggle="tab">매칭하기</a></li>
+							<li><a href="#tab4" data-toggle="tab">평가하기</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-8 col-md-9">
 						<div class="tab-content">
 							<div class="tab-pane fade in active" id="tab1">
-								<h3 class="box-title bt2">What is HTML5?</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, distinctio omnis dolorum nostrum alias nulla placeat id sit debitis molestiae neque tenetur consequatur in unde aliquam optio quasi beatae veritatis rem delectus eveniet! Aliquid, minima, natus, odit cumque consequuntur ratione eligendi est pariatur maiores recusandae asperiores tenetur optio id cum?</p>
+								<h3 class="box-title bt2">서비스 찾기</h3>
+								<p>'검색'또는 '카테고리 선택'을 통해 원하는 서비스들을 확인합니다.</p>
 							</div>
 							<div class="tab-pane fade" id="tab2">
-								<h3 class="box-title bt2">How to create Wordpress themes?</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, distinctio omnis dolorum nostrum alias nulla placeat id sit debitis molestiae neque tenetur consequatur in unde aliquam optio quasi beatae veritatis rem delectus eveniet! Aliquid, minima, natus, odit cumque consequuntur ratione eligendi est pariatur maiores recusandae asperiores tenetur optio id cum?</p>
+								<h3 class="box-title bt2">서비스 비교</h3>
+								<p>서비스의 설명, 가격, 평가, 포트폴리오 등을 꼼꼼히 살펴보고, 견적에 맞게 옵션을 선택합니다.</p>
 							</div>
 							<div class="tab-pane fade" id="tab3">
-								<h3 class="box-title bt2">Is Drupal better than Joomla?</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, distinctio omnis dolorum nostrum alias nulla placeat id sit debitis molestiae neque tenetur consequatur in unde aliquam optio quasi beatae veritatis rem delectus eveniet! Aliquid, minima, natus, odit cumque consequuntur ratione eligendi est pariatur maiores recusandae asperiores tenetur optio id cum?</p>
+								<h3 class="box-title bt2">매칭하기</h3>
+								<p>요청란에 요청을 하면 많은 사람들중에 한분만 채택될수 있습니다. 채택후 연결정보를 주고받고 작업물을 주고 받습니다.</p>
 							</div>
 							<div class="tab-pane fade" id="tab4">
-								<h3 class="box-title bt2">Magento or OpenCart</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, distinctio omnis dolorum nostrum alias nulla placeat id sit debitis molestiae neque tenetur consequatur in unde aliquam optio quasi beatae veritatis rem delectus eveniet! Aliquid, minima, natus, odit cumque consequuntur ratione eligendi est pariatur maiores recusandae asperiores tenetur optio id cum?</p>
+								<h3 class="box-title bt2">평가하기</h3>
+								<p>작업물을 받은 후, 전문가에 대한 평가를 남깁니다.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		<section class="section-3 section-gray mb0">
-			<div class="container">
-				<div class="row mb50">
-					<div class="col-sm-6 col-md-3 sm-box">
-						<a href="#" class="job-careers"> <i class="fa fa-html5 fa-5x"></i>
-							<h3 class="box-title">Clean Code</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3 sm-box">
-						<a href="#" class="job-careers"> <i class="fa fa-apple fa-5x"></i>
-							<h3 class="box-title">Retina Ready</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3 xs-box">
-						<a href="#" class="job-careers"> <i class="fa fa-android fa-5x"></i>
-							<h3 class="box-title">Responsive Design</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3">
-						<a href="#" class="job-careers"> <i class="fa fa-photo fa-5x"></i>
-							<h3 class="box-title">Multipurpose Template</h3>
-						</a>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6 col-md-3 sm-box">
-						<a href="#" class="job-careers"> <i class="fa fa-bar-chart fa-5x"></i>
-							<h3 class="box-title">Tons of elements</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3 sm-box">
-						<a href="#" class="job-careers"> <i class="fa fa-support fa-5x"></i>
-							<h3 class="box-title">Friendly Support</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3 xs-box">
-						<a href="#" class="job-careers"> <i class="fa fa-cloud-download fa-5x"></i>
-							<h3 class="box-title">Free Updates</h3>
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-3">
-						<a href="#" class="job-careers"> <i class="fa fa-book fa-5x"></i>
-							<h3 class="box-title">Detailed Documentation</h3>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="large-padding section-dark m0 custom-bg custom-bg2 bg-left parallax" data-bg="../assets/images/demo/i-102.png">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12 col-md-6 col-md-offset-6">
-						<h2 class="section-title text-left st2 mb30">Even more</h2>
-						<p class="mb40">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium voluptates, laboriosam eaque voluptatem vitae earum quos similique dolorum preset.</p>
-						<p>
-							<i class="fa fa-cloud-download fa-bg main-bg color-white"></i> &nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit facere, distinctio.
-						</p>
-						<p>
-							<i class="fa fa-cloud-upload fa-bg main-bg color-white"></i> &nbsp; Laboriosam eaque voluptatem vitae earum quos similique dolorum.
-						</p>
-						<p class="mb0">
-							<i class="fa fa-cloud fa-bg main-bg color-white"></i> &nbsp; Omnis dolorum nostrum alias nulla placeat id sit debitis molestiae neque
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="section-3 custom-section cs2 mt0">
-			<div class="container animated" data-anim="bounceIn">
-				<div class="row">
-					<div class="col-sm-12 text-center">
-						<h2 class="section-title st2 mb25">Showcase the main services to your customers!</h2>
-						<a href="#" class="btn btn-primary">See more services</a>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="section">
-			<div class="container">
-				<div class="row mb30">
-					<div class="col-sm-4 text-center xs-box">
-						<img src="../assets/images/demo/bar-chart.png" alt="careers" class="img-careers">
-					</div>
-					<div class="col-sm-8">
-						<div class="text-careers">
-							<h3 class="box-title">We do not have rules. We have values.</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quidem modi facilis doloremque qui dicta, est, libero distinctio a explicabo adipisci, autem animi tempore excepturi numquam atque cum officia. Labore nisi minus odio quo vero, quaerat sit doloribus. Enim necessitatibus reprehenderit maiores inventore.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row mb30">
-					<div class="col-sm-4 text-center xs-box col-sm-push-8">
-						<img src="../assets/images/demo/brightness.png" alt="careers" class="img-careers">
-					</div>
-					<div class="col-sm-8 col-sm-pull-4">
-						<div class="text-careers">
-							<h3 class="box-title">Be Bold. Be Open. Be you.</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quidem modi facilis doloremque qui dicta, est, libero distinctio a explicabo adipisci, autem animi tempore excepturi numquam atque cum officia. Labore nisi minus odio quo vero, quaerat sit doloribus. Enim necessitatibus reprehenderit maiores inventore.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 text-center xs-box">
-						<img src="../assets/images/demo/compose.png" alt="careers" class="img-careers">
-					</div>
-					<div class="col-sm-8">
-						<div class="text-careers">
-							<h3 class="box-title">Work on important problems</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quidem modi facilis doloremque qui dicta, est, libero distinctio a explicabo adipisci, autem animi tempore excepturi numquam atque cum officia. Labore nisi minus odio quo vero, quaerat sit doloribus. Enim necessitatibus reprehenderit maiores inventore.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="section-3 section-gray mb0">
-			<div class="container">
-				<div class="row ">
-					<div class="col-sm-4 xs-box2">
-						<div class="box-content">
-							<i class="fa fa-support fa-3x"></i>
-							<h3 class="box-title br-dashed">Knowledgebase</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab corrupti, quasi? Beatae cumque maiores.</p>
-						</div>
-					</div>
-					<div class="col-sm-4 xs-box2">
-						<div class="box-content">
-							<i class="fa fa-phone fa-3x"></i>
-							<h3 class="box-title br-dashed">Phone Support</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab corrupti, quasi? Beatae cumque maiores.</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="box-content">
-							<i class="fa fa-envelope fa-3x"></i>
-							<h3 class="box-title br-dashed">Mail Support</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab corrupti, quasi? Beatae cumque maiores.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="section-3 section-dark mt0">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 xs-box">
-						<h3 class="box-title color-white">Boxed / Wide Layout</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, error, ipsa assumenda cumque dicta deleniti quibusdam accusamus vitae ab impedit.</p>
-						<p>
-							<i class="fa fa-cloud-download fa-bg main-bg color-white"></i> &nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit facere.
-						</p>
-						<p class="mb0">
-							<i class="fa fa-cloud fa-bg main-bg color-white"></i> &nbsp; Omnis dolorum nostrum alias nulla placeat id sit debitis molestiae.
-						</p>
-					</div>
-					<div class="col-sm-6">
-						<h3 class="box-title color-white">Our Skills</h3>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" data-percentage="85">
-								<span><i class="fa fa-wordpress"></i> Wordpress 85%</span>
-							</div>
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" data-percentage="70">
-								<span><i class="fa fa-drupal"></i> Drupal 70%</span>
-							</div>
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" data-percentage="100">
-								<span><i class="fa fa-html5"></i> HTML 100%</span>
-							</div>
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" data-percentage="60">
-								<span><i class="fa fa-joomla"></i> Joomla 60%</span>
-							</div>
-						</div>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" data-percentage="100">
-								<span><i class="fa fa-joomla"></i> CSS3 100%</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="section mb30">
-			<div class="container">
-				<div class="row mb35">
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<img src="../assets/images/icons/one-color/64px/check.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Responsive Design</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<i class="fa fa-weixin"></i>
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Top notch Support</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="box-left">
-							<img src="../assets/images/icons/full-color/64px/browser.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Wide / Boxed layout</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row mb35">
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<img src="../assets/images/icons/one-color/64px/bookshelf.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Extensive Documentation</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<i class="fa fa-paint-brush"></i>
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Unimited colors</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="box-left">
-							<img src="../assets/images/icons/full-color/64px/shop.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Shop Pages</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<img src="../assets/images/icons/one-color/64px/smartphone.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Retina Ready</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4 xs-box">
-						<div class="box-left">
-							<i class="fa fa-html5"></i>
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">95+ HTML files</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="box-left">
-							<img src="../assets/images/icons/full-color/64px/star.png" alt="service">
-						</div>
-						<div class="box-right">
-							<h3 class="box-title bt3">Free Updates</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, cumque sint officia.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
 		</section>
 		<!-- //HOME -->
 
