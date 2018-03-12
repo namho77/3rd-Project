@@ -3261,3 +3261,39 @@
 	padding: 15px
 }
 
+/*
+프로필 사진 원형 썸네일
+*/
+
+/*
+글 내용에서 프로필 썸네일
+*/
+.content_profile_thumbnail{
+	width: 53px;
+    height: 53px;
+    display: inline-block;
+    background-color: #ffffff;
+    border-radius: 50px;
+ 
+}
+
+/*
+프로필 썸네일 Wrapper
+*/
+.profile_thumbnail_container{
+	display: inline-flex;
+}
+
+/*
+상단 네비 프로필 박스
+*/
+ul>li>a.header-profile-box{
+  width: 35px;
+  height: 35px;
+  overflow: hidden;
+  border-radius: 30px;
+  border:1px solid #c0c0c0!important;
+  margin:8px 0;
+  background-size: cover; 
+  background-position: center;
+}
