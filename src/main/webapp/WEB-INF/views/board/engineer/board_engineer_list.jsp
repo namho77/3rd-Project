@@ -55,7 +55,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	getBoardList(1,'E',1,1);
+	getBoardList(1,'E',"${category_srl}","${subcategory_srl}");
 	
 	//글쓰기 폼이동
 	$('#write').click(function(){		
