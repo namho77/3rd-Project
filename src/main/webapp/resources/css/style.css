@@ -3284,16 +3284,3 @@
 	display: inline-flex;
 }
 
-/*
-상단 네비 프로필 박스
-*/
-ul>li>a.header-profile-box{
-  width: 35px;
-  height: 35px;
-  overflow: hidden;
-  border-radius: 30px;
-  border:1px solid #c0c0c0!important;
-  margin:8px 0;
-  background-size: cover; 
-  background-position: center;
-}

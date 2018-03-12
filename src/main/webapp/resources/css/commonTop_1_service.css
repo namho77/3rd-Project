@@ -302,7 +302,24 @@
 	color: #878787!important;
 }
 
+.id-image {
+	width: 35px;
+	height: 35px;
+	/* overflow: hidden; */
+	border-radius: 30px;
+	border: 1px solid #c0c0c0;
+	background-size: cover;
+	background-position: center;
+	float: left;
+	top: -5px;
+	position: relative;
+}
 
+.size-up{
+	min-width: 145px;
+	max-width: 170px;
+	text-align: center;
+}
 
 
 

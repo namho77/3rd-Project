@@ -34,6 +34,201 @@
     <link href="#" rel="stylesheet" id="theme-color">
     <!-- END  MANDATORY STYLE -->
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    
+    <script>
+	$(document).ready(function() {
+		getBoardListByAdmin(1);
+	});
+
+	function boardAdminPaging(nowPage, is_admin, board_type) {
+		getBoardListByAdmin(nowPage, is_admin, board_type);
+	}
+	
+	//리스트 가져오기
+	function getBoardListByAdmin(nowPage, is_admin, board_type) {
+		nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+		is_admin = typeof is_admin !== 'undefined' ? is_admin : "";
+
+		board_type = typeof board_type !== 'undefined' ? board_type : "";
+
+		var url = "${pageContext.request.contextPath}/admin/json/member_list.json";
+		var inHTML = "";
+		
+		var inHTMLPaging = "";
+		$("#memberTBody").empty();
+		var params = "nowPage=" + nowPage + "&is_admin=" + is_admin + "&member_type=" + member_type;
+		//alert(url + params);
+		$.ajax({
+			url : url,
+			dataType : "json",
+			type : "get",
+			data : params,
+			contentType : "text/html; charset=utf-8",
+			success : function(data) {
+				$.each(data.boardLists, function(index, boardObj) { // each로 모든 데이터 가져와서 items 배열에 넣고
+					//<span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> jquery</span>
+					inHTML += "<tr>";
+					inHTML += "<td class=\"\">";
+					inHTML += "	<input type=\"checkbox\" class=\"memberIds\" id=\"memberIds\" name=\"memberIds\" value=\""+boardObj.user_id+"\" />";
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+					inHTML += "" + boardObj.user_id + "";
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+					inHTML += "" + boardObj.title + "";
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+					inHTML += "" + boardObj.email_address + "";
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+					inHTML += "" + boardObj.regdate + "";
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+
+					if (memberObj.is_admin == 'Y')
+						inHTML += "관리자";
+					else {
+						if (memberObj.member_type == 'P')
+							inHTML += "개인";
+						else if (memberObj.member_type == 'C')
+							inHTML += "기업";
+					}
+
+					inHTML += "</td>";
+					inHTML += "<td class=\"\">";
+
+					inHTML += "<a href=\"${pageContext.request.contextPath}/member/myinfo?action=modifyAdmin&modify_id=" + memberObj.user_id + "\"target=\"_blank\">조회/수정</a>";
+					inHTML += "</td>";
+					inHTML += "</tr>";
+
+				});//each끝
+
+				inHTML += "<div class=\"row text-center\">";
+				inHTML += "<ul class=\"pagination\" id=\"memberPagingDiv\">";
+				inHTML += "</ul> </div>";
+				inHTML += "		</div>";
+				inHTML += "		</div>";
+
+				$("#memberTBody").html(inHTML);
+
+				$("#memberPagingDiv").html(data.pagingDiv);
+			},
+			error : function(e) {
+				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+			}
+		});
+	}
+
+	$(document).ready(function() {
+
+		$('#toggle_check_all').click(function() {
+
+			var isChecked = $(this).prop("checked");
+
+			$(".memberIds").prop("checked", isChecked);
+
+		})
+
+		$("#checkedMemberDeleteBtn").click(function() {
+			var isChecked = false;
+
+			$(".memberIds").each(function(index, data) {
+				if (data.checked) {
+					isChecked = data.checked;
+				}
+			});
+
+			if (!isChecked) {
+				//체크
+				popLayerMsg("삭제할 회원을 선택하세요.");
+				return;
+			}
+
+			/* 삭제는 중요하니 한번 더 확인 */
+
+			var checkArray = new Array();
+			var inValidDeleteId = false;
+			$("input[name='memberIds']:checked").each(function(i) {
+				if ($(this).val() == "${loginUserInfo.user_id}") {
+					popLayerMsg("현재 로그인 된 관리자 아이디는 삭제할 수 없습니다.<br/>다른 관리자 아이디로 로그인하여 삭제 하시거나 회원탈퇴를 이용하세요.");
+					inValidDeleteId = true;
+					return false;
+					
+				}
+				checkArray.push($(this).val());
+			});
+			
+			if(inValidDeleteId)
+			{
+				return;
+			}
+			
+			var params = $('#adminMemberListForm').serialize();
+			//var params = {"checkArray": checkboxValues };
+			//alert(params);
+			//alert(checkArray);
+			if (confirm("정말 삭제하시겠습니까?")) {
+				var url = "${pageContext.request.contextPath}/admin/members";
+				//alert(url);
+				$.ajax({
+					url : url,
+					type : 'delete',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "DELETE"
+					},
+					//data : {memberIds : checkArray},
+					data : JSON.stringify(checkArray),
+					dataType : "json",
+					contentType : "text/html; charset:utf-8",
+					success : function(d) {
+						if (d.result == "fail") {
+							popLayerMsg("해당 회원을 삭제하는데 실패하였습니다.");
+						} else if (d.result == "success") {
+							popLayerMsg("해당 회원이 삭제 되었습니다.");
+							getMemberListByAdmin(1);
+							//$("#faqDiv_" + faq_srl).hide(1000);
+							//$(this).parent().hide();
+						}
+					},
+					error : function(e) {
+						popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+					}
+				});
+
+				//array초기화
+				checkArray = new Array();
+
+			}
+		});
+
+	});
+
+	//수정폼 가져오기
+	function modifyFAQ(faq_srl) {
+		$("#faqHead").text("FAQ 글수정");
+		var url = "${pageContext.request.contextPath}/customercenter/faq/" + faq_srl + "/edit";
+
+		$.ajax({
+
+			url : url,
+			type : "get",
+			dataType : "html",
+			contentType : "text/html; charset=UTF-8",
+			success : function(d) {
+				//alert(d);
+				$("#faqBody").empty();
+				$("#faqBody").html(d);
+
+			},
+			error : function(e) {
+				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+			}
+		});
+	}
+	</script>
+    
 </head>
 
 <body data-page="posts" class="posts">
