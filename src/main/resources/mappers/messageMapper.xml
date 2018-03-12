@@ -101,17 +101,21 @@
 	<insert id="writeMessage">
 		insert into
 		op_message(message_srl,sender_srl,receiver_srl,title,contents) values
-		(op_message_srl_seq.nextval,2, #{receiver_srl},
+		(op_message_srl_seq.nextval,#{sender_srl}, #{receiver_srl},
 		#{title},#{contents})
 		
 		
 	</insert>
 
-	<select id="readMessage" resultType="MessageVO">
-		select * from op_message where receiver_srl=sender_srl 
+	<select id="sendedMessage" resultType="MessageVO">
+		select * from op_message where sender_srl=#{login_id}
 		
 	</select>
 	
+	<select id="receivedMessage" resultType="MessageVO">
+		select * from op_message where receiver_srl=#{login_id}
+		
+	</select>
 	
 
 

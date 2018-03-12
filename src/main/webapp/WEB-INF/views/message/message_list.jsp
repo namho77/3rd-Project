@@ -49,7 +49,7 @@
 	$(document).ready(function() {
 		getListMessage(1, 1, 1);
 	});
-
+	//쪽지 쓰기
 	$(document).ready(
 			function() {
 
@@ -59,7 +59,7 @@
 
 				//글쓰기 폼 가져오기
 				function getWriteFormMessage() {
-					$("#messageHead").text("메세지");
+					$("#messageHead").text("전체 메세지");
 
 					$.ajax({
 						url : "${pageContext.request.contextPath}/message/new",
@@ -80,6 +80,150 @@
 				}
 
 			});
+	//받은 쪽지함
+
+	 $(document).ready(
+	function() {
+
+		$("#receivedMessage").on("click", function() {
+			getReceivedMessage();
+		});
+
+		
+		function getReceivedMessage() {
+			$("#messageHead").text("받은 메세지");
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/message",
+				type : "get",
+				dataType : "html",
+				contentType : "text/html; charset=UTF-8",
+				success : function(d) {
+					//alert(d);
+					$("#messageBody").empty();
+					$("#messageBody").html(d);
+				},
+				error : function(e) {
+					popLayerMsg("AJAX Error 발생" + e.status + ":"
+							+ e.statusText);
+				}
+			});
+
+		}
+
+	}); 
+
+	//보낸 쪽지함
+	$(document)
+			.ready(
+					function() {
+
+						$("#sendedMessage").on("click", function() {
+							getSendedMessage();
+						});
+
+						function getSendedMessage() {
+							$("#messageHead").text("보낸 메세지");
+
+							$
+									.ajax({
+										url : "${pageContext.request.contextPath}/message/sendedMessage",
+										type : "get",
+										dataType : "html",
+										contentType : "text/html; charset=UTF-8",
+										success : function(d) {
+											//alert(d);
+											$("#messageBody").empty();
+											$("#messageBody").html(d);
+										},
+										error : function(e) {
+											popLayerMsg("AJAX Error 발생"
+													+ e.status + ":"
+													+ e.statusText);
+										}
+									});
+
+						}
+
+					});
+	//쪽지 보관함
+	$(document)
+			.ready(
+					function() {
+
+						$("#messageStorage").on("click", function() {
+							getMessageStorage();
+						});
+
+						function getMessageStorage() {
+							$("#messageHead").text("쪽지 보관함");
+
+							$
+									.ajax({
+										url : "${pageContext.request.contextPath}/message/messageStorage",
+										type : "get",
+										dataType : "html",
+										contentType : "text/html; charset=UTF-8",
+										success : function(d) {
+											//alert(d);
+											$("#messageBody").empty();
+											$("#messageBody").html(d);
+										},
+										error : function(e) {
+											popLayerMsg("AJAX Error 발생"
+													+ e.status + ":"
+													+ e.statusText);
+										}
+									});
+
+						}
+
+					});
+	$('#writeActionBtn').click(function() {
+
+		//폼값 검증
+		if ($("input[type='text'][name='receiver_srl']").val() == "") {
+			popLayerMsg("받는 이를 입력해주세요");
+			$("input[type='text'][name='receiver_srl']").focus();
+			return;
+		}
+
+		if ($("input[type='text'][name='title']").val() == "") {
+			popLayerMsg("제목을 입력해주세요");
+			$("input[type='text'][name='title']").focus();
+			return;
+		}
+
+		if ($("input[type='text'][name='contents']").val() == "") {
+			popLayerMsg("내용 입력해주세요");
+			$("input[type='text'][name='contents']").focus();
+			return;
+		}
+
+		//글쓰기 처리
+		var params = $('#writeMessageFrm').serialize();
+
+		$.ajax({
+			cache : false, // 캐시 사용 없애기
+			url : "${pageContext.request.contextPath}/message",
+			type : "post",
+			dataType : "json",
+
+			data : params,
+			success : function(d) {
+				if (d.result == "success") {
+
+					popLayerMsg("쪽지를 보냈습니다.");
+
+					getListMessage(1, 1, "");
+				}
+
+			},
+			error : function(e) {
+				alert("요청실패:" + e.status + " " + e.statusText);
+			}
+		});
+	});
 
 	function messagePaging(message_srl) {
 		getListMessage(message_srl);
@@ -112,7 +256,7 @@
 										function(index, messageList) { // each로 모든 데이터 가져와서 items 배열에 넣고
 
 											inHTML += "<div id=\"messageDiv_"
-				
+													+ messageList.message_srl 
 													+ "\" class=\"mix  col-lg-12 panel panel-default\" data-value=\""
 													+ (index + 1)
 													+ "\" style=\"display: inline-block;\">";
@@ -121,13 +265,14 @@
 											inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#messageBody\" href=\"#question"
 													+ (index + 1)
 													+ "\"> <strong class=\"c-gray-light\">"
-													+"보낸사람 : "
+													+ "보낸사람 : "
 													+ messageList.sender_srl
-													+"</br>"
+													+ "</br>"
 													+ "</strong> "
-													+ messageList.title;
+													+ messageList.title
 													
-													
+													+messageList.readed;
+
 											inHTML += "			</a>";
 											inHTML += "		</h4>";
 
@@ -138,15 +283,18 @@
 											inHTML += "		<div class=\"panel-body\">";
 											inHTML += "			<p>"
 													+ messageList.contents
-													
+
 													+ "</p>";
 											inHTML += "		</div>";
 											inHTML += "		<div class=\"panel-footer\">";
-											inHTML +=messageList.postdate
+											inHTML += "받은 날짜 : "
+											inHTML += messageList.postdate
+											inHTML += "		</div>";
+											inHTML += "		<div class=\"panel-footer\">";
+											inHTML +="<button type=\"button\" class=\"btn btn-danger\" onclick=\"javascript:deleteMessage('" + messageList.message_srl + "');\" >삭제</button>";
 											inHTML += "		</div>";
 											inHTML += "	</div>";
 
-			
 											inHTML += "</div>";
 
 										});//each끝
@@ -168,38 +316,35 @@
 	function deleteMessage(message_srl) {
 
 		if (confirm("정말로 삭제 하시겠습니까?")) {
-			var url = "${pageContext.request.contextPath}/message/"
-					+ message_srl;
+			var url = "${pageContext.request.contextPath}/message/" + message_srl;
 			//alert(url);
-			$
-					.ajax({
-						url : url,
-						type : 'delete',
-						headers : {
-							"Content-Type" : "application/json",
-							"X-HTTP-Method-Override" : "DELETE"
-						},
-						/* data : JSON.stringify({
-							replytext : replytext
-						}), */
-						dataType : "json",
-						contentType : "text/html; charset:utf-8",
-						success : function(d) {
-							if (d.result == "fail") {
-								popLayerMsg("게시물 삭제에 실패하였습니다.");
-							} else if (d.result == "success") {
-								popLayerMsg("게시물 삭제에 성공하였습니다.");
-								$("#messageDiv_" + message_srl).hide(1000);
-								//$(this).parent().hide();
-							}
-						},
-						error : function(e) {
-							popLayerMsg("AJAX Error 발생" + e.status + ":"
-									+ e.statusText);
-						}
-					});
+			$.ajax({
+				url : url,
+				type : 'delete',
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "DELETE"
+				},
+				
+				dataType : "json",
+				contentType : "text/html; charset:utf-8",
+				success : function(d) {
+					if (d.result == "fail") {
+						popLayerMsg("게시물 삭제에 실패하였습니다.");
+					} else if (d.result == "success") {
+						popLayerMsg("게시물 삭제에 성공하였습니다.");
+						$("#messageDiv_" + message_srl).hide(100);
+						
+					}
+				},
+				error : function(e) {
+					popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+				}
+			});
 		}
 	}
+	//setInterval("${pageContext.request.contextPath}/message/", 3000);
+		
 </script>
 <script type="text/javascript" charset="utf-8">
 	sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
@@ -234,17 +379,19 @@
 						<h2>
 							<b>메시지</b>
 						</h2>
-						<h4 class="margin-top-30">
-							<a id="GENERAL_messages" href="javascript:void(0)"
-								class="messageLink  message-list-menu-active  plain">전체메시지</a>
+						<h4 class="margin-top-10">
+							<a id="receivedMessage" href="javascript:void(0)"
+								class="messageLink  plain">받은 쪽지함</a>
+						</h4>
+
+
+						<h4 class="margin-top-10">
+							<a id="sendedMessage" href="javascript:void(0)"
+								class="messageLink  plain">보낸 쪽지함</a>
 						</h4>
 						<h4 class="margin-top-10">
-							<a id="UNREAD_messages" href="javascript:void(0)"
-								class="messageLink  plain">안읽은메시지</a>
-						</h4>
-						<h4 class="margin-top-10">
-							<a id="STARRED_messages" href="javascript:void(0)"
-								class="messageLink  plain">별표메시지</a>
+							<a id="messageStorage" href="javascript:void(0)"
+								class="messageLink  plain">쪽지 보관함</a>
 						</h4>
 					</div>
 					<div class="col-xs-10">
@@ -320,7 +467,7 @@
 
 														<c:when test="${not empty loginUserInfo}">
 															<button type="button" class="pull-right btn btn-success"
-																id="writeMessageBtn">글쓰기</button>
+																id="writeMessageBtn">쪽지 쓰기</button>
 
 														</c:when>
 
