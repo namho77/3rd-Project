@@ -221,7 +221,7 @@ values (member_srl_seq.nextval,#{member_type},#{user_id},#{email_address},#{pass
  	
  	<!-- 아이디로 회원번호 가져오기 -->
  	<select id="getMemberSrlById" resultType="String">
- 		select member_srl from op_member where user_id=#{userid} 
+ 		select member_srl from op_member where user_id=#{user_id} 
  	</select>
  	
  	

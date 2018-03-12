@@ -100,7 +100,8 @@
 	</div>
 	<div class="write-btn">
 		<button type="button" class="btn btn-info" id="listView">목록보기</button>
-		<button type="button" class="btn btn-success" id="writeActionBtn">완료</button>
+		<button type="button" class="btn btn-danger" id="writeCancel">취소</button>
+		<button type="button" class="btn btn-success" id="writeActionBtn">보내기</button>
 	</div>
 
 

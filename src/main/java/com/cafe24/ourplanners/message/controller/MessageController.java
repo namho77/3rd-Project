@@ -34,10 +34,8 @@ public class MessageController {
 	@RequestMapping(value = "/message/json/message_list.json")
 	public HashMap<String, Object> getMessageListJson(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
-			@RequestParam(required = false) Integer receiver_srl,
-			@RequestParam(required = false) Integer sender_srl,
-			@RequestParam(required = false) Integer pageSize,
-			@RequestParam(required = false) Integer blockPage) {
+			@RequestParam(required = false) Integer receiver_srl, @RequestParam(required = false) Integer sender_srl,
+			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer blockPage) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -66,12 +64,11 @@ public class MessageController {
 		if (receiver_srl != null) {
 			scri.setReceiver_srl(receiver_srl);
 		}
-		
+
 		if (sender_srl != null) {
 			scri.setSender_srl(sender_srl);
 		}
 
-		
 		scri.setNowPage(nowPage);
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
@@ -98,10 +95,28 @@ public class MessageController {
 		return "/message/message_list";
 	}
 
-	// 글쓰기 폼 가져오기
+	// 쪽지 쓰기 폼 가져오기
 	@RequestMapping(value = "/message/new", method = RequestMethod.GET)
 	public String writeFormMessege() {
 		return "/message/message_write";
+	}
+
+	// 받은 쪽지함 가져오기
+	@RequestMapping(value = "/message/receivedMessage", method = RequestMethod.GET)
+	public String receivedMessage() {
+		return "/message/message_received";
+	}
+
+	// 보낸 쪽지함 가져오기
+	@RequestMapping(value = "/message/sendedMessage", method = RequestMethod.GET)
+	public String sendedMessage() {
+		return "/message/message_sended";
+	}
+
+	// 쪽지 보관함 가져오기
+	@RequestMapping(value = "/message/messageStorage", method = RequestMethod.GET)
+	public String messageStorage() {
+		return "/message/message_storage";
 	}
 
 	// 글쓰기 처리
@@ -117,7 +132,6 @@ public class MessageController {
 		}
 
 		
-
 		int result = service.writeMessage(req, map);
 
 		if (result <= 0) {
