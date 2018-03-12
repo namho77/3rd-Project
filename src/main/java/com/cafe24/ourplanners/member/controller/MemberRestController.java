@@ -129,9 +129,14 @@ public class MemberRestController {
 	      * 헤더를 임의로 실을떄
 	      
 	      */
-	     headers.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+	     //json
+	     //headers.setContentType(new MediaType("application","json",Charset.forName("UTF-8")));
+	     
+	     //xml
 	     //headers.setContentType(new MediaType("text","xml",Charset.forName("UTF-8")));
-	     headers.set("My-Header", "MyHeaderTestValue");
+	    
+	     //user define header
+	     //headers.set("My-Header", "MyHeaderTestValue");
 	     
 	     
 		entity = new ResponseEntity<Map<String, Object>>(map, headers,HttpStatus.OK);

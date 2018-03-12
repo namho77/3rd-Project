@@ -39,6 +39,75 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
+<script>
+
+$(document).ready(function() {
+	getProfile("${profile_user_id}",1);
+});
+
+function getProfile(user_id,nowPage){
+	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
+
+	user_id = typeof user_id !== 'undefined' ? user_id : "kosmo";
+	
+	var url = "${pageContext.request.contextPath}/member/json/member_list.json";
+	var inHTML = "";
+
+	var inHTMLPaging = "";
+
+	$("#faqBody").empty();
+	
+	var params = "user_id=" + user_id + "&nowPage=" + nowPage;
+	
+	$.ajax({
+		url : url,
+		dataType : "json",
+		type : "get",
+		data : params,
+		contentType : "text/html; charset=utf-8",
+		success : function(data) {
+			$.each(data.faqLists, function(index, faqList) { // each로 모든 데이터 가져와서 items 배열에 넣고
+
+				inHTML += "<div id=\"faqDiv_" + faqList.faq_srl + "\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\"" + (index + 1) + "\" style=\"display: inline-block;\">";
+				inHTML += "	<div class=\"panel-heading\">";
+				inHTML += "		<h4 class=\"panel-title\">";
+				inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#faqBody\" href=\"#question" + (index + 1) + "\"> <strong class=\"c-gray-light\">" + (index + 1) + "</strong> " + faqList.title;
+				inHTML += "			</a>";
+				inHTML += "		</h4>";
+
+				inHTML += "	</div>";
+				inHTML += "	<div id=\"question" + (index + 1) + "\" class=\"panel-collapse collapse\" style=\"height: 0px;\">";
+				inHTML += "		<div class=\"panel-body\">";
+				inHTML += "			<p>" + faqList.contents + "</p>";
+				inHTML += "		</div>";
+				inHTML += "	</div>";
+
+				<c:choose>
+				<c:when	test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
+				inHTML += "<div>";
+				inHTML += "<button type=\"button\" class=\"btn btn-warning\" onclick=\"javascript:modifyFAQ('" + faqList.faq_srl + "');\" >수정</button>";
+				inHTML += "<button type=\"button\" class=\"btn btn-danger\" onclick=\"javascript:deleteFAQ('" + faqList.faq_srl + "');\" >삭제</button>";
+				inHTML += "</div>";
+				</c:when>
+				</c:choose>
+
+				inHTML += "</div>";
+
+			});//each끝
+			inHTML += "<div class=\"row text-center\">";
+			inHTML += "<ul class=\"pagination\" id=\"faqPagingDiv\">";
+			inHTML += "</ul> </div>";
+			inHTML += "		</div>";
+			inHTML += "		</div>";
+			$("#faqBody").html(inHTML);
+			$("#faqPagingDiv").html(data.pagingDiv);
+		},
+		error : function(e) {
+			popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<!-- PRELOADER -->
@@ -108,12 +177,12 @@
 									<p>서비스를 등록하여</p>
 									<p>수익을 얻어보세요!</p>
 								</div>
-								<button type="button" class="btn btn-danger service-btn">서비스 등록하기</button>
+								<button type="button" onclick="" class="btn btn-danger service-btn">서비스 등록하기</button>
 							</div>
 							</c:otherwise>
 						</c:choose>
 						
-						<span class="margin-span">kosmo1004님의 받은 평가
+						<span class="margin-span"><span id="spanUserId">kosmo1004</span>님의 받은 평가
 						<img src="${pageContext.request.contextPath}/resources/images/star.png">
 						<img src="${pageContext.request.contextPath}/resources/images/star.png">
 						<img src="${pageContext.request.contextPath}/resources/images/star.png">
@@ -311,7 +380,7 @@
 			</div>
 			<div class="col-xs-3"></div>
 		</div>		
-	</div>
+
 	
 	
 	

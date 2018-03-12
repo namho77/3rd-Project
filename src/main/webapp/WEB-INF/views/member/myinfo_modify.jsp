@@ -51,9 +51,9 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
+<script src="${pageContext.request.contextPath}/resources/js/myinfo.js?ver=<fmt:formatDate value="${today}" pattern="yyyyMMddHHmmss" />"></script>
 <script>
 $(document).ready(function(){
 	
@@ -400,6 +400,8 @@ function isNumeric(num, opt){
 					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a> <a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 				</div>
 				<!-- 기본정보부분 -->
+				<input id="thumbnail_upload" name="profile_img_path" type="file" style="display: none;">
+				
 				<form class="form-horizontal" name="modifyFrm" method="post" action="${pageContext.request.contextPath}/member/myinfo" onsubmit="return checkForm(this);">
 					<div class="col-xs-10" id="profile-info">
 						<h4>기본정보</h4>
@@ -422,20 +424,20 @@ function isNumeric(num, opt){
 
 									<c:choose>
 
-										<c:when test="${(not empty userInfo) && userInfo.profile_img_path!=''}">
+										<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
 
-											<img src="${pageContext.request.contextPath}/resources/upload/member/${userInfo.member_srl}/profile/${userInfo.profile_img_path}" class="profile-image" />
+											<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" id="profile_Img" class="profile-image" />
 
 										</c:when>
 
 										<c:otherwise>
 
-											<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" />
+											<img src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" class="profile-image" id="profile_Img" />
 
 										</c:otherwise>
 									</c:choose>
 
-									<input id="thumbnail_upload" name="profile_img_path" type="file" style="display: none;">
+									
 									<div class="margin-top-20">
 										<label id="profilePictureBtn" class="label-margin-none btn btn-default btn-sm width-100px border-888" for="thumbnail_upload"> 이미지 등록 </label>
 									</div>

@@ -594,8 +594,7 @@ public class MemberServiceImpl implements MemberService {
 			String allow_mailing = req.getParameter("allow_mailing");
 			String allow_message = req.getParameter("allow_message");
 
-			String profile_img_path = req.getParameter("profile_img_path");
-
+			
 			userInfo.setUser_name(user_name);
 			userInfo.setGender(gender);
 			userInfo.setFind_account_question(find_account_question);
@@ -605,7 +604,9 @@ public class MemberServiceImpl implements MemberService {
 
 			userInfo.setMobile(mobile);
 
-			userInfo.setProfile_img_path(profile_img_path);
+			//프로필은 자동 업로드 되며 저장되므로 여기서는 따로 저장하지 않는다.
+			//String profile_img_path = req.getParameter("profile_img_path");
+			//userInfo.setProfile_img_path(profile_img_path);
 
 			userInfo.setAllow_mailing(allow_mailing);
 			userInfo.setAllow_message(allow_message);
