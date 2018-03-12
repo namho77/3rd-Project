@@ -20,7 +20,7 @@
 <head>
     <!-- BEGIN META SECTION -->
     <meta charset="utf-8">
-    <title>Pixit - Responsive Boostrap3 Admin</title>
+    <title>서비스 게시판 관리|OUR PLANNERS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="" name="description" />
     <meta content="themes-lab" name="author" />

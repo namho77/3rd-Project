@@ -6,6 +6,53 @@
 
 <mapper namespace="com.kosmo.mapper.SearchMapper">
 
+<!-- 내용 부분 clob데이터타입으로 변경시.. -->
+
+<resultMap id="serviceBoardMap" type="BoardVO">
+    <result property="board_srl" column="board_srl" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="user_id" column="user_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="location" column="location" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="service_time_start" column="service_time_start" javaType="java.sql.Date" jdbcType="DATE" />
+    <result property="service_time_end" column="service_time_end" javaType="java.sql.Date" jdbcType="DATE" />
+    <result property="title" column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="contents" column="contents" javaType="java.lang.String" jdbcType="CLOB" />
+    <result property="postdate" column="postdate" javaType="java.sql.Date" jdbcType="VARCHAR" />
+    
+    <result property="visitcount" column="visitcount" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="contact_time_start" column="contact_time_start" javaType="java.lang.Integer" jdbcType="INTEGER" />    
+    <result property="contact_time_end" column="contact_time_end" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="like_user_id" column="like_user_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="main_image" column="main_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="contents_image" column="contents_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="category_srl" column="category_srl" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="subcategory_srl" column="subcategory_srl" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="service_expired" column="service_expired" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="service_cost" column="service_cost" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="limit_person" column="limit_person" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="board_type" column="board_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+    <result property="service_score" column="service_score" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    <result property="last_update" column="last_update" javaType="java.sql.Date" jdbcType="DATE" />
+</resultMap>
+
+<!-- 
+
+<insert id="insertClobDataServiceBoard" parameterType="com.cafe24.ourplanners.board.dto.BoardDTO">
+    <selectKey keyProperty="board_srl" resultType="int" order="BEFORE">
+        SELECT SEQ_BULLETIN.NEXTVAL FROM DUAL              
+    </selectKey>
+
+insert into op_board (
+ 			board_srl, user_id, location, service_time_start, service_time_end,
+ 			title, contents, contact_time_start, contact_time_end, main_image, 
+ 			category_srl, subcategory_srl, service_cost, board_type) 
+		values (
+			board_srl_seq.nextval, #{user_id}, #{location}, #{service_time_start}, #{service_time_end},
+            #{title}, #{contents:VARCHAR}, #{contact_time_start}, #{contact_time_end}, #{main_image}, 
+            #{category_srl}, #{subcategory_srl}, #{service_cost}, #{board_type}) 
+   
+   
+</insert>
+ -->
 	<sql id="search">
 		<choose>
 			<when test="searchType == null or searchType == '' or keyword == null or keyword == ''">

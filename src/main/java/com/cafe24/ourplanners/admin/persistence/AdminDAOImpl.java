@@ -27,6 +27,12 @@ public class AdminDAOImpl implements AdminDAO {
 	public int getTotalMemberCount(SearchMemberCriteria scri) {
 		return sqlSession.selectOne(namespace+".getTotalMemberCount", scri);
 	}
+
+	@Override
+	public int deleteMember(String user_id) {
+		
+		return sqlSession.delete(namespace+".deleteMember", user_id);
+	}
 	
 
 

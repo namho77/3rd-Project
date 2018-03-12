@@ -8,9 +8,11 @@ import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
 public interface AdminDAO {
 
-	List<MemberVO> getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
+	public List<MemberVO> getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
 
-	int getTotalMemberCount(SearchMemberCriteria scri);
+	public int getTotalMemberCount(SearchMemberCriteria scri);
+
+	public int deleteMember(String user_id);
 
 
 }

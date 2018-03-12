@@ -46,6 +46,8 @@ public interface MemberService {
 	public void updateMyInfo(HttpServletRequest req, Model model, ModelAndView mv);
 
 	public void getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map);
+
+	public MemberVO getUserInfoById(String user_id);
 	
 	
 }
