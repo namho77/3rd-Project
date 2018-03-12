@@ -94,19 +94,17 @@
 							<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="dropdown">
-							
+							<li class="dropdown size-up">
+							<a class="dropdown-toggle margin-left-10" data-toggle="dropdown" href="javascript:void(0);">
 							<c:choose>
-									<c:when test="${loginUserInfo.profile_img_path==null}">
-									<!-- /displayFile?fileName=${loginUserInfo.profile_img_path}&directory=profile -->
-										<a class="header-profile-box" style="background-image:url('${pageContext.request.contextPath}/resources/images/main_user_gray.png')"></a>
-									</c:when>
-									<c:otherwise>
-										<a class="header-profile-box" style="background-image:url('${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile"></a>
-									</c:otherwise>
-								</c:choose>	
-								
-							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
+								<c:when test="${loginUserInfo.profile_img_path==null}">
+									<img class="id-image" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png"  />
+								</c:when>
+								<c:otherwise>
+									<img class="id-image" src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile"  />
+								</c:otherwise>
+							</c:choose>
+							<span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
 								<ul class="dropdown-menu" id="dropdown-menu">
 									<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
 										<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
@@ -145,7 +143,7 @@
 						<figure class="snip1206">
 							<img src="${pageContext.request.contextPath}/resources/images/categorie11.jpg" alt=""/>
 							<figcaption>
-								<h2><b>건축디자인</b></h2>
+								<h2><b>건축</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=1"></a>
@@ -155,9 +153,9 @@
 					<!-- IT분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
 						<figure class="snip1206">
-							<img src="${pageContext.request.contextPath}/resources/images/categorie22.jpg" alt=""/>
+							<img src="${pageContext.request.contextPath}/resources/images/categorie88.jpg" alt=""/>
 							<figcaption>
-								<h2><b>IT프로그래밍</b></h2>
+								<h2><b>디자인</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=2"></a>
@@ -167,9 +165,9 @@
 					<!-- 자동차분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
 						<figure class="snip1206">
-							<img src="${pageContext.request.contextPath}/resources/images/categorie33.jpg" alt=""/>
+							<img src="${pageContext.request.contextPath}/resources/images/categorie22.jpg" alt=""/>
 							<figcaption>
-								<h2><b>자동차</b></h2>
+								<h2><b>IT프로그래밍</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=3"></a>
@@ -179,9 +177,9 @@
 					<!-- 교육분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
 						<figure class="snip1206">
-							<img src="${pageContext.request.contextPath}/resources/images/categorie44.jpg" alt=""/>
+							<img src="${pageContext.request.contextPath}/resources/images/categorie55.jpg" alt=""/>
 							<figcaption>
-								<h2><b>교육</b></h2>
+								<h2><b>번역&통역</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=4"></a>
@@ -191,9 +189,9 @@
 					<!-- 번역%통역분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
 						<figure class="snip1206">
-							<img src="${pageContext.request.contextPath}/resources/images/categorie55.jpg" alt=""/>
+							<img src="${pageContext.request.contextPath}/resources/images/categorie77.jpg" alt=""/>
 							<figcaption>
-								<h2><b>번역&통역</b></h2>
+								<h2><b>컨텐츠제작</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=5"></a>
@@ -203,9 +201,9 @@
 					<!-- 컨텐츠분야 -->
 					<div class="col-lg-2 col-sm-2 image-size-c">
 						<figure class="snip1206">
-							<img src="${pageContext.request.contextPath}/resources/images/categorie77.jpg" alt=""/>
+							<img src="${pageContext.request.contextPath}/resources/images/categorie44.jpg" alt=""/>
 							<figcaption>
-								<h2><b>컨텐츠</b></h2>
+								<h2><b>핸드메이드</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
 							<a href="${pageContext.request.contextPath}/board/engineer?category=6"></a>

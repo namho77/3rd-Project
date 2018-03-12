@@ -64,7 +64,17 @@
 							<li><a href="${pageContext.request.contextPath}/member/join">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);"><span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
+							<li class="dropdown size-up">
+							<a class="dropdown-toggle margin-left-10" data-toggle="dropdown" href="javascript:void(0);">
+							<c:choose>
+								<c:when test="${loginUserInfo.profile_img_path==null}">
+									<img class="id-image" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png"  />
+								</c:when>
+								<c:otherwise>
+									<img class="id-image" src="${pageContext.request.contextPath}/upload/displayFile?fileName=${loginUserInfo.profile_img_path}&directory=member/${loginUserInfo.member_srl}/profile"  />
+								</c:otherwise>
+							</c:choose>
+							<span class="text-uppercase">${loginUserInfo.user_id}님</span> <span class="caret"></span></a>
 								<ul class="dropdown-menu" id="dropdown-menu">
 									<c:if test="${not empty loginUserInfo && loginUserInfo.is_admin=='Y'}">
 										<li><a href="${pageContext.request.contextPath}/admin/">관리자페이지</a></li>
@@ -77,7 +87,6 @@
 									<li><a href="${pageContext.request.contextPath}/member/withdraw">회원탈퇴</a></li>
 								</ul>
 							</li>
-							
 							<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 						</c:otherwise>
 						</c:choose>
