@@ -108,6 +108,10 @@ SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from op_member M where
 		<include refid="search"></include>
 
 	</select>
+	
+	<delete id="deleteMember">
+ 	DELETE op_member WHERE user_id=#{user_id}
+ 	</delete>
 
 
 </mapper>

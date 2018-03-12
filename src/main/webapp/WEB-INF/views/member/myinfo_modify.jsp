@@ -364,8 +364,8 @@ function isNumeric(num, opt){
 
 		<c:when test="${empty userInfo || (loginUserInfo.is_admin!='Y' && isMatchedPass!='Y')}">
 
-		<script>
-	alert("저장된값 없어요.");
+			<script>
+			alert("저장된값 없어요.");
 			location.href='${pageContext.request.contextPath}/member/myinfo';
 		</script>
 
@@ -400,7 +400,7 @@ function isNumeric(num, opt){
 					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a> <a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 				</div>
 				<!-- 기본정보부분 -->
-				<form class="form-horizontal" name="modifyFrm" method="post" action="" onsubmit="return checkForm(this);">
+				<form class="form-horizontal" name="modifyFrm" method="post" action="${pageContext.request.contextPath}/member/myinfo" onsubmit="return checkForm(this);">
 					<div class="col-xs-10" id="profile-info">
 						<h4>기본정보</h4>
 						<input type="hidden" name="action" value="complete">
@@ -408,6 +408,18 @@ function isNumeric(num, opt){
 							<tr class="mini-title">
 								<!-- 프로필이미지 -->
 								<td rowspan="17" class="image-area" align="center">
+									
+									<c:choose>
+
+										<c:when test="${ not empty modify_id}">
+
+											<input type="hidden" name="modify_id" value="${modify_id}">
+
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
+
 									<c:choose>
 
 										<c:when test="${(not empty userInfo) && userInfo.profile_img_path!=''}">

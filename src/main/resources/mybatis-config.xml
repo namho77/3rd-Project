@@ -11,6 +11,9 @@
     <package name="com.cafe24.ourplanners.notice.domain"/>
     <package name="com.cafe24.ourplanners.comment.domain"/>
     <package name="com.cafe24.ourplanners.message.domain"/>
+    
+    <package name="com.cafe24.ourplanners.member.dto"/>
+    <package name="com.cafe24.ourplanners.board.dto"/>
   </typeAliases>
 
 
