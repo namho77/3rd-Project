@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.board.domain.SubCategoryVO;
 import com.cafe24.ourplanners.board.domain.WordCloudVO;
+import com.cafe24.ourplanners.board.dto.BoardDTO;
 import com.cafe24.ourplanners.util.Criteria;
 import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
@@ -61,4 +62,30 @@ public class SearchDAOImpl implements SearchDAO {
 	public int getTotalServiceCount(SearchServiceBoardCriteria scri) {
 		return sqlSession.selectOne(searchMapper+".getTotalServiceCount",scri);
 	}
+	
+	@Override
+	public int writeBoard(BoardVO vo) {
+		return sqlSession.insert(searchMapper + ".writeBoard", vo); 
+	}
+
+	
+	@Override
+	public int deleteBoard(Integer board_srl) {
+		return sqlSession.delete(searchMapper + ".delete", board_srl); 
+	}
+	
+	@Override
+	public int modifyBoard(BoardVO vo) {
+		return sqlSession.update(searchMapper + ".modifyBoard", vo); 
+	}
+	
+	@Override
+	public BoardVO readBoard(Integer board_srl) {
+		return sqlSession.selectOne(searchMapper+".readBoard",board_srl);
+	}
+	@Override
+	public void visitCount(Integer boardSrl) {
+		sqlSession.update(searchMapper + ".visitCount", boardSrl);
+	}
+	
 }

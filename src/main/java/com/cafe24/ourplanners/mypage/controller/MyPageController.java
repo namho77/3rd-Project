@@ -12,16 +12,17 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
+import com.cafe24.ourplanners.member.service.MemberService;
 import com.cafe24.ourplanners.mypage.service.MyPageService;
 
 @Controller
@@ -30,7 +31,10 @@ public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
 	@Inject
-	private MyPageService service;
+	private MyPageService myPageService;
+	
+	@Inject
+	private MemberService memberService;
 		
 	// 마이 플래너스
 	@RequestMapping(value = "mypage/myplan", method = RequestMethod.GET)
@@ -49,10 +53,10 @@ public class MyPageController {
 		String user_id = ((MemberVO)session.getAttribute("loginUserInfo")).getUser_id();
 		
 		try {
-			clientListCheck_TotalRecordConut = service.getClientListCheck_TotalRecordConut(user_id);
-			clientList_TotalRecordConut = service.getClientList_TotalRecordConut(user_id);
-			engineerListCheck_TotalRecordConut = service.getEngineerListCheck_TotalRecordConut(user_id);
-			engineerList_TotalRecordConut = service.getEngineerList_TotalRecordConut(user_id);
+			clientListCheck_TotalRecordConut = myPageService.getClientListCheck_TotalRecordConut(user_id);
+			clientList_TotalRecordConut = myPageService.getClientList_TotalRecordConut(user_id);
+			engineerListCheck_TotalRecordConut = myPageService.getEngineerListCheck_TotalRecordConut(user_id);
+			engineerList_TotalRecordConut = myPageService.getEngineerList_TotalRecordConut(user_id);
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -75,13 +79,13 @@ public class MyPageController {
 		
 		BoardVO vo = null;
 		try {
-			vo = service.view(Integer.parseInt(req.getParameter("board_srl")));
+			vo = myPageService.view(Integer.parseInt(req.getParameter("board_srl")));
 			
 			//줄바꿈
 			vo.setContents(vo.getContents().replace("\r\n", "<br/>"));
 			
 			//조회수
-			service.visitCount(Integer.parseInt(req.getParameter("board_srl")));
+			myPageService.visitCount(Integer.parseInt(req.getParameter("board_srl")));
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -96,7 +100,7 @@ public class MyPageController {
 	@RequestMapping(value = "mypage/myplan/modify/{board_srl}", method = RequestMethod.GET)
 	public String myPlanModify(@PathVariable Integer board_srl, Model model) {
 		try {
-			service.modify(board_srl, model);
+			myPageService.modify(board_srl, model);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -119,7 +123,7 @@ public class MyPageController {
 		}
 		
 		try {
-			result = service.modifyAction(req);
+			result = myPageService.modifyAction(req);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -151,7 +155,7 @@ public class MyPageController {
 		}
 		
 		try {
-			result = service.delete(board_srl);
+			result = myPageService.delete(board_srl);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -170,19 +174,36 @@ public class MyPageController {
 	
 	//상대방(또는 자신) 서비스 프로필 보기
 	@RequestMapping(value = "/profile/{user_id}", method = RequestMethod.GET)
-	public String viewProfile(@PathVariable String user_id,Model model, HttpServletRequest req,
+	public ModelAndView viewProfile(@PathVariable String user_id,Model model, HttpServletRequest req,HttpSession session,
 			@RequestParam(required = false, defaultValue = "E") String type) {
 		
+		ModelAndView mv = new ModelAndView();
+		
+				
 		/*
 		 * type => E:기술자시점 C:의뢰인시점
 		 */
-		logger.info("상대방 서비스 프로필 보기(문의하기 기능 message)");
 		
-		//다른사람이 보는 프로필페이지
-		return "mypage/profile_others";
+		MemberVO memVO = (MemberVO)session.getAttribute("loginUserInfo");
 		
-		//내가보는 프로필페이지
-		//return "mypage/profile";
+		
+		if(memVO.getUser_id().equalsIgnoreCase(user_id)) {
+			logger.info("자신의 서비스 프로필 보기(기본 정보 수정 가능)");
+			memVO = memberService.getUserInfoById(user_id);
+			model.addAttribute("profileInfo",memVO);
+			mv.setViewName("mypage/profile");
+		}
+		
+		else {
+			//나중에 memberDTO로 변경할것!
+			memVO = memberService.getUserInfoById(user_id);
+			model.addAttribute("profileInfo",memVO);
+			mv.setViewName("mypage/profile_others");
+			logger.info("상대방 서비스 프로필 보기(문의하기 기능 message)");			
+		}
+		model.addAttribute("profile_user_id",user_id);
+		
+		return mv;
 	}
 	
 }
