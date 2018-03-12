@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.message.service.MessageService;
 import com.cafe24.ourplanners.util.SearchMessageCriteria;
 
@@ -35,7 +34,9 @@ public class MessageController {
 	@RequestMapping(value = "/message/json/message_list.json")
 	public HashMap<String, Object> getMessageListJson(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
-			@RequestParam(required = false) Integer message_srl, @RequestParam(required = false) Integer pageSize,
+			@RequestParam(required = false) Integer receiver_srl,
+			@RequestParam(required = false) Integer sender_srl,
+			@RequestParam(required = false) Integer pageSize,
 			@RequestParam(required = false) Integer blockPage) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -62,10 +63,15 @@ public class MessageController {
 		}
 		SearchMessageCriteria scri = new SearchMessageCriteria();
 
-		if (message_srl != null) {
-			scri.setMessage_srl(message_srl);
-			System.out.println("message_srl:" + message_srl);
+		if (receiver_srl != null) {
+			scri.setReceiver_srl(receiver_srl);
 		}
+		
+		if (sender_srl != null) {
+			scri.setSender_srl(sender_srl);
+		}
+
+		
 		scri.setNowPage(nowPage);
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
@@ -110,11 +116,7 @@ public class MessageController {
 			return map;
 		}
 
-		if (!((MemberVO) session.getAttribute("loginUserInfo")).getIs_admin().equalsIgnoreCase("Y")) {
-			map.put("result", "fail");
-			map.put("errorMsg", "isNotAdmin");
-			return map;
-		}
+		
 
 		int result = service.writeMessage(req, map);
 

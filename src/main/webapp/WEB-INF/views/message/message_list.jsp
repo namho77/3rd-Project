@@ -59,7 +59,7 @@
 
 				//글쓰기 폼 가져오기
 				function getWriteFormMessage() {
-					$("#messageHead").text("메세지 보내기");
+					$("#messageHead").text("메세지");
 
 					$.ajax({
 						url : "${pageContext.request.contextPath}/message/new",
@@ -112,8 +112,8 @@
 										function(index, messageList) { // each로 모든 데이터 가져와서 items 배열에 넣고
 
 											inHTML += "<div id=\"messageDiv_"
-													+ messageList.message_srl
-													+ "\" class=\"mix category-1 col-lg-12 panel panel-default\" data-value=\""
+				
+													+ "\" class=\"mix  col-lg-12 panel panel-default\" data-value=\""
 													+ (index + 1)
 													+ "\" style=\"display: inline-block;\">";
 											inHTML += "	<div class=\"panel-heading\">";
@@ -121,9 +121,13 @@
 											inHTML += "			<a class=\"collapsed\" data-toggle=\"collapse\" data-parent=\"#messageBody\" href=\"#question"
 													+ (index + 1)
 													+ "\"> <strong class=\"c-gray-light\">"
-													+ (index + 1)
+													+"보낸사람 : "
+													+ messageList.sender_srl
+													+"</br>"
 													+ "</strong> "
 													+ messageList.title;
+													
+													
 											inHTML += "			</a>";
 											inHTML += "		</h4>";
 
@@ -134,7 +138,11 @@
 											inHTML += "		<div class=\"panel-body\">";
 											inHTML += "			<p>"
 													+ messageList.contents
+													
 													+ "</p>";
+											inHTML += "		</div>";
+											inHTML += "		<div class=\"panel-footer\">";
+											inHTML +=messageList.postdate
 											inHTML += "		</div>";
 											inHTML += "	</div>";
 

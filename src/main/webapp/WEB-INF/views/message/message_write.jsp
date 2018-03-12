@@ -6,12 +6,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/write.css" />
 <script charset="utf-8">
-	$(function() {
+	$(document).ready(function() {
 		//전역변수선언
-		
-		var ctx = getContextPath();
-		
-
 		$('#writeActionBtn').click(function() {
 
 			//폼값 검증
@@ -21,20 +17,15 @@
 				return;
 			}
 
-			
+			if ($("input[type='text'][name='title']").val() == "") {
+				popLayerMsg("제목을 입력해주세요");
+				$("input[type='text'][name='title']").focus();
+				return;
+			}
 
-
-			//id가 smarteditor인 textarea에 에디터에서 대입
-			editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
-
-			
-
-			//폼 검증
-			var contentsVal = $("#contents").val();
-
-			if (contentsVal == null || contentsVal == "" || contentsVal == '&nbsp;' || contentsVal == '<p>&nbsp;</p>') {
-				popLayerMsg("내용을 입력해주세요");
-				editor_object.getById["contents"].exec("FOCUS"); //포커싱
+			if ($("input[type='text'][name='contents']").val() == "") {
+				popLayerMsg("내용 입력해주세요");
+				$("input[type='text'][name='contents']").focus();
 				return;
 			}
 
@@ -43,16 +34,16 @@
 
 			$.ajax({
 				cache : false, // 캐시 사용 없애기
-				url : "${pageContext.request.contextPath}/customercenter/faq",
+				url : "${pageContext.request.contextPath}/message",
 				type : "post",
 				dataType : "json",
-				//contentType : "text/html; charset=utf-8",
+
 				data : params,
 				success : function(d) {
 					if (d.result == "success") {
 
 						popLayerMsg("쪽지를 보냈습니다.");
-						//location.href = "${pageContext.request.contextPath}/customercenter/faq";
+
 						getListMessage(1, 1, "");
 					}
 
@@ -76,12 +67,13 @@
 	$(document).ready(function() {
 
 		$('#listView').click(function() {
-			getListMessage(1, "", "");
+			getListMessage(1, 1, "");
 		});
 
 	});
 </script>
-<form id="writeMessageFrm">
+<form id="writeMessageFrm"
+	action="${pageContext.request.contextPath}/message" method="post">
 
 	<div class="write-body">
 		<div class="service">
