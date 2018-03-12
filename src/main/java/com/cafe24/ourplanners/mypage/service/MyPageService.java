@@ -27,5 +27,17 @@ public interface MyPageService {
 	public int getEngineerListCheck_TotalRecordConut(String user_id) throws Exception;
 	
 	public int getEngineerList_TotalRecordConut(String user_id) throws Exception;
+	
+	public int getEngineerMember_TotalConut() throws Exception;
+	
+	public int getEngineerCateGory1_TotalConut() throws Exception;
+	
+	public int getEngineerCateGory2_TotalConut() throws Exception;
+	
+	public int getEngineerCateGory3_TotalConut() throws Exception;
+	
+	public int getEngineerCateGory4_TotalConut() throws Exception;
+
+	public int getEngineerCateGory5_TotalConut() throws Exception;
 
 }

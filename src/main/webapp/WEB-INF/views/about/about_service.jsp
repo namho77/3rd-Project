@@ -114,36 +114,36 @@
 			<div class="col-lg-8 col-sm-10 col-xs-12">
 				<div class="service-title-div">
 					<h1>전문적인 서비스</h1>
-					<h2>각 분야의 전문가 <b>5483명</b>의 <b>차별화된 서비스</b>를 이용해보세요.</h2>
+					<h2>각 분야의 전문가 <b>${engineerMember_TotalConut}명</b>의 <b>차별화된 서비스</b>를 이용해보세요.</h2>
 					
 					<div class="position-relative bg-color-f6 padding-all-20" style="width: 29%">
                         <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_design.png">
                         <h4 class="margin-none font-color-lighter">디자인 전문가의 자료</h4>
-                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">22,464</span>건</div>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">${engineerCateGory1_TotalConut}</span>건</div>
                     </div>
                     
                     <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 24%">
                         <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_marketing.png">
                         <h4 class="margin-none font-color-lighter">마케팅 전문가의 자료</h4>
-                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">16,412</span>건</div>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">${engineerCateGory2_TotalConut}</span>건</div>
                     </div>
                     
                     <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 17%">
                         <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_it.png">
                         <h4 class="margin-none font-color-lighter">IT&amp;개발 전문가자료</h4>
-                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">8,524</span>건</div>
+                        <div class="margin-top-30" style="font-size: 28px !important;"><span class="count">${engineerCateGory3_TotalConut}</span>건</div>
                     </div>
                     
                     <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 11%">
                         <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_content.png">
                         <h4 class="margin-none font-color-lighter line-height">컨텐츠제작<br>전문가<br>자료</h4>
-                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">5,390</span>건</div>
+                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">${engineerCateGory4_TotalConut}</span>건</div>
                     </div>
                     
                     <div class="position-relative bg-color-f6 padding-all-20 margin-left-10" style="width: 10%">
                         <img class="position-absolute bottom-0 right-0" src="${pageContext.request.contextPath}/resources/images/img_category_translate.png">
                         <h4 class="margin-none font-color-lighter line-height">번역&amp;<br>통역전문<br>자료</h4>
-                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">4,473</span>건</div>
+                        <div class="margin-top-10" style="font-size: 20px !important;"><span class="count">${engineerCateGory5_TotalConut}</span>건</div>
                     </div>
 				</div>
 			</div>
@@ -156,9 +156,14 @@
 		<!-- HOME -->
 		<section class="section page-services" style="margin-top: 120px; background-color: #F1F1F1;">
 			<div class="container">
+				<div class="service-text1">
+					<h1>간편한 매칭과정</h1>
+					<h2>나에게 맞는 서비스를 <b>손쉽게 찾고 간편하게 매칭</b>할 수 있습니다.</h2>
+				</div>
 				<div class="row service-size">
 					<div class="col-sm-4 col-md-3 sm-box">
-						<ul class="nav nav-tabs vertical">
+					
+						<ul class="nav nav-tabs vertical text-whtie-bold">
 							<li class="active"><a href="#tab1" data-toggle="tab">서비스 찾기</a></li>
 							<li><a href="#tab2" data-toggle="tab">서비스 비교</a></li>
 							<li><a href="#tab3" data-toggle="tab">매칭하기</a></li>
@@ -168,20 +173,41 @@
 					<div class="col-sm-8 col-md-9">
 						<div class="tab-content">
 							<div class="tab-pane fade in active" id="tab1">
-								<h3 class="box-title bt2">서비스 찾기</h3>
-								<p>'검색'또는 '카테고리 선택'을 통해 원하는 서비스들을 확인합니다.</p>
+								<h3 class="box-title-bt2">서비스 찾기</h3>
+								<p class="box-title-bt3">'검색'또는 '카테고리 선택'을 통해 원하는 서비스들을 확인합니다.</p>
+								<div class="images-info">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image1.jpg">
+								</div>
 							</div>
 							<div class="tab-pane fade" id="tab2">
-								<h3 class="box-title bt2">서비스 비교</h3>
-								<p>서비스의 설명, 가격, 평가, 포트폴리오 등을 꼼꼼히 살펴보고, 견적에 맞게 옵션을 선택합니다.</p>
+								<h3 class="box-title-bt2">서비스 비교</h3>
+								<p class="box-title-bt3">서비스의 설명, 예상가격, 평가, 포트폴리오 등을 꼼꼼히 살펴보고, 견적에 맞게 서비스를 선택합니다.</p>
+								<div class="images-info-one">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image2.jpg">
+								</div>
+								<div class="images-info-two">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image3.jpg">
+								</div>
 							</div>
 							<div class="tab-pane fade" id="tab3">
-								<h3 class="box-title bt2">매칭하기</h3>
-								<p>요청란에 요청을 하면 많은 사람들중에 한분만 채택될수 있습니다. 채택후 연결정보를 주고받고 작업물을 주고 받습니다.</p>
+								<h3 class="box-title-bt2">매칭하기</h3>
+								<p class="box-title-bt3">요청란에 요청을 하면 서비스제공자는 요청을 보고 작업이 가능하다면 채택후 연결정보를 주고받고 작업물을 주고 받습니다.</p>
+								<div class="images-info-one">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image4.jpg">
+								</div>
+								<div class="images-info-two">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image4.jpg">
+								</div>
 							</div>
 							<div class="tab-pane fade" id="tab4">
-								<h3 class="box-title bt2">평가하기</h3>
-								<p>작업물을 받은 후, 전문가에 대한 평가를 남깁니다.</p>
+								<h3 class="box-title-bt2">평가하기</h3>
+								<p class="box-title-bt3">작업물을 받은 후, 전문가에 대한 평가를 남깁니다.</p>
+								<div class="images-info-one">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image6.jpg">
+								</div>
+								<div class="images-info-two">
+									<img src="${pageContext.request.contextPath}/resources/images/service-image6.jpg">
+								</div>
 							</div>
 						</div>
 					</div>
