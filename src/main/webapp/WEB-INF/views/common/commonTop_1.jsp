@@ -20,8 +20,8 @@
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
-						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
-						<li><a href="${pageContext.request.contextPath}/board/project?board_type=C">의뢰인 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/service?board_type=E">기술자 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/service?board_type=C">의뢰인 게시판</a></li>
 	
 						<c:choose>
 						<c:when test="${empty loginUserInfo}">

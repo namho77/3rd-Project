@@ -185,7 +185,7 @@ $(document).ready(function() {
 		//$("#faqHead").text("FAQ 글쓰기");
 
 		$.ajax({
-			url : "${pageContext.request.contextPath}/board/project/new",
+			url : "${pageContext.request.contextPath}/board/service/new",
 			type : "get",
 			dataType : "html",
 			contentType : "text/html; charset=UTF-8",
@@ -205,7 +205,7 @@ $(document).ready(function() {
 function deleteBoard(board_srl) {
 	
 	if(confirm("정말로 삭제 하시겠습니까?")){
-	var url = "${pageContext.request.contextPath}/board/project/"+board_srl;
+	var url = "${pageContext.request.contextPath}/board/service/"+board_srl;
 	//alert(url);
 	$.ajax({
 		url:url,
@@ -239,7 +239,7 @@ function deleteBoard(board_srl) {
 //수정폼 가져오기
 function modifyBoard(board_srl) {
 //$("#noticeHead").text("Notice 글수정");
-var url = "${pageContext.request.contextPath}/board/project/"+board_srl+"/edit";
+var url = "${pageContext.request.contextPath}/board/service/"+board_srl+"/edit";
 
 	$.ajax({
 		
@@ -412,10 +412,10 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 //글 읽기
 function viewPage(board_srl){
 	
-	//location.href="${pageContext.request.contextPath}/board/project/"+board_srl;
+	//location.href="${pageContext.request.contextPath}/board/service/"+board_srl;
 	 
 	$.ajax({
-		url : "${pageContext.request.contextPath}/board/project/"+board_srl+"/little",
+		url : "${pageContext.request.contextPath}/board/service/"+board_srl+"/little",
 		dataType : "html",
 		type : "get",
 		contentType : "text/html; charset:utf-8",
@@ -485,8 +485,8 @@ function viewPage(board_srl){
 
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 					//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
-					//<a href='${pageContext.request.contextPath}/board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
-					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
+					//<a href='${pageContext.request.contextPath}/board/service?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
+					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/service?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
 
 				});//each끝
 				//alert(tagInHTML);

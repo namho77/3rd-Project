@@ -72,7 +72,7 @@ $(document).ready(function() {
 						
 						//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 						//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
-						items.push("<span><a href='./board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
+						items.push("<span><a href='./board/service?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"'>"+hotKeyWord.searchword+"</a></span>");						
 					});//each끝
 					
 					$('#tagsList').html(items.join(''));
@@ -83,9 +83,9 @@ $(document).ready(function() {
 		      }
 		     });
 		/* 	
-	 	var inHTML = "<span><a href='./board/engineer?category=2&subcategory=3'>운전연습</a></span>";
-		inHTML += "<span><a href='./board/engineer?category=4&subcategory=1'>중국어</a></span>";
-		inHTML += "<span><a href='./board/engineer?category=4&subcategory=1'>영어</a></span>";
+	 	var inHTML = "<span><a href='./board/service?category=2&subcategory=3'>운전연습</a></span>";
+		inHTML += "<span><a href='./board/service?category=4&subcategory=1'>중국어</a></span>";
+		inHTML += "<span><a href='./board/service?category=4&subcategory=1'>영어</a></span>";
 	 */
 		//$('#tagsList').html(inHTML);
 		
