@@ -163,7 +163,7 @@ public class AdminRestController {
 		
 	}
 	
-	
+	//게시글 삭제하기
 	@RequestMapping(value = "admin/boards", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> deleteBoard(
 			@RequestBody List<Integer> deleteList,
@@ -209,5 +209,97 @@ public class AdminRestController {
 		return entity;
 		
 	}
+	
+	//댓글 삭제하기
+	@RequestMapping(value = "admin/comments", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> deleteComments(
+			@RequestBody List<Integer> deleteList,
+			HttpSession session) throws Exception {
+		
+		int totalDeletedCount = 0;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseEntity<Map<String, Object>> entity = null;
+	
+		try {
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("result", "fail");
+				map.put("errorMsg", "isNotLogin");
+			} else {
+					
+			for (Integer delete_comment_srl : deleteList) {
+				
+				Integer delete_count = adminService.deleteComment(delete_comment_srl);
+				totalDeletedCount += delete_count;
+			}
+			
+			if (totalDeletedCount <= 0) {
+				map.put("result", "fail");
+				map.put("errorMsg", "sqlError");
+			} else {
+				map.put("result", "success");
+			}
+		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+
+		if (((String) map.get("result")).equals("fail")) {
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
+		} else if (((String) map.get("result")).equals("success")) {
+			System.out.println("댓글 삭제 성공");
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
+		return entity;
+		
+	}
+	
+	//공지사항게시판 글삭제하기
+	@RequestMapping(value = "admin/notices", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> deleteNotice(
+			@RequestBody List<Integer> deleteList,
+			HttpSession session) throws Exception {
+		
+		int totalDeletedCount = 0;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseEntity<Map<String, Object>> entity = null;
+		try {
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("result", "fail");
+				map.put("errorMsg", "isNotLogin");
+			} else {
+					
+			for (Integer delete_notice_srl : deleteList) {
+				
+				Integer delete_count = adminService.deleteNotice(delete_notice_srl);
+				totalDeletedCount += delete_count;
+			}
+			
+			if (totalDeletedCount <= 0) {
+				map.put("result", "fail");
+				map.put("errorMsg", "sqlError");
+			} else {
+				map.put("result", "success");
+			}
+		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+
+		if (((String) map.get("result")).equals("fail")) {
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
+		} else if (((String) map.get("result")).equals("success")) {
+			System.out.println("공지사항게시판 삭제 성공");
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
+		return entity;
+		
+	}
+	
 
 }

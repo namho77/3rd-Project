@@ -65,6 +65,10 @@ public class MyPageController {
 		clientMatchingPrecent = (int)(((double)clientListCheck_TotalRecordConut/clientList_TotalRecordConut)*100);
 		engineerMatchingPrecent = (int)(((double)engineerListCheck_TotalRecordConut/engineerList_TotalRecordConut)*100);
 		
+		model.addAttribute("clientListCheck_TotalRecordConut", clientListCheck_TotalRecordConut);
+		model.addAttribute("clientList_TotalRecordConut", clientList_TotalRecordConut);
+		model.addAttribute("engineerListCheck_TotalRecordConut", engineerListCheck_TotalRecordConut);
+		model.addAttribute("engineerList_TotalRecordConut", engineerList_TotalRecordConut);
 		model.addAttribute("clientMatchingPrecent", clientMatchingPrecent);
 		model.addAttribute("engineerMatchingPrecent", engineerMatchingPrecent);
 		
