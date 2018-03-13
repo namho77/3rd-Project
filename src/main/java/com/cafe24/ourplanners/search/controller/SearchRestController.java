@@ -220,9 +220,9 @@ public class SearchRestController {
 		scri.setPageSize(pageSize);
 		scri.setBlockPage(blockPage);
 		
-		if(searchType != null && searchType.length() != 0)
+		//if(searchType != null && searchType.length() != 0)
 		scri.setSearchType(searchType);
-		if(keyword != null && keyword.length() != 0)
+		//if(keyword != null && keyword.length() != 0)
 		scri.setKeyword(keyword);		
 		
 		service.getServiceListSearch(scri, map);

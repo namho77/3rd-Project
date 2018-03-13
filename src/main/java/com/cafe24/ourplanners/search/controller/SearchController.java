@@ -60,7 +60,7 @@ public class SearchController {
 	
 	
 	//리스트(O)
-	@RequestMapping(value="/board/project", method = RequestMethod.GET)
+	@RequestMapping(value="/board/service", method = RequestMethod.GET)
 	public String mainBoard(Model model,HttpServletRequest req, @RequestParam(required = false, defaultValue = "1") Integer nowPage,
 
 			@RequestParam(required = false) Integer category_srl,
@@ -87,11 +87,11 @@ public class SearchController {
 		if(keyword != null && keyword.length() != 0)
 			model.addAttribute("keyword",keyword);
 
-		return "board/project/board_project_list";
+		return "board/service/board_service_list";
 	}
 	
 	// 글 상세보기 AJAX 부분 가져오기
-	@RequestMapping(value = "/board/project/{board_srl}/little", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/service/{board_srl}/little", method = RequestMethod.GET)
 	public String readBoardJson(@PathVariable Integer board_srl, Model model) {
 		
 		BoardVO vo = null;
@@ -110,29 +110,29 @@ public class SearchController {
 		
 		model.addAttribute("view", vo);
 		
-		return "board/project/board_project_view_little";
+		return "board/service/board_service_view_little";
 	}
 	
 	// 글 상세 보기
-	@RequestMapping(value = "/board/project/{board_srl}", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/service/{board_srl}", method = RequestMethod.GET)
 	public String readBoard(@PathVariable Integer board_srl, Model model) {
 		
 		
 		model.addAttribute("board_srl", board_srl);
 		
 		
-		return "board/project/board_project_view";
+		return "board/service/board_service_view";
 	}
 	
 	// 글쓰기 폼 가져오기
-		@RequestMapping(value = "/board/project/new", method = RequestMethod.GET)
+		@RequestMapping(value = "/board/service/new", method = RequestMethod.GET)
 		public String writeFormBoard() {
-			return "board/project/board_project_write";
+			return "board/service/board_service_write";
 		}
 
 		// 글쓰기 처리
 		@ResponseBody
-		@RequestMapping(value = "/board/project", method = RequestMethod.POST)
+		@RequestMapping(value = "/board/service", method = RequestMethod.POST)
 		public ResponseEntity<Map<String, Object>> writeActionBoard(HttpServletRequest req, HttpSession session) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			ResponseEntity<Map<String, Object>> entity = null;
@@ -174,17 +174,17 @@ public class SearchController {
 		}
 
 		// 글수정 폼
-		@RequestMapping(value = "/board/project/{board_srl}/edit", method = RequestMethod.GET)
+		@RequestMapping(value = "/board/service/{board_srl}/edit", method = RequestMethod.GET)
 		public String modifyFormBoard(@PathVariable Integer board_srl, Model model) {
 			// model.addAttribute("board_srl",board_srl);
 			System.out.println("글 수정 폼");
 			service.readBoard(board_srl, model);
-			return "board/project/board_project_modify";
+			return "board/service/board_service_modify";
 		}
 
 		// 글수정 처리
 		@ResponseBody
-		@RequestMapping(value = "/board/project/{board_srl}", method = { RequestMethod.PUT, RequestMethod.PATCH })
+		@RequestMapping(value = "/board/service/{board_srl}", method = { RequestMethod.PUT, RequestMethod.PATCH })
 		public ResponseEntity<Map<String, Object>> modifyActionBoard(@PathVariable Integer board_srl, HttpServletRequest req,
 				HttpSession session, @RequestBody BoardVO vo) {
 
@@ -239,7 +239,7 @@ public class SearchController {
 
 		// 해당 글 삭제
 		@ResponseBody
-		@RequestMapping(value = "/board/project/{board_srl}", method = RequestMethod.DELETE)
+		@RequestMapping(value = "/board/service/{board_srl}", method = RequestMethod.DELETE)
 		public ResponseEntity<Map<String, Object>> deleteBoard(HttpServletRequest req, HttpSession session, Model model,
 				@PathVariable Integer board_srl) {
 

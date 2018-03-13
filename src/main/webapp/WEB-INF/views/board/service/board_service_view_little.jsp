@@ -45,46 +45,61 @@ $(document).ready(function(){
 });
 
 
+function deleteBoard(board_srl) {
+	
+	if(confirm("정말로 삭제 하시겠습니까?")){
+	var url = "${pageContext.request.contextPath}/board/service/"+board_srl;
+	//alert(url);
+	$.ajax({
+		url:url,
+		type : 'delete',
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "DELETE"
+		},
+		/* data : JSON.stringify({
+			replytext : replytext
+		}), */
+		dataType:"json",
+		contentType:"text/html; charset:utf-8",
+		success:function(d){
+			if(d.result == "fail"){
+				popLayerMsg("게시물 삭제에 실패하였습니다.");
+			}
+			else if(d.result == "success"){
+				popLayerMsg("게시물 삭제에 성공하였습니다.");
+				$("#noticeDiv_"+board_srl).hide(1000);
+				//$(this).parent().hide();
+			}						
+		},
+		error:function(e){
+			popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
+		}
+	});
+	}
+}
 
 //수정폼 가져오기
-function modify(board_srl) {
-	
-	var url = "${pageContext.request.contextPath}/board/engineer/modify/"+board_srl;
-	
+function modifyBoard(board_srl) {
+//$("#noticeHead").text("Notice 글수정");
+var url = "${pageContext.request.contextPath}/board/service/"+board_srl+"/edit";
+
 	$.ajax({
 		
-		url : url,
+		url:url,
 		type : "get",
 		dataType : "html",
 		contentType : "text/html; charset=UTF-8",
 		success : function(d){
-			$("#row-body-view").html(d);
+			//alert(d);
+			$("#boardBody").empty();
+			$("#boardBody").html(d);
+				
 		},
 		error : function(e){
-			alert("요청 실패 : "+ e.status+":"+e.statusText);
+			popLayerMsg("AJAX Error 발생"+ e.status+":"+e.statusText);
 		}
 	});
-}
-
-//삭제하기
-function deleteBoard(board_srl){
-	if(confirm("삭제 하시겠습니까?")){
-		var url = "${pageContext.request.contextPath}/board/engineer/delete/"+board_srl;
-		
-		$.ajax({
-			url : url,
-			type : "post",
-			dataType : "html",
-			contentType : "text/html; charset=UTF-8",
-			success : function(d){
-				alert("삭제 되었습니다");
-				location.href = "./engineer"
-			},
-			error : function(e){
-				alert("요청 실패 : "+ e.status+":"+e.statusText);
-			}
-		});
-	}
 }
 
 //리스트 가져오기

@@ -108,7 +108,7 @@ $(document).ready(function(){
 		var params = $('#writeFrm').serialize();
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/board/project",
+			url : "${pageContext.request.contextPath}/board/service",
 			dataType : "json",
 			type : "post",
 			//contentType : "text/html; charset=utf-8",

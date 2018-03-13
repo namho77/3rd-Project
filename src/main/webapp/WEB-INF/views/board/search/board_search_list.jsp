@@ -121,7 +121,7 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 				inHTML += "<div class=\"card-content\">";
 				inHTML += "<h6 class=\"category text-info\">"+boardVO.category_srl+"-"+ boardVO.subcategory_srl + "</h6>";
 				inHTML += "<h4 class=\"card-title\">";
-				inHTML += "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\">" + boardVO.title + "</a>";
+				inHTML += "<a href=\"${pageContext.request.contextPath}/board/service/"+boardVO.board_srl+"\">" + boardVO.title + "</a>";
 				inHTML += "</h4>";
 				inHTML += "<p class=\"card-description text-left\">";
 				
@@ -130,7 +130,7 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 				inHTML +="서비스 기간 : " +boardVO.service_time_start + " ~ " + boardVO.service_time_end+"<br/>";
 			
 			
-				inHTML += "<a href=\"${pageContext.request.contextPath}/board/engineer/"+boardVO.board_srl+"\"> 자세히 보기 </a>";
+				inHTML += "<a href=\"${pageContext.request.contextPath}/board/service/"+boardVO.board_srl+"\"> 자세히 보기 </a>";
 				inHTML += "</p>";
 				inHTML += "</div>";
 				inHTML += "</div>";
@@ -216,7 +216,7 @@ function getServiceSearchList(nowPage, category_srl, subcategory_srl , board_typ
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 					//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
 					//<a href='${pageContext.request.contextPath}/board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
-					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
+					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/service?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
 
 				});//each끝
 				//alert(tagInHTML);

@@ -95,7 +95,7 @@
 			//$("#faqHead").text("FAQ 글쓰기");
 
 			$.ajax({
-				url : "${pageContext.request.contextPath}/board/project/new",
+				url : "${pageContext.request.contextPath}/board/service/new",
 				type : "get",
 				dataType : "html",
 				contentType : "text/html; charset=UTF-8",
@@ -265,9 +265,9 @@
 	//글 읽기
 	function viewPage(board_srl) {
 
-		//location.href = "${pageContext.request.contextPath}/board/project/" + board_srl;
+		//location.href = "${pageContext.request.contextPath}/board/service/" + board_srl;
 		$.ajax({
-			url : "${pageContext.request.contextPath}/board/project/" + board_srl + "/little",
+			url : "${pageContext.request.contextPath}/board/service/" + board_srl + "/little",
 			dataType : "html",
 			type : "get",
 			contentType : "text/html; charset:utf-8",
@@ -336,8 +336,8 @@
 
 					//배열에 푸쉬후 뿌려줄 영역에 html메소드로 넣기
 					//items.push("<a class='title' href='bbs/bbs_detail.jsp?num=" + hotKeyWord.num + "&nowPage=1'>"+hotKeyWord.title+"</a>");
-					//<a href='${pageContext.request.contextPath}/board/engineer?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
-					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/engineer?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
+					//<a href='${pageContext.request.contextPath}/board/service?category="+hotKeyWord.category_srl+"&subcategory="+hotKeyWord.subcategory_srl+"' title='"+hotKeyWord.searchword+"'><i class='fa fa-tag'></i> "+hotKeyWord.searchword+"</a>
+					tagInHTML += "<span><a href='${pageContext.request.contextPath}/board/service?category=" + hotKeyWord.category_srl + "&subcategory=" + hotKeyWord.subcategory_srl + "' title='10 Topics'><i class='fa fa-tag'></i> " + hotKeyWord.searchword + "</a></span>";
 
 				});//each끝
 				//alert(tagInHTML);

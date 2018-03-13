@@ -114,7 +114,7 @@ $(document).ready(function(){
 		var category_srl = $("input[type='text'][name='category_srl']").val();
 		var service_srl = $("input[type='text'][name='service_srl']").val();
 
-		var url = "${pageContext.request.contextPath}/board/project/" + board_srl;
+		var url = "${pageContext.request.contextPath}/board/service/" + board_srl;
 		//alert(url);
 		$.ajax({
 			cache : false, // 캐시 사용 없애기
