@@ -98,7 +98,10 @@ table>tbody>tr>td{
 	
 }
 
-
+.user_id{
+	font-weight: bold;
+	color: #303030;
+}
 
 
 

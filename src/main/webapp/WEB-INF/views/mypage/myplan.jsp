@@ -44,46 +44,32 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
-	
-	var value= getMyPlanCount("1", "C","${loginUserInfo.user_id}", "N");
 
-	setMyPlanCount("#span_client_ing",value);
-
-	value = getMyPlanCount("1", "C","${loginUserInfo.user_id}", "Y");
-
-	setMyPlanCount("#span_client_check",value);
-
-	value = getMyPlanCount("1", "E","${loginUserInfo.user_id}", "N");
-
-	setMyPlanCount("#span_engineer_ing",value);
-
-	value = getMyPlanCount("1", "E","${loginUserInfo.user_id}", "Y");
-
-	setMyPlanCount("#span_engineer_check",value);
-	
-	value = getMyStarScore("${loginUserInfo.user_id}");
+	var value = getMyStarScore("${loginUserInfo.user_id}");
 	setMyStarScore(value);
-	
 	
 	//요청자 진행건 버튼 클릭시발동
 	$('#btn_client_ing').click(function(){
 		getMyPlanList("1", "C","${loginUserInfo.user_id}", "N", "danger");
+		$("#service_expired").val("N");
 	});
 	
 	//요청자 완료건 버튼 클릭시발동
 	$('#btn_client_check').click(function(){	
 		getMyPlanList("1", "C","${loginUserInfo.user_id}", "Y", "warning");
+		$("#service_expired").val("Y");
 	});
 	
 	//기술자 진행건 버튼 클릭시발동
 	$('#btn_engineer_ing').click(function(){	
 		getMyPlanList("1", "E","${loginUserInfo.user_id}", "N", "success");
+		$("#service_expired").val("N");
 	});
 	
 	//기술자 완료건 버튼 클릭시발동
 	$('#btn_engineer_check').click(function(){	
 		getMyPlanList("1", "E","${loginUserInfo.user_id}", "Y", "info");
+		$("#service_expired").val("Y");
 	});
 	
 	
@@ -117,7 +103,11 @@ function getMyStarScore(user_id){
 			
 			avgScore = totalScore / data.searchList.length;
 			//alert(count);
-			
+			for(var i=1;i<=avgScore ;i++){
+				
+				$("#starScoreImg").append("<img src=\"${pageContext.request.contextPath}/resources/images/star.png\">");
+				
+			}
 			
 		},
 		error : function(e) {
@@ -172,6 +162,16 @@ function getMyPlanCount(nowPage, board_type,user_id, service_expired){
 	return returnVal;
 }
 
+
+function servicePaging(nowPage, category_srl, subcategory_srl, board_type, searchType, keyword) {
+	//var params = "nowPage=" + nowPage + "&board_type=" + board_type + "&pageSize=6&blockPage=5&keyword=" + keyword + "&searchType=" + searchType;
+	//alert(params);
+	var service_expired = $("#service_expired").val();
+	getMyPlanList(nowPage, board_type,"${loginUserInfo.user_id}", service_expired);
+
+}
+
+
 function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 	nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
 
@@ -193,6 +193,7 @@ function getMyPlanList(nowPage, board_type,user_id, service_expired, color) {
 				inHTML += "<col width=\"10%\">";
 			inHTML += "</colgroup>"
 			inHTML += "<thead>";
+			if(typeof service_srl !== 'undefined') 
 			inHTML += "<tr class=\""+color+"\">";
 				inHTML += "<th>서브카테고리</th>";
 				inHTML += "<th>아이디</th>";
@@ -331,18 +332,15 @@ function viewPage(board_srl){
 									<div class="col-xs-12 dashboard-profile text-center">
 										<div class="dashboard-profile-body">
 											<c:choose>
-												<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
+												<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!='' && not empty loginUserInfo.profile_img_path}">
 													<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" class="border-round" />
 												</c:when>
 												<c:otherwise>
-													<img class="border-round" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png">
+													<img class="border-round profile-image" src="${pageContext.request.contextPath}/resources/images/main_user_gray.png" id="profile_Img" >
 												</c:otherwise>
 											</c:choose>
-											<input id="thumbnail_upload" name="profile_img_path" type="file"style="display: none;">
-											<div class="margin-top-20">
-												<label id="myplanPictureBtn"
-												class="label-margin-none btn btn-default btn-sm width-100px border-888"
-												for="thumbnail_upload"> 이미지 등록 </label>
+											<div class="user_id">
+												${loginUserInfo.user_id }
 											</div>
 											<div class="dashboard-profile-grade userProfileRanking NEW">
 												<a href="${pageContext.request.contextPath}/grade"> <img src="/img/tools/grade/kmong_grade_NEW.png" data-toggle="tooltip" data-placement="right" title="" data-original-title=NEW>
@@ -357,12 +355,8 @@ function viewPage(board_srl){
 												만족도(<span id="starScore"></span>)
 												</h5>
 												<br/>
-												<span class="pull-left" style="margin-top: -30px;">
-													<img src="${pageContext.request.contextPath}/resources/images/star.png">
-													<img src="${pageContext.request.contextPath}/resources/images/star.png">
-													<img src="${pageContext.request.contextPath}/resources/images/star.png">
-													<img src="${pageContext.request.contextPath}/resources/images/star.png">
-													<img src="${pageContext.request.contextPath}/resources/images/star.png">
+												<span class="pull-left" style="margin-top: -30px;" id="starScoreImg">
+													
 												</span>
 											</div>
 										</div>
@@ -412,7 +406,9 @@ function viewPage(board_srl){
 					</div>
 				</div>
 			</div>
-
+			
+			<input type="hidden" name="service_expired" id="service_expired">
+			
 			<div class="col-xs-9">
 				<div class="row margin-top-10">
 					<div class="col-xs-12">
@@ -422,25 +418,25 @@ function viewPage(board_srl){
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_ing">요청자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>(<span id="span_client_ing"></span>) </b>
+												<b>(<span>${clientList_TotalRecordConut}</span>) </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_client_check">요청자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>(<span id="span_client_check"></span>)</b>
+												<b>(<span>${clientListCheck_TotalRecordConut}</span>) </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center border-right">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_ing">기술자 진행 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>(<span id="span_engineer_ing"></span>) </b>
+												<b>(<span>${engineerList_TotalRecordConut}</span>) </b>
 											</h4>
 									</div>
 									<div class="col-xs-3 text-center">
 										<button type="button" class="btn btn-default btn-sotitle" id="btn_engineer_check">기술자 완료 건</button>
 											<h4 class="header-margin-none margin-top-5">
-												<b>(<span id="span_engineer_check"></span>) </b>
+												<b>(<span>${engineerListCheck_TotalRecordConut}</span>) </b>
 											</h4>
 									</div>
 								</div>

@@ -44,6 +44,18 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.delete(namespace+".deleteBoard", board_srl);
 	}
 	
+	@Override
+	public int deleteComment(Integer comment_srl) {
+		
+		return sqlSession.delete(namespace+".deleteComment", comment_srl);
+	}
+	
+	@Override
+	public int deleteNotice(Integer notice_srl) {
+		
+		return sqlSession.delete(namespace+".deleteComment", notice_srl);
+	}
+	
 
 
 }

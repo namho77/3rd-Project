@@ -157,6 +157,12 @@ public class AdminController {
 		return "admin/admin_comment_list";
 	}
 	
+	@RequestMapping(value="admin/notice")
+	public String adminNotice(HttpServletRequest req, Model model) {
+		System.out.println("공지사항게시판");
+		return "admin/admin_notice_list";
+	}
+	
 	@RequestMapping(value="admin/faq")
 	public String adminFAQ(HttpServletRequest req, Model model) {
 		System.out.println("자주 묻는 질문");

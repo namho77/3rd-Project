@@ -10,6 +10,7 @@
 		response.setHeader("Cache-Control", "no-cache");
 %>
 
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js sidebar-large lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js sidebar-large lt-ie9 lt-ie8"> <![endif]-->
@@ -19,7 +20,7 @@
 <head>
     <!-- BEGIN META SECTION -->
     <meta charset="utf-8">
-    <title>서비스 게시판 댓글 관리|OUR PLANNERS</title>
+    <title>공지사항 게시판 관리|OUR PLANNERS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="" name="description" />
     <meta content="themes-lab" name="author" />
@@ -36,43 +37,25 @@
     
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     
-    
     <script>
 	$(document).ready(function() {
-		getCommentListByAdmin(1);
-		
-		//총댓글을 눌렀을때
-		$('#a_check_allcommentlist').click(function() {
-			getCommentListByAdmin(1);
-		});
-		
-		//채택된 댓글을 눌렀을때
-		$('#a_check_checkcommentlist').click(function() {
-			getCommentListByAdmin(1);
-		});
-		
-		//미채택된 댓글을 눌렀을때
-		$('#a_check_nocheckcommentlist').click(function() {
-			getCommentListByAdmin(1);
-		});
+		getNoticeListByAdmin(1);
 	});
 	
-	function commentAdminPaging(nowPage, board_type) {
-		getCommentListByAdmin(nowPage, board_type);
+	function noticeAdminPaging(nowPage) {
+		getNoticeListByAdmin(nowPage);
 	}
 	
-	//댓글리스트 가져오기
-	function getCommentListByAdmin(nowPage, board_type) {
+	//공지사항 리스트 가져오기
+	function getNoticeListByAdmin(nowPage) {
 		nowPage = typeof nowPage !== 'undefined' ? nowPage : 1;
 
-		board_type = typeof board_type !== 'undefined' ? board_type : "";
-
-		var url = "${pageContext.request.contextPath}/board/engineer/comment/json/comment_list.json";
+		var url = "${pageContext.request.contextPath}/customercenter/notice/json/notice_list.json";
 		var inHTML = "";
 		
 		var inHTMLPaging = "";
-		$("#boardTBody").empty();
-		var params = "nowPage=" + nowPage + "&board_type=" + board_type;
+		$("#noticeTBody").empty();
+		var params = "nowPage=" + nowPage;
 		//alert(url + params);
 		$.ajax({
 			url : url,
@@ -81,32 +64,28 @@
 			data : params,
 			contentType : "text/html; charset=utf-8",
 			success : function(data) {
-				$.each(data.commentLists, function(index, commendObj) { // each로 모든 데이터 가져와서 items 배열에 넣고
+				$.each(data.noticeLists, function(index, noticeObj) { // each로 모든 데이터 가져와서 items 배열에 넣고
+					//<span class="label label-default"><i class="fa fa-tag f-10 p-r-5 c-gray-light"></i> jquery</span>
 					inHTML += "<tr>";
 					inHTML += "<td class=\"\">";
-					inHTML += "	<input type=\"checkbox\" class=\"commentIds\" id=\"commentIds\" name=\"commentIds\" value=\""+commendObj.comment_srl+"\" />";
+					inHTML += "	<input type=\"checkbox\" class=\"noticeIds\" id=\"noticeIds\" name=\"noticeIds\" value=\""+noticeObj.notice_srl+"\" />";
 					inHTML += "</td>";
-					inHTML += "<td class=\"\">";
-					inHTML += "" + commendObj.user_id + "";
-					inHTML += "</td>";
-					inHTML += "<td class=\"\">";
-					inHTML += "" + commendObj.comments + "";
-					inHTML += "</td>";
-					inHTML += "<td>"+commendObj.postdate+"</td>";
-		            inHTML += "<td>"+commendObj.last_update+"</td>";
+					inHTML += "<td>"+noticeObj.title+"</td>";
+					inHTML += "<td>"+noticeObj.contents+"</td>";
+		            inHTML += "<td>"+noticeObj.postdate+"</td>";
 					inHTML += "</tr>";
 
 				});//each끝
 
 				inHTML += "<div class=\"row text-center\">";
-				inHTML += "<ul class=\"pagination\" id=\"commentPagingDiv\">";
+				inHTML += "<ul class=\"pagination\" id=\"noticePagingDiv\">";
 				inHTML += "</ul> </div>";
 				inHTML += "		</div>";
 				inHTML += "		</div>";
 
-				$("#commentTBody").html(inHTML);
+				$("#noticeTBody").html(inHTML);
 
-				$("#commentPagingDiv").html(data.pagingDiv);
+				$("#noticePagingDiv").html(data.pagingDiv);
 			},
 			error : function(e) {
 				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
@@ -120,14 +99,14 @@
 
 			var isChecked = $(this).prop("checked");
 
-			$(".commentIds").prop("checked", isChecked);
+			$(".noticeIds").prop("checked", isChecked);
 
 		})
 
 		$("#checkedBoardDeleteBtn").click(function() {
 			var isChecked = false;
 
-			$(".commentIds").each(function(index, data) {
+			$(".noticeIds").each(function(index, data) {
 				if (data.checked) {
 					isChecked = data.checked;
 				}
@@ -135,25 +114,25 @@
 
 			if (!isChecked) {
 				//체크
-				popLayerMsg("삭제할 댓글을 선택하세요.");
+				popLayerMsg("삭제할 공지사항 게시글을 선택하세요.");
 				return;
 			}
 			
 			var checkArray = new Array();
 			var inValidDeleteId = false;
-			$("input[name='commentIds']:checked").each(function(i) {
+			$("input[name='noticeIds']:checked").each(function(i) {
 				
 				checkArray.push($(this).val());
 			});
 			
 
 			
-			var params = $('#adminCommentListForm').serialize();
+			var params = $('#adminNoticeListForm').serialize();
 			//var params = {"checkArray": checkboxValues };
 			//alert(params);
 			//alert(checkArray);
 			if (confirm("정말 삭제하시겠습니까?")) {
-				var url = "${pageContext.request.contextPath}/admin/comments";
+				var url = "${pageContext.request.contextPath}/admin/notices";
 				//alert(url);
 				$.ajax({
 					url : url,
@@ -171,14 +150,14 @@
 							popLayerMsg("해당 게시글을 삭제하는데 실패하였습니다.");
 						} else if (d.result == "success") {
 							popLayerMsg("해당 게시글이 삭제 되었습니다.");
-							getCommentListByAdmin(1);
+							getNoticeListByAdmin(1);
 							//$("#faqDiv_" + faq_srl).hide(1000);
 							//$(this).parent().hide();
 						}
 					},
-				      error : function(request, status, error){
-				          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				       }
+					error : function(e) {
+						popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
+					}
 				});
 
 				//array초기화
@@ -212,11 +191,11 @@
 		});
 	}
 	</script>
+    
 </head>
 
-<body data-page="comments">
-
-	<!-- BEGIN TOP MENU -->
+<body data-page="posts" class="posts">
+   	<!-- BEGIN TOP MENU -->
 		<%@include file="common/common_top.jsp" %>
 	<!-- END TOP MENU -->
 	<!-- BEGIN WRAPPER -->
@@ -230,20 +209,20 @@
 			<div class="top-page clearfix">
 				<div class="page-title pull-left">
 					<h3 class="pull-left">
-						<strong>댓글 관리</strong>
+						<strong>게시판 관리</strong>
 					</h3>
 				</div>
 				<div class="pull-right">
-					<a href="${pageContext.request.contextPath}/admin/regist" class="btn btn-primary m-t-10"><i class="fa fa-plus p-r-10"></i>댓글생성</a>
+					<a href="${pageContext.request.contextPath}/admin/regist" class="btn btn-primary m-t-10"><i class="fa fa-plus p-r-10"></i>게시판 글생성</a>
 				</div>
 			</div>
 			<div class="top-menu">
-				<a id="a_check_engineerlist" href="javascript:;"><strong>총 댓글관리</strong></a><span class="label label-default m-l-10">9</span><span class="c-gray p-l-10 p-r-5">|</span> 
-				<a id="a_check_clientlist" href="javascript:;">채택된 댓글관리</a><span class="label label-default m-l-10">2</span><span class="c-gray p-l-10 p-r-5">|</span> 
-				<a id="a_check_engineerlist" href="javascript:;"><strong>미채택 댓글관리</strong></a><span class="label label-default m-l-10">9</span>
+				<a id="a_check_engineerlist" href="javascript:;"><strong>기술자게시판</strong></a><span class="label label-default m-l-10">9</span><span class="c-gray p-l-10 p-r-5">|</span> 
+				<a id="a_check_clientlist" href="javascript:;">의뢰인게시판</a><span class="label label-default m-l-10">2</span>
+				
 			</div>
 			<div class="row">
-				<form id="adminCommentListForm">
+				<form id="adminNoticeListForm">
 					<div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
 						<div class="filter-checkbox pull-right">
 							<button id="checkedBoardDeleteBtn" type="button" class="btn btn-danger">삭제</button>
@@ -265,16 +244,15 @@
 									<th style="min-width: 50px">
 										<input type="checkbox" id="toggle_check_all" class="check_all" />
 									</th>
-									<th>아이디</th>
-									<th>댓글내용</th>
+									<th>제목</th>
+									<th>내용</th>
 									<th>작성날자</th>
-									<th>수정날자</th>
 									<!-- <th class="text-center">접속상태</th> -->
 								</tr>
 							</thead>
-							
 							<!-- @@@@ ajax뿌려지는곳 @@@@@ -->
-							<tbody id="commentTBody">
+							<tbody id="noticeTBody">
+
 								<tr>
 									<td>
 										<input type="checkbox" />
@@ -399,12 +377,13 @@
 		</ul>
 	</nav>
 	<!-- END CHAT MENU -->
-	
+
 	<!-- 모달창 메시지 -->
 	<%@ include file="/WEB-INF/views/common/modal_msg.jsp"%>
 	<!--// 모달창 메시지 -->
 	
     <!-- BEGIN MANDATORY SCRIPTS -->
+    
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-migrate-1.2.1.js"></script>
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-mobile/jquery.mobile-1.4.2.js"></script>
@@ -420,7 +399,6 @@
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
     <!-- END MANDATORY SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/js/comments.js"></script>
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dynamic/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dataTables.bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dataTables.tableTools.js"></script>
@@ -429,4 +407,5 @@
     <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/js/application.js"></script>
 </body>
 </html>
+
 

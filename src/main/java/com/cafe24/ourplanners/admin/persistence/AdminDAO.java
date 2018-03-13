@@ -17,5 +17,9 @@ public interface AdminDAO {
 	public int deleteMember(String user_id);
 	
 	public int deleteBoard(Integer board_srl);
+	
+	public int deleteComment(Integer comment_srl);
+	
+	public int deleteNotice(Integer notice_srl);
 
 }

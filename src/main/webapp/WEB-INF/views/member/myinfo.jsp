@@ -66,7 +66,7 @@
 				<!-- 서브메뉴부분 -->
 				<div class="col-xs-2" id="profile-menu">
 					<h3>계정설정</h3>
-					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a> <a href="#"><p>인증정보</p></a> <a href="#"><p>알림설정</p></a> <a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a> <a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
+					<a href="${pageContext.request.contextPath}/member/myinfo"><p>계정정보</p></a>  <a href="${pageContext.request.contextPath}/member/change_password"><p>비밀번호 변경</p></a> <a href="${pageContext.request.contextPath}/member/withdraw"><p>회원탈퇴</p></a>
 				</div>
 				<!-- 기본정보부분 -->
 				<form action="${pageContext.request.contextPath}/member/myinfo" method="post">
@@ -80,7 +80,7 @@
 
 									<c:choose>
 
-										<c:when test="${(not empty loginUserInfo) && loginUserInfo.profile_img_path!=''}">
+										<c:when test="${not empty loginUserInfo.profile_img_path}">
 
 											<img src="${pageContext.request.contextPath}/resources/upload/member/${loginUserInfo.member_srl}/profile/${loginUserInfo.profile_img_path}" id="profile_Img" class="profile-image" />
 

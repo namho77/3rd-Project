@@ -49,6 +49,18 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteBoard(board_srl);
 	}
 	
+	@Override
+	public int deleteComment(Integer comment_srl) {
+		
+		return dao.deleteComment(comment_srl);
+	}
+	
+	@Override
+	public int deleteNotice(Integer notice_srl) {
+		
+		return dao.deleteNotice(notice_srl);
+	}
+	
 	
 	
 	
