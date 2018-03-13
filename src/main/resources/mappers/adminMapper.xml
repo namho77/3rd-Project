@@ -58,6 +58,24 @@ SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from op_member M where
 				AND email_address = #{email_address,jdbcType=VARCHAR}
 			</otherwise>
 		</choose>
+		
+		<choose>
+			<when test="member_type == null or member_type == ''">
+
+			</when>
+			<otherwise>
+				AND member_type = #{member_type,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="is_admin == null or is_admin == ''">
+
+			</when>
+			<otherwise>
+				AND is_admin = #{is_admin,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
 
 		<include refid="search"></include>
   
@@ -104,6 +122,24 @@ SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from op_member M where
 				AND email_address = #{email_address,jdbcType=VARCHAR}
 			</otherwise>
 		</choose>
+		
+		<choose>
+			<when test="member_type == null or member_type == ''">
+
+			</when>
+			<otherwise>
+				AND member_type = #{member_type,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="is_admin == null or is_admin == ''">
+
+			</when>
+			<otherwise>
+				AND is_admin = #{is_admin,jdbcType=VARCHAR}
+			</otherwise>
+		</choose>
 
 		<include refid="search"></include>
 
@@ -112,6 +148,9 @@ SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( Select M.* from op_member M where
 	<delete id="deleteMember">
  	DELETE op_member WHERE user_id=#{user_id}
  	</delete>
-
+ 	
+ 	<delete id="deleteBoard">
+ 	DELETE op_board WHERE board_srl=#{board_srl}
+ 	</delete>
 
 </mapper>

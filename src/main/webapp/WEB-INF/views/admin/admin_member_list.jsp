@@ -43,6 +43,27 @@
 <script>
 	$(document).ready(function() {
 		getMemberListByAdmin(1);
+		
+		//모든회원을 눌렀을때
+		$('#a_check_allmember').click(function() {
+			getMemberListByAdmin(1);
+		});
+		
+		//관리자 눌렀을때
+		$('#a_check_admin').click(function() {
+			getMemberListByAdmin(1, "Y", "");
+		});
+		
+		//개인회원 눌렀을때
+		$('#a_check_personal').click(function() {
+			getMemberListByAdmin(1, "N", "P");
+		});
+		
+		//기업회원 눌렀을때
+		$('#a_check_company').click(function() {
+			getMemberListByAdmin(1, "N", "C");
+		});
+		
 	});
 
 	function memberAdminPaging(nowPage, is_admin, member_type) {
@@ -117,7 +138,7 @@
 
 				$("#memberTBody").html(inHTML);
 
-				$("#memberPagingDiv").html(data.pagingDiv);
+				$("#memberPagingDiv").html(data.memberPagingDiv);
 			},
 			error : function(e) {
 				popLayerMsg("AJAX Error 발생" + e.status + ":" + e.statusText);
@@ -261,7 +282,10 @@
 				</div>
 			</div>
 			<div class="top-menu">
-				<a href="#"><strong>모든 회원</strong></a><span class="label label-default m-l-10">9</span> <span class="c-gray p-l-10 p-r-5">|</span> <a href="#">최고 관리자</a><span class="label label-default m-l-10">2</span> <span class="c-gray p-l-10 p-r-5">|</span> <a href="#">개인 회원</a><span class="label label-default m-l-10">3</span> <span class="c-gray p-l-10 p-r-5">|</span> <a href="#">기업 회원</a><span class="label label-default m-l-10">4</span>
+				<a id="a_check_allmember" href="javascript:;"><strong>모든 회원</strong></a><span class="label label-default m-l-10">9</span> <span class="c-gray p-l-10 p-r-5">|</span>
+				<a id="a_check_admin" href="javascript:;">최고 관리자</a><span class="label label-default m-l-10">2</span> <span class="c-gray p-l-10 p-r-5">|</span>
+				<a id="a_check_personal" href="javascript:;">개인 회원</a><span class="label label-default m-l-10">3</span> <span class="c-gray p-l-10 p-r-5">|</span>
+				<a id="a_check_company" href="javascript:;">기업 회원</a><span class="label label-default m-l-10">4</span>
 			</div>
 			<div class="row">
 				<form id="adminMemberListForm">
@@ -432,7 +456,6 @@
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-migrate-1.2.1.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-ui/jquery-ui-1.10.4.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery-mobile/jquery.mobile-1.4.2.js"></script>
-
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/bootstrap/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/bootstrap-dropdown/bootstrap-hover-dropdown.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/bootstrap-select/bootstrap-select.js"></script>
@@ -445,6 +468,10 @@
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
 	<!-- END MANDATORY SCRIPTS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+ <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dynamic/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/datatables/dataTables.tableTools.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/js/blog.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/plugins/quicksearch/jquery.quicksearch.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/pixit/admin/assets/js/members.js"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->

@@ -1,6 +1,5 @@
 package com.cafe24.ourplanners.admin.controller;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.ourplanners.admin.service.AdminService;
+import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.util.SearchMemberCriteria;
 
@@ -32,13 +32,15 @@ public class AdminRestController {
 
 	@Inject
 	private AdminService adminService;
-
+	
 	// 서비스 게시판 내 검색하기 searchType 기능 추가
 	@RequestMapping(value = "admin/json/member_list.json")
 	public HashMap<String, Object> getMemberListSearch(HttpServletRequest req, Model model,
 			@RequestParam(required = false, defaultValue = "1") Integer nowPage,
 			@RequestParam(required = false) Integer pageSize, @RequestParam(required = false) Integer blockPage,
 			@RequestParam(required = false) Integer member_srl,
+			@RequestParam(required = false, defaultValue = "") String member_type,
+			@RequestParam(required = false, defaultValue = "") String is_admin,
 			@RequestParam(required = false, defaultValue = "") String user_id,
 			@RequestParam(required = false, defaultValue = "") String user_name,
 			@RequestParam(required = false, defaultValue = "") String email_address,
@@ -72,6 +74,9 @@ public class AdminRestController {
 		if (member_srl != null && member_srl != 0)
 			scri.setMember_srl(member_srl);
 
+		scri.setIs_admin(is_admin);
+		scri.setMember_type(member_type);
+		
 		scri.setUser_id(user_id);
 		scri.setUser_name(user_name);
 		scri.setEmail_address(email_address);
@@ -89,6 +94,8 @@ public class AdminRestController {
 
 		return map;
 	}
+	
+	
 
 	@RequestMapping(value = "admin/members", method = RequestMethod.DELETE)
 	public ResponseEntity<Map<String, Object>> deleteMember(
@@ -150,6 +157,53 @@ public class AdminRestController {
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
 		} else if (((String) map.get("result")).equals("success")) {
 			System.out.println("회원 삭제 성공");
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		}
+		return entity;
+		
+	}
+	
+	
+	@RequestMapping(value = "admin/boards", method = RequestMethod.DELETE)
+	public ResponseEntity<Map<String, Object>> deleteBoard(
+			@RequestBody List<Integer> deleteList,
+			HttpSession session) throws Exception {
+		
+		int totalDeletedCount = 0;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		ResponseEntity<Map<String, Object>> entity = null;
+		BoardVO boardVO = null;
+		Integer board_srl = null;
+		try {
+			if (session.getAttribute("loginUserInfo") == null) {
+				map.put("result", "fail");
+				map.put("errorMsg", "isNotLogin");
+			} else {
+					
+			for (Integer delete_board_srl : deleteList) {
+				
+				Integer delete_count = adminService.deleteBoard(delete_board_srl);
+				totalDeletedCount += delete_count;
+			}
+			
+			if (totalDeletedCount <= 0) {
+				map.put("result", "fail");
+				map.put("errorMsg", "sqlError");
+			} else {
+				map.put("result", "success");
+			}
+		}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+
+		if (((String) map.get("result")).equals("fail")) {
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.BAD_REQUEST);
+		} else if (((String) map.get("result")).equals("success")) {
+			System.out.println("게시판 삭제 성공");
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 		}
 		return entity;
