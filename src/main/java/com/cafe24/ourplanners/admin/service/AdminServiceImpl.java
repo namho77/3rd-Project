@@ -9,9 +9,13 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.ourplanners.admin.persistence.AdminDAO;
+import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.util.PagingUtil;
 import com.cafe24.ourplanners.util.SearchMemberCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
+
+import scala.inline;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -38,6 +42,28 @@ public class AdminServiceImpl implements AdminService {
 		
 		return dao.deleteMember(user_id);
 	}
+	
+	@Override
+	public int deleteBoard(Integer board_srl) {
+		
+		return dao.deleteBoard(board_srl);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

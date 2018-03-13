@@ -3,8 +3,10 @@ package com.cafe24.ourplanners.admin.persistence;
 import java.util.HashMap;
 import java.util.List;
 
+import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.util.SearchMemberCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 public interface AdminDAO {
 
@@ -13,6 +15,7 @@ public interface AdminDAO {
 	public int getTotalMemberCount(SearchMemberCriteria scri);
 
 	public int deleteMember(String user_id);
-
+	
+	public int deleteBoard(Integer board_srl);
 
 }

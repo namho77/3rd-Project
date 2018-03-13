@@ -8,8 +8,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.ourplanners.board.domain.BoardVO;
 import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.util.SearchMemberCriteria;
+import com.cafe24.ourplanners.util.SearchServiceBoardCriteria;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -17,6 +19,8 @@ public class AdminDAOImpl implements AdminDAO {
 	@Inject
 	private SqlSession sqlSession;
 	private static String namespace = "com.kosmo.mapper.AdminMapper";
+	
+	//회원관리기능
 	@Override
 	public List<MemberVO> getSearchMemberList(SearchMemberCriteria scri, HashMap<String, Object> map) {
 		
@@ -32,6 +36,12 @@ public class AdminDAOImpl implements AdminDAO {
 	public int deleteMember(String user_id) {
 		
 		return sqlSession.delete(namespace+".deleteMember", user_id);
+	}
+
+	@Override
+	public int deleteBoard(Integer board_srl) {
+		
+		return sqlSession.delete(namespace+".deleteBoard", board_srl);
 	}
 	
 
