@@ -27,8 +27,22 @@
 		</choose>
 	</sql>
 
+	<!-- select 
+	mes.TITLE ,
+	mes.CONTENTS ,
+	mes.postdate,
+	mes.readed,
+	mes.readed_date,
+	mem.user_id
+from op_message mes inner join op_member mem
+on mes.sender_srl = mem.user_id
+where mes.receiver_srl = (select user_id from op_member where user_id = 'kosmo'); -->
+
+
 	<select id="getMessageListJson" resultType="MessageVO">
 	<![CDATA[  
+	
+	
 	SELECT * FROM (SELECT Tb.*, rownum rNum FROM ( SELECT message_srl ,
 	TITLE ,
 	CONTENTS ,

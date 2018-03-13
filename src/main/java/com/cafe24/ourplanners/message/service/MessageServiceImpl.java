@@ -55,8 +55,8 @@ public class MessageServiceImpl implements MessageService {
 		String title = req.getParameter("title");
 		String contents = req.getParameter("contents");
 		MemberVO memVO = (MemberVO)req.getSession().getAttribute("loginUserInfo");
-		int sender_srl = memVO.getMember_srl();
-		int receiver_srl =Integer.parseInt(req.getParameter("receiver_srl"));		
+		String sender_srl = memVO.getUser_id();
+		String receiver_srl =req.getParameter("receiver_srl");		
 		MessageVO vo = new MessageVO();
 		vo.setContents(contents);
 		vo.setReceiver_srl(receiver_srl);

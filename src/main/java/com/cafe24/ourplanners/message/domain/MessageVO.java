@@ -2,8 +2,8 @@ package com.cafe24.ourplanners.message.domain;
 
 public class MessageVO {
 	private int message_srl;
-	private int receiver_srl;
-	private int sender_srl;
+	private String receiver_srl;
+	private String sender_srl;
 	private String title;
 	private String contents;
 	private String postdate;
@@ -27,16 +27,17 @@ public class MessageVO {
 	public void setMessage_srl(int message_srl) {
 		this.message_srl = message_srl;
 	}
-	public int getReceiver_srl() {
+	
+	public String getReceiver_srl() {
 		return receiver_srl;
 	}
-	public void setReceiver_srl(int receiver_srl) {
+	public void setReceiver_srl(String receiver_srl) {
 		this.receiver_srl = receiver_srl;
 	}
-	public int getSender_srl() {
+	public String getSender_srl() {
 		return sender_srl;
 	}
-	public void setSender_srl(int sender_srl) {
+	public void setSender_srl(String sender_srl) {
 		this.sender_srl = sender_srl;
 	}
 	public String getTitle() {
