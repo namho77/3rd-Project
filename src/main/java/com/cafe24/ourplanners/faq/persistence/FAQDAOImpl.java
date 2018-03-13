@@ -34,7 +34,7 @@ public class FAQDAOImpl implements FAQDAO{
 	@Override
 	public int modifyFAQ(FAQVO vo) {
 	
-		return sqlSession.delete(namespace + ".modifyFAQ", vo);
+		return sqlSession.update(namespace + ".modifyFAQ", vo);
 		
 	}
 	@Override

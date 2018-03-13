@@ -491,6 +491,9 @@ public class PagingUtil {
 		int subcategory_srl = scri.getSubcategory_srl();
 		String board_type = scri.getBoard_type();
 		
+		String searchType = scri.getSearchType();
+		String keyword = scri.getKeyword();
+		
 		// 1.전체페이지 구하기
 		int totalPage = (int) (Math.ceil(((double) totalRecordCount / pageSize)));
 
@@ -504,11 +507,11 @@ public class PagingUtil {
 		if (intTemp != 1) {
 
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(1," + category_srl + "," + subcategory_srl
-					+",\""+board_type+ "\");'> <span class=\"glyphicon glyphicon-backward\"></span></a></li>";
+					+",\""+board_type+ "\",\""+searchType +"\",\""+keyword+"\");'> <span class=\"glyphicon glyphicon-backward\"></span></a></li>";
 
 			// 블럭 페이지의 마지막 페이지 번호로
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(" + (intTemp - 1) + "," + category_srl + ","
-					+ subcategory_srl +",\""+board_type+ "\");'>"
+					+ subcategory_srl +",\""+board_type+ "\",\""+searchType +"\",\""+keyword+"\");'>"
 					// 블럭 페이지의 첫번째 페이지번호로
 					// pagingStr += "<li><a href='javascript:paging("+(intTemp - blockPage) + ");'>"
 					+ "<span class=\"glyphicon glyphicon-chevron-left\"></span></a></li>";
@@ -525,7 +528,7 @@ public class PagingUtil {
 				pagingStr += "<li class=\"active\"><a href=\"javascript:;\">" + intTemp + "</a></li>";
 			} else {
 				pagingStr += "<li><a href='javascript:" + jsFnName + "(" + intTemp + "," + category_srl + ","
-						+ subcategory_srl +",\""+board_type+ "\");'>" + intTemp + "</a></li>";
+						+ subcategory_srl +",\""+board_type+ "\",\""+searchType +"\",\""+keyword+"\");'>" + intTemp + "</a></li>";
 			}
 
 			intTemp = intTemp + 1;
@@ -535,15 +538,17 @@ public class PagingUtil {
 		// 다음 및 마지막 페이지를 위한 로직
 		if (intTemp <= totalPage) {
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(" + intTemp + "," + category_srl + "," + subcategory_srl
-					+",\""+board_type+ "\");'>" + "<span class=\"glyphicon glyphicon-chevron-right\"></span></a></li>";
+					+",\""+board_type+ "\",\""+searchType +"\",\""+keyword+"\");'>" + "<span class=\"glyphicon glyphicon-chevron-right\"></span></a></li>";
 
 			pagingStr += "<li><a href='javascript:" + jsFnName + "(" + totalPage + "," + category_srl + ","
-					+ subcategory_srl +",\""+board_type+ "\");'>" + "<span class=\"glyphicon	glyphicon-forward\"></span></a></li>";
+					+ subcategory_srl +",\""+board_type+ "\",\""+searchType +"\",\""+keyword+"\");'>" + "<span class=\"glyphicon	glyphicon-forward\"></span></a></li>";
 
 		}
 		pagingStr += "</ul></div>";
 		return pagingStr;
 	}
+	
+	 
 
 	public static String pagingAjaxMember(int totalRecordCount, SearchMemberCriteria scri, String jsFnName) {
 		String pagingStr = "";

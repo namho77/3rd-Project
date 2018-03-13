@@ -12,8 +12,8 @@
 					<nav class="navbar-right">
 						<ul class="menu">
 							<li class="toggle-menu"><span class="title">Menu</span> <span class="icon"><i></i><i></i><i></i></span></li>
-							<li><a  href="${pageContext.request.contextPath}/board/engineer">기술자 게시판 리스트</a></li>
-							<li><a  href="${pageContext.request.contextPath}/board/client">의뢰인 게시판 리스트</a></li>
+							<li><a  href="${pageContext.request.contextPath}/board/service?board_type=E">기술자 게시판 리스트</a></li>
+							<li><a  href="${pageContext.request.contextPath}/board/service?board_type=C">의뢰인 게시판 리스트</a></li>
 
 							<c:choose>
 								<c:when test="${empty loginUserInfo}">

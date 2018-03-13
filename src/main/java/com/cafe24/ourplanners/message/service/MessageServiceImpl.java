@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.cafe24.ourplanners.member.domain.MemberVO;
 import com.cafe24.ourplanners.message.domain.MessageVO;
 import com.cafe24.ourplanners.message.persistence.MessageDAO;
 import com.cafe24.ourplanners.util.PagingUtil;
@@ -53,12 +54,14 @@ public class MessageServiceImpl implements MessageService {
 	public int writeMessage(HttpServletRequest req, Map<String, Object> map) {
 		String title = req.getParameter("title");
 		String contents = req.getParameter("contents");
-		int receiver_srl =Integer.parseInt(req.getParameter("receiver_srl"));
+		MemberVO memVO = (MemberVO)req.getSession().getAttribute("loginUserInfo");
+		int sender_srl = memVO.getMember_srl();
+		int receiver_srl =Integer.parseInt(req.getParameter("receiver_srl"));		
 		MessageVO vo = new MessageVO();
 		vo.setContents(contents);
 		vo.setReceiver_srl(receiver_srl);
 		vo.setTitle(title);
-		
+		vo.setSender_srl(sender_srl);
 		
 		return dao.writeMessage(vo);
 	}

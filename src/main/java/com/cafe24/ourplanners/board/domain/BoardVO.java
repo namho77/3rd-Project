@@ -67,7 +67,6 @@ public class BoardVO {
 	}
 
 
-
 	public int getBoard_srl() {
 		return board_srl;
 	}

@@ -86,8 +86,8 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right" id="navbar-nav">
-						<li><a href="${pageContext.request.contextPath}/board/engineer">기술자 게시판</a></li>
-						<li><a href="${pageContext.request.contextPath}/board/project?board_type=C">의뢰인 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/service?board_type=E">기술자 게시판</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/service?board_type=C">의뢰인 게시판</a></li>
 						<c:choose>
 						<c:when test="${empty loginUserInfo}">
 							<li><a href="${pageContext.request.contextPath}/member/login">로그인</a></li>
@@ -146,7 +146,7 @@
 								<h2><b>건축</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=1"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=1"></a>
 						</figure>
 					</div>
 					
@@ -158,7 +158,7 @@
 								<h2><b>디자인</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=2"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=2"></a>
 						</figure>
 					</div>
 
@@ -170,7 +170,7 @@
 								<h2><b>IT프로그래밍</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=3"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=3"></a>
 						</figure>
 					</div>
 
@@ -182,7 +182,7 @@
 								<h2><b>번역&통역</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=4"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=4"></a>
 						</figure>
 					</div>
 					
@@ -194,7 +194,7 @@
 								<h2><b>컨텐츠제작</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=5"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=5"></a>
 						</figure>
 					</div>
 					
@@ -206,7 +206,7 @@
 								<h2><b>핸드메이드</b></h2>
 								<p>기술자와 의뢰인의 만남에 공간입니다</p>
 							</figcaption>
-							<a href="${pageContext.request.contextPath}/board/engineer?category=6"></a>
+							<a href="${pageContext.request.contextPath}/board/service?category=6"></a>
 						</figure>
 					</div>
 				</div>

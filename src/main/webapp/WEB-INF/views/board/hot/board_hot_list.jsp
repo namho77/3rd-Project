@@ -49,14 +49,14 @@
 					inHTML += "<div class=\"card-content\">";
 					inHTML += "<h6 class=\"category text-info\">" + hotEngineerBoardList.subcategory_srl + "</h6>";
 					inHTML += "<h4 class=\"card-title\">";
-					inHTML += "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
+					inHTML += "<a href=\"./board/service/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
 					inHTML += "</h4>";
 					inHTML += "<p class=\"card-description text-left\">";
 					
 					inHTML +="서비스 지역 : " +hotEngineerBoardList.location+"<br/>";
 					inHTML +="서비스 비용 : " +hotEngineerBoardList.service_cost+"<br/>";
 					inHTML +="서비스 기간 : " +hotEngineerBoardList.service_time_start + " ~ " + hotEngineerBoardList.service_time_end+"<br/>";
-					inHTML +="<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					inHTML +="<a href=\"./board/service/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
 					
 					//inHTML += replaceContents(hotEngineerBoardList.contents) + "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
 					
@@ -121,7 +121,7 @@
 					inHTML += "<div class=\"card-content\">";
 					inHTML += "<h6 class=\"category text-info\">" + hotEngineerBoardList.subcategory_srl + "</h6>";
 					inHTML += "<h4 class=\"card-title\">";
-					inHTML += "<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
+					inHTML += "<a href=\"./board/service/"+hotEngineerBoardList.board_srl+"\">" + hotEngineerBoardList.title + "</a>";
 					inHTML += "</h4>";
 					inHTML += "<p class=\"card-description text-left\">";
 					
@@ -130,7 +130,7 @@
 					inHTML +="서비스 지역 : " +hotEngineerBoardList.location+"<br/>";
 					inHTML +="서비스 비용 : " +hotEngineerBoardList.service_cost+"<br/>";
 					inHTML +="서비스 기간 : " +hotEngineerBoardList.service_time_start + " ~ " + hotEngineerBoardList.service_time_end+"<br/>";
-					inHTML +="<a href=\"./board/engineer/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
+					inHTML +="<a href=\"./board/service/"+hotEngineerBoardList.board_srl+"\"> 자세히 보기 </a>";
 					
 					
 					inHTML += "</p>";
